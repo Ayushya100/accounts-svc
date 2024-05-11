@@ -16,15 +16,8 @@ const isSettingAvailable = async(payload) => {
             isValid: true
         };
 
-        const requestBody = {
-            categoryName: payload.categoryName,
-            categoryType: payload.categoryType,
-            subCategory: payload.subCategory,
-            duration: payload.duration
-        };
-
         log.info('Call db query to check for the existing records');
-        const settingDetails = await dbConnect.isSettingByNameAvailable(requestBody);
+        const settingDetails = await dbConnect.isSettingAvailable(payload);
 
         if (settingDetails) {
             log.error(`Conflict, record already exists for requested category with name : ${payload.categoryName}`);

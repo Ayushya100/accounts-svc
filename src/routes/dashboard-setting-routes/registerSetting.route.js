@@ -34,6 +34,7 @@ const registerSetting = async(req, res, next) => {
             throw settingCreated;
         }
 
+        log.success(`Successfully registered new setting (${payload.categoryName}) in db`);
         res.status(responseCodes[settingCreated.resType]).json(
             buildApiResponse(settingCreated)
         );

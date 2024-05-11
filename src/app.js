@@ -33,6 +33,8 @@ app.use(cookieParser());
 
 // Dashboard Setting Routes
 app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
+app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
+app.get(`${USERS_API}/setting-info/:label`, routes.settingRoutes.getSettingInfo);
 
 // Error Handler middleware
 app.use(errorHandler);
