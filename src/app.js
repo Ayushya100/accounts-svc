@@ -8,6 +8,7 @@ import { errorHandler } from 'lib-finance-service';
 import { USERS_API } from './constants.js';
 
 // User Routes
+import routes from './routes/index.js';
 
 const app = express();
 
@@ -30,7 +31,8 @@ app.use(express.static('public'));
 
 app.use(cookieParser());
 
-// Routes
+// Dashboard Setting Routes
+app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 
 // Error Handler middleware
 app.use(errorHandler);
