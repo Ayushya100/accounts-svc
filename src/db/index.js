@@ -1,11 +1,15 @@
 'use strict';
 
 import {
-    isSettingByNameAvailable,
-    registerNewSetting
+    isSettingAvailable,
+    registerNewSetting,
+    getAllSettings,
+    getSettingInfoById
 } from './settings.db.js';
 
 export default {
-    isSettingByNameAvailable,
-    registerNewSetting
+    isSettingAvailable,
+    registerNewSetting,
+    getAllSettings,
+    getSettingInfoById
 };

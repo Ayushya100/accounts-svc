@@ -1,23 +1,61 @@
 'use strict';
 
-import mongoose from 'mongoose';
+import { Types } from 'mongoose';
+import { dbOperations } from 'lib-finance-service';
 
 // Import DB Models
 import { 
-    DashboardSettingsModel,
-    executeQuery
+    DashboardSettingsModel
 } from 'lib-finance-service';
 
-const isSettingByNameAvailable = async(body) =>{
-    const settingDetails = DashboardSettingsModel.findOne(body);
-    return await executeQuery(settingDetails);
+const isSettingAvailable = async(payload) => {
+    const query = {
+        categoryName: payload.categoryName,
+        categoryType: payload.categoryType,
+        subCategory: payload.subCategory,
+        duration: payload.duration
+    };
+    const db = new dbOperations(DashboardSettingsModel);
+    return await db.findOne(query, null);
 }
 
 const registerNewSetting = async(payload) => {
-    return await DashboardSettingsModel.create(payload);
+    const db = new dbOperations(DashboardSettingsModel);
+    return await db.create(payload);
+}
+
+const getAllSettings = async() => {
+    const query = {
+        isDeleted: false
+    };
+    const fields = 'categoryName categoryDescription categoryType subCategory type isPeriodic duration';
+
+    const db = new dbOperations(DashboardSettingsModel);
+    return await db.find(query, fields);
+}
+
+const getSettingInfoById = async(settingLabel) => {
+    let query;
+    if (Types.ObjectId.isValid(settingLabel)) {
+        query = {
+            _id : settingLabel,
+            isDeleted: false
+        };
+    } else {
+        query = {
+            categoryName: settingLabel,
+            isDeleted: false
+        };
+    }
+    const fields = 'categoryName categoryDescription categoryType subCategory type isPeriodic duration';
+
+    const db = new dbOperations(DashboardSettingsModel);
+    return await db.findOne(query, fields);
 }
 
 export {
-    isSettingByNameAvailable,
-    registerNewSetting
+    isSettingAvailable,
+    registerNewSetting,
+    getAllSettings,
+    getSettingInfoById
 };
