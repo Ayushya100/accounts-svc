@@ -1,0 +1,51 @@
+{
+  "name": "accounts-svc",
+  "version": "1.0.0",
+  "description": "Welcome to the GitHub repository for **Finance Tracker Accounts SVC** - This service is responsible for managing user accounts and their information. It provides functionality for user registration, authentication, and profile management, allowing users to securely manage their expenses, investments, and incomes\r ## Project Status: Under Development\r ### What's Happening Now:\r - The service is currently being developed to create the functionalities to register and manage user accounts related information.\r ## Features\r - User registration: Allow users to create new accounts by providing necessary information.\r - Authentication: Verify user identity through secure authentication mechanisms.\r - Profile management: Ensure users to update their profile information and manage their account settings.\r ---\r **Finance Tracker** - Simplifying Financial Management for Everyone!",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayushya100/accounts-svc.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "accounts-svc"
+  ],
+  "author": "Ayushya Jaiswal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayushya100/accounts-svc/issues"
+  },
+  "homepage": "https://github.com/Ayushya100/accounts-svc#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.2.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "moment-timezone": "^0.5.45",
+    "mongoose": "^8.3.4",
+    "mongoose-aggregate-paginate-v2": "^1.0.7",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7",
+    "randombytes": "^2.1.0",
+    "util": "^0.12.5",
+    "uuid": "^9.0.1",
+    "validator": "^13.12.0"
+  }
+}
