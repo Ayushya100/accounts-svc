@@ -32,7 +32,7 @@ const isSettingAvailable = async(payload) => {
         log.error(`Error while working with db to check for existing setting record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db.',
+            resMsg: 'Some error occurred while working with db to check for existing setting record.',
             stack: err.stack,
             isValid: false
         };
@@ -70,7 +70,7 @@ const createSetting = async(payload) => {
         log.error(`Error while working with db to register new setting record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db.',
+            resMsg: 'Some error occurred while working with db to register new setting.',
             stack: err.stack,
             isValid: false
         };

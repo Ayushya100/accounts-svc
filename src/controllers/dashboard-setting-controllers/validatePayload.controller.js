@@ -1,11 +1,16 @@
 'use strict';
 
+import validators from '../../assets/validators/payloadValidators.js';
 import { logger } from 'lib-finance-service';
 
 const log = logger('controller: validate-payload');
 
 const returnValidationConfirmation = () => {
     log.info('Requested Payload validation completed successfully');
+}
+
+const isValidMethod = (method) => {
+    return ['GET', 'POST', 'PUT', 'DELETE'].includes(method);
 }
 
 const validateCreateSettingPayload = (payload) => {
@@ -40,6 +45,44 @@ const validateCreateSettingPayload = (payload) => {
     return response;
 }
 
+const validateNewRoutePayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    const mandatoryFields = ['path', 'microservice', 'port', 'method'];
+
+    if (!payload.path || !payload.microservice || !payload.port || !payload.method) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `Required parameter is missing`;
+        response.isValid = false;
+
+        for(const field of mandatoryFields) {
+            if (!payload[field]) {
+                response.resMsg += `: ${field}`;
+                break;
+            }
+        }
+    }
+
+    if (payload.port && typeof payload.port !== 'number') {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `Provided port is not a valid number`;
+        response.isValid = false;
+    }
+    if (payload.method && !isValidMethod(payload.method)) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `Provided method is not a valid API method`;
+        response.isValid = false;
+    }
+
+    returnValidationConfirmation();
+    return response;
+}
+
 export {
-    validateCreateSettingPayload
+    validateCreateSettingPayload,
+    validateNewRoutePayload
 };

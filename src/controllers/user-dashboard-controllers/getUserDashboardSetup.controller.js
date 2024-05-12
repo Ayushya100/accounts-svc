@@ -18,7 +18,7 @@ const getSystemUserDashboardSetup = async() => {
         const dashboardSettingDetails = await dbConnect.getSystemUserSettingInfo(fieldsToRetrieve);
 
         if (dashboardSettingDetails.length > 0) {
-            log.info('Execution for retrieving setting info for SYSTEM user completed successfully');
+            log.success('Execution for retrieving setting info for SYSTEM user completed successfully');
             return {
                 resType: 'SUCCESS',
                 resMsg: 'Dashboard setting details found',

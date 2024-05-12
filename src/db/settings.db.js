@@ -1,7 +1,7 @@
 'use strict';
 
 import { Types } from 'mongoose';
-import { dbOperations } from 'lib-finance-service';
+import { dbOperations, ServiceRoutesModel } from 'lib-finance-service';
 
 // Import DB Models
 import { 
@@ -65,10 +65,25 @@ const getSystemUserSettingInfo = async(fieldsToRetrieve) => {
     return await db.find(query, fields);
 }
 
+const isRouteAvailable = async(payload) => {
+    const query = {
+        path: payload.path
+    };
+    const db = new dbOperations(ServiceRoutesModel);
+    return await db.findOne(query, null);
+}
+
+const registerNewRoute = async(payload) => {
+    const db = new dbOperations(ServiceRoutesModel);
+    return await db.create(payload);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
     getSettingInfoById,
-    getSystemUserSettingInfo
+    getSystemUserSettingInfo,
+    isRouteAvailable,
+    registerNewRoute
 };
