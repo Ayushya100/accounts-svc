@@ -34,7 +34,7 @@ const getSettingInfo = async(req, res, next) => {
             buildApiResponse(settingInfo)
         );
     } catch (err) {
-         if (err.resType === 'INTERNAL_SERVER_ERROR') {
+        if (err.resType === 'INTERNAL_SERVER_ERROR') {
             log.error('Internal Error occurred while working with register setting router function');
         } else {
             log.error(`Error occurred : ${err.resMsg}`);

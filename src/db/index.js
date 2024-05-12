@@ -4,12 +4,14 @@ import {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
-    getSettingInfoById
+    getSettingInfoById,
+    getSystemUserSettingInfo
 } from './settings.db.js';
 
 export default {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
-    getSettingInfoById
+    getSettingInfoById,
+    getSystemUserSettingInfo
 };

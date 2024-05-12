@@ -53,9 +53,22 @@ const getSettingInfoById = async(settingLabel) => {
     return await db.findOne(query, fields);
 }
 
+const getSystemUserSettingInfo = async(fieldsToRetrieve) => {
+    const query = {
+        categoryName: {
+            $in: fieldsToRetrieve
+        }
+    };
+    const fields = 'categoryName categoryDescription categoryType subCategory type isPeriodic duration';
+
+    const db = new dbOperations(DashboardSettingsModel);
+    return await db.find(query, fields);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
-    getSettingInfoById
+    getSettingInfoById,
+    getSystemUserSettingInfo
 };
