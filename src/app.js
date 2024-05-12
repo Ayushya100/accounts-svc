@@ -36,6 +36,9 @@ app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
 app.get(`${USERS_API}/setting-info/:label`, routes.settingRoutes.getSettingInfo);
 
+// User Setting Routes
+app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);
+
 // Error Handler middleware
 app.use(errorHandler);
 
