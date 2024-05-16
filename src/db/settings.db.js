@@ -77,7 +77,8 @@ const registerNewRoute = async(payload) => {
 const isUserRoleAvailable = async(payload) => {
     const query = {
         roleCode: payload.roleCode.toUpperCase(),
-        roleName: payload.roleName
+        roleName: payload.roleName,
+        isDeleted: false
     };
     const db = new userRoleTemplate();
     return await db.findOne(query, null);
@@ -109,9 +110,21 @@ const updateUserRoleById = async(userId, roleId, payload) => {
     const query = {
         _id: roleId
     };
-
     const db = new userRoleTemplate();
     return await db.findByIdAndUpdate(userId, query, payload, null);
+}
+
+const deleteUserRoleById = async(userId, roleId) => {
+    const query = {
+        _id: roleId
+    };
+    const payload = {
+        isActive: false,
+        isDeleted: true
+    };
+    const db = new userRoleTemplate();
+    const fields = 'roleCode roleName isActive isDeleted';
+    return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 export {
@@ -126,5 +139,6 @@ export {
     registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
-    updateUserRoleById
+    updateUserRoleById,
+    deleteUserRoleById
 };

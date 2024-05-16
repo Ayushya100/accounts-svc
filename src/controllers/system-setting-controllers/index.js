@@ -11,6 +11,7 @@ import { isRouteAvailable, createRoute } from './registerRoute.controller.js';
 import { isUserRoleAvailable, createUserRole } from './registerUserRole.controller.js';
 import { getAllUserRole, getUserRoleById } from './getUserRoleInfo.controller.js';
 import { updateUserRole } from './updateUserRole.controller.js';
+import { deleteUserRole } from './deleteUserRole.controller.js';
 
 export default {
     validateCreateSettingPayload,
@@ -26,5 +27,6 @@ export default {
     createUserRole,
     getAllUserRole,
     getUserRoleById,
-    updateUserRole
+    updateUserRole,
+    deleteUserRole
 };
