@@ -8,21 +8,20 @@ import {
 } from 'lib-finance-service';
 import controller from '../../controllers/index.js';
 
-const header = 'route: update-user-role';
-const msg = 'Update user role info router started';
+const header = 'route: delete-user-role';
+const msg = 'Delete user role router started';
 
 const log = logger(header);
 const dashboardController = controller.dashboardController;
 
 // API Function
-const updateUserRole = async(req, res, next) => {
+const deleteUserRole = async(req, res, next) => {
     log.info(msg);
 
     try {
         const userContext = getUserContext();
         const roleId = req.params.roleId;
         const userId = userContext.userId || req.user?.userId;
-        const payload = req.body;
 
         if (!roleId) {
             throw {
@@ -31,20 +30,20 @@ const updateUserRole = async(req, res, next) => {
                 isValid: false
             };
         }
-        
+
         log.info('Call controller function to check if user role exists in db');
         const userRoleInfo = await dashboardController.getUserRoleById(roleId);
         if (!userRoleInfo) {
             throw userRoleInfo;
         }
 
-        log.info(`Call controller function to update user role for requested user role id : ${roleId}`);
-        const updatedInfo = await dashboardController.updateUserRole(userId, roleId, payload, userRoleInfo.data);
+        log.info(`Call controller function to delete user role for requested user role id : ${roleId}`);
+        const updatedInfo = await dashboardController.deleteUserRole(userId, roleId);
         if (!updatedInfo.isValid) {
             throw updatedInfo;
         }
 
-        log.success('Successfully updated info for requested user role in db');
+        log.success('Successfully deleted user role from db');
         res.status(responseCodes[updatedInfo.resType]).json(
             buildApiResponse(updatedInfo)
         );
@@ -58,4 +57,4 @@ const updateUserRole = async(req, res, next) => {
     }
 }
 
-export default updateUserRole;
+export default deleteUserRole;

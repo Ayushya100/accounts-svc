@@ -12,7 +12,8 @@ import {
     registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
-    updateUserRoleById
+    updateUserRoleById,
+    deleteUserRoleById
 } from './settings.db.js';
 
 export default {
@@ -27,5 +28,6 @@ export default {
     registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
-    updateUserRoleById
+    updateUserRoleById,
+    deleteUserRoleById
 };
