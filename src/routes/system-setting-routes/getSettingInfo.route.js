@@ -35,7 +35,7 @@ const getSettingInfo = async(req, res, next) => {
         );
     } catch (err) {
         if (err.resType === 'INTERNAL_SERVER_ERROR') {
-            log.error('Internal Error occurred while working with register setting router function');
+            log.error('Internal Error occurred while working with get setting info router function');
         } else {
             log.error(`Error occurred : ${err.resMsg}`);
         }
