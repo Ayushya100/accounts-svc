@@ -92,6 +92,27 @@ const registerNewUserRole = async(payload) => {
     return await db.create(payload);
 }
 
+const getAllUserRole = async() => {
+    const query = {
+        isDeleted: false
+    };
+    const fields = 'roleCode roleName isActive';
+
+    const db = new dbOperations(UserRoleModel);
+    return await db.find(query, fields);
+}
+
+const getUserRoleById = async(roleId) => {
+    const query = {
+        _id: roleId,
+        isDeleted: false
+    };
+    const fields = 'roleCode roleName isActive';
+
+    const db = new dbOperations(UserRoleModel);
+    return await db.find(query, fields);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -101,5 +122,7 @@ export {
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
-    registerNewUserRole
+    registerNewUserRole,
+    getAllUserRole,
+    getUserRoleById
 };

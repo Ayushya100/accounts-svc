@@ -38,7 +38,10 @@ app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
 app.get(`${USERS_API}/setting-info/:label`, routes.settingRoutes.getSettingInfo);
 app.post(`${USERS_API}/register-route`, routes.settingRoutes.registerRoute);
+
 app.post(`${USERS_API}/register-user-role`, routes.settingRoutes.registerUserRoleRoute);
+app.get(`${USERS_API}/user-role`, routes.settingRoutes.getUserRoleInfo);
+app.get(`${USERS_API}/user-role/:roleId`, routes.settingRoutes.getUserRoleInfo);
 
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);
