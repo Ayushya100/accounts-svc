@@ -7,7 +7,9 @@ import {
     getSettingInfoById,
     getSystemUserSettingInfo,
     isRouteAvailable,
-    registerNewRoute
+    registerNewRoute,
+    isUserRoleAvailable,
+    registerNewUserRole
 } from './settings.db.js';
 
 export default {
@@ -17,5 +19,7 @@ export default {
     getSettingInfoById,
     getSystemUserSettingInfo,
     isRouteAvailable,
-    registerNewRoute
+    registerNewRoute,
+    isUserRoleAvailable,
+    registerNewUserRole
 };

@@ -3,7 +3,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { errorHandler } from 'lib-finance-service';
+import { errorHandler, setUserContext } from 'lib-finance-service';
 
 import { USERS_API } from './constants.js';
 
@@ -31,11 +31,14 @@ app.use(express.static('public'));
 
 app.use(cookieParser());
 
-// Dashboard Setting Routes
+setUserContext(app);
+
+// System Setting Routes
 app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
 app.get(`${USERS_API}/setting-info/:label`, routes.settingRoutes.getSettingInfo);
 app.post(`${USERS_API}/register-route`, routes.settingRoutes.registerRoute);
+app.post(`${USERS_API}/register-user-role`, routes.settingRoutes.registerUserRoleRoute);
 
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);
