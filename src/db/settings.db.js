@@ -1,7 +1,7 @@
 'use strict';
 
 import { Types } from 'mongoose';
-import { dbOperations, ServiceRoutesModel } from 'lib-finance-service';
+import { dbOperations, ServiceRoutesModel, UserRoleModel } from 'lib-finance-service';
 
 // Import DB Models
 import { 
@@ -78,6 +78,20 @@ const registerNewRoute = async(payload) => {
     return await db.create(payload);
 }
 
+const isUserRoleAvailable = async(payload) => {
+    const query = {
+        roleCode: payload.roleCode.toUpperCase(),
+        roleName: payload.roleName
+    };
+    const db = new dbOperations(UserRoleModel);
+    return await db.findOne(query, null);
+}
+
+const registerNewUserRole = async(payload) => {
+    const db = new dbOperations(UserRoleModel);
+    return await db.create(payload);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -85,5 +99,7 @@ export {
     getSettingInfoById,
     getSystemUserSettingInfo,
     isRouteAvailable,
-    registerNewRoute
+    registerNewRoute,
+    isUserRoleAvailable,
+    registerNewUserRole
 };
