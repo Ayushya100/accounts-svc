@@ -9,6 +9,7 @@ import { isSettingAvailable, createSetting } from './registerSetting.controller.
 import { getAllSettings, getSettingInfoById } from './getSettingInfo.controller.js';
 import { isRouteAvailable, createRoute } from './registerRoute.controller.js';
 import { isUserRoleAvailable, createUserRole } from './registerUserRole.controller.js';
+import { getAllUserRole, getUserRoleById } from './getUserRoleInfo.controller.js';
 
 export default {
     validateCreateSettingPayload,
@@ -21,5 +22,7 @@ export default {
     isRouteAvailable,
     createRoute,
     isUserRoleAvailable,
-    createUserRole
+    createUserRole,
+    getAllUserRole,
+    getUserRoleById
 };

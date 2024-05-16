@@ -9,7 +9,9 @@ import {
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
-    registerNewUserRole
+    registerNewUserRole,
+    getAllUserRole,
+    getUserRoleById
 } from './settings.db.js';
 
 export default {
@@ -21,5 +23,7 @@ export default {
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
-    registerNewUserRole
+    registerNewUserRole,
+    getAllUserRole,
+    getUserRoleById
 };

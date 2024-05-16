@@ -47,7 +47,7 @@ const getSettingInfoById = async(settingId) => {
         log.info('Call db query to get the details of setting for requested id');
         const settingDetail = await dbConnect.getSettingInfoById(settingId);
 
-        if (!settingDetail) {
+        if (!settingDetail || settingDetail.length === 0) {
             log.error('No information found for requested setting');
             return {
                 resType: 'NOT_FOUND',
@@ -56,20 +56,10 @@ const getSettingInfoById = async(settingId) => {
             };
         }
 
-        if (settingDetail.length === 0) {
-            log.info('No setting info available');
-            return {
-                resType: 'CONTENT_NOT_AVAILABLE',
-                resMsg: 'No User Available to Assign Setting',
-                data: [],
-                isValid: true
-            };
-        }
-
         log.success(`Execution for retrieving setting info for provided id (${settingId}) completed successfully`);
         return {
             resType: 'SUCCESS',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: 'Setting info retrieved successfully',
             data: settingDetail,
             isValid: true
         };
