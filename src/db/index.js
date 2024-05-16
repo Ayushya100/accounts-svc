@@ -11,7 +11,8 @@ import {
     isUserRoleAvailable,
     registerNewUserRole,
     getAllUserRole,
-    getUserRoleById
+    getUserRoleById,
+    updateUserRoleById
 } from './settings.db.js';
 
 export default {
@@ -25,5 +26,6 @@ export default {
     isUserRoleAvailable,
     registerNewUserRole,
     getAllUserRole,
-    getUserRoleById
+    getUserRoleById,
+    updateUserRoleById
 };

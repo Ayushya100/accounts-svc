@@ -42,6 +42,7 @@ app.post(`${USERS_API}/register-route`, routes.settingRoutes.registerRoute);
 app.post(`${USERS_API}/register-user-role`, routes.settingRoutes.registerUserRoleRoute);
 app.get(`${USERS_API}/user-role`, routes.settingRoutes.getUserRoleInfo);
 app.get(`${USERS_API}/user-role/:roleId`, routes.settingRoutes.getUserRoleInfo);
+app.put(`${USERS_API}/user-role/:roleId`, routes.settingRoutes.updateUserRole);
 
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);

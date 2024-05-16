@@ -1,11 +1,12 @@
 'use strict';
 
 import { Types } from 'mongoose';
-import { dbOperations, ServiceRoutesModel, UserRoleModel } from 'lib-finance-service';
 
 // Import DB Models
-import { 
-    DashboardSettingsModel
+import {
+    dashboardSettingTemplate,
+    serviceRoutesTemplate,
+    userRoleTemplate
 } from 'lib-finance-service';
 
 const isSettingAvailable = async(payload) => {
@@ -15,12 +16,12 @@ const isSettingAvailable = async(payload) => {
         subCategory: payload.subCategory,
         duration: payload.duration
     };
-    const db = new dbOperations(DashboardSettingsModel);
+    const db = new dashboardSettingTemplate();
     return await db.findOne(query, null);
 }
 
 const registerNewSetting = async(payload) => {
-    const db = new dbOperations(DashboardSettingsModel);
+    const db = new dashboardSettingTemplate();
     return await db.create(payload);
 }
 
@@ -28,10 +29,8 @@ const getAllSettings = async() => {
     const query = {
         isDeleted: false
     };
-    const fields = 'categoryName categoryDescription categoryType subCategory type isPeriodic duration';
-
-    const db = new dbOperations(DashboardSettingsModel);
-    return await db.find(query, fields);
+    const db = new dashboardSettingTemplate();
+    return await db.find(query, null);
 }
 
 const getSettingInfoById = async(settingLabel) => {
@@ -47,10 +46,9 @@ const getSettingInfoById = async(settingLabel) => {
             isDeleted: false
         };
     }
-    const fields = 'categoryName categoryDescription categoryType subCategory type isPeriodic duration';
 
-    const db = new dbOperations(DashboardSettingsModel);
-    return await db.findOne(query, fields);
+    const db = new dashboardSettingTemplate();
+    return await db.findOne(query, null);
 }
 
 const getSystemUserSettingInfo = async(fieldsToRetrieve) => {
@@ -59,22 +57,20 @@ const getSystemUserSettingInfo = async(fieldsToRetrieve) => {
             $in: fieldsToRetrieve
         }
     };
-    const fields = 'categoryName categoryDescription categoryType subCategory type isPeriodic duration';
-
-    const db = new dbOperations(DashboardSettingsModel);
-    return await db.find(query, fields);
+    const db = new dashboardSettingTemplate();
+    return await db.find(query, null);
 }
 
 const isRouteAvailable = async(payload) => {
     const query = {
         path: payload.path
     };
-    const db = new dbOperations(ServiceRoutesModel);
+    const db = new serviceRoutesTemplate();
     return await db.findOne(query, null);
 }
 
 const registerNewRoute = async(payload) => {
-    const db = new dbOperations(ServiceRoutesModel);
+    const db = new serviceRoutesTemplate();
     return await db.create(payload);
 }
 
@@ -83,12 +79,12 @@ const isUserRoleAvailable = async(payload) => {
         roleCode: payload.roleCode.toUpperCase(),
         roleName: payload.roleName
     };
-    const db = new dbOperations(UserRoleModel);
+    const db = new userRoleTemplate();
     return await db.findOne(query, null);
 }
 
 const registerNewUserRole = async(payload) => {
-    const db = new dbOperations(UserRoleModel);
+    const db = new userRoleTemplate();
     return await db.create(payload);
 }
 
@@ -96,10 +92,8 @@ const getAllUserRole = async() => {
     const query = {
         isDeleted: false
     };
-    const fields = 'roleCode roleName isActive';
-
-    const db = new dbOperations(UserRoleModel);
-    return await db.find(query, fields);
+    const db = new userRoleTemplate();
+    return await db.find(query, null);
 }
 
 const getUserRoleById = async(roleId) => {
@@ -107,10 +101,17 @@ const getUserRoleById = async(roleId) => {
         _id: roleId,
         isDeleted: false
     };
-    const fields = 'roleCode roleName isActive';
+    const db = new userRoleTemplate();
+    return await db.find(query, null);
+}
 
-    const db = new dbOperations(UserRoleModel);
-    return await db.find(query, fields);
+const updateUserRoleById = async(userId, roleId, payload) => {
+    const query = {
+        _id: roleId
+    };
+
+    const db = new userRoleTemplate();
+    return await db.findByIdAndUpdate(userId, query, payload, null);
 }
 
 export {
@@ -124,5 +125,6 @@ export {
     isUserRoleAvailable,
     registerNewUserRole,
     getAllUserRole,
-    getUserRoleById
+    getUserRoleById,
+    updateUserRoleById
 };
