@@ -9,12 +9,15 @@ import {
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
+    isUserRoleByIdAvailable,
     isDefaultUserRoleAvailable,
     registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
     updateUserRoleById,
-    deleteUserRoleById
+    deleteUserRoleById,
+    isScopeAvailable,
+    registerNewScope
 } from './settings.db.js';
 
 export default {
@@ -26,10 +29,13 @@ export default {
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
+    isUserRoleByIdAvailable,
     isDefaultUserRoleAvailable,
     registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
     updateUserRoleById,
-    deleteUserRoleById
+    deleteUserRoleById,
+    isScopeAvailable,
+    registerNewScope
 };

@@ -36,7 +36,6 @@ const registerUserRoleRoute = async(req, res, next) => {
             }
         }
 
-
         log.info('Call controller function to register new user role started');
         const userRoleCreated = await dashboardController.createUserRole(payload);
         if (!userRoleCreated.isValid) {

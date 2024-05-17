@@ -3,7 +3,8 @@
 import {
     validateCreateSettingPayload,
     validateNewRoutePayload,
-    validateNewUserRolePayload
+    validateNewUserRolePayload,
+    validateNewScopePayload
 } from './validatePayload.controller.js';
 import { isSettingAvailable, createSetting } from './registerSetting.controller.js';
 import { getAllSettings, getSettingInfoById } from './getSettingInfo.controller.js';
@@ -12,12 +13,14 @@ import { isUserRoleAvailable, createUserRole } from './registerUserRole.controll
 import { getAllUserRole, getUserRoleById } from './getUserRoleInfo.controller.js';
 import { updateUserRole } from './updateUserRole.controller.js';
 import { deleteUserRole } from './deleteUserRole.controller.js';
-import { isDefaultUserAvailable } from './shared.controller.js';
+import { isDefaultUserAvailable, isUserRoleByIdAvailable } from './shared.controller.js';
+import { isUserScopeAvailable, createUserScope } from './createScope.controller.js';
 
 export default {
     validateCreateSettingPayload,
     validateNewRoutePayload,
     validateNewUserRolePayload,
+    validateNewScopePayload,
     isSettingAvailable,
     createSetting,
     getAllSettings,
@@ -30,5 +33,8 @@ export default {
     getUserRoleById,
     updateUserRole,
     deleteUserRole,
-    isDefaultUserAvailable
+    isDefaultUserAvailable,
+    isUserRoleByIdAvailable,
+    isUserScopeAvailable,
+    createUserScope
 };
