@@ -181,6 +181,14 @@ const getUserScopeById = async(roleId, scopeId) => {
     return await db.findById(query, null);
 }
 
+const updateUserScopeById = async(userId, scopeId, payload) => {
+    const query = {
+        _id: scopeId
+    };
+    const db = new roleScopeTemplate();
+    return await db.findByIdAndUpdate(userId, query, payload, null);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -200,5 +208,6 @@ export {
     isScopeAvailable,
     registerNewScope,
     getAllUserScope,
-    getUserScopeById
+    getUserScopeById,
+    updateUserScopeById
 };
