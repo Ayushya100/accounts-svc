@@ -9,7 +9,7 @@ const log = logger(header);
 
 const isRouteAvailable = async(payload) => {
     try {
-        log.info('Execution to check for existing route controller started');
+        log.info('Execution to check for the records of existing route controller started');
         let response = {
             resType: 'SUCCESS',
             resMsg: 'VALIDATION SUCCESSFULL',
@@ -20,13 +20,13 @@ const isRouteAvailable = async(payload) => {
         const routeDetails = await dbConnect.isRouteAvailable(payload);
 
         if (routeDetails) {
-            log.error(`Conflict, record already exists for requested route with end-point : ${payload.path}`);
+            log.error(`Conflict, record already exists for requested route with provided end-point : ${payload.path}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'Route already exists with same end-point.';
+            response.resMsg = 'Route already exists with same end-point';
             response.isValid = false;
         }
 
-        log.info('Execution for checking existing record completed');
+        log.info('Execution for checking existing route record completed');
         return response;
     } catch (err) {
         log.error(`Error while working with db to check for existing route record : ${err}`);
@@ -45,7 +45,7 @@ const createRoute = async(payload) => {
         log.info('Call db query to register new record');
         const newRoute = await dbConnect.registerNewRoute(payload);
         
-        log.success('Execution for new record completed');
+        log.success('Execution for registering new route record completed');
         return {
             resType: 'REQUEST_COMPLETED',
             resMsg: 'Route Created Successfully',
@@ -56,7 +56,7 @@ const createRoute = async(payload) => {
         log.error(`Error while working with db to register new route record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new route.',
+            resMsg: 'Some error occurred while working with db to register new route',
             stack: err.stack,
             isValid: false
         };

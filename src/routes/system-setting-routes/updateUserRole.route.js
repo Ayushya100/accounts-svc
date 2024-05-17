@@ -23,14 +23,6 @@ const updateUserRole = async(req, res, next) => {
         const roleId = req.params.roleId;
         const userId = userContext.userId || req.user?.userId;
         const payload = req.body;
-
-        if (!roleId) {
-            throw {
-                resType: 'BAD_REQUEST',
-                resMsg: 'Role Id not provided',
-                isValid: false
-            };
-        }
         
         log.info('Call controller function to check if user role exists in db');
         const userRoleInfo = await dashboardController.getUserRoleById(roleId);

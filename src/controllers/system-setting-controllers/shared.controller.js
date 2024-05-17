@@ -30,7 +30,7 @@ const isDefaultUserAvailable = async() => {
         log.error(`Error while working with db to check for default user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for default user role record.',
+            resMsg: 'Some error occurred while working with db to check for default user role record',
             stack: err.stack,
             isValid: false
         };
@@ -61,7 +61,7 @@ const isUserRoleByIdAvailable = async(roleId) => {
         log.error(`Error while working with db to check for user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for user role record.',
+            resMsg: 'Some error occurred while working with db to check for user role record',
             stack: err.stack,
             isValid: false
         };

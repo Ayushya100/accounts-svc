@@ -6,7 +6,7 @@ import controller from '../../controllers/index.js';
 const header = 'route: get-user-role-info';
 const msg = 'Get user role info router started';
 
-const log = logger(msg);
+const log = logger(header);
 const dashboardController = controller.dashboardController;
 
 // API Function
@@ -18,10 +18,10 @@ const getUserRoleInfo = async(req, res, next) => {
 
         let userRoleInfo;
         if (roleId) {
-            log.info('Call controller function to retrieve all user roles info');
+            log.info(`Call controller function to retrieve the user role info for requested user role id : ${roleId}`);
             userRoleInfo = await dashboardController.getUserRoleById(roleId);
         } else {
-            log.info(`Call controller function to retrieve the user role info for requested user role id : ${roleId}`);
+            log.info('Call controller function to retrieve all user roles info');
             userRoleInfo = await dashboardController.getAllUserRole();
         }
 

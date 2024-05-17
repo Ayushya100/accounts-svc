@@ -17,7 +17,9 @@ import {
     updateUserRoleById,
     deleteUserRoleById,
     isScopeAvailable,
-    registerNewScope
+    registerNewScope,
+    getAllUserScope,
+    getUserScopeById
 } from './settings.db.js';
 
 export default {
@@ -37,5 +39,7 @@ export default {
     updateUserRoleById,
     deleteUserRoleById,
     isScopeAvailable,
-    registerNewScope
+    registerNewScope,
+    getAllUserScope,
+    getUserScopeById
 };

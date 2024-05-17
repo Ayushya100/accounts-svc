@@ -162,6 +162,25 @@ const registerNewScope = async(payload) => {
     return await db.create(payload);
 }
 
+const getAllUserScope = async(roleId) => {
+    const query = {
+        roleId: roleId,
+        isDeleted: false
+    };
+    const db = new roleScopeTemplate();
+    return await db.find(query, null);
+}
+
+const getUserScopeById = async(roleId, scopeId) => {
+    const query = {
+        _id: scopeId,
+        roleId: roleId,
+        isDeleted: false
+    };
+    const db = new roleScopeTemplate();
+    return await db.findById(query, null);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -179,5 +198,7 @@ export {
     updateUserRoleById,
     deleteUserRoleById,
     isScopeAvailable,
-    registerNewScope
+    registerNewScope,
+    getAllUserScope,
+    getUserScopeById
 };

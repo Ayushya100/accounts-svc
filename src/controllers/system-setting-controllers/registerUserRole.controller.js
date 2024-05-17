@@ -15,22 +15,22 @@ const isUserRoleAvailable = async(payload) => {
             isValid: true
         };
 
-        log.info('Call db query to check for the existing records');
+        log.info('Call db query to check for the existing user role record');
         const routeDetails = await dbConnect.isUserRoleAvailable(payload);
         if (routeDetails) {
             log.error(`Conflict, record already exists for requested user role code : ${payload.roleCode}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'User role already exists with same role code.';
+            response.resMsg = 'User role already exists with same role code';
             response.isValid = false;
         }
 
-        log.info('Execution for checking existing record completed');
+        log.info('Execution for checking existing user role record completed');
         return response;
     } catch (err) {
         log.error(`Error while working with db to check for existing user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing user role record.',
+            resMsg: 'Some error occurred while working with db to check for existing user role record',
             stack: err.stack,
             isValid: false
         };
@@ -55,7 +55,7 @@ const createUserRole = async(payload) => {
         log.error(`Error while working with db to register new user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new user role.',
+            resMsg: 'Some error occurred while working with db to register new user role',
             stack: err.stack,
             isValid: false
         };

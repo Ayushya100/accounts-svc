@@ -1,6 +1,5 @@
 'use strict';
 
-import validators from '../../assets/validators/payloadValidators.js';
 import { logger } from 'lib-finance-service';
 
 const log = logger('controller: validate-payload');
