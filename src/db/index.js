@@ -6,6 +6,7 @@ import {
     getAllSettings,
     getSettingInfoById,
     getSystemUserSettingInfo,
+    getUserAssignableSettings,
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
@@ -25,8 +26,14 @@ import {
     getAllAppRoute,
     getAppRouteById,
     updateAppRouteById,
-    deleteAppRouteById
+    deleteAppRouteById,
+    createUserSettings
 } from './settings.db.js';
+import {
+    isUserByUsernameOrEmailAvailable,
+    createNewUser,
+    assignUserRole
+} from './users.db.js';
 
 export default {
     isSettingAvailable,
@@ -34,6 +41,7 @@ export default {
     getAllSettings,
     getSettingInfoById,
     getSystemUserSettingInfo,
+    getUserAssignableSettings,
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
@@ -53,5 +61,9 @@ export default {
     getAllAppRoute,
     getAppRouteById,
     updateAppRouteById,
-    deleteAppRouteById
+    deleteAppRouteById,
+    isUserByUsernameOrEmailAvailable,
+    createNewUser,
+    createUserSettings,
+    assignUserRole
 };

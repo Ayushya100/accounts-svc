@@ -2,11 +2,12 @@
 
 import { Types } from 'mongoose';
 
-// Import DB Models
+// Import DB Templates
 import {
     dashboardSettingTemplate,
     roleScopeTemplate,
     serviceRoutesTemplate,
+    userDashboardTemplate,
     userRoleTemplate
 } from 'lib-finance-service';
 
@@ -57,6 +58,15 @@ const getSystemUserSettingInfo = async(fieldsToRetrieve) => {
         categoryName: {
             $in: fieldsToRetrieve
         }
+    };
+    const db = new dashboardSettingTemplate();
+    return await db.find(query, null);
+}
+
+const getUserAssignableSettings = async() => {
+    const query = {
+        isDeleted: false,
+        isUserAssignable: true
     };
     const db = new dashboardSettingTemplate();
     return await db.find(query, null);
@@ -241,12 +251,18 @@ const deleteAppRouteById = async(userId, routeId) => {
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
+const createUserSettings = async(userSettings) => {
+    const db = new userDashboardTemplate();
+    return await db.create(userSettings);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
     getSettingInfoById,
     getSystemUserSettingInfo,
+    getUserAssignableSettings,
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
@@ -266,5 +282,6 @@ export {
     getAllAppRoute,
     getAppRouteById,
     updateAppRouteById,
-    deleteAppRouteById
+    deleteAppRouteById,
+    createUserSettings
 };
