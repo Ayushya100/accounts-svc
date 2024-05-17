@@ -203,6 +203,23 @@ const deleteUserScopeById = async(userId, scopeId) => {
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
+const getAllAppRoute = async() => {
+    const query = {
+        isDeleted: false
+    };
+    const db = new serviceRoutesTemplate();
+    return await db.find(query, null);
+}
+
+const getAppRouteById = async(routeId) => {
+    const query = {
+        _id: routeId,
+        isDeleted: false
+    };
+    const db = new serviceRoutesTemplate();
+    return await db.find(query, null);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -224,5 +241,7 @@ export {
     getAllUserScope,
     getUserScopeById,
     updateUserScopeById,
-    deleteUserScopeById
+    deleteUserScopeById,
+    getAllAppRoute,
+    getAppRouteById
 };
