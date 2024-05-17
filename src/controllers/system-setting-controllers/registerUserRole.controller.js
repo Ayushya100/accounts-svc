@@ -17,9 +17,8 @@ const isUserRoleAvailable = async(payload) => {
 
         log.info('Call db query to check for the existing records');
         const routeDetails = await dbConnect.isUserRoleAvailable(payload);
-
         if (routeDetails) {
-            log.error(`Conflict, record already exists for requested user role code $ ${payload.roleCode}`);
+            log.error(`Conflict, record already exists for requested user role code : ${payload.roleCode}`);
             response.resType = 'CONFLICT';
             response.resMsg = 'User role already exists with same role code.';
             response.isValid = false;
@@ -37,7 +36,6 @@ const isUserRoleAvailable = async(payload) => {
         };
     }
 }
-
 const createUserRole = async(payload) => {
     try {
         log.info('Execution for registering new user role controller started');
