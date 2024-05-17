@@ -28,13 +28,13 @@ const createScope = async(req, res, next) => {
             throw userRoleAvailable;
         }
 
-        log.info(`Call controller function to check for existing role scope with same scope code : ${payload.scope}`);
+        log.info(`Call controller function to check for existing user scope with same scope code : ${payload.scope}`);
         const existingScope = await dashboardController.isUserScopeAvailable(payload);
         if (!existingScope.isValid) {
             throw existingScope;
         }
 
-        log.info('Call controller function to register new role scope started');
+        log.info('Call controller function to register new user scope started');
         const newScope = await dashboardController.createUserScope(payload);
         if (!newScope.isValid) {
             throw newScope;
@@ -46,7 +46,7 @@ const createScope = async(req, res, next) => {
         );
     } catch (err) {
         if (err.resType === 'INTERNAL_SERVER_ERROR') {
-            log.error('Internal Error occurred while working with register user role router function');
+            log.error('Internal Error occurred while working with register user scope router function');
         } else {
             log.error(`Error occurred : ${err.resMsg}`);
         }

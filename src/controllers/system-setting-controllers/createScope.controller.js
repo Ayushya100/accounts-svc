@@ -20,7 +20,7 @@ const isUserScopeAvailable = async(payload) => {
         if (scopeDetails) {
             log.error(`Conflict, record already exists for requested user scope code : ${payload.scope}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'User role already exists with same role code.';
+            response.resMsg = 'User scope already exists with same code';
             response.isValid = false;
         }
 
@@ -30,7 +30,7 @@ const isUserScopeAvailable = async(payload) => {
         log.error(`Error while working with db to check for existing user scope record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing user scope record.',
+            resMsg: 'Some error occurred while working with db to check for existing user scope record',
             stack: err.stack,
             isValid: false
         };
@@ -48,7 +48,7 @@ const createUserScope = async(payload) => {
         log.success('Execution for creating new record completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'User Role Created Successfully',
+            resMsg: 'User Scope Created Successfully',
             data: newUserScope,
             isValid: true
         };
@@ -56,7 +56,7 @@ const createUserScope = async(payload) => {
         log.error(`Error while working with db to register new user scope record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new user scope.',
+            resMsg: 'Some error occurred while working with db to register new user scope',
             stack: err.stack,
             isValid: false
         };

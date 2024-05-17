@@ -17,13 +17,13 @@ const getAllSettings = async() => {
             log.info('No setting info available');
             return {
                 resType: 'CONTENT_NOT_AVAILABLE',
-                resMsg: 'No Dashboard setting records found',
+                resMsg: 'No Dashboard setting record found',
                 data: [],
                 isValid: true
             };
         }
 
-        log.info('Execution for retrieving all setting info completed successfully');
+        log.info('Execution for retrieving all settings info completed successfully');
         return {
             resType: 'SUCCESS',
             resMsg: 'All settings found',
@@ -34,7 +34,7 @@ const getAllSettings = async() => {
         log.error('Error while working with db to get all setting records');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to retrieve setting records.',
+            resMsg: 'Some error occurred while working with db to retrieve setting records',
             stack: err.stack,
             isValid: false
         };
@@ -48,10 +48,10 @@ const getSettingInfoById = async(settingId) => {
         const settingDetail = await dbConnect.getSettingInfoById(settingId);
 
         if (!settingDetail || settingDetail.length === 0) {
-            log.error('No information found for requested setting');
+            log.error('No information found for requested setting id');
             return {
                 resType: 'NOT_FOUND',
-                resMsg: 'Setting does not found',
+                resMsg: 'Setting info not found',
                 isValid: false
             };
         }

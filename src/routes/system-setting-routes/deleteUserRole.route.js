@@ -49,7 +49,7 @@ const deleteUserRole = async(req, res, next) => {
         );
     } catch (err) {
         if (err.resType === 'INTERNAL_SERVER_ERROR') {
-            log.error('Internal Error occurred while working with db to update user role router function');
+            log.error('Internal Error occurred while working with db to delete user role router function');
         } else {
             log.error(`Error occurred : ${err.resMsg}`);
         }

@@ -22,7 +22,7 @@ const registerSetting = async(req, res, next) => {
             throw isValidPayload;
         }
 
-        log.info('Call controller function to check for existing record with similar setting');
+        log.info('Call controller function to check for existing record of requested setting');
         const isSettingAvailable = await dashboardController.isSettingAvailable(payload);
         if (!isSettingAvailable.isValid) {
             throw isSettingAvailable;
@@ -40,7 +40,7 @@ const registerSetting = async(req, res, next) => {
         );
     } catch (err) {
         if (err.resType === 'INTERNAL_SERVER_ERROR') {
-            log.error('Internal Error occurred while working with register setting router function');
+            log.error('Internal Error occurred while working with register new setting router function');
         } else {
             log.error(`Error occurred : ${err.resMsg}`);
         }

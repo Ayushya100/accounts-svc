@@ -15,15 +15,15 @@ const deleteUserRole = async(userId, roleId) => {
         log.info('Execution for deleting user role completed successfully');
         return {
             resType: 'REQUEST_ACCEPTED',
-            resMsg: 'User role info deleted',
+            resMsg: 'User role deleted successfully',
             data: userRoleDetails,
             isValid: true
         };
     } catch (err) {
-        log.error('Error while working with db to delete user role record');
+        log.error('Error while working with db to delete user role');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to delete user role.',
+            resMsg: 'Some error occurred while working with db to delete user role',
             stack: err.stack,
             isValid: false
         };

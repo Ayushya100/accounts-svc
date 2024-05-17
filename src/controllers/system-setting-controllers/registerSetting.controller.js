@@ -16,23 +16,23 @@ const isSettingAvailable = async(payload) => {
             isValid: true
         };
 
-        log.info('Call db query to check for the existing records');
+        log.info('Call db query to check for the existing setting records');
         const settingDetails = await dbConnect.isSettingAvailable(payload);
 
         if (settingDetails) {
             log.error(`Conflict, record already exists for requested category with name : ${payload.categoryName}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'Setting already exists with same name.';
+            response.resMsg = 'Setting already exists with same category name';
             response.isValid = false;
         }
 
-        log.info('Execution for checking existing record completed');
+        log.info('Execution for checking existing setting record completed');
         return response;
     } catch (err) {
         log.error(`Error while working with db to check for existing setting record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing setting record.',
+            resMsg: 'Some error occurred while working with db to check for existing setting record',
             stack: err.stack,
             isValid: false
         };
@@ -56,7 +56,7 @@ const createSetting = async(payload) => {
             isUserAssignable: payload.isUserAssignable
         };
 
-        log.info('Call db query to register new records');
+        log.info('Call db query to register new setting record');
         const newSetting = await dbConnect.registerNewSetting(newSettingPayload);
 
         log.success('Execution for new record completed');
@@ -70,7 +70,7 @@ const createSetting = async(payload) => {
         log.error(`Error while working with db to register new setting record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new setting.',
+            resMsg: 'Some error occurred while working with db to register new setting',
             stack: err.stack,
             isValid: false
         };
