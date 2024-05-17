@@ -38,6 +38,14 @@ const updateUserRole = async(req, res, next) => {
             throw userRoleInfo;
         }
 
+        if (payload.isDefault === true) {
+            log.info('Call controller function to check for existing default user role');
+            const isDefaultUserAvailable = await dashboardController.isDefaultUserAvailable();
+            if (isDefaultUserAvailable.isValid) {
+                payload.isDefault = false;
+            }
+        }
+
         log.info(`Call controller function to update user role for requested user role id : ${roleId}`);
         const updatedInfo = await dashboardController.updateUserRole(userId, roleId, payload, userRoleInfo.data);
         if (!updatedInfo.isValid) {
