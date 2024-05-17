@@ -228,6 +228,19 @@ const updateAppRouteById = async(userId, routeId, payload) => {
     return await db.findByIdAndUpdate(userId, query, payload, null);
 }
 
+const deleteAppRouteById = async(userId, routeId) => {
+    const query = {
+        _id: routeId
+    };
+    const payload = {
+        isDeleted: true
+    };
+    const fields = 'path microservice port method validations isDeleted';
+
+    const db = new serviceRoutesTemplate();
+    return await db.findByIdAndUpdate(userId, query, payload, fields);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -252,5 +265,6 @@ export {
     deleteUserScopeById,
     getAllAppRoute,
     getAppRouteById,
-    updateAppRouteById
+    updateAppRouteById,
+    deleteAppRouteById
 };
