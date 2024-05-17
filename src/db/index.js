@@ -19,7 +19,8 @@ import {
     isScopeAvailable,
     registerNewScope,
     getAllUserScope,
-    getUserScopeById
+    getUserScopeById,
+    updateUserScopeById
 } from './settings.db.js';
 
 export default {
@@ -41,5 +42,6 @@ export default {
     isScopeAvailable,
     registerNewScope,
     getAllUserScope,
-    getUserScopeById
+    getUserScopeById,
+    updateUserScopeById
 };

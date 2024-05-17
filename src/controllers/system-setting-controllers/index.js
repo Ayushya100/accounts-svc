@@ -16,6 +16,7 @@ import { deleteUserRole } from './deleteUserRole.controller.js';
 import { isDefaultUserAvailable, isUserRoleByIdAvailable } from './shared.controller.js';
 import { isUserScopeAvailable, createUserScope } from './createScope.controller.js';
 import { getAllUserScope, getUserScopeById } from './getUserScope.controller.js';
+import { updatedUserScope } from './updateUserScope.controller.js';
 
 export default {
     validateCreateSettingPayload,
@@ -39,5 +40,6 @@ export default {
     isUserScopeAvailable,
     createUserScope,
     getAllUserScope,
-    getUserScopeById
+    getUserScopeById,
+    updatedUserScope
 };
