@@ -28,6 +28,15 @@ const registerUserRoleRoute = async(req, res, next) => {
             throw isUserRoleAvailable;
         }
 
+        if (payload.isDefault === true) {
+            log.info('Call controller function to check for existing default user role');
+            const isDefaultUserAvailable = await dashboardController.isDefaultUserAvailable();
+            if (isDefaultUserAvailable.isValid) {
+                payload.isDefault = false;
+            }
+        }
+
+
         log.info('Call controller function to register new user role started');
         const userRoleCreated = await dashboardController.createUserRole(payload);
         if (!userRoleCreated.isValid) {

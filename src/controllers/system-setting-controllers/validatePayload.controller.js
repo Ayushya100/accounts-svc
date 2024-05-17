@@ -89,7 +89,7 @@ const validateNewUserRolePayload = (payload) => {
         isValid: true
     };
 
-    if (!payload.roleCode || !payload.roleName) {
+    if (!payload.roleCode || !payload.roleName || !payload.isDefault) {
         response.resType = 'BAD_REQUEST';
         response.resMsg = `Required parameter is missing`;
         response.isValid = false;

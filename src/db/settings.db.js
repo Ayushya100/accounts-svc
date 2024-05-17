@@ -84,6 +84,15 @@ const isUserRoleAvailable = async(payload) => {
     return await db.findOne(query, null);
 }
 
+const isDefaultUserRoleAvailable = async() => {
+    const query = {
+        isDefault: true,
+        isDeleted: false
+    };
+    const db = new userRoleTemplate();
+    return await db.findOne(query, null);
+}
+
 const registerNewUserRole = async(payload) => {
     const db = new userRoleTemplate();
     return await db.create(payload);
@@ -136,6 +145,7 @@ export {
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
+    isDefaultUserRoleAvailable,
     registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
