@@ -12,6 +12,7 @@ import getUserScopeInfo from './getUserScope.route.js';
 import updateUserScope from './updateUserScope.route.js';
 import deleteUserScope from './deleteUserScope.route.js';
 import getAppRouteInfo from './getAppRoute.route.js';
+import updateAppRoute from './updateAppRoute.route.js';
 
 export default {
     registerSetting,
@@ -25,5 +26,6 @@ export default {
     getUserScopeInfo,
     updateUserScope,
     deleteUserScope,
-    getAppRouteInfo
+    getAppRouteInfo,
+    updateAppRoute
 };

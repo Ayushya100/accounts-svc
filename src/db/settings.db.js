@@ -220,6 +220,14 @@ const getAppRouteById = async(routeId) => {
     return await db.find(query, null);
 }
 
+const updateAppRouteById = async(userId, routeId, payload) => {
+    const query = {
+        _id: routeId
+    };
+    const db = new serviceRoutesTemplate();
+    return await db.findByIdAndUpdate(userId, query, payload, null);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -243,5 +251,6 @@ export {
     updateUserScopeById,
     deleteUserScopeById,
     getAllAppRoute,
-    getAppRouteById
+    getAppRouteById,
+    updateAppRouteById
 };
