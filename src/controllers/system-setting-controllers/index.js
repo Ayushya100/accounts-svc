@@ -17,6 +17,7 @@ import { isDefaultUserAvailable, isUserRoleByIdAvailable } from './shared.contro
 import { isUserScopeAvailable, createUserScope } from './createScope.controller.js';
 import { getAllUserScope, getUserScopeById } from './getUserScope.controller.js';
 import { updatedUserScope } from './updateUserScope.controller.js';
+import { deleteUserScope } from './deleteUserScope.controller.js';
 
 export default {
     validateCreateSettingPayload,
@@ -41,5 +42,6 @@ export default {
     createUserScope,
     getAllUserScope,
     getUserScopeById,
-    updatedUserScope
+    updatedUserScope,
+    deleteUserScope
 };

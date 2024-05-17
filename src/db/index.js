@@ -20,7 +20,8 @@ import {
     registerNewScope,
     getAllUserScope,
     getUserScopeById,
-    updateUserScopeById
+    updateUserScopeById,
+    deleteUserScopeById
 } from './settings.db.js';
 
 export default {
@@ -43,5 +44,6 @@ export default {
     registerNewScope,
     getAllUserScope,
     getUserScopeById,
-    updateUserScopeById
+    updateUserScopeById,
+    deleteUserScopeById
 };

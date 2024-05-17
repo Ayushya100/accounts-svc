@@ -8,40 +8,41 @@ import {
 } from 'lib-finance-service';
 import controller from '../../controllers/index.js';
 
-const header = 'route: delete-user-role';
-const msg = 'Delete user role router started';
+const header = 'route: delete-user-scope';
+const msg = 'Delete user scope router started';
 
 const log = logger(header);
 const dashboardController = controller.dashboardController;
 
 // API Function
-const deleteUserRole = async(req, res, next) => {
+const deleteUserScope = async(req, res, next) => {
     log.info(msg);
 
     try {
         const userContext = getUserContext();
         const roleId = req.params.roleId;
+        const scopeId = req.params.scopeId;
         const userId = userContext.userId || req.user?.userId;
 
-        log.info('Call controller function to check if user role exists in db');
-        const userRoleInfo = await dashboardController.getUserRoleById(roleId);
-        if (!userRoleInfo) {
-            throw userRoleInfo;
+        log.info('Call controller function to check if user scope exists in db');
+        const userScopeInfo = await dashboardController.getUserScopeById(roleId, scopeId);
+        if (!userScopeInfo.isValid) {
+            throw userScopeInfo;
         }
 
-        log.info(`Call controller function to delete user role for requested user role id : ${roleId}`);
-        const updatedInfo = await dashboardController.deleteUserRole(userId, roleId);
+        log.info(`Call controller function to delete user scope for requested user scope if : ${scopeId}`);
+        const updatedInfo = await dashboardController.deleteUserScope(userId, scopeId);
         if (!updatedInfo.isValid) {
             throw updatedInfo;
         }
 
-        log.success('Successfully deleted user role from db');
+        log.success('Successfully deleted user scope from db');
         res.status(responseCodes[updatedInfo.resType]).json(
             buildApiResponse(updatedInfo)
         );
     } catch (err) {
         if (err.resType === 'INTERNAL_SERVER_ERROR') {
-            log.error('Internal Error occurred while working with db to delete user role router function');
+            log.error('Internal Error occurred while working with db to delete user scope router function');
         } else {
             log.error(`Error occurred : ${err.resMsg}`);
         }
@@ -49,4 +50,4 @@ const deleteUserRole = async(req, res, next) => {
     }
 }
 
-export default deleteUserRole;
+export default deleteUserScope;

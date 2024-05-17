@@ -10,6 +10,7 @@ import deleteUserRole from './deleteUserRole.route.js';
 import createScope from './createScope.route.js';
 import getUserScopeInfo from './getUserScope.route.js';
 import updateUserScope from './updateUserScope.route.js';
+import deleteUserScope from './deleteUserScope.route.js';
 
 export default {
     registerSetting,
@@ -21,5 +22,6 @@ export default {
     deleteUserRole,
     createScope,
     getUserScopeInfo,
-    updateUserScope
+    updateUserScope,
+    deleteUserScope
 };

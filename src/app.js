@@ -49,6 +49,7 @@ app.post(`${USERS_API}/user-scope`, routes.settingRoutes.createScope);
 app.get(`${USERS_API}/user-role/:roleId/user-scope`, routes.settingRoutes.getUserScopeInfo);
 app.get(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingRoutes.getUserScopeInfo);
 app.put(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingRoutes.updateUserScope);
+app.delete(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingRoutes.deleteUserScope);
 
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);

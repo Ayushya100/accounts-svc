@@ -141,8 +141,9 @@ const deleteUserRoleById = async(userId, roleId) => {
         isActive: false,
         isDeleted: true
     };
-    const db = new userRoleTemplate();
     const fields = 'roleCode roleName isActive isDeleted';
+
+    const db = new userRoleTemplate();
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
@@ -189,6 +190,19 @@ const updateUserScopeById = async(userId, scopeId, payload) => {
     return await db.findByIdAndUpdate(userId, query, payload, null);
 }
 
+const deleteUserScopeById = async(userId, scopeId) => {
+    const query = {
+        _id: scopeId
+    };
+    const payload = {
+        isDeleted: true
+    };
+    const fields = 'roleId scope scopeDesc isDeleted';
+
+    const db = new roleScopeTemplate();
+    return await db.findByIdAndUpdate(userId, query, payload, fields);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -209,5 +223,6 @@ export {
     registerNewScope,
     getAllUserScope,
     getUserScopeById,
-    updateUserScopeById
+    updateUserScopeById,
+    deleteUserScopeById
 };
