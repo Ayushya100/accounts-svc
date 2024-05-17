@@ -20,6 +20,7 @@ import { updatedUserScope } from './updateUserScope.controller.js';
 import { deleteUserScope } from './deleteUserScope.controller.js';
 import { getAllAppRouteInfo, getAppRoutebyId } from './getAppRoute.controller.js';
 import { updateAppRoute } from './updateAppRoute.controller.js';
+import { deleteAppRoute } from './deleteUserRoute.controller.js';
 
 export default {
     validateCreateSettingPayload,
@@ -48,5 +49,6 @@ export default {
     deleteUserScope,
     getAllAppRouteInfo,
     getAppRoutebyId,
-    updateAppRoute
+    updateAppRoute,
+    deleteAppRoute
 };

@@ -42,6 +42,7 @@ app.post(`${USERS_API}/register-route`, routes.settingRoutes.registerRoute);
 app.get(`${USERS_API}/app-route`, routes.settingRoutes.getAppRouteInfo);
 app.get(`${USERS_API}/app-route/:routeId`, routes.settingRoutes.getAppRouteInfo);
 app.put(`${USERS_API}/app-route/:routeId`, routes.settingRoutes.updateAppRoute);
+app.delete(`${USERS_API}/app-route/:routeId`, routes.settingRoutes.deleteAppRoute);
 
 app.post(`${USERS_API}/register-user-role`, routes.settingRoutes.registerUserRoleRoute);
 app.get(`${USERS_API}/user-role`, routes.settingRoutes.getUserRoleInfo);

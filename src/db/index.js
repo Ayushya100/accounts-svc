@@ -24,7 +24,8 @@ import {
     deleteUserScopeById,
     getAllAppRoute,
     getAppRouteById,
-    updateAppRouteById
+    updateAppRouteById,
+    deleteAppRouteById
 } from './settings.db.js';
 
 export default {
@@ -51,5 +52,6 @@ export default {
     deleteUserScopeById,
     getAllAppRoute,
     getAppRouteById,
-    updateAppRouteById
+    updateAppRouteById,
+    deleteAppRouteById
 };
