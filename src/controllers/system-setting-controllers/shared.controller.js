@@ -37,6 +37,38 @@ const isDefaultUserAvailable = async() => {
     }
 }
 
+const isUserRoleByIdAvailable = async(roleId) => {
+    try {
+        log.info('Execution to check for user role for provided id controller started');
+        let response = {
+            resType: 'SUCCESS',
+            resMsg: 'VALIDATION SUCCESSFULL',
+            isValid: true
+        };
+
+        log.info('Call db query to check for the user role record with provided id');
+        const routeDetails = await dbConnect.isUserRoleByIdAvailable(roleId);
+        if (!routeDetails) {
+            log.error(`User role for provided id (${roleId}) not found`);
+            response.resType = 'NOT_FOUND';
+            response.resMsg = 'User role not found';
+            response.isValid = false;
+        }
+        
+        log.info('Execution for checking user role with provided id completed');
+        return response;
+    } catch (err) {
+        log.error(`Error while working with db to check for user role record : ${err}`);
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: 'Some error occurred while working with db to check for user role record.',
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 export {
-    isDefaultUserAvailable
+    isDefaultUserAvailable,
+    isUserRoleByIdAvailable
 };

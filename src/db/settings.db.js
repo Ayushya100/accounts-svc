@@ -5,6 +5,7 @@ import { Types } from 'mongoose';
 // Import DB Models
 import {
     dashboardSettingTemplate,
+    roleScopeTemplate,
     serviceRoutesTemplate,
     userRoleTemplate
 } from 'lib-finance-service';
@@ -84,6 +85,15 @@ const isUserRoleAvailable = async(payload) => {
     return await db.findOne(query, null);
 }
 
+const isUserRoleByIdAvailable = async(roleId) => {
+    const query = {
+        _id: roleId,
+        isDeleted: false
+    };
+    const db = new userRoleTemplate();
+    return await db.findById(query, null);
+}
+
 const isDefaultUserRoleAvailable = async() => {
     const query = {
         isDefault: true,
@@ -136,6 +146,22 @@ const deleteUserRoleById = async(userId, roleId) => {
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
+const isScopeAvailable = async(payload) => {
+    const query = {
+        roleId: payload.roleId,
+        scope: payload.scope.toUpperCase(),
+        scopeDesc: payload.scopeDesc,
+        isDeleted: false
+    };
+    const db = new roleScopeTemplate();
+    return await db.findOne(query, null);
+}
+
+const registerNewScope = async(payload) => {
+    const db = new roleScopeTemplate();
+    return await db.create(payload);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -145,10 +171,13 @@ export {
     isRouteAvailable,
     registerNewRoute,
     isUserRoleAvailable,
+    isUserRoleByIdAvailable,
     isDefaultUserRoleAvailable,
     registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
     updateUserRoleById,
-    deleteUserRoleById
+    deleteUserRoleById,
+    isScopeAvailable,
+    registerNewScope
 };

@@ -99,8 +99,26 @@ const validateNewUserRolePayload = (payload) => {
     return response;
 }
 
+const validateNewScopePayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.roleId || !payload.scope || !payload.scopeDesc) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `Required parameter is missing`;
+        response.isValid = false;
+    }
+
+    returnValidationConfirmation();
+    return response;
+}
+
 export {
     validateCreateSettingPayload,
     validateNewRoutePayload,
-    validateNewUserRolePayload
+    validateNewUserRolePayload,
+    validateNewScopePayload
 };
