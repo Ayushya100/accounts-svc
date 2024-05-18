@@ -3,6 +3,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import rateLimit from 'express-rate-limit';
 import { errorHandler, setUserContext } from 'lib-finance-service';
 
 import { USERS_API } from './constants.js';
@@ -25,6 +26,11 @@ app.use(express.json({
 app.use(express.urlencoded({
     limit: '32kb',
     extended: false
+}));
+
+app.use(rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 minutes max
+    max: 200 // Limit each IP to 200 requests per windowMs
 }));
 
 app.use(express.static('public'));
