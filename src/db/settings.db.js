@@ -74,7 +74,9 @@ const getUserAssignableSettings = async() => {
 
 const isRouteAvailable = async(payload) => {
     const query = {
-        path: payload.path
+        path: payload.path,
+        microservice: payload.microservice,
+        method: payload.method
     };
     const db = new serviceRoutesTemplate();
     return await db.findOne(query, null);
