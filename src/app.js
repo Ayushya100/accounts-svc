@@ -39,6 +39,9 @@ app.use(cookieParser());
 
 setUserContext(app);
 
+// System Setup Routes
+app.get(`${USERS_API}/system-setup`, routes.userSetting.getSystemSetup);
+
 // System Setting Routes
 app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
