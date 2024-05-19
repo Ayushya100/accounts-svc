@@ -1,12 +1,15 @@
 'use strict';
 
 import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 // Import DB Templates
 import {
     dashboardSettingTemplate,
+    executeAggregation,
     roleScopeTemplate,
     serviceRoutesTemplate,
+    UserDashboardModel,
     userDashboardTemplate,
     userRoleTemplate
 } from 'lib-finance-service';
@@ -258,6 +261,53 @@ const createUserSettings = async(userSettings) => {
     return await db.create(userSettings);
 }
 
+const getUserDashboardSetup = async(userId, fieldsToRetrieve) => {
+    const setupDetails = UserDashboardModel.aggregate([
+        {
+            $match: {
+                userId: new mongoose.mongoose.Types.ObjectId(userId),
+                isDeleted: false
+            }
+        },
+        {
+            $lookup: {
+                from: 'dashboard_settings',
+                localField: 'settingId',
+                foreignField: '_id',
+                as: 'dashboard'
+            }
+        },
+        {
+            $match: {
+                'dashboard.isDeleted': false,
+                'dashboard.categoryName': {
+                    $in: fieldsToRetrieve
+                }
+            }
+        },
+        {
+            $addFields: {
+                categoryName: {
+                    $arrayElemAt: ['$dashboard.categoryName', 0]
+                },
+                categoryDescription: {
+                    $arrayElemAt: ['$dashboard.categoryDescription', 0]
+                }
+            }
+        },
+        {
+            $project: {
+                categoryName: 1,
+                categoryDescription: 1,
+                value: 1,
+                type: 1
+            }
+        }
+    ]);
+
+    return await executeAggregation(setupDetails);
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -285,5 +335,6 @@ export {
     getAppRouteById,
     updateAppRouteById,
     deleteAppRouteById,
-    createUserSettings
+    createUserSettings,
+    getUserDashboardSetup
 };
