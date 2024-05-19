@@ -42,6 +42,10 @@ setUserContext(app);
 // System Setup Routes
 app.get(`${USERS_API}/system-setup`, routes.userSetting.getSystemSetup);
 
+// User Account Routes
+app.post(`${USERS_API}/register-user`, routes.userRoutes.registerUser);
+app.put(`${USERS_API}/:userId/verify-user`, routes.userRoutes.verifyUser);
+
 // System Setting Routes
 app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
@@ -67,9 +71,6 @@ app.delete(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingR
 
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);
-
-// User Account Routes
-app.post(`${USERS_API}/register-user`, routes.userRoutes.registerUser);
 
 // Error Handler middleware
 app.use(errorHandler);

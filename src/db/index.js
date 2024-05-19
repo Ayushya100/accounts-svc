@@ -32,7 +32,10 @@ import {
 import {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
-    assignUserRole
+    assignUserRole,
+    isUserByIdAvailable,
+    getUserFullDetails,
+    validateUser
 } from './users.db.js';
 
 export default {
@@ -65,5 +68,8 @@ export default {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
     createUserSettings,
-    assignUserRole
+    assignUserRole,
+    isUserByIdAvailable,
+    getUserFullDetails,
+    validateUser
 };
