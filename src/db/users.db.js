@@ -12,6 +12,14 @@ const isUserByUsernameOrEmailAvailable = async(userName, emailId) => {
     return await db.findOne(query, null);
 }
 
+const isUserByIdAvailable = async(userId) => {
+    const query = {
+        _id: userId
+    };
+    const db = new userTemplate();
+    return await db.findById(query, null);
+}
+
 const createNewUser = async(payload) => {
     const userPayload = {
         firstName: payload.firstName,
@@ -42,7 +50,9 @@ const generateVerificationCode = async(userId) => {
         verificationCode: verificationCode,
         verificationCodeExpiry: Date.now() + (6 * 60 * 60 * 1000)
     };
-    return await db.findByIdAndUpdate(userId, query, payload, null);
+
+    const fields = 'roleId firstName lastName userName emailId verificationCode isVerified';
+    return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 const assignUserRole = async(userId, roleId) => {
@@ -58,8 +68,33 @@ const assignUserRole = async(userId, roleId) => {
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
+const getUserFullDetails = async(userId) => {
+    const query = {
+        _id: userId
+    };
+    const fields = 'roleId firstName lastName userName emailId profileImageURL lastLogin loginCount verificationCode verificationCodeExpiry isVerified isVerified';
+
+    const db = new userTemplate();
+    return await db.findById(query, fields);
+}
+
+const validateUser = async(userId) => {
+    const query = {
+        _id: userId
+    };
+    const payload = {
+        verificationCode: '',
+        isVerified: true
+    };
+    const db = new userTemplate();
+    return await db.findByIdAndUpdate(userId, query, payload, null);
+}
+
 export {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
-    assignUserRole
+    assignUserRole,
+    isUserByIdAvailable,
+    getUserFullDetails,
+    validateUser
 };
