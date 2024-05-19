@@ -9,14 +9,25 @@ const log = logger(header);
 
 let externalSvcConfig = {};
 
-const getPathDetails = async(path) => {
-    const pathDetails = await dbConnect.isRouteAvailable({
-        path: {
-            $regex: path,
-            $options: 'i'
-        }
-    });
-    return pathDetails;
+const getPathDetails = async(path, microservice, method) => {
+    try {
+        const pathDetails = await dbConnect.isRouteAvailable({
+            path: {
+                $regex: path,
+                $options: 'i'
+            },
+            microservice: microservice,
+            method: method
+        });
+        return {
+            pathDetails: pathDetails,
+            status: true
+        };
+    } catch (err) {
+        return {
+            status: false
+        };
+    }
 }
 
 const initializeSvc = (svc, port) => {
@@ -36,7 +47,7 @@ const sendRequest = async(path, method, payload, accessToken = null, jsonData = 
             url: baseUrl,
             baseUrl: baseUrl,
             data: payload,
-            timeout: 20000,
+            timeout: 50000,
             headers: { accept: 'application/json, text/plain, */*', 'content-type': 'application/json' },
             responseType: 'json'
         };
@@ -74,14 +85,22 @@ const sendRequest = async(path, method, payload, accessToken = null, jsonData = 
 
 const sendMail = async(payload) => {
     const url = `emails/send-mail`;
-    const pathDetails = await getPathDetails(url);
-    const microservice = pathDetails.microservice;
-    const path = pathDetails.path;
-    const port = pathDetails.port;
-    const method = pathDetails.method;
+    const microservice = 'email-svc';
+    const method = 'POST'
 
-    initializeSvc(microservice, port);
-    return await sendRequest(path, method, payload);
+    const pathFound = await getPathDetails(url, microservice, method);
+    if (pathFound.status) {
+        const path = pathFound.pathDetails.path;
+        const port = pathFound.pathDetails.port;
+    
+        initializeSvc(microservice, port);
+        return await sendRequest(path, method, payload);
+    }
+    return {
+        statusCode: 'INTERNAL_SERVER_ERROR',
+        message: 'Failed to send mail try getting verification link via login',
+        isValid: false
+    };
 }
 
 export {
