@@ -27,7 +27,8 @@ import {
     getAppRouteById,
     updateAppRouteById,
     deleteAppRouteById,
-    createUserSettings
+    createUserSettings,
+    getUserDashboardSetup
 } from './settings.db.js';
 import {
     isUserByUsernameOrEmailAvailable,
@@ -35,7 +36,11 @@ import {
     assignUserRole,
     isUserByIdAvailable,
     getUserFullDetails,
-    validateUser
+    validateUser,
+    verifyPassword,
+    generateVerificationCode,
+    reactivateUser,
+    generateAccessAndRefreshTokens
 } from './users.db.js';
 
 export default {
@@ -68,8 +73,13 @@ export default {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
     createUserSettings,
+    getUserDashboardSetup,
     assignUserRole,
     isUserByIdAvailable,
     getUserFullDetails,
-    validateUser
+    validateUser,
+    verifyPassword,
+    generateVerificationCode,
+    reactivateUser,
+    generateAccessAndRefreshTokens
 };

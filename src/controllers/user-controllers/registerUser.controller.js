@@ -23,6 +23,7 @@ const checkUserByUserNameOrEmail = async(payload) => {
         const userFound = await dbConnect.isUserByUsernameOrEmailAvailable(payload.userName, payload.emailId);
 
         if (userFound) {
+            log.error('User already exist with same username or emailId');
             response.resType = 'CONFLICT';
             response.resMsg = 'User already exist with same username or emailId.',
             response.isValid = false;
