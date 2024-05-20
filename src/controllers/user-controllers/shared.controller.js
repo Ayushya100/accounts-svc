@@ -23,14 +23,22 @@ const checkUserById = async(userId) => {
         log.info('Call db query to check for the existing record');
         const isUserAvailable = await dbConnect.isUserByIdAvailable(userId);
         if (isUserAvailable) {
-            response.resType = 'SUCCESS';
-            response.resMsg = 'VALIDATION SUCCESSFUL';
-            response.data = isUserAvailable;
-            response.isValid = true;
+            log.info('Execution for checking existing user record completed');
+            return {
+                resType: 'SUCCESS',
+                resMsg: 'VALIDATION SUCCESSFUL',
+                data: isUserAvailable,
+                isValid: true
+            };
         }
 
-        log.info('Execution for checking existing user record completed');
-        return response;
+        log.error('No user found');
+        return {
+            resType: 'NOT_FOUND',
+            resMsg: 'User not found',
+            data: null,
+            isValid: false
+        };
     } catch (err) {
         log.error(`Error while working with db to check for existing user for provided id : ${userId}`);
         return {

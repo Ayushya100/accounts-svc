@@ -17,7 +17,7 @@ const verifyUser = async(payload) => {
         let currentTime = new Date(Date.now());
 
         log.info('Call db query to get the existing record');
-        const userInfo = await dbConnect.getUserFullDetails(payload.userId);
+        const userInfo = await dbConnect.getUserVerificationDetails(payload.userId);
 
         log.info('Check if verification code is valid');
         if (userInfo && (userInfo.verificationCode === payload.verificationCode) && (currentTime <= userInfo.verificationCodeExpiry)) {

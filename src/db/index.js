@@ -35,12 +35,14 @@ import {
     createNewUser,
     assignUserRole,
     isUserByIdAvailable,
-    getUserFullDetails,
+    getUserVerificationDetails,
     validateUser,
     verifyPassword,
     generateVerificationCode,
     reactivateUser,
-    generateAccessAndRefreshTokens
+    generateAccessAndRefreshTokens,
+    getUserFullDetails,
+    getUserSetupInfo
 } from './users.db.js';
 
 export default {
@@ -76,10 +78,12 @@ export default {
     getUserDashboardSetup,
     assignUserRole,
     isUserByIdAvailable,
-    getUserFullDetails,
+    getUserVerificationDetails,
     validateUser,
     verifyPassword,
     generateVerificationCode,
     reactivateUser,
-    generateAccessAndRefreshTokens
+    generateAccessAndRefreshTokens,
+    getUserFullDetails,
+    getUserSetupInfo
 };
