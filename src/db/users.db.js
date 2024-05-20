@@ -72,11 +72,11 @@ const assignUserRole = async(userId, roleId) => {
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
-const getUserFullDetails = async(userId) => {
+const getUserVerificationDetails = async(userId) => {
     const query = {
         _id: userId
     };
-    const fields = 'roleId firstName lastName userName emailId profileImageURL lastLogin loginCount verificationCode verificationCodeExpiry isVerified isVerified';
+    const fields = 'firstName lastName userName emailId verificationCode verificationCodeExpiry isVerified isDeleted';
 
     const db = new userTemplate();
     return await db.findById(query, fields);
@@ -114,25 +114,15 @@ const generateAccessAndRefreshTokens = async(userId) => {
     const db = new userTemplate();
     const user = await db.findById({ _id: userId }, null);
 
-    const allUserScopes = await dbConnect.getAllUserScope(user.roleId);
-    const userScopes = allUserScopes.map(scopes => scopes.scope);
-
-    let userRole = await dbConnect.getUserRoleById(user.roleId);
-    userRole = userRole[0];
-
-    const fieldsToRetrieve = [
-        'user-language',
-        'user-theme'
-    ];
-    const userSetup = await dbConnect.getUserDashboardSetup(userId, fieldsToRetrieve);
+    const additionalData = await getUserSetupInfo(userId, user.roleId);
 
     const accessToken = jwt.sign(
         {
             _id: user._id,
             userName: user.userName,
-            userRole: userRole.roleCode,
-            userScopes: userScopes,
-            userSetup: userSetup,
+            userRole: additionalData.userRole.roleCode,
+            userScopes: additionalData.userScopes,
+            userSetup: additionalData.userSetup,
             isVerified: user.isVerified,
             isDeleted: user.isDeleted
         },
@@ -168,13 +158,41 @@ const generateAccessAndRefreshTokens = async(userId) => {
         refreshToken: refreshToken,
         userId: updatedUserInfo._id,
         userName: updatedUserInfo.userName,
-        userRole: userRole.roleCode,
-        userScopes: userScopes,
-        userSetup: userSetup.map(setupDetail => ({
+        userRole: additionalData.userRole.roleCode,
+        userScopes: additionalData.userScopes,
+        userSetup: additionalData.userSetup.map(setupDetail => ({
             categoryName: setupDetail.categoryName,
             categoryDescription: setupDetail.categoryDescription,
             value: setupDetail.value
         }))
+    };
+}
+
+const getUserFullDetails = async(userId) => {
+    const query = {
+        _id: userId
+    };
+    const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -password -createdOn -createdBy -modifiedOn -modifiedBy';
+
+    const db = new userTemplate();
+    return await db.findById(query, fields);
+}
+
+const getUserSetupInfo = async(userId, roleId) => {
+    const allUserScopes = await dbConnect.getAllUserScope(roleId);
+    const userScopes = allUserScopes.map(scopes => scopes.scope);
+
+    let userRole = await dbConnect.getUserRoleById(roleId);
+    userRole = userRole[0];
+
+    const fieldsToRetrieve = [
+        'user-language',
+        'user-theme'
+    ];
+    const userSetup = await dbConnect.getUserDashboardSetup(userId, fieldsToRetrieve);
+
+    return {
+        userScopes, userRole, userSetup
     };
 }
 
@@ -183,10 +201,12 @@ export {
     createNewUser,
     assignUserRole,
     isUserByIdAvailable,
-    getUserFullDetails,
+    getUserVerificationDetails,
     validateUser,
     verifyPassword,
     generateVerificationCode,
     reactivateUser,
-    generateAccessAndRefreshTokens
+    generateAccessAndRefreshTokens,
+    getUserFullDetails,
+    getUserSetupInfo
 };

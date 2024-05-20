@@ -4,13 +4,14 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import { errorHandler, setUserContext } from 'lib-finance-service';
+import { errorHandler, setUserContext, verifyToken } from 'lib-finance-service';
 
 import { USERS_API } from './constants.js';
 
 // User Routes
 import routes from './routes/index.js';
 
+const tokenKey = process.env.ACCESS_TOKEN_KEY;
 const app = express();
 
 // Setting up Middlewares
@@ -47,6 +48,8 @@ app.post(`${USERS_API}/register-user`, routes.userRoutes.registerUser);
 app.put(`${USERS_API}/:userId/verify-user`, routes.userRoutes.verifyUser);
 app.post(`${USERS_API}/login-user`, routes.userRoutes.loginUser);
 
+app.use(verifyToken(tokenKey));
+
 // System Setting Routes
 app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
@@ -72,6 +75,9 @@ app.delete(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingR
 
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);
+
+// User Account Routes
+app.get(`${USERS_API}/user-info/:userId`, routes.userRoutes.getUserInfo);
 
 // Error Handler middleware
 app.use(errorHandler);

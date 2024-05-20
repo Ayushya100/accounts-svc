@@ -19,6 +19,7 @@ import {
     generateAccessAndRefreshTokens,
     sendAccountReactivationMailPayload
 } from './loginUser.controller.js';
+import { getUserDtlInfo } from './getUserDtlInfoById.controller.js';
 
 export default {
     validateRegisterUserPayload,
@@ -34,5 +35,6 @@ export default {
     isUserVerified,
     isUserActive,
     generateAccessAndRefreshTokens,
-    sendAccountReactivationMailPayload
+    sendAccountReactivationMailPayload,
+    getUserDtlInfo
 };
