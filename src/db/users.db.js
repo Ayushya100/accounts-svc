@@ -172,7 +172,7 @@ const getUserFullDetails = async(userId) => {
     const query = {
         _id: userId
     };
-    const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -password -createdOn -createdBy -modifiedOn -modifiedBy';
+    const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -createdOn -createdBy -modifiedOn -modifiedBy';
 
     const db = new userTemplate();
     return await db.findById(query, fields);
@@ -249,6 +249,18 @@ const updateProfileImage = async(userId, cloudinaryImageURL) => {
     return db.findByIdAndUpdate(userId, query, payload, null);
 }
 
+const userDeactivate = async(userId) => {
+    const db = new userTemplate();
+    const query = {
+        _id: userId
+    };
+    const payload = {
+        isDeleted: true
+    };
+    const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -createdBy -modifiedBy';
+    return await db.findByIdAndUpdate(userId, query, payload, fields);
+}
+
 export {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
@@ -264,5 +276,6 @@ export {
     getUserSetupInfo,
     updateUserInfo,
     updateUserPassword,
-    updateProfileImage
+    updateProfileImage,
+    userDeactivate
 };

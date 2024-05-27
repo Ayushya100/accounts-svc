@@ -8,6 +8,7 @@ import updateUserDetails from './updateUserDetails.route.js';
 import updateUserPassword from './updateUserPassword.route.js';
 import updateProfileImage from './updateProfileImage.route.js';
 import deleteProfileImage from './deleteProfileImage.route.js';
+import deactivateUser from './deactivateUser.route.js';
 
 export default {
     registerUser,
@@ -17,5 +18,6 @@ export default {
     updateUserDetails,
     updateUserPassword,
     updateProfileImage,
-    deleteProfileImage
+    deleteProfileImage,
+    deactivateUser
 };
