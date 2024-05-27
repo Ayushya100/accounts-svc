@@ -19,9 +19,15 @@ const getPathDetails = async(path, microservice, method) => {
             microservice: microservice,
             method: method
         });
+
+        if (pathDetails) {
+            return {
+                pathDetails: pathDetails,
+                status: true
+            };
+        }
         return {
-            pathDetails: pathDetails,
-            status: true
+            status: false
         };
     } catch (err) {
         return {
@@ -41,7 +47,7 @@ const sendRequest = async(path, method, payload, accessToken = null, jsonData = 
     log.info('Execution of external service request started');
 
     try {
-        let baseUrl = `${externalSvcConfig.host}/${path}`;
+        let baseUrl = `${externalSvcConfig.host}${path}`;
         let options = {
             method: method,
             url: baseUrl,

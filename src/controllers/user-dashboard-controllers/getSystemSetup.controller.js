@@ -14,7 +14,18 @@ const getSystemSetup = async() => {
         ];
 
         log.info('Call db query to get the details of setup for SYSTEM user');
-        const setupDetails = await dbConnect.getSystemUserSettingInfo(fieldsToRetrieve);
+        let setupDetails = await dbConnect.getSystemUserSettingInfo(fieldsToRetrieve);
+        setupDetails = setupDetails.map(val => ({
+            _id: val._id,
+            categoryName: val.categoryName,
+            categoryDescription: val.categoryDescription,
+            categoryType: val.categoryType,
+            subCategory: val.subCategory,
+            type: val.type,
+            isPeriodic: val.isPeriodic,
+            duration: val.duration,
+            value: val.default
+        }));
 
         if (setupDetails.length > 0) {
             log.info('Execution for retrieving setup info for SYSTEM user completed successfully');

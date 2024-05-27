@@ -42,7 +42,8 @@ import {
     reactivateUser,
     generateAccessAndRefreshTokens,
     getUserFullDetails,
-    getUserSetupInfo
+    getUserSetupInfo,
+    updateUserInfo
 } from './users.db.js';
 
 export default {
@@ -85,5 +86,6 @@ export default {
     reactivateUser,
     generateAccessAndRefreshTokens,
     getUserFullDetails,
-    getUserSetupInfo
+    getUserSetupInfo,
+    updateUserInfo
 };

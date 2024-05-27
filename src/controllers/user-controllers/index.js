@@ -3,7 +3,8 @@
 import {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
-    validateUserLoginPayload
+    validateUserLoginPayload,
+    validateUserDetailsPayload
 } from './validatePayload.controller.js';
 import {
     checkUserByUserNameOrEmail,
@@ -20,11 +21,13 @@ import {
     sendAccountReactivationMailPayload
 } from './loginUser.controller.js';
 import { getUserDtlInfo } from './getUserDtlInfoById.controller.js';
+import { updateUserDetails, sendUpdateDetailsMailPayload } from './updateUserDetails.route.js';
 
 export default {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
+    validateUserDetailsPayload,
     checkUserByUserNameOrEmail,
     createNewUser,
     sendVerificationMailPayload,
@@ -36,5 +39,7 @@ export default {
     isUserActive,
     generateAccessAndRefreshTokens,
     sendAccountReactivationMailPayload,
-    getUserDtlInfo
+    getUserDtlInfo,
+    updateUserDetails,
+    sendUpdateDetailsMailPayload
 };
