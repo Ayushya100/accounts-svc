@@ -292,6 +292,17 @@ const userDeactivate = async(userId) => {
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
+const logoutUser = async(userId) => {
+    const db = new userTemplate();
+    const query = {
+        _id: userId
+    };
+    const payload = {
+        refreshToken: null
+    };
+    return await db.findByIdAndUpdate(userId, query, payload, null);
+}
+
 export {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
@@ -309,5 +320,6 @@ export {
     updateUserPassword,
     updateProfileImage,
     userDeactivate,
-    refreshTokens
+    refreshTokens,
+    logoutUser
 };
