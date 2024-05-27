@@ -83,6 +83,7 @@ app.put(`${USERS_API}/user-info/:userId`, verifyScope('USER.U'), routes.userRout
 app.put(`${USERS_API}/user-password/:userId`, verifyScope('USER.U'), routes.userRoutes.updateUserPassword);
 app.put(`${USERS_API}/profile-image/:userId`, verifyScope('USER.U'), upload.single('profileImage'), routes.userRoutes.updateProfileImage);
 app.delete(`${USERS_API}/profile-image/:userId`, verifyScope('USER.D'), routes.userRoutes.deleteProfileImage);
+app.put(`${USERS_API}/deactivate-user/:userId`, verifyScope('USER.D'), routes.userRoutes.deactivateUser);
 
 // Error Handler middleware
 app.use(errorHandler);

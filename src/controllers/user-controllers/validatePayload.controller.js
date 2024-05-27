@@ -179,11 +179,30 @@ const validateProfileImagePayload = (profileImagePath) => {
     return response;
 }
 
+// Mandatory parameters check for deactivate user
+const validateDeactivateUserPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.userName || !payload.password) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required Parameters are missing';
+        response.isValid = false;
+    }
+
+    returnValidationConfirmation();
+    return response;
+}
+
 export {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
     validateUserDetailsPayload,
     validatePasswordUpdatePayload,
-    validateProfileImagePayload
+    validateProfileImagePayload,
+    validateDeactivateUserPayload
 };

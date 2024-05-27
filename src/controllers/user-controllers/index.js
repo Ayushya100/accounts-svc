@@ -6,7 +6,8 @@ import {
     validateUserLoginPayload,
     validateUserDetailsPayload,
     validatePasswordUpdatePayload,
-    validateProfileImagePayload
+    validateProfileImagePayload,
+    validateDeactivateUserPayload
 } from './validatePayload.controller.js';
 import {
     checkUserByUserNameOrEmail,
@@ -26,6 +27,11 @@ import { getUserDtlInfo } from './getUserDtlInfoById.controller.js';
 import { updateUserDetails, sendUpdateDetailsMailPayload } from './updateUserDetails.controller.js';
 import { updateUserPassword, sendUpdatePasswordMailPayload } from './updateUserPassword.controller.js';
 import { updateProfileImage, deleteProfileImage } from './profileImage.controller.js';
+import {
+    validateUserCredentials,
+    deactivateUser,
+    sendAccountDeactivateMailPayload
+} from './deactivateUser.controller.js';
 
 export default {
     validateRegisterUserPayload,
@@ -34,6 +40,7 @@ export default {
     validateUserDetailsPayload,
     validatePasswordUpdatePayload,
     validateProfileImagePayload,
+    validateDeactivateUserPayload,
     checkUserByUserNameOrEmail,
     createNewUser,
     sendVerificationMailPayload,
@@ -51,5 +58,8 @@ export default {
     updateUserPassword,
     sendUpdatePasswordMailPayload,
     updateProfileImage,
-    deleteProfileImage
+    deleteProfileImage,
+    validateUserCredentials,
+    deactivateUser,
+    sendAccountDeactivateMailPayload
 };
