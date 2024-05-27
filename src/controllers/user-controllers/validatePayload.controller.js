@@ -161,10 +161,29 @@ const validatePasswordUpdatePayload = (payload) => {
     return response;
 }
 
+// Mandatory parameter check for updating profile image
+const validateProfileImagePayload = (profileImagePath) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+    
+    if (!profileImagePath) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Profile image is missing';
+        response.isValid = false;
+    }
+
+    returnValidationConfirmation();
+    return response;
+}
+
 export {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
     validateUserDetailsPayload,
-    validatePasswordUpdatePayload
+    validatePasswordUpdatePayload,
+    validateProfileImagePayload
 };

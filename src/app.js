@@ -7,6 +7,7 @@ import rateLimit from 'express-rate-limit';
 import { errorHandler, setUserContext, verifyToken, verifyScope } from 'lib-finance-service';
 
 import { USERS_API } from './constants.js';
+import { upload } from './middlewares/index.js';
 
 // User Routes
 import routes from './routes/index.js';
@@ -80,6 +81,7 @@ app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSe
 app.get(`${USERS_API}/user-info/:userId`, verifyScope('USER.V'), routes.userRoutes.getUserInfo);
 app.put(`${USERS_API}/user-info/:userId`, verifyScope('USER.U'), routes.userRoutes.updateUserDetails);
 app.put(`${USERS_API}/user-password/:userId`, verifyScope('USER.U'), routes.userRoutes.updateUserPassword);
+app.put(`${USERS_API}/profile-image/:userId`, verifyScope('USER.U'), upload.single('profileImage'), routes.userRoutes.updateProfileImage);
 
 // Error Handler middleware
 app.use(errorHandler);
