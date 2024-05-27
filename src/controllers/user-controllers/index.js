@@ -32,6 +32,7 @@ import {
     deactivateUser,
     sendAccountDeactivateMailPayload
 } from './deactivateUser.controller.js';
+import { isTokenAvailableAndActive, refreshTokens } from './refreshAccessToken.controller.js';
 
 export default {
     validateRegisterUserPayload,
@@ -61,5 +62,7 @@ export default {
     deleteProfileImage,
     validateUserCredentials,
     deactivateUser,
-    sendAccountDeactivateMailPayload
+    sendAccountDeactivateMailPayload,
+    isTokenAvailableAndActive,
+    refreshTokens
 };

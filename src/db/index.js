@@ -46,7 +46,8 @@ import {
     updateUserInfo,
     updateUserPassword,
     updateProfileImage,
-    userDeactivate
+    userDeactivate,
+    refreshTokens
 } from './users.db.js';
 
 export default {
@@ -93,5 +94,6 @@ export default {
     updateUserInfo,
     updateUserPassword,
     updateProfileImage,
-    userDeactivate
+    userDeactivate,
+    refreshTokens
 };

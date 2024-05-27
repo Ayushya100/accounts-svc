@@ -110,7 +110,7 @@ const reactivateUser = async(userId) => {
     return await db.findByIdAndUpdate(userId, query, payload, null);
 }
 
-const generateAccessAndRefreshTokens = async(userId) => {
+const generateTokens = async(userId) => {
     const db = new userTemplate();
     const user = await db.findById({ _id: userId }, null);
 
@@ -142,6 +142,15 @@ const generateAccessAndRefreshTokens = async(userId) => {
         }
     );
 
+    return {
+        user, additionalData, accessToken, refreshToken
+    };
+}
+
+const generateAccessAndRefreshTokens = async(userId) => {
+    const { user, additionalData, accessToken, refreshToken } = await generateTokens(userId);
+
+    const db = new userTemplate();
     const query = {
         _id: user._id
     };
@@ -165,6 +174,28 @@ const generateAccessAndRefreshTokens = async(userId) => {
             categoryDescription: setupDetail.categoryDescription,
             value: setupDetail.value
         }))
+    };
+}
+
+const refreshTokens = async(userId) => {
+    const { user, additionalData, accessToken, refreshToken } = await generateTokens(userId);
+
+    const db = new userTemplate();
+    const query = {
+        _id: user._id
+    };
+    const payload = {
+        refreshToken: refreshToken,
+        lastLogin: Date.now()
+    };
+    const fields = '-password -createdOn -createdBy -modifiedOn -modifiedBy';
+    const updatedUserInfo = await db.findByIdAndUpdate(user._id, query, payload, fields);
+
+    return {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        userId: updatedUserInfo._id,
+        userName: updatedUserInfo.userName
     };
 }
 
@@ -277,5 +308,6 @@ export {
     updateUserInfo,
     updateUserPassword,
     updateProfileImage,
-    userDeactivate
+    userDeactivate,
+    refreshTokens
 };
