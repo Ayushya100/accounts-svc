@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import { errorHandler, setUserContext, verifyToken } from 'lib-finance-service';
+import { errorHandler, setUserContext, verifyToken, verifyScope } from 'lib-finance-service';
 
 import { USERS_API } from './constants.js';
 
@@ -55,31 +55,31 @@ app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
 app.get(`${USERS_API}/setting-info/:label`, routes.settingRoutes.getSettingInfo);
 
-app.post(`${USERS_API}/register-route`, routes.settingRoutes.registerRoute);
-app.get(`${USERS_API}/app-route`, routes.settingRoutes.getAppRouteInfo);
-app.get(`${USERS_API}/app-route/:routeId`, routes.settingRoutes.getAppRouteInfo);
-app.put(`${USERS_API}/app-route/:routeId`, routes.settingRoutes.updateAppRoute);
-app.delete(`${USERS_API}/app-route/:routeId`, routes.settingRoutes.deleteAppRoute);
+app.post(`${USERS_API}/register-route`, verifyScope('ROUTE.U'), routes.settingRoutes.registerRoute);
+app.get(`${USERS_API}/app-route`, verifyScope('ROUTE.V'), routes.settingRoutes.getAppRouteInfo);
+app.get(`${USERS_API}/app-route/:routeId`, verifyScope('ROUTE.V'), routes.settingRoutes.getAppRouteInfo);
+app.put(`${USERS_API}/app-route/:routeId`, verifyScope('ROUTE.U'), routes.settingRoutes.updateAppRoute);
+app.delete(`${USERS_API}/app-route/:routeId`, verifyScope('ROUTE.D'), routes.settingRoutes.deleteAppRoute);
 
-app.post(`${USERS_API}/register-user-role`, routes.settingRoutes.registerUserRoleRoute);
-app.get(`${USERS_API}/user-role`, routes.settingRoutes.getUserRoleInfo);
-app.get(`${USERS_API}/user-role/:roleId`, routes.settingRoutes.getUserRoleInfo);
-app.put(`${USERS_API}/user-role/:roleId`, routes.settingRoutes.updateUserRole);
-app.delete(`${USERS_API}/user-role/:roleId`, routes.settingRoutes.deleteUserRole);
+app.post(`${USERS_API}/register-user-role`, verifyScope('ROLE.U'), routes.settingRoutes.registerUserRoleRoute);
+app.get(`${USERS_API}/user-role`, verifyScope('ROLE.V'), routes.settingRoutes.getUserRoleInfo);
+app.get(`${USERS_API}/user-role/:roleId`, verifyScope('ROLE.V'), routes.settingRoutes.getUserRoleInfo);
+app.put(`${USERS_API}/user-role/:roleId`, verifyScope('ROLE.U'), routes.settingRoutes.updateUserRole);
+app.delete(`${USERS_API}/user-role/:roleId`, verifyScope('ROLE.D'), routes.settingRoutes.deleteUserRole);
 
-app.post(`${USERS_API}/user-scope`, routes.settingRoutes.createScope);
-app.get(`${USERS_API}/user-role/:roleId/user-scope`, routes.settingRoutes.getUserScopeInfo);
-app.get(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingRoutes.getUserScopeInfo);
-app.put(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingRoutes.updateUserScope);
-app.delete(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, routes.settingRoutes.deleteUserScope);
+app.post(`${USERS_API}/user-scope`, verifyScope('SCOPE.U'), routes.settingRoutes.createScope);
+app.get(`${USERS_API}/user-role/:roleId/user-scope`, verifyScope('SCOPE.V'), routes.settingRoutes.getUserScopeInfo);
+app.get(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, verifyScope('SCOPE.V'), routes.settingRoutes.getUserScopeInfo);
+app.put(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, verifyScope('SCOPE.U'), routes.settingRoutes.updateUserScope);
+app.delete(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, verifyScope('SCOPE.D'), routes.settingRoutes.deleteUserScope);
 
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);
 
 // User Account Routes
-app.get(`${USERS_API}/user-info/:userId`, routes.userRoutes.getUserInfo);
-app.put(`${USERS_API}/user-info/:userId`, routes.userRoutes.updateUserDetails);
-app.put(`${USERS_API}/user-password/:userId`, routes.userRoutes.updateUserPassword);
+app.get(`${USERS_API}/user-info/:userId`, verifyScope('USER.V'), routes.userRoutes.getUserInfo);
+app.put(`${USERS_API}/user-info/:userId`, verifyScope('USER.U'), routes.userRoutes.updateUserDetails);
+app.put(`${USERS_API}/user-password/:userId`, verifyScope('USER.U'), routes.userRoutes.updateUserPassword);
 
 // Error Handler middleware
 app.use(errorHandler);
