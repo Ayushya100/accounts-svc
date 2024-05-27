@@ -48,6 +48,7 @@ app.get(`${USERS_API}/system-setup`, routes.userSetting.getSystemSetup);
 app.post(`${USERS_API}/register-user`, routes.userRoutes.registerUser);
 app.put(`${USERS_API}/:userId/verify-user`, routes.userRoutes.verifyUser);
 app.post(`${USERS_API}/login-user`, routes.userRoutes.loginUser);
+app.post(`${USERS_API}/refresh-token`, routes.userRoutes.refreshAccessToken);
 
 app.use(verifyToken(tokenKey));
 
