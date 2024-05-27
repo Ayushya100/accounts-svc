@@ -10,6 +10,7 @@ import updateProfileImage from './updateProfileImage.route.js';
 import deleteProfileImage from './deleteProfileImage.route.js';
 import deactivateUser from './deactivateUser.route.js';
 import refreshAccessToken from './refreshAccessToken.route.js';
+import logoutUser from './logoutUser.route.js';
 
 export default {
     registerUser,
@@ -21,5 +22,6 @@ export default {
     updateProfileImage,
     deleteProfileImage,
     deactivateUser,
-    refreshAccessToken
+    refreshAccessToken,
+    logoutUser
 };
