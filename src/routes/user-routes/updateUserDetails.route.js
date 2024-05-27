@@ -33,7 +33,7 @@ const updateUserDetails = async(req, res, next) => {
         }
 
         log.info('Call controller function to update user details');
-        const updatedUser = await userController.updateUserDetails(userId, payload);
+        const updatedUser = await userController.updateUserDetails(userId, userExists.data, payload);
         if (!updatedUser.isValid) {
             throw updatedUser;
         }

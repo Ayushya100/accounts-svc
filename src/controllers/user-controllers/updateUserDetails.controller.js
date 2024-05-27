@@ -8,11 +8,19 @@ const header = 'controller: update-user-details-controller';
 const log = logger(header);
 const registerLog = createNewLog(header);
 
-const updateUserDetails = async(userId, payload) => {
+const updateUserDetails = async(userId, userRecord, payload) => {
     registerLog.createDebugLog('Start operation to update user details');
 
     try {
         log.info('Execution for updating user details controller started');
+
+        if (payload.userName !== null && payload.userName !== undefined && payload.userName !== '' && userRecord.userName !== payload.userName) {
+            const userRecordAvailable = await dbConnect.isUserByUsernameOrEmailAvailable(payload.userName, payload.userName);
+            if (userRecordAvailable) {
+                delete payload.userName;
+            }
+        }
+
         log.info('Call db query to update user details');
         const updatedUserInfo = await dbConnect.updateUserInfo(userId, payload);
 
