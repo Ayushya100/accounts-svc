@@ -43,7 +43,8 @@ import {
     generateAccessAndRefreshTokens,
     getUserFullDetails,
     getUserSetupInfo,
-    updateUserInfo
+    updateUserInfo,
+    updateUserPassword
 } from './users.db.js';
 
 export default {
@@ -87,5 +88,6 @@ export default {
     generateAccessAndRefreshTokens,
     getUserFullDetails,
     getUserSetupInfo,
-    updateUserInfo
+    updateUserInfo,
+    updateUserPassword
 };

@@ -216,6 +216,28 @@ const updateUserInfo = async(userId, userPayload) => {
     return await db.findByIdAndUpdate(userId, query, payload, fields);
 }
 
+const updateUserPassword = async(userId, payload) => {
+    const db = new userTemplate();
+    const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -createdBy -modifiedOn -modifiedBy';
+
+    const query = {
+        _id: userId
+    };
+    const currentUserInfo = await db.findOne(query, fields);
+
+    if (await verifyPassword(currentUserInfo, payload.oldPassword)) {
+        currentUserInfo.password = payload.newPassword;
+        currentUserInfo.modifiedOn = Date.now();
+        currentUserInfo.modifiedBy = userId;
+        await currentUserInfo.save({
+            validateBeforeSave: false
+        });
+
+        return await isUserByIdAvailable(userId);
+    }
+    return false;
+}
+
 export {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
@@ -229,5 +251,6 @@ export {
     generateAccessAndRefreshTokens,
     getUserFullDetails,
     getUserSetupInfo,
-    updateUserInfo
+    updateUserInfo,
+    updateUserPassword
 };
