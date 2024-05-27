@@ -9,6 +9,8 @@ const log = logger(header);
 const registerLog = createNewLog(header);
 
 const updateUserDetails = async(userId, payload) => {
+    registerLog.createDebugLog('Start operation to update user details');
+
     try {
         log.info('Execution for updating user details controller started');
         log.info('Call db query to update user details');

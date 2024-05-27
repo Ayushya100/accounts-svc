@@ -5,11 +5,13 @@ import verifyUser from './verifyUser.route.js';
 import loginUser from './loginUser.route.js';
 import getUserInfo from './getUserInfo.route.js';
 import updateUserDetails from './updateUserDetails.route.js';
+import updateUserPassword from './updateUserPassword.route.js';
 
 export default {
     registerUser,
     verifyUser,
     loginUser,
     getUserInfo,
-    updateUserDetails
+    updateUserDetails,
+    updateUserPassword
 };

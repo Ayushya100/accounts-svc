@@ -4,7 +4,8 @@ import {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
-    validateUserDetailsPayload
+    validateUserDetailsPayload,
+    validatePasswordUpdatePayload
 } from './validatePayload.controller.js';
 import {
     checkUserByUserNameOrEmail,
@@ -21,13 +22,15 @@ import {
     sendAccountReactivationMailPayload
 } from './loginUser.controller.js';
 import { getUserDtlInfo } from './getUserDtlInfoById.controller.js';
-import { updateUserDetails, sendUpdateDetailsMailPayload } from './updateUserDetails.route.js';
+import { updateUserDetails, sendUpdateDetailsMailPayload } from './updateUserDetails.controller.js';
+import { updateUserPassword, sendUpdatePasswordMailPayload } from './updateUserPassword.controller.js';
 
 export default {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
     validateUserDetailsPayload,
+    validatePasswordUpdatePayload,
     checkUserByUserNameOrEmail,
     createNewUser,
     sendVerificationMailPayload,
@@ -41,5 +44,7 @@ export default {
     sendAccountReactivationMailPayload,
     getUserDtlInfo,
     updateUserDetails,
-    sendUpdateDetailsMailPayload
+    sendUpdateDetailsMailPayload,
+    updateUserPassword,
+    sendUpdatePasswordMailPayload
 };

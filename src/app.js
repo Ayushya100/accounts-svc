@@ -79,6 +79,7 @@ app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSe
 // User Account Routes
 app.get(`${USERS_API}/user-info/:userId`, routes.userRoutes.getUserInfo);
 app.put(`${USERS_API}/user-info/:userId`, routes.userRoutes.updateUserDetails);
+app.put(`${USERS_API}/user-password/:userId`, routes.userRoutes.updateUserPassword);
 
 // Error Handler middleware
 app.use(errorHandler);
