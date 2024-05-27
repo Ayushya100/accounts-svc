@@ -6,6 +6,7 @@ import loginUser from './loginUser.route.js';
 import getUserInfo from './getUserInfo.route.js';
 import updateUserDetails from './updateUserDetails.route.js';
 import updateUserPassword from './updateUserPassword.route.js';
+import updateProfileImage from './updateProfileImage.route.js';
 
 export default {
     registerUser,
@@ -13,5 +14,6 @@ export default {
     loginUser,
     getUserInfo,
     updateUserDetails,
-    updateUserPassword
+    updateUserPassword,
+    updateProfileImage
 };

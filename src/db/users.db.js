@@ -238,6 +238,17 @@ const updateUserPassword = async(userId, payload) => {
     return false;
 }
 
+const updateProfileImage = async(userId, cloudinaryImageURL) => {
+    const db = new userTemplate();
+    const query = {
+        _id: userId
+    };
+    const payload = {
+        profileImageURL: cloudinaryImageURL
+    };
+    return db.findByIdAndUpdate(userId, query, payload, null);
+}
+
 export {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
@@ -252,5 +263,6 @@ export {
     getUserFullDetails,
     getUserSetupInfo,
     updateUserInfo,
-    updateUserPassword
+    updateUserPassword,
+    updateProfileImage
 };
