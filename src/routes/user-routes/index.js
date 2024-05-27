@@ -4,10 +4,12 @@ import registerUser from './registerUser.route.js';
 import verifyUser from './verifyUser.route.js';
 import loginUser from './loginUser.route.js';
 import getUserInfo from './getUserInfo.route.js';
+import updateUserDetails from './updateUserDetails.route.js';
 
 export default {
     registerUser,
     verifyUser,
     loginUser,
-    getUserInfo
+    getUserInfo,
+    updateUserDetails
 };

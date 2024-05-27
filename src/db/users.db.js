@@ -196,6 +196,26 @@ const getUserSetupInfo = async(userId, roleId) => {
     };
 }
 
+const updateUserInfo = async(userId, userPayload) => {
+    const currentUserInfo = await isUserByIdAvailable(userId);
+
+    const query = {
+        _id: userId
+    };
+    const payload = {
+        firstName: userPayload.firstName || currentUserInfo.firstName,
+        lastName: userPayload.lastName || currentUserInfo.lastName,
+        userName: userPayload.userName || currentUserInfo.userName,
+        bio: userPayload.bio || currentUserInfo.bio,
+        gender: userPayload.gender || currentUserInfo.gender,
+        dob: userPayload.dob || currentUserInfo.dob,
+        contactNumber: userPayload.contactNumber || currentUserInfo.contactNumber
+    };
+    const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -password -createdBy -modifiedOn -modifiedBy';
+    const db = new userTemplate();
+    return await db.findByIdAndUpdate(userId, query, payload, fields);
+}
+
 export {
     isUserByUsernameOrEmailAvailable,
     createNewUser,
@@ -208,5 +228,6 @@ export {
     reactivateUser,
     generateAccessAndRefreshTokens,
     getUserFullDetails,
-    getUserSetupInfo
+    getUserSetupInfo,
+    updateUserInfo
 };
