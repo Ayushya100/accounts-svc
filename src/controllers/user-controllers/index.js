@@ -25,7 +25,7 @@ import {
 import { getUserDtlInfo } from './getUserDtlInfoById.controller.js';
 import { updateUserDetails, sendUpdateDetailsMailPayload } from './updateUserDetails.controller.js';
 import { updateUserPassword, sendUpdatePasswordMailPayload } from './updateUserPassword.controller.js';
-import { updateProfileImage } from './profileImage.controller.js';
+import { updateProfileImage, deleteProfileImage } from './profileImage.controller.js';
 
 export default {
     validateRegisterUserPayload,
@@ -50,5 +50,6 @@ export default {
     sendUpdateDetailsMailPayload,
     updateUserPassword,
     sendUpdatePasswordMailPayload,
-    updateProfileImage
+    updateProfileImage,
+    deleteProfileImage
 };
