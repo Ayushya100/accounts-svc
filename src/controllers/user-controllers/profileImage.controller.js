@@ -53,6 +53,44 @@ const updateProfileImage = async(user, userId, imagePath) => {
     }
 }
 
+const deleteProfileImage = async(userRecord, userId) => {
+    registerLog.createDebugLog('Start operation to delete user image on cloudinary');
+
+    try {
+        log.info('Execution for deleting an image over cloudinary started');
+        const userCurrentImageURL = userRecord.data.profileImageURL;
+
+        if ((userCurrentImageURL) && (await deleteImageFromCloudinary(userCurrentImageURL))) {
+            log.info('Call db query to remove profile image url from database');
+            const updatedUserInfo = await dbConnect.updateProfileImage(userId, null);
+
+            log.info('Execution for deleting an image from cloudinary completed');
+            return {
+                resType: 'REQUEST_COMPLETED',
+                resMsg: 'User image deleted successfully',
+                data: updatedUserInfo,
+                isValid: true
+            };
+        }
+
+        log.error('Failed to delete an image from cloudinary server');
+        return {
+            resType: 'BAD_REQUEST',
+            resMsg: 'Unable to delete image or image does not exists',
+            isValid: false
+        };
+    } catch (err) {
+        log.error('Error while working with update profile image controller');
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: err,
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 export {
-    updateProfileImage
+    updateProfileImage,
+    deleteProfileImage
 };
