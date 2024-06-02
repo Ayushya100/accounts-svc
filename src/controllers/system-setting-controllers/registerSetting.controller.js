@@ -49,7 +49,7 @@ const createSetting = async(payload) => {
             categoryDescription: payload.categoryDescription,
             categoryType: payload.categoryType,
             subCategory: payload.subCategory,
-            type: payload.type,
+            type: payload.type.toLowerCase(),
             isPeriodic: payload.isPeriodic,
             duration: payload.duration,
             default: payload.defaultValue,

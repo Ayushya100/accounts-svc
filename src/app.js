@@ -90,6 +90,8 @@ app.post(`${USERS_API}/logout-user`, routes.userRoutes.logoutUser);
 // User Setting Routes
 app.get(`${USERS_API}/:userId/user-setup`, verifyScope('SETUP.V'), routes.userSetting.getUserDashboardSetup);
 app.get(`${USERS_API}/:userId/user-setup/:settingId`, verifyScope('SETUP.V'), routes.userSetting.getUserDashboardSetup);
+app.put(`${USERS_API}/:userId/user-setup`, verifyScope('SETUP.U'), routes.userSetting.updateUserDashboardSetup);
+app.put(`${USERS_API}/:userId/user-setup/:settingId`, verifyScope('SETUP.U'), routes.userSetting.updateUserDashboardSetup);
 
 // Error Handler middleware
 app.use(errorHandler);

@@ -19,9 +19,9 @@ const validateCreateSettingPayload = (payload) => {
         isValid: true
     };
 
-    const mandatoryFields = ['categoryName', 'categoryDescription', 'categoryType', 'subCategory', 'defaultValue'];
+    const mandatoryFields = ['categoryName', 'categoryDescription', 'categoryType', 'subCategory'];
 
-    if (!payload.categoryName || !payload.categoryDescription || !payload.categoryType || !payload.subCategory || !payload.defaultValue || payload.isPeriodic === '') {
+    if (!payload.categoryName || !payload.categoryDescription || !payload.categoryType || !payload.subCategory || payload.isPeriodic === '') {
         response.resType = 'BAD_REQUEST';
         response.resMsg = `Required parameter is missing`;
         response.isValid = false;
@@ -32,6 +32,12 @@ const validateCreateSettingPayload = (payload) => {
                 break;
             }
         }
+    }
+
+    if (payload.defaultValue === null || payload.defaultValue === undefined) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `Required parameter is missing: defaultValue`;
+        response.isValid = false;
     }
 
     if (payload.isPeriodic && !payload.duration) {

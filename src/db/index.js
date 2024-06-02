@@ -29,7 +29,8 @@ import {
     deleteAppRouteById,
     createUserSettings,
     getUserDashboardSetup,
-    getDashboardSettingByUserId
+    getDashboardSettingByUserId,
+    updateUserDashboardSetting
 } from './settings.db.js';
 import {
     isUserByUsernameOrEmailAvailable,
@@ -99,5 +100,6 @@ export default {
     userDeactivate,
     refreshTokens,
     logoutUser,
-    getDashboardSettingByUserId
+    getDashboardSettingByUserId,
+    updateUserDashboardSetting
 };
