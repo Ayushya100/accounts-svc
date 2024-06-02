@@ -6,20 +6,13 @@ import { createNewLog, logger } from 'lib-finance-service';
 const header = 'controller: shared-user-controller';
 
 const log = logger(header);
-const registerLog = createNewLog(header);
+// const registerLog = createNewLog(header);
 
 const checkUserById = async(userId) => {
-    registerLog.createDebugLog('Start checking if user is available');
+    // registerLog.createDebugLog('Start checking if user is available');
 
     try {
         log.info(`Execution for checking user for provided id (${userId}) started`);
-        const response = {
-            resType: 'NOT_FOUND',
-            resMsg: 'User not found',
-            data: null,
-            isValid: false
-        };
-
         log.info('Call db query to check for the existing record');
         const isUserAvailable = await dbConnect.isUserByIdAvailable(userId);
         if (isUserAvailable) {

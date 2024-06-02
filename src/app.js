@@ -57,26 +57,26 @@ app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
 app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
 app.get(`${USERS_API}/setting-info/:label`, routes.settingRoutes.getSettingInfo);
 
+// System Routes
 app.post(`${USERS_API}/register-route`, verifyScope('ROUTE.U'), routes.settingRoutes.registerRoute);
 app.get(`${USERS_API}/app-route`, verifyScope('ROUTE.V'), routes.settingRoutes.getAppRouteInfo);
 app.get(`${USERS_API}/app-route/:routeId`, verifyScope('ROUTE.V'), routes.settingRoutes.getAppRouteInfo);
 app.put(`${USERS_API}/app-route/:routeId`, verifyScope('ROUTE.U'), routes.settingRoutes.updateAppRoute);
 app.delete(`${USERS_API}/app-route/:routeId`, verifyScope('ROUTE.D'), routes.settingRoutes.deleteAppRoute);
 
+// User Role Routes
 app.post(`${USERS_API}/register-user-role`, verifyScope('ROLE.U'), routes.settingRoutes.registerUserRoleRoute);
 app.get(`${USERS_API}/user-role`, verifyScope('ROLE.V'), routes.settingRoutes.getUserRoleInfo);
 app.get(`${USERS_API}/user-role/:roleId`, verifyScope('ROLE.V'), routes.settingRoutes.getUserRoleInfo);
 app.put(`${USERS_API}/user-role/:roleId`, verifyScope('ROLE.U'), routes.settingRoutes.updateUserRole);
 app.delete(`${USERS_API}/user-role/:roleId`, verifyScope('ROLE.D'), routes.settingRoutes.deleteUserRole);
 
+// User Scope Routes
 app.post(`${USERS_API}/user-scope`, verifyScope('SCOPE.U'), routes.settingRoutes.createScope);
 app.get(`${USERS_API}/user-role/:roleId/user-scope`, verifyScope('SCOPE.V'), routes.settingRoutes.getUserScopeInfo);
 app.get(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, verifyScope('SCOPE.V'), routes.settingRoutes.getUserScopeInfo);
 app.put(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, verifyScope('SCOPE.U'), routes.settingRoutes.updateUserScope);
 app.delete(`${USERS_API}/user-role/:roleId/user-scope/:scopeId`, verifyScope('SCOPE.D'), routes.settingRoutes.deleteUserScope);
-
-// User Setting Routes
-app.get(`${USERS_API}/:userId/user-setup`, routes.userSetting.getUserDashboardSetup);
 
 // User Account Routes
 app.get(`${USERS_API}/user-info/:userId`, verifyScope('USER.V'), routes.userRoutes.getUserInfo);
@@ -86,6 +86,10 @@ app.put(`${USERS_API}/profile-image/:userId`, verifyScope('USER.U'), upload.sing
 app.delete(`${USERS_API}/profile-image/:userId`, verifyScope('USER.D'), routes.userRoutes.deleteProfileImage);
 app.put(`${USERS_API}/deactivate-user/:userId`, verifyScope('USER.D'), routes.userRoutes.deactivateUser);
 app.post(`${USERS_API}/logout-user`, routes.userRoutes.logoutUser);
+
+// User Setting Routes
+app.get(`${USERS_API}/:userId/user-setup`, verifyScope('SETUP.V'), routes.userSetting.getUserDashboardSetup);
+app.get(`${USERS_API}/:userId/user-setup/:settingId`, verifyScope('SETUP.V'), routes.userSetting.getUserDashboardSetup);
 
 // Error Handler middleware
 app.use(errorHandler);

@@ -20,6 +20,8 @@ const getUserDtlInfo = async(userId) => {
         if (userRecord) {
             log.info('Execution for retrieving user detail record completed successfully');
             const additionalData = await dbConnect.getUserSetupInfo(userId, userRecord.roleId);
+            userRecord = userRecord.toObject();
+            delete userRecord.password;
 
             return {
                 resType: 'SUCCESS',
