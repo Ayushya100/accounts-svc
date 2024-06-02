@@ -1,9 +1,10 @@
 'use strict';
 
-import { getSystemUserDashboardSetup } from './getUserDashboardSetup.controller.js';
 import { getSystemSetup } from './getSystemSetup.controller.js';
+import { getAllUserDashboardSetting, getUserDashboardSettingById } from './getUserDashboardSetup.controller.js';
 
 export default {
-    getSystemUserDashboardSetup,
-    getSystemSetup
+    getSystemSetup,
+    getAllUserDashboardSetting,
+    getUserDashboardSettingById
 };

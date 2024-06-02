@@ -235,12 +235,12 @@ const updateUserInfo = async(userId, userPayload) => {
     };
     const payload = {
         firstName: userPayload.firstName || currentUserInfo.firstName,
-        lastName: userPayload.lastName || currentUserInfo.lastName,
+        lastName: userPayload.lastName !== null || userPayload.lastName !== undefined ? userPayload.lastName : currentUserInfo.lastName,
         userName: userPayload.userName || currentUserInfo.userName,
-        bio: userPayload.bio || currentUserInfo.bio,
-        gender: userPayload.gender || currentUserInfo.gender,
-        dob: userPayload.dob || currentUserInfo.dob,
-        contactNumber: userPayload.contactNumber || currentUserInfo.contactNumber
+        bio: userPayload.bio !== null || userPayload.bio !== undefined ? userPayload.bio : currentUserInfo.bio,
+        gender: userPayload.gender !== null || userPayload.gender !== undefined ? userPayload.gender : currentUserInfo.gender,
+        dob: userPayload.dob !== null || userPayload.dob !== undefined ? userPayload.dob : currentUserInfo.dob,
+        contactNumber: userPayload.contactNumber !== null || userPayload.contactNumber !== undefined ? userPayload.contactNumber : currentUserInfo.contactNumber
     };
     const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -password -createdBy -modifiedOn -modifiedBy';
     const db = new userTemplate();

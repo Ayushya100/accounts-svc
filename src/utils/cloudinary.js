@@ -7,7 +7,6 @@ import { logger, createNewLog } from 'lib-finance-service';
 const header = 'util: operation-cloudinary';
 
 const log = logger(header);
-const registerLog = createNewLog(header);
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -16,8 +15,6 @@ cloudinary.config({
 });
 
 const uploadOnCloudinary = async(localFilePath) => {
-    registerLog.createDebugLog('Start operation to upload image on cloudinary');
-
     try {
         log.info('Execution for uploading the image on cloudinary started');
         if (!localFilePath) {
@@ -64,8 +61,6 @@ const getPublicIdFromURL = (URL) => {
 }
 
 const destroyOnCloudinary = async(cloudinaryFilePath) => {
-    registerLog.createDebugLog('Start operation to delete image from cloudinary');
-
     try {
         log.info('Execution for removing the image from cloudinary started');
 

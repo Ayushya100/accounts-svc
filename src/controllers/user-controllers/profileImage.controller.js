@@ -38,7 +38,7 @@ const updateProfileImage = async(user, userId, imagePath) => {
         log.info('Execution for uploading an image over cloudinary completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'Uimage updated successfully',
+            resMsg: 'User image updated successfully',
             data: updatedUserInfo,
             isValid: true
         };

@@ -262,50 +262,92 @@ const createUserSettings = async(userSettings) => {
 }
 
 const getUserDashboardSetup = async(userId, fieldsToRetrieve) => {
-    const setupDetails = UserDashboardModel.aggregate([
-        {
-            $match: {
-                userId: new mongoose.mongoose.Types.ObjectId(userId),
-                isDeleted: false
-            }
-        },
-        {
-            $lookup: {
-                from: 'dashboard_settings',
-                localField: 'settingId',
-                foreignField: '_id',
-                as: 'dashboard'
-            }
-        },
-        {
-            $match: {
-                'dashboard.isDeleted': false,
-                'dashboard.categoryName': {
-                    $in: fieldsToRetrieve
-                }
-            }
-        },
-        {
-            $addFields: {
-                categoryName: {
-                    $arrayElemAt: ['$dashboard.categoryName', 0]
-                },
-                categoryDescription: {
-                    $arrayElemAt: ['$dashboard.categoryDescription', 0]
-                }
-            }
-        },
-        {
-            $project: {
-                categoryName: 1,
-                categoryDescription: 1,
-                value: 1,
-                type: 1
-            }
+    const matchQuery = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        isDeleted: false
+    };
+    const lookupRecord = {
+        from: 'dashboard_settings',
+        localField: 'settingId',
+        foreignField: '_id',
+        as: 'dashboard'
+    };
+    const lookupQuery = {
+        'dashboard.isDeleted': false,
+        'dashboard.categoryName': {
+            $in: fieldsToRetrieve
         }
-    ]);
+    };
+    const lookupFields = {
+        categoryName: {
+            $arrayElemAt: ['$dashboard.categoryName', 0]
+        },
+        categoryDescription: {
+            $arrayElemAt: ['$dashboard.categoryDescription', 0]
+        }
+    };
+    const projectionFields = {
+        categoryName: 1,
+        categoryDescription: 1,
+        value: 1,
+        type: 1
+    };
 
-    return await executeAggregation(setupDetails);
+    const db = new userDashboardTemplate();
+    return await db.aggregate(matchQuery, lookupRecord, lookupQuery, lookupFields, projectionFields);
+}
+
+const getDashboardSettingByUserId = async(userId, settingId) => {
+    const matchQuery = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        isDeleted: false
+    };
+    const lookupRecord = {
+        from: 'dashboard_settings',
+        localField: 'settingId',
+        foreignField: '_id',
+        as: 'dashboard'
+    };
+    const lookupQuery = {
+        'dashboard.isDeleted': false
+    };
+    const lookupFields = {
+        categoryName: {
+            $arrayElemAt: ['$dashboard.categoryName', 0]
+        },
+        categoryDescription: {
+            $arrayElemAt: ['$dashboard.categoryDescription', 0]
+        },
+        categoryType: {
+            $arrayElemAt: ['$dashboard.categoryType', 0]
+        },
+        subCategory: {
+            $arrayElemAt: ['$dashboard.subCategory', 0]
+        },
+        isPeriodic: {
+            $arrayElemAt: ['$dashboard.isPeriodic', 0]
+        },
+        duration: {
+            $arrayElemAt: ['$dashboard.duration', 0]
+        }
+    };
+    const projectionFields = {
+        categoryName: 1,
+        categoryDescription: 1,
+        categoryType: 1,
+        subCategory: 1,
+        isPeriodic: 1,
+        duration: 1,
+        type: 1,
+        value: 1
+    };
+
+    if (settingId) {
+        matchQuery._id = new mongoose.mongoose.Types.ObjectId(settingId)
+    }
+
+    const db = new userDashboardTemplate();
+    return await db.aggregate(matchQuery, lookupRecord, lookupQuery, lookupFields, projectionFields);
 }
 
 export {
@@ -336,5 +378,6 @@ export {
     updateAppRouteById,
     deleteAppRouteById,
     createUserSettings,
-    getUserDashboardSetup
+    getUserDashboardSetup,
+    getDashboardSettingByUserId
 };
