@@ -350,6 +350,39 @@ const getDashboardSettingByUserId = async(userId, settingId) => {
     return await db.aggregate(matchQuery, lookupRecord, lookupQuery, lookupFields, projectionFields);
 }
 
+const updateUserDashboardSetting = async(userId, payload, settingId, isAllUpdate = false) => {
+    const db = new userDashboardTemplate();
+
+    if (isAllUpdate) {
+        const updateQuery = payload.map(record => ({
+            updateOne: {
+                filter: {
+                    _id: record._id,
+                    userId: userId
+                },
+                update: {
+                    $set: {
+                        value: record.value,
+                        modifiedOn: Date.now(),
+                        modifiedBy: userId
+                    }
+                }
+            }
+        }));
+        return await db.bulkWrite(updateQuery);
+    } else {
+        const query = {
+            _id: settingId,
+            userId: userId,
+            isDeleted: false
+        };
+        const queryPayload = {
+            value: payload.value
+        };
+        return await db.findByIdAndUpdate(userId, query, queryPayload, null);
+    }
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
@@ -379,5 +412,6 @@ export {
     deleteAppRouteById,
     createUserSettings,
     getUserDashboardSetup,
-    getDashboardSettingByUserId
+    getDashboardSettingByUserId,
+    updateUserDashboardSetting
 };

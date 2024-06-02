@@ -55,8 +55,8 @@ const createNewUser = async(payload) => {
         settingsInfoToAdd = settingsInfoToAdd.map((setting) => ({
             userId: newUser._id,
             settingId: setting._id,
-            type: setting.type || 'Boolean',
-            value: setting.type === 'Boolean' ? true : setting.default
+            type: setting.type || 'boolean',
+            value: setting.type === 'boolean' ? true : setting.default
         }));
 
         log.info('Call db query to register default dashboard settings to newly created user');
