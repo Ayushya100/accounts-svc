@@ -13,6 +13,7 @@ const isValidMethod = (method) => {
 }
 
 const validateCreateSettingPayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -51,6 +52,7 @@ const validateCreateSettingPayload = (payload) => {
 }
 
 const validateNewRoutePayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -88,6 +90,7 @@ const validateNewRoutePayload = (payload) => {
 }
 
 const validateNewUserRolePayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -105,6 +108,7 @@ const validateNewUserRolePayload = (payload) => {
 }
 
 const validateNewScopePayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
