@@ -8,12 +8,12 @@ const log = logger(header);
 
 const getSystemSetup = async() => {
     try {
-        log.info('Execution for retrieving setup info for SYSTEM user controller started');
+        log.info('Execution for retrieving setup info for SYSTEM controller started');
         const fieldsToRetrieve = [
             'application-title', 'application-quote', 'user-theme', 'user-language'
         ];
 
-        log.info('Call db query to get the details of setup for SYSTEM user');
+        log.info('Call db query to get the details of setup for SYSTEM');
         let setupDetails = await dbConnect.getSystemUserSettingInfo(fieldsToRetrieve);
         setupDetails = setupDetails.map(val => ({
             _id: val._id,
@@ -28,7 +28,7 @@ const getSystemSetup = async() => {
         }));
 
         if (setupDetails.length > 0) {
-            log.info('Execution for retrieving setup info for SYSTEM user completed successfully');
+            log.info('Execution for retrieving setup info for SYSTEM completed successfully');
             return {
                 resType: 'SUCCESS',
                 resMsg: 'System setup details retrieved successfully',
@@ -37,17 +37,17 @@ const getSystemSetup = async() => {
             };
         }
 
-        log.error('No setup info found for SYSTEM user');
+        log.error('No setup info found for SYSTEM');
         return {
             resType: 'NOT_FOUND',
             resMsg: 'No System Setup Found',
             isValid: false
         };
     } catch (err) {
-        log.error('Error while working with db to get all setup records for SYSTEM user');
+        log.error('Error while working with db to get all setup records for SYSTEM');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to get setup records for SYSTEM user',
+            resMsg: 'Some error occurred while working with db to get setup records for SYSTEM',
             stack: err.stack,
             isValid: false
         };

@@ -14,6 +14,8 @@ import {
     userRoleTemplate
 } from 'lib-finance-service';
 
+const settingDB = new dashboardSettingTemplate();
+
 const isSettingAvailable = async(payload) => {
     const query = {
         categoryName: payload.categoryName,
@@ -21,21 +23,18 @@ const isSettingAvailable = async(payload) => {
         subCategory: payload.subCategory,
         duration: payload.duration
     };
-    const db = new dashboardSettingTemplate();
-    return await db.findOne(query, null);
+    return await settingDB.findOne(query, null);
 }
 
 const registerNewSetting = async(payload) => {
-    const db = new dashboardSettingTemplate();
-    return await db.create(payload);
+    return await settingDB.create(payload);
 }
 
 const getAllSettings = async() => {
     const query = {
         isDeleted: false
     };
-    const db = new dashboardSettingTemplate();
-    return await db.find(query, null);
+    return await settingDB.find(query, null);
 }
 
 const getSettingInfoById = async(settingLabel) => {
@@ -52,8 +51,7 @@ const getSettingInfoById = async(settingLabel) => {
         };
     }
 
-    const db = new dashboardSettingTemplate();
-    return await db.findOne(query, null);
+    return await settingDB.findOne(query, null);
 }
 
 const getSystemUserSettingInfo = async(fieldsToRetrieve) => {
@@ -62,8 +60,7 @@ const getSystemUserSettingInfo = async(fieldsToRetrieve) => {
             $in: fieldsToRetrieve
         }
     };
-    const db = new dashboardSettingTemplate();
-    return await db.find(query, null);
+    return await settingDB.find(query, null);
 }
 
 const getUserAssignableSettings = async() => {
@@ -71,8 +68,7 @@ const getUserAssignableSettings = async() => {
         isDeleted: false,
         isUserAssignable: true
     };
-    const db = new dashboardSettingTemplate();
-    return await db.find(query, null);
+    return await settingDB.find(query, null);
 }
 
 const isRouteAvailable = async(payload) => {
