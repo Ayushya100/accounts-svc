@@ -5,19 +5,31 @@ Welcome to the GitHub repository for **Finance Tracker Accounts SVC** - This ser
 ### What's Happening Now:
 - The service is currently being developed to create the functionalities to register and manage user accounts related information.
 ## Features
-- User registration: Allow users to create new accounts by providing necessary information.
-- Authentication: Verify user identity through secure authentication mechanisms.
-- Profile management: Ensure users to update their profile information and manage their account settings.
+#### Overview
+Our system provides essential APIs designed specifically for integration within a finance tracker application. These APIs facilitate secure user authentication, profile management, role-based access control, and dynamic system configuration.
+#### Key Features
+- **User Management:** Register, verify, login, and manage user profiles securely. Update user details, passwords, and manage session lifecycles with ease.
+- **Role-Based Access Control:** Define and manage user roles with specific scopes to control access to system resources and functionalities.
+- **System Configuration:** Set up and synchronize service routes, dashboard settings, and other system configurations dynamically.
+- **Customizable User Settings:** Allow users to personalize their experience with customizable settings tailored to their preferences.
+- **Profile Management:** Upload, update, and delete user profile images, enhancing user interaction and personalization.
+#### Usage
+Our APIs are integrated seamlessly into our finance tracker application to enhance user management, security, and operational efficiency.
+#### Security
+Robust security measures are integrated in our finance tracker application. Implemented HTTPS encryption for secure data transmission and added validation for JWT bearer tokens to authenticate and authorize user access. Protected sensitive financial information and adhere to industry best practices for data security and privacy.
 ## APIs
+#### Setup APIs
 - sync-setup API: The 'sync-setup' API checks and inserts database records for service routes, user roles, role scopes, and dashboard settings. It ensures that these configurations are up-to-date and consistent. This API helps automate the maintenance of essential system settings in the database.  
 POST - /sync-setup
 - system-setup API: The 'system-setup' API retrieves the system's basic setup details required by the UI for default operations. This API provides essential configuration data to initialize and run the user interface smoothly.  
 GET - /system-setup
+#### Dashboard Setting APIs
 - register-setting API: The 'register-setting' API allows administrator to register new dashboard settings to be used by users within the application.  
 POST - register-setting
 - setting-info API: The 'setting-info' API retrieves details of dashboard settings available in the system, which users can utilize.  
 GET - /setting-info  
 GET - /setting-info/:label
+#### Service Route APIs
 - register-route API: The 'register-route' API allows for the registration of new service routes in the database, enabling the system to trigger requests based on these routes.  
 POST - /register-route
 - app-route API: The 'app-route' API retrieves all registered service routes from the database. Users can also pass a 'routeId' to get a specific service route record.  
@@ -27,6 +39,7 @@ GET - /app-route/:routeId
 PUT - /app-route/:routeId
 - app-route/:routeId API: The 'app-route' API allows users to delete the information of registered service routes in the database. Users need to pass the 'routeId' of the route they want to delete.  
 DELETE - /app-route/:routeId
+#### User Role APIs
 - register-user-role API: The 'register-user-role' API allows administrators to create new user roles in the database. This helps in managing user permissions and access levels within the system.  
 POST - /register-user-role
 - user-role APi: The 'user-role' API retrieves information about all user roles available in the system. Users can also provide a 'roleId' to get details of a specific user role.  
@@ -36,6 +49,7 @@ GET - /user-role/:roleId
 PUT - /user-role/:roleId
 - user-role/:roleId API: The 'user-role' API allows users to delete an existing user role from the database. Users need to pass the 'roleId' of the role they want to delete.  
 DELETE - /user-role/:roleId
+#### User Scope APIs
 - user-scope API: The 'user-scope' API allows administrators to create a new scope for users in the database. This scope defines the APIs and UI pages the user can access.  
 POST - /user-scope
 - user-role/:roleId/user-scope API: The 'user-scope' API retrieves information about user scopes based on the 'userRoleId' provided. Users can retrieve all user scopes associated with a specific 'userRoleId' or retrieve details of a specific scope by providing its 'scopeId'.  
@@ -45,13 +59,14 @@ GET - /user-role/:roleId/user-scope/:scopeId
 PUT - /user-role/:roleId/user-scope/:scopeId
 - user-role/:roleId/user-scope/:scopeId API: The 'user-scope' API allows administrators to delete a user scope from the database based on the 'userRoleId' and 'scopeId' provided.  
 DELETE - /user-role/:roleId/user-scope/:scopeId
+#### User Setup APIs
 - :userId/user-setup API: The 'user-setup' API allows users to retrieve user setup records specific to a user by 'userId'. Users can also retrieve details of a specific user setup record by providing its 'settingId'.  
 GET - /:userId/user-setup  
 GET - /:userId/user-setup/:settingId
 - :userId/user-setup API: The 'user-setup' API allows users to update user setup records specific to a user by 'userId'. Users can update multiple records at once or update a single record by providing its 'setupId'.
 PUT - /:userId/user-setup  
 PUT - /:userId/user-setup/:settingId
-  
+#### User APIs
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user
 - :userId/verify-user API: The 'verify-user' API is used to verify a user's account by checking the provided verification code. This ensures that the user has access to the email associated with their account.  
