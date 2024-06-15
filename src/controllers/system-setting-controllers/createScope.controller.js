@@ -43,7 +43,7 @@ const createUserScope = async(payload) => {
         payload.scope = payload.scope.toUpperCase();
 
         log.info('Call db query to register new user scope in system');
-        const newUserScope = await dbConnect.registerNewScope(payload);
+        const newUserScope = await dbConnect.createNewScope(payload);
 
         log.success('Execution for creating new record completed');
         return {
