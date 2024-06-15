@@ -27,6 +27,8 @@ GET - app-route/:routeId
 PUT - app-route/:routeId
 - app-route API: The 'app-route' API allows users to delete the information of registered service routes in the database. Users need to pass the 'routeId' of the route they want to delete.  
 DELETE - app-route/:routeId
+- register-user-role API: The 'register-user-role' API allows administrators to create new user roles in the database. This helps in managing user permissions and access levels within the system.  
+POST - register-user-role
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user

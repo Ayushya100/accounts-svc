@@ -36,13 +36,14 @@ const isUserRoleAvailable = async(payload) => {
         };
     }
 }
+
 const createUserRole = async(payload) => {
     try {
         log.info('Execution for registering new user role controller started');
         payload.roleCode = payload.roleCode.toUpperCase();
 
         log.info('Call db query to register new user role in system');
-        const newUserRole = await dbConnect.registerNewUserRole(payload);
+        const newUserRole = await dbConnect.createNewRole(payload);
 
         log.success('Execution for creating new record completed');
         return {
