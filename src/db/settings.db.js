@@ -118,10 +118,6 @@ const isDefaultUserRoleAvailable = async() => {
     return await roleDB.findOne(query, null);
 }
 
-const registerNewUserRole = async(payload) => {
-    return await roleDB.create(payload);
-}
-
 const getAllUserRole = async() => {
     const query = {
         isDeleted: false
@@ -379,7 +375,6 @@ export {
     isUserRoleAvailable,
     isUserRoleByIdAvailable,
     isDefaultUserRoleAvailable,
-    registerNewUserRole,
     getAllUserRole,
     getUserRoleById,
     updateUserRoleById,
