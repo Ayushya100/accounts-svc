@@ -18,6 +18,8 @@ POST - register-setting
 - setting-info API: The 'setting-info' API retrieves details of dashboard settings available in the system, which users can utilize.  
 GET - setting-info  
 GET - setting-info/:label
+- register-route API: The 'register-route' API allows for the registration of new service routes in the database, enabling the system to trigger requests based on these routes.  
+POST - register-route
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user

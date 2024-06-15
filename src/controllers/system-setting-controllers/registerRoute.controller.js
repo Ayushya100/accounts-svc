@@ -43,7 +43,7 @@ const createRoute = async(payload) => {
     try {
         log.info('Execution for registering new route controller started');
         log.info('Call db query to register new record');
-        const newRoute = await dbConnect.registerNewRoute(payload);
+        const newRoute = await dbConnect.createNewRoute(payload);
         
         log.success('Execution for registering new route record completed');
         return {

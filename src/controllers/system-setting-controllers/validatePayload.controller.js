@@ -81,7 +81,7 @@ const validateNewRoutePayload = (payload) => {
     }
     if (payload.method && !isValidMethod(payload.method)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Provided method is not a valid API method`;
+        response.resMsg = `Provided method is not a valid API method. Only GET, POST, PUT and DELETE methods are allowed as a method.`;
         response.isValid = false;
     }
 
