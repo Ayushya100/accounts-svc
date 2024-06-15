@@ -15,5 +15,7 @@ POST - sync-setup
 GET - system-setup
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user
+- verify-user API: The 'verify-user' API is used to verify a user's account by checking the provided verification code. This ensures that the user has access to the email associated with their account.  
+PUT - /:userId/verify-user
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
