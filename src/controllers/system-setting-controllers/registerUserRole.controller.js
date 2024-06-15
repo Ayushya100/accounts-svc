@@ -10,17 +10,25 @@ const isUserRoleAvailable = async(payload) => {
     try {
         log.info('Execution to check for existing user role controller started');
         let response = {
-            resType: 'SUCCESS',
+            resType: 'REQUEST_COMPLETED',
             resMsg: 'VALIDATION SUCCESSFULL',
+            data: null,
             isValid: true
         };
 
         log.info('Call db query to check for the existing user role record');
-        const routeDetails = await dbConnect.isUserRoleAvailable(payload);
-        if (routeDetails) {
+        const roleDetails = await dbConnect.isUserRoleAvailable(payload);
+
+        if (roleDetails && !roleDetails.isDeleted) {
             log.error(`Conflict, record already exists for requested user role code : ${payload.roleCode}`);
             response.resType = 'CONFLICT';
             response.resMsg = 'User role already exists with same role code';
+            response.isValid = false;
+        } else if (roleDetails && roleDetails.isDeleted) {
+            log.error(`Role already exists but is deleted, need to restore or update the role with provided code`);
+            response.resType = 'SUCCESS';
+            response.resMsg = 'User Role already exists but is deleted';
+            response.data = roleDetails;
             response.isValid = false;
         }
 
@@ -63,7 +71,32 @@ const createUserRole = async(payload) => {
     }
 }
 
+const restoreRole = async(userId, role) => {
+    try {
+        log.info('Execution for restoring deleted role controller started');
+        log.info('Call db query to restore deleted role');
+        const updatedRole = await dbConnect.restoreRole(userId, role);
+
+        log.success('Execution for restoring deleted role record completed');
+        return {
+            resType: 'REQUEST_COMPLETED',
+            resMsg: 'Role Restored Successfully',
+            data: updatedRole,
+            isValid: true
+        };
+    } catch (err) {
+        log.error(`Error while working with db to restore deleted role record : ${err}`);
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: 'Some error occurred while working with db to restore deleted role',
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 export {
     isUserRoleAvailable,
-    createUserRole
+    createUserRole,
+    restoreRole
 };

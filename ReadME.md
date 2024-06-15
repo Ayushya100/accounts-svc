@@ -29,6 +29,13 @@ PUT - app-route/:routeId
 DELETE - app-route/:routeId
 - register-user-role API: The 'register-user-role' API allows administrators to create new user roles in the database. This helps in managing user permissions and access levels within the system.  
 POST - register-user-role
+- user-role APi: The 'user-role' API retrieves information about all user roles available in the system. Users can also provide a 'roleId' to get details of a specific user role.  
+GET - user-role  
+GET - user-role/:roleId
+- user-role API: The 'user-role' API allows users to update the information of an existing user role in the database. Users need to pass the 'roleId' of the role they want to update.  
+PUT - user-role/:roleId
+- user-role API: The 'user-role' API allows users to delete an existing user role from the database. Users need to pass the 'roleId' of the role they want to delete.  
+DELETE - user-role/:roleId
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user

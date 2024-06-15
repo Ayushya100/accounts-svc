@@ -96,10 +96,20 @@ const restoreRoute = async(userId, route) => {
 const isUserRoleAvailable = async(payload) => {
     const query = {
         roleCode: payload.roleCode.toUpperCase(),
-        roleName: payload.roleName,
-        isDeleted: false
+        roleName: payload.roleName
     };
     return await roleDB.findOne(query, null);
+}
+
+const restoreRole = async(userId, role) => {
+    const query = {
+        _id: role._id
+    };
+    const payload = {
+        isDeleted: false,
+        isActive: true
+    };
+    return await roleDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 const isUserRoleByIdAvailable = async(roleId) => {
@@ -373,6 +383,7 @@ export {
     isRouteAvailable,
     restoreRoute,
     isUserRoleAvailable,
+    restoreRole,
     isUserRoleByIdAvailable,
     isDefaultUserRoleAvailable,
     getAllUserRole,

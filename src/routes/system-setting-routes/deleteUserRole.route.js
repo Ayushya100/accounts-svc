@@ -25,7 +25,7 @@ const deleteUserRole = async(req, res, next) => {
 
         log.info('Call controller function to check if user role exists in db');
         const userRoleInfo = await dashboardController.getUserRoleById(roleId);
-        if (!userRoleInfo) {
+        if (!userRoleInfo.isValid) {
             throw userRoleInfo;
         }
 
