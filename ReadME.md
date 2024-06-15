@@ -41,6 +41,10 @@ POST - user-scope
 - user-scope API: The 'user-scope' API retrieves information about user scopes based on the 'userRoleId' provided. Users can retrieve all user scopes associated with a specific 'userRoleId' or retrieve details of a specific scope by providing its 'scopeId'.  
 GET - user-role/:roleId/user-scope  
 GET - user-role/:roleId/user-scope/:scopeId
+- user-scope API: The 'user-scope' API allows administrators to update the details of an existing user scope in the database. Users need to provide both 'userRoleId' and 'scopeId' to specify which scope details to update.  
+PUT - user-role/:roleId/user-scope/:scopeId
+- user-scope API: The 'user-scope' API allows administrators to delete a user scope from the database based on the 'userRoleId' and 'scopeId' provided.  
+DELETE - user-role/:roleId/user-scope/:scopeId
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user

@@ -185,7 +185,7 @@ const getUserScopeById = async(roleId, scopeId) => {
         roleId: roleId,
         isDeleted: false
     };
-    return await scopeDB.findById(query, null);
+    return await scopeDB.findOne(query, null);
 }
 
 const updateUserScopeById = async(userId, scopeId, payload) => {
@@ -195,17 +195,16 @@ const updateUserScopeById = async(userId, scopeId, payload) => {
     return await scopeDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
-const deleteUserScopeById = async(userId, scopeId) => {
+const deleteUserScopeById = async(userId, roleId, scopeId) => {
     const query = {
-        _id: scopeId
+        _id: scopeId,
+        roleId: roleId
     };
     const payload = {
         isDeleted: true
     };
     const fields = 'roleId scope scopeDesc isDeleted';
-
-    const db = new roleScopeTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, fields);
+    return await scopeDB.findOneAndUpdate(userId, query, payload, fields);
 }
 
 const getAllAppRoute = async() => {

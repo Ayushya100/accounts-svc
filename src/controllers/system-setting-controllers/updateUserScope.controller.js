@@ -12,7 +12,7 @@ const updatedUserScope = async(userId, scopeId, payload, scopeInfo) => {
         const queryPayload = {
             roleId: payload.roleId || scopeInfo.roleId,
             scope: payload.scope ? payload.scope.toUpperCase() : scopeInfo.scope,
-            scopeDesc: payload.scopeDesc || scopeInfo.scopeDesc
+            scopeDescription: payload.scopeDesc || scopeInfo.scopeDesc
         };
 
         log.info('Call db query to update user scope info');

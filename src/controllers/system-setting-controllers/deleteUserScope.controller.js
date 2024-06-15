@@ -6,11 +6,11 @@ import { logger } from 'lib-finance-service';
 const header = 'controller: delete-user-scope';
 const log = logger(header);
 
-const deleteUserScope = async(userId, scopeId) => {
+const deleteUserScope = async(userId, roleId, scopeId) => {
     try {
         log.info('Execution for deleting user scope controller started');
         log.info('Call db query to delete user scope from db');
-        const userScopeDetails = await dbConnect.deleteUserScopeById(userId, scopeId);
+        const userScopeDetails = await dbConnect.deleteUserScopeById(userId,  roleId, scopeId);
 
         log.info('Execution for deleting user scope completed successfully');
         return {
