@@ -17,6 +17,7 @@ import {
 const settingDB = new dashboardSettingTemplate();
 const dashboardDB = new userDashboardTemplate();
 const roleDB = new userRoleTemplate();
+const routeDB = new serviceRoutesTemplate();
 
 const isSettingAvailable = async(payload) => {
     const query = {
@@ -79,13 +80,7 @@ const isRouteAvailable = async(payload) => {
         microservice: payload.microservice,
         method: payload.method
     };
-    const db = new serviceRoutesTemplate();
-    return await db.findOne(query, null);
-}
-
-const registerNewRoute = async(payload) => {
-    const db = new serviceRoutesTemplate();
-    return await db.create(payload);
+    return await routeDB.findOne(query, null);
 }
 
 const isUserRoleAvailable = async(payload) => {
@@ -211,8 +206,7 @@ const getAllAppRoute = async() => {
     const query = {
         isDeleted: false
     };
-    const db = new serviceRoutesTemplate();
-    return await db.find(query, null);
+    return await routeDB.find(query, null);
 }
 
 const getAppRouteById = async(routeId) => {
@@ -220,16 +214,14 @@ const getAppRouteById = async(routeId) => {
         _id: routeId,
         isDeleted: false
     };
-    const db = new serviceRoutesTemplate();
-    return await db.find(query, null);
+    return await routeDB.find(query, null);
 }
 
 const updateAppRouteById = async(userId, routeId, payload) => {
     const query = {
         _id: routeId
     };
-    const db = new serviceRoutesTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, null);
+    return await routeDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 const deleteAppRouteById = async(userId, routeId) => {
@@ -240,9 +232,7 @@ const deleteAppRouteById = async(userId, routeId) => {
         isDeleted: true
     };
     const fields = 'path microservice port method validations isDeleted';
-
-    const db = new serviceRoutesTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, fields);
+    return await routeDB.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 const createUserSettings = async(userSettings) => {
@@ -375,7 +365,6 @@ export {
     getSystemUserSettingInfo,
     getUserAssignableSettings,
     isRouteAvailable,
-    registerNewRoute,
     isUserRoleAvailable,
     isUserRoleByIdAvailable,
     isDefaultUserRoleAvailable,
