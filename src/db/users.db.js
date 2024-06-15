@@ -6,22 +6,22 @@ import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 import dbConnect from './index.js';
 
+const userDB = new userTemplate();
+const financeDB = new financeTemplate();
+
 const isUserByUsernameOrEmailAvailable = async(userName, emailId) => {
     const query = {
         $or: [{ userName }, { emailId }]
     };
     const fields = 'roleId firstName lastName userName emailId password lastLogin loginCount isVerified isDeleted';
-
-    const db = new userTemplate();
-    return await db.findOne(query, fields);
+    return await userDB.findOne(query, fields);
 }
 
 const isUserByIdAvailable = async(userId) => {
     const query = {
         _id: userId
     };
-    const db = new userTemplate();
-    return await db.findById(query, null);
+    return await userDB.findById(query, null);
 }
 
 const createNewUser = async(payload) => {
@@ -32,22 +32,18 @@ const createNewUser = async(payload) => {
         emailId: payload.emailId,
         password: payload.password
     };
-    const db = new userTemplate();
-    const newUser = await db.create(userPayload);
-
-    const fdb = new financeTemplate();
-    await fdb.create({ userId: newUser._id });
+    const newUser = await userDB.create(userPayload);
+    await financeDB.create({ userId: newUser._id });
 
     const udpatedUser = await generateVerificationCode(newUser._id);
     return udpatedUser;
 }
 
 const generateVerificationCode = async(userId) => {
-    const db = new userTemplate();
     const query = {
         _id: userId
     };
-    const user = await db.findById(query, null);
+    const user = await userDB.findById(query, null);
 
     const verificationCode = uuidv4() + user._id;
     const payload = {
@@ -56,7 +52,7 @@ const generateVerificationCode = async(userId) => {
     };
 
     const fields = 'roleId firstName lastName userName emailId verificationCode isVerified';
-    return await db.findByIdAndUpdate(userId, query, payload, fields);
+    return await userDB.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 const assignUserRole = async(userId, roleId) => {
@@ -67,9 +63,7 @@ const assignUserRole = async(userId, roleId) => {
         roleId: roleId
     };
     const fields = 'roleId firstName lastName isVerified isDeleted'
-
-    const db = new userTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, fields);
+    return await userDB.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 const getUserVerificationDetails = async(userId) => {
@@ -77,9 +71,7 @@ const getUserVerificationDetails = async(userId) => {
         _id: userId
     };
     const fields = 'firstName lastName userName emailId verificationCode verificationCodeExpiry isVerified isDeleted';
-
-    const db = new userTemplate();
-    return await db.findById(query, fields);
+    return await userDB.findById(query, fields);
 }
 
 const validateUser = async(userId) => {
@@ -90,8 +82,7 @@ const validateUser = async(userId) => {
         verificationCode: '',
         isVerified: true
     };
-    const db = new userTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, null);
+    return await userDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 const verifyPassword = async(user, password) => {
@@ -106,14 +97,11 @@ const reactivateUser = async(userId) => {
     const payload = {
         isDeleted: false
     };
-    const db = new userTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, null);
+    return await userDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 const generateTokens = async(userId) => {
-    const db = new userTemplate();
-    const user = await db.findById({ _id: userId }, null);
-
+    const user = await userDB.findById({ _id: userId }, null);
     const additionalData = await getUserSetupInfo(userId, user.roleId);
 
     const accessToken = jwt.sign(
@@ -150,7 +138,6 @@ const generateTokens = async(userId) => {
 const generateAccessAndRefreshTokens = async(userId) => {
     const { user, additionalData, accessToken, refreshToken } = await generateTokens(userId);
 
-    const db = new userTemplate();
     const query = {
         _id: user._id
     };
@@ -160,7 +147,7 @@ const generateAccessAndRefreshTokens = async(userId) => {
         lastLogin: Date.now()
     };
     const fields = '-password -createdOn -createdBy -modifiedOn -modifiedBy';
-    const updatedUserInfo = await db.findByIdAndUpdate(user._id, query, payload, fields);
+    const updatedUserInfo = await userDB.findByIdAndUpdate(user._id, query, payload, fields);
 
     return {
         accessToken: accessToken,
@@ -180,7 +167,6 @@ const generateAccessAndRefreshTokens = async(userId) => {
 const refreshTokens = async(userId) => {
     const { user, additionalData, accessToken, refreshToken } = await generateTokens(userId);
 
-    const db = new userTemplate();
     const query = {
         _id: user._id
     };
@@ -189,7 +175,7 @@ const refreshTokens = async(userId) => {
         lastLogin: Date.now()
     };
     const fields = '-password -createdOn -createdBy -modifiedOn -modifiedBy';
-    const updatedUserInfo = await db.findByIdAndUpdate(user._id, query, payload, fields);
+    const updatedUserInfo = await userDB.findByIdAndUpdate(user._id, query, payload, fields);
 
     return {
         accessToken: accessToken,
@@ -204,9 +190,7 @@ const getUserFullDetails = async(userId) => {
         _id: userId
     };
     const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -createdOn -createdBy -modifiedOn -modifiedBy';
-
-    const db = new userTemplate();
-    return await db.findById(query, fields);
+    return await userDB.findById(query, fields);
 }
 
 const getUserSetupInfo = async(userId, roleId) => {
@@ -243,18 +227,15 @@ const updateUserInfo = async(userId, userPayload) => {
         contactNumber: userPayload.contactNumber !== null || userPayload.contactNumber !== undefined ? userPayload.contactNumber : currentUserInfo.contactNumber
     };
     const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -password -createdBy -modifiedOn -modifiedBy';
-    const db = new userTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, fields);
+    return await userDB.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 const updateUserPassword = async(userId, payload) => {
-    const db = new userTemplate();
     const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -createdBy -modifiedOn -modifiedBy';
-
     const query = {
         _id: userId
     };
-    const currentUserInfo = await db.findOne(query, fields);
+    const currentUserInfo = await userDB.findOne(query, fields);
 
     if (await verifyPassword(currentUserInfo, payload.oldPassword)) {
         currentUserInfo.password = payload.newPassword;
@@ -263,25 +244,22 @@ const updateUserPassword = async(userId, payload) => {
         await currentUserInfo.save({
             validateBeforeSave: false
         });
-
         return await isUserByIdAvailable(userId);
     }
     return false;
 }
 
 const updateProfileImage = async(userId, cloudinaryImageURL) => {
-    const db = new userTemplate();
     const query = {
         _id: userId
     };
     const payload = {
         profileImageURL: cloudinaryImageURL
     };
-    return db.findByIdAndUpdate(userId, query, payload, null);
+    return userDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 const userDeactivate = async(userId) => {
-    const db = new userTemplate();
     const query = {
         _id: userId
     };
@@ -289,18 +267,17 @@ const userDeactivate = async(userId) => {
         isDeleted: true
     };
     const fields = '-verificationCode -verificationCodeExpiry -forgotPasswordToken -forgotPasswordTokenExpiry -refreshToken -createdBy -modifiedBy';
-    return await db.findByIdAndUpdate(userId, query, payload, fields);
+    return await userDB.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 const logoutUser = async(userId) => {
-    const db = new userTemplate();
     const query = {
         _id: userId
     };
     const payload = {
         refreshToken: null
     };
-    return await db.findByIdAndUpdate(userId, query, payload, null);
+    return await userDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 export {

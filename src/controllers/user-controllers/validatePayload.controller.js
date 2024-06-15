@@ -27,6 +27,7 @@ const validContactNumber = (number) => {
 
 // Mandatory parameters check for registering new user
 const validateRegisterUserPayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -49,21 +50,21 @@ const validateRegisterUserPayload = (payload) => {
         }
     }
 
-    if (!validUserName(payload.userName)) {
+    if (payload.userName && !validUserName(payload.userName)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Pattern invalid. Username incorrect';
+        response.resMsg = `Pattern invalid. Provided username doesnot match the required pattern. UserName should be only alpha-numeric of length 4-24 characters long without any special characters`;
         response.isValid = false;
     }
     
-    if (!validEmailId(payload.emailId)) {
+    if (payload.emailId && !validEmailId(payload.emailId)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Pattern invalid. Email ID incorrect';
+        response.resMsg = 'Pattern invalid. Provided Email ID doesnot match the required pattern.';
         response.isValid = false;
     }
 
-    if (!validPassword(payload.password)) {
+    if (payload.password && !validPassword(payload.password)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Pattern invalid. Password incorrect';
+        response.resMsg = `Pattern invalid. Provided Password doesnot match the required pattern. Password should be between 8 and 16 characters long. It can be alpha-numeric and only @ is allowed.`;
         response.isValid = false;
     }
 

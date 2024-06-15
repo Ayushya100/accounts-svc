@@ -15,6 +15,8 @@ import {
 } from 'lib-finance-service';
 
 const settingDB = new dashboardSettingTemplate();
+const dashboardDB = new userDashboardTemplate();
+const roleDB = new userRoleTemplate();
 
 const isSettingAvailable = async(payload) => {
     const query = {
@@ -92,8 +94,7 @@ const isUserRoleAvailable = async(payload) => {
         roleName: payload.roleName,
         isDeleted: false
     };
-    const db = new userRoleTemplate();
-    return await db.findOne(query, null);
+    return await roleDB.findOne(query, null);
 }
 
 const isUserRoleByIdAvailable = async(roleId) => {
@@ -101,8 +102,7 @@ const isUserRoleByIdAvailable = async(roleId) => {
         _id: roleId,
         isDeleted: false
     };
-    const db = new userRoleTemplate();
-    return await db.findById(query, null);
+    return await roleDB.findById(query, null);
 }
 
 const isDefaultUserRoleAvailable = async() => {
@@ -110,21 +110,18 @@ const isDefaultUserRoleAvailable = async() => {
         isDefault: true,
         isDeleted: false
     };
-    const db = new userRoleTemplate();
-    return await db.findOne(query, null);
+    return await roleDB.findOne(query, null);
 }
 
 const registerNewUserRole = async(payload) => {
-    const db = new userRoleTemplate();
-    return await db.create(payload);
+    return await roleDB.create(payload);
 }
 
 const getAllUserRole = async() => {
     const query = {
         isDeleted: false
     };
-    const db = new userRoleTemplate();
-    return await db.find(query, null);
+    return await roleDB.find(query, null);
 }
 
 const getUserRoleById = async(roleId) => {
@@ -132,16 +129,14 @@ const getUserRoleById = async(roleId) => {
         _id: roleId,
         isDeleted: false
     };
-    const db = new userRoleTemplate();
-    return await db.find(query, null);
+    return await roleDB.find(query, null);
 }
 
 const updateUserRoleById = async(userId, roleId, payload) => {
     const query = {
         _id: roleId
     };
-    const db = new userRoleTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, null);
+    return await roleDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 const deleteUserRoleById = async(userId, roleId) => {
@@ -153,9 +148,7 @@ const deleteUserRoleById = async(userId, roleId) => {
         isDeleted: true
     };
     const fields = 'roleCode roleName isActive isDeleted';
-
-    const db = new userRoleTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, fields);
+    return await roleDB.findByIdAndUpdate(userId, query, payload, fields);
 }
 
 const isScopeAvailable = async(payload) => {
@@ -253,8 +246,7 @@ const deleteAppRouteById = async(userId, routeId) => {
 }
 
 const createUserSettings = async(userSettings) => {
-    const db = new userDashboardTemplate();
-    return await db.create(userSettings);
+    return await dashboardDB.create(userSettings);
 }
 
 const getUserDashboardSetup = async(userId, fieldsToRetrieve) => {
@@ -289,8 +281,7 @@ const getUserDashboardSetup = async(userId, fieldsToRetrieve) => {
         type: 1
     };
 
-    const db = new userDashboardTemplate();
-    return await db.aggregate(matchQuery, lookupRecord, lookupQuery, lookupFields, projectionFields);
+    return await dashboardDB.aggregate(matchQuery, lookupRecord, lookupQuery, lookupFields, projectionFields);
 }
 
 const getDashboardSettingByUserId = async(userId, settingId) => {
@@ -342,13 +333,10 @@ const getDashboardSettingByUserId = async(userId, settingId) => {
         matchQuery._id = new mongoose.mongoose.Types.ObjectId(settingId)
     }
 
-    const db = new userDashboardTemplate();
-    return await db.aggregate(matchQuery, lookupRecord, lookupQuery, lookupFields, projectionFields);
+    return await dashboardDB.aggregate(matchQuery, lookupRecord, lookupQuery, lookupFields, projectionFields);
 }
 
 const updateUserDashboardSetting = async(userId, payload, settingId, isAllUpdate = false) => {
-    const db = new userDashboardTemplate();
-
     if (isAllUpdate) {
         const updateQuery = payload.map(record => ({
             updateOne: {
@@ -365,7 +353,7 @@ const updateUserDashboardSetting = async(userId, payload, settingId, isAllUpdate
                 }
             }
         }));
-        return await db.bulkWrite(updateQuery);
+        return await dashboardDB.bulkWrite(updateQuery);
     } else {
         const query = {
             _id: settingId,
@@ -375,7 +363,7 @@ const updateUserDashboardSetting = async(userId, payload, settingId, isAllUpdate
         const queryPayload = {
             value: payload.value
         };
-        return await db.findByIdAndUpdate(userId, query, queryPayload, null);
+        return await dashboardDB.findByIdAndUpdate(userId, query, queryPayload, null);
     }
 }
 
