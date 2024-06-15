@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "6646d0b3718c3160d4c9d9a2",
+        "roleCode": "USER",
+        "roleName": "General User",
+        "isActive": true,
+        "isDefault": true,
+        "createdOn": "2024-05-17T03:36:09.424Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-17T03:36:09.424Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "6646d19389ca97a9889f6b77",
+        "roleCode": "ADMIN",
+        "roleName": "System Admin",
+        "isActive": true,
+        "isDefault": false,
+        "createdOn": "2024-05-17T03:39:58.456Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-17T04:26:03.136Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66475320b4df6c9461899d52",
+        "roleCode": "DUMMY",
+        "roleName": "Dummy user",
+        "isActive": true,
+        "isDefault": false,
+        "createdOn": "2024-05-17T12:52:41.496Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-17T12:52:41.496Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    }
+]
