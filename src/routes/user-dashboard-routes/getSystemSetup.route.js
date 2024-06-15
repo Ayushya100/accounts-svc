@@ -14,7 +14,7 @@ const getSystemSetup = async(req, res, next) => {
     log.info(msg);
 
     try {
-        log.info('Call controller function to get setup info for SYSTEM user');
+        log.info('Call controller function to get setup info for SYSTEM');
         const setupInfo = await userDashboardController.getSystemSetup();
         if (!setupInfo.isValid) {
             throw setupInfo;
