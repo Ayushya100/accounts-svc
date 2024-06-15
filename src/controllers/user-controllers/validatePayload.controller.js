@@ -74,6 +74,7 @@ const validateRegisterUserPayload = (payload) => {
 
 // Mandatory parameters check for verifying new user
 const validateUserVerificationPayload = (verificationCode) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -92,6 +93,7 @@ const validateUserVerificationPayload = (verificationCode) => {
 
 // Mandatory parameters check for registering new user
 const validateUserLoginPayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -116,6 +118,7 @@ const validateUserLoginPayload = (payload) => {
 
 // Mandatory parameter check for updating user details
 const validateUserDetailsPayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -140,6 +143,7 @@ const validateUserDetailsPayload = (payload) => {
 
 // Mandatory parameters check for updating user password
 const validatePasswordUpdatePayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -164,6 +168,7 @@ const validatePasswordUpdatePayload = (payload) => {
 
 // Mandatory parameter check for updating profile image
 const validateProfileImagePayload = (profileImagePath) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -182,6 +187,7 @@ const validateProfileImagePayload = (profileImagePath) => {
 
 // Mandatory parameters check for deactivate user
 const validateDeactivateUserPayload = (payload) => {
+    log.info('Payload verification execution started');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',

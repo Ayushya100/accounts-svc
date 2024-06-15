@@ -12,7 +12,7 @@ const checkUserById = async(userId) => {
     // registerLog.createDebugLog('Start checking if user is available');
 
     try {
-        log.info(`Execution for checking user for provided id (${userId}) started`);
+        log.info(`Execution for checking the existense of user for provided id (${userId}) started`);
         log.info('Call db query to check for the existing record');
         const isUserAvailable = await dbConnect.isUserByIdAvailable(userId);
         if (isUserAvailable) {
