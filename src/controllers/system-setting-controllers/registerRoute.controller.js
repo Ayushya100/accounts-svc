@@ -87,7 +87,7 @@ const restoreRoute = async(userId, route) => {
         log.error(`Error while working with db to restore deleted route record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to restore delete route',
+            resMsg: 'Some error occurred while working with db to restore deleted route',
             stack: err.stack,
             isValid: false
         };

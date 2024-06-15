@@ -1,6 +1,11 @@
 'use strict';
 
-import { buildApiResponse, responseCodes, logger } from 'lib-finance-service';
+import {
+    buildApiResponse,
+    responseCodes,
+    logger,
+    getUserContext
+} from 'lib-finance-service';
 import controller from '../../controllers/index.js';
 
 const header = 'route: register-user-role';
@@ -15,6 +20,8 @@ const registerUserRoleRoute = async(req, res, next) => {
 
     try {
         const payload = req.body;
+        const userContext = getUserContext();
+        const userId = userContext.userId || req.user?.userId;
 
         log.info('Call controller function to validate payload');
         const isValidPayload = dashboardController.validateNewUserRolePayload(payload);
@@ -24,7 +31,7 @@ const registerUserRoleRoute = async(req, res, next) => {
 
         log.info('Call controller function to check for existing user role with same role code');
         const isUserRoleAvailable = await dashboardController.isUserRoleAvailable(payload);
-        if (!isUserRoleAvailable.isValid) {
+        if (!isUserRoleAvailable.isValid && isUserRoleAvailable.resType === 'CONFLICT') {
             throw isUserRoleAvailable;
         }
 
@@ -36,8 +43,14 @@ const registerUserRoleRoute = async(req, res, next) => {
             }
         }
 
-        log.info('Call controller function to register new user role started');
-        const userRoleCreated = await dashboardController.createUserRole(payload);
+        let userRoleCreated;
+        if (isUserRoleAvailable.resType === 'REQUEST_COMPLETED') {
+            log.info('Call controller function to register new user role started');
+            userRoleCreated = await dashboardController.createUserRole(payload);
+        } else if (isUserRoleAvailable.resType === 'SUCCESS') {
+            log.info('Call controller function to restore deleted role started');
+            userRoleCreated = await dashboardController.restoreRole(userId, isUserRoleAvailable.data);
+        }
         if (!userRoleCreated.isValid) {
             throw userRoleCreated;
         }
