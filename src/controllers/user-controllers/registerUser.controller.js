@@ -19,7 +19,7 @@ const checkUserByUserNameOrEmail = async(payload) => {
             isValid: true
         };
 
-        log.info('Call db query to check for existing user record');
+        log.info('Call db query to check for existing user record with user name or email id');
         const userFound = await dbConnect.isUserByUsernameOrEmailAvailable(payload.userName, payload.emailId);
 
         if (userFound) {
