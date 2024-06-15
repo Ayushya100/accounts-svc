@@ -15,6 +15,9 @@ POST - sync-setup
 GET - system-setup
 - register-setting API: The 'register-setting' API allows administrator to register new dashboard settings to be used by users within the application.  
 POST - register-setting
+- setting-info API: The 'setting-info' API retrieves details of dashboard settings available in the system, which users can utilize.  
+GET - setting-info  
+GET - setting-info/:label
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user
