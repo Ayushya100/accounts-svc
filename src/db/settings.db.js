@@ -6,10 +6,8 @@ import mongoose from 'mongoose';
 // Import DB Templates
 import {
     dashboardSettingTemplate,
-    executeAggregation,
     roleScopeTemplate,
     serviceRoutesTemplate,
-    UserDashboardModel,
     userDashboardTemplate,
     userRoleTemplate
 } from 'lib-finance-service';
@@ -18,6 +16,7 @@ const settingDB = new dashboardSettingTemplate();
 const dashboardDB = new userDashboardTemplate();
 const roleDB = new userRoleTemplate();
 const routeDB = new serviceRoutesTemplate();
+const scopeDB = new roleScopeTemplate();
 
 const isSettingAvailable = async(payload) => {
     const query = {
@@ -166,16 +165,10 @@ const isScopeAvailable = async(payload) => {
     const query = {
         roleId: payload.roleId,
         scope: payload.scope.toUpperCase(),
-        scopeDesc: payload.scopeDesc,
+        scopeDescription: payload.scopeDesc,
         isDeleted: false
     };
-    const db = new roleScopeTemplate();
-    return await db.findOne(query, null);
-}
-
-const registerNewScope = async(payload) => {
-    const db = new roleScopeTemplate();
-    return await db.create(payload);
+    return await scopeDB.findOne(query, null);
 }
 
 const getAllUserScope = async(roleId) => {
@@ -183,8 +176,7 @@ const getAllUserScope = async(roleId) => {
         roleId: roleId,
         isDeleted: false
     };
-    const db = new roleScopeTemplate();
-    return await db.find(query, null);
+    return await scopeDB.find(query, null);
 }
 
 const getUserScopeById = async(roleId, scopeId) => {
@@ -193,16 +185,14 @@ const getUserScopeById = async(roleId, scopeId) => {
         roleId: roleId,
         isDeleted: false
     };
-    const db = new roleScopeTemplate();
-    return await db.findById(query, null);
+    return await scopeDB.findById(query, null);
 }
 
 const updateUserScopeById = async(userId, scopeId, payload) => {
     const query = {
         _id: scopeId
     };
-    const db = new roleScopeTemplate();
-    return await db.findByIdAndUpdate(userId, query, payload, null);
+    return await scopeDB.findByIdAndUpdate(userId, query, payload, null);
 }
 
 const deleteUserScopeById = async(userId, scopeId) => {
@@ -391,7 +381,6 @@ export {
     updateUserRoleById,
     deleteUserRoleById,
     isScopeAvailable,
-    registerNewScope,
     getAllUserScope,
     getUserScopeById,
     updateUserScopeById,

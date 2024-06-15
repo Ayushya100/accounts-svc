@@ -36,6 +36,11 @@ GET - user-role/:roleId
 PUT - user-role/:roleId
 - user-role API: The 'user-role' API allows users to delete an existing user role from the database. Users need to pass the 'roleId' of the role they want to delete.  
 DELETE - user-role/:roleId
+- user-scope API: The 'user-scope' API allows administrators to create a new scope for users in the database. This scope defines the APIs and UI pages the user can access.  
+POST - user-scope
+- user-scope API: The 'user-scope' API retrieves information about user scopes based on the 'userRoleId' provided. Users can retrieve all user scopes associated with a specific 'userRoleId' or retrieve details of a specific scope by providing its 'scopeId'.  
+GET - user-role/:roleId/user-scope  
+GET - user-role/:roleId/user-scope/:scopeId
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user
