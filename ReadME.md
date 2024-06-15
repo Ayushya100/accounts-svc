@@ -20,6 +20,13 @@ GET - setting-info
 GET - setting-info/:label
 - register-route API: The 'register-route' API allows for the registration of new service routes in the database, enabling the system to trigger requests based on these routes.  
 POST - register-route
+- app-route API: The 'app-route' API retrieves all registered service routes from the database. Users can also pass a 'routeId' to get a specific service route record.  
+GET - app-route  
+GET - app-route/:routeId
+- app-route API: The 'app-route' API allows users to update the information of registered service routes in the database. Users need to pass the 'routeId' for the route they want to update.  
+PUT - app-route/:routeId
+- app-route API: The 'app-route' API allows users to delete the information of registered service routes in the database. Users need to pass the 'routeId' of the route they want to delete.  
+DELETE - app-route/:routeId
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user
