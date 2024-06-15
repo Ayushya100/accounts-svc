@@ -13,7 +13,15 @@ const updateAllUserDashboardSetup = async(userId, payload, userDashboardSettings
         log.info('Execution for updating setup records for all settings controller started');
         for (let record of payload.records) {
             let setupRecord = userDashboardSettings.filter(setup => String(setup._id) === record._id);
+            if (setupRecord.length === 0) {
+                return {
+                    resType: 'NOT_FOUND',
+                    resMsg: `Provided id is incorrect for which requested value is '${record.value}'`,
+                    isValid: false
+                };
+            }
             setupRecord = setupRecord[0];
+
             if (typeof record.value !== setupRecord.type) {
                 return {
                     resType: 'BAD_REQUEST',

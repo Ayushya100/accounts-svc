@@ -10,41 +10,47 @@ Welcome to the GitHub repository for **Finance Tracker Accounts SVC** - This ser
 - Profile management: Ensure users to update their profile information and manage their account settings.
 ## APIs
 - sync-setup API: The 'sync-setup' API checks and inserts database records for service routes, user roles, role scopes, and dashboard settings. It ensures that these configurations are up-to-date and consistent. This API helps automate the maintenance of essential system settings in the database.  
-POST - sync-setup
+POST - /sync-setup
 - system-setup API: The 'system-setup' API retrieves the system's basic setup details required by the UI for default operations. This API provides essential configuration data to initialize and run the user interface smoothly.  
-GET - system-setup
+GET - /system-setup
 - register-setting API: The 'register-setting' API allows administrator to register new dashboard settings to be used by users within the application.  
 POST - register-setting
 - setting-info API: The 'setting-info' API retrieves details of dashboard settings available in the system, which users can utilize.  
-GET - setting-info  
-GET - setting-info/:label
+GET - /setting-info  
+GET - /setting-info/:label
 - register-route API: The 'register-route' API allows for the registration of new service routes in the database, enabling the system to trigger requests based on these routes.  
-POST - register-route
+POST - /register-route
 - app-route API: The 'app-route' API retrieves all registered service routes from the database. Users can also pass a 'routeId' to get a specific service route record.  
-GET - app-route  
-GET - app-route/:routeId
-- app-route API: The 'app-route' API allows users to update the information of registered service routes in the database. Users need to pass the 'routeId' for the route they want to update.  
-PUT - app-route/:routeId
-- app-route API: The 'app-route' API allows users to delete the information of registered service routes in the database. Users need to pass the 'routeId' of the route they want to delete.  
-DELETE - app-route/:routeId
+GET - /app-route  
+GET - /app-route/:routeId
+- app-route/:routeId API: The 'app-route' API allows users to update the information of registered service routes in the database. Users need to pass the 'routeId' for the route they want to update.  
+PUT - /app-route/:routeId
+- app-route/:routeId API: The 'app-route' API allows users to delete the information of registered service routes in the database. Users need to pass the 'routeId' of the route they want to delete.  
+DELETE - /app-route/:routeId
 - register-user-role API: The 'register-user-role' API allows administrators to create new user roles in the database. This helps in managing user permissions and access levels within the system.  
-POST - register-user-role
+POST - /register-user-role
 - user-role APi: The 'user-role' API retrieves information about all user roles available in the system. Users can also provide a 'roleId' to get details of a specific user role.  
-GET - user-role  
-GET - user-role/:roleId
-- user-role API: The 'user-role' API allows users to update the information of an existing user role in the database. Users need to pass the 'roleId' of the role they want to update.  
-PUT - user-role/:roleId
-- user-role API: The 'user-role' API allows users to delete an existing user role from the database. Users need to pass the 'roleId' of the role they want to delete.  
-DELETE - user-role/:roleId
+GET - /user-role  
+GET - /user-role/:roleId
+- user-role/:roleId API: The 'user-role' API allows users to update the information of an existing user role in the database. Users need to pass the 'roleId' of the role they want to update.  
+PUT - /user-role/:roleId
+- user-role/:roleId API: The 'user-role' API allows users to delete an existing user role from the database. Users need to pass the 'roleId' of the role they want to delete.  
+DELETE - /user-role/:roleId
 - user-scope API: The 'user-scope' API allows administrators to create a new scope for users in the database. This scope defines the APIs and UI pages the user can access.  
-POST - user-scope
-- user-scope API: The 'user-scope' API retrieves information about user scopes based on the 'userRoleId' provided. Users can retrieve all user scopes associated with a specific 'userRoleId' or retrieve details of a specific scope by providing its 'scopeId'.  
-GET - user-role/:roleId/user-scope  
-GET - user-role/:roleId/user-scope/:scopeId
-- user-scope API: The 'user-scope' API allows administrators to update the details of an existing user scope in the database. Users need to provide both 'userRoleId' and 'scopeId' to specify which scope details to update.  
-PUT - user-role/:roleId/user-scope/:scopeId
-- user-scope API: The 'user-scope' API allows administrators to delete a user scope from the database based on the 'userRoleId' and 'scopeId' provided.  
-DELETE - user-role/:roleId/user-scope/:scopeId
+POST - /user-scope
+- user-role/:roleId/user-scope API: The 'user-scope' API retrieves information about user scopes based on the 'userRoleId' provided. Users can retrieve all user scopes associated with a specific 'userRoleId' or retrieve details of a specific scope by providing its 'scopeId'.  
+GET - /user-role/:roleId/user-scope  
+GET - /user-role/:roleId/user-scope/:scopeId
+- user-role/:roleId/user-scope/:scopeId API: The 'user-scope' API allows administrators to update the details of an existing user scope in the database. Users need to provide both 'userRoleId' and 'scopeId' to specify which scope details to update.  
+PUT - /user-role/:roleId/user-scope/:scopeId
+- user-role/:roleId/user-scope/:scopeId API: The 'user-scope' API allows administrators to delete a user scope from the database based on the 'userRoleId' and 'scopeId' provided.  
+DELETE - /user-role/:roleId/user-scope/:scopeId
+- :userId/user-setup API: The 'user-setup' API allows users to retrieve user setup records specific to a user by 'userId'. Users can also retrieve details of a specific user setup record by providing its 'settingId'.  
+GET - /:userId/user-setup  
+GET - /:userId/user-setup/:settingId
+- :userId/user-setup API: The 'user-setup' API allows users to update user setup records specific to a user by 'userId'. Users can update multiple records at once or update a single record by providing its 'setupId'.
+PUT - /:userId/user-setup  
+PUT - /:userId/user-setup/:settingId
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user
