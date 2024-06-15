@@ -54,11 +54,25 @@ PUT - /:userId/user-setup/:settingId
   
 - register-user API: The 'register-user' API allows for the registration of new users in the system. This API collects necessary user information and creates a new user account.  
 POST - register-user
-- verify-user API: The 'verify-user' API is used to verify a user's account by checking the provided verification code. This ensures that the user has access to the email associated with their account.  
+- :userId/verify-user API: The 'verify-user' API is used to verify a user's account by checking the provided verification code. This ensures that the user has access to the email associated with their account.  
 PUT - :userId/verify-user
 - login-user API: The 'login-user' API is used for authenticating users and generating a session token upon successful login.  
 POST - login-user
 - refresh-token API: The 'refresh-token' API is used to generate a new access token using a refresh token, extending the validity period of the user's session without requiring reauthentication.  
 POST - refresh-token
+- user-info/:userId API: The 'user-info' API retrieves detailed information about a user based on the 'userId'.  
+GET - /user-info/:userId
+- user-info/:userId API: The 'user-info' API allows users to update specific details of a user profile based on the 'userId'.  
+PUT - /user-info/:userId API
+- user-password/:userId API: The 'user-password' API allows users to update their password by providing the old password for verification and the new password for replacement.  
+PUT - /user-password/:userId
+- profile-image/:userId API: The 'profile-image' API allows users to update their profile image in system.  
+PUT - /profile-image/:userId
+- profile-image/:userId API: The 'profile-image' API allows users to delete their profile image from system.  
+DELETE - /profile-image/:userId
+- deactivate-user/:userId API: The 'deactivate-user' API allows users to deactivate their user profile. When deactivated, the user account will be suspended and cannot be accessed until reactivated.  
+PUT - /deactivate-user/:userId
+- logout-user API: The 'logout-user' API allows users to log out from the system, invalidating their current session and access token.  
+POST - /logout-user
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
