@@ -52,6 +52,16 @@ import {
     refreshTokens,
     logoutUser
 } from './users.db.js';
+import {
+    findRouteById,
+    createNewRoute,
+    findRoleById,
+    createNewRole,
+    findScopeById,
+    createNewScope,
+    findSettingById,
+    createNewSetting
+} from './setup.db.js';
 
 export default {
     isSettingAvailable,
@@ -101,5 +111,13 @@ export default {
     refreshTokens,
     logoutUser,
     getDashboardSettingByUserId,
-    updateUserDashboardSetting
+    updateUserDashboardSetting,
+    findSettingById,
+    createNewSetting,
+    findRoleById,
+    createNewRole,
+    findScopeById,
+    createNewScope,
+    findRouteById,
+    createNewRoute
 };

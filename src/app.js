@@ -42,6 +42,7 @@ app.use(cookieParser());
 setUserContext(app);
 
 // System Setup Routes
+app.post(`${USERS_API}/sync-setup`, routes.setupRoutes.syncSystemSetup);
 app.get(`${USERS_API}/system-setup`, routes.userSetting.getSystemSetup);
 
 // User Account Routes
