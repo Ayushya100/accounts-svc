@@ -83,6 +83,16 @@ const isRouteAvailable = async(payload) => {
     return await routeDB.findOne(query, null);
 }
 
+const restoreRoute = async(userId, route) => {
+    const query = {
+        _id: route._id
+    };
+    const payload = {
+        isDeleted: false
+    };
+    return await routeDB.findByIdAndUpdate(userId, query, payload, null);
+}
+
 const isUserRoleAvailable = async(payload) => {
     const query = {
         roleCode: payload.roleCode.toUpperCase(),
@@ -365,6 +375,7 @@ export {
     getSystemUserSettingInfo,
     getUserAssignableSettings,
     isRouteAvailable,
+    restoreRoute,
     isUserRoleAvailable,
     isUserRoleByIdAvailable,
     isDefaultUserRoleAvailable,

@@ -8,7 +8,11 @@ import {
 } from './validatePayload.controller.js';
 import { isSettingAvailable, createSetting } from './registerSetting.controller.js';
 import { getAllSettings, getSettingInfoById } from './getSettingInfo.controller.js';
-import { isRouteAvailable, createRoute } from './registerRoute.controller.js';
+import {
+    isRouteAvailable,
+    createRoute,
+    restoreRoute
+} from './registerRoute.controller.js';
 import { isUserRoleAvailable, createUserRole } from './registerUserRole.controller.js';
 import { getAllUserRole, getUserRoleById } from './getUserRoleInfo.controller.js';
 import { updateUserRole } from './updateUserRole.controller.js';
@@ -33,6 +37,7 @@ export default {
     getSettingInfoById,
     isRouteAvailable,
     createRoute,
+    restoreRoute,
     isUserRoleAvailable,
     createUserRole,
     getAllUserRole,

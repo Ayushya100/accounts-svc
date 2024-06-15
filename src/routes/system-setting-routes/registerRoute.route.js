@@ -1,6 +1,11 @@
 'use strict';
 
-import { buildApiResponse, responseCodes, logger } from 'lib-finance-service';
+import {
+    buildApiResponse,
+    responseCodes,
+    logger,
+    getUserContext
+} from 'lib-finance-service';
 import controller from '../../controllers/index.js';
 
 const header = 'route: register-route';
@@ -15,6 +20,8 @@ const registerRoute = async(req, res, next) => {
 
     try {
         const payload = req.body;
+        const userContext = getUserContext();
+        const userId = userContext.userId || req.user?.userId;
 
         log.info('Call controller function to validate payload');
         const isValidPayload = dashboardController.validateNewRoutePayload(payload);
@@ -24,12 +31,18 @@ const registerRoute = async(req, res, next) => {
 
         log.info('Call controller function to check for existing route with similar end point');
         const isRouteAvailable = await dashboardController.isRouteAvailable(payload);
-        if (!isRouteAvailable.isValid) {
+        if (!isRouteAvailable.isValid && isRouteAvailable.resType === 'CONFLICT') {
             throw isRouteAvailable;
         }
 
-        log.info('Call controller function to register new route started');
-        const routeCreated = await dashboardController.createRoute(payload);
+        let routeCreated;
+        if (isRouteAvailable.resType === 'REQUEST_COMPLETED') {
+            log.info('Call controller function to register new route started');
+            routeCreated = await dashboardController.createRoute(payload);
+        } else if (isRouteAvailable.resType === 'SUCCESS') {
+            log.info('Call controller function to restore deleted route started');
+            routeCreated = await dashboardController.restoreRoute(userId, isRouteAvailable.data);
+        }
         if (!routeCreated.isValid) {
             throw routeCreated;
         }

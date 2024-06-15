@@ -11,18 +11,25 @@ const isRouteAvailable = async(payload) => {
     try {
         log.info('Execution to check for the records of existing route controller started');
         let response = {
-            resType: 'SUCCESS',
+            resType: 'REQUEST_COMPLETED',
             resMsg: 'VALIDATION SUCCESSFULL',
+            data: null,
             isValid: true
         };
 
         log.info('Call db query to check for the existing records');
         const routeDetails = await dbConnect.isRouteAvailable(payload);
-
-        if (routeDetails) {
+        
+        if (routeDetails && !routeDetails.isDeleted) {
             log.error(`Conflict, record already exists for requested route with provided end-point : ${payload.path}`);
             response.resType = 'CONFLICT';
             response.resMsg = 'Route already exists with same end-point';
+            response.isValid = false;
+        } else if (routeDetails && routeDetails.isDeleted) {
+            log.error(`Route already exists but is deleted, need to restore or update the route with provided endpoint`);
+            response.resType = 'SUCCESS';
+            response.resMsg = 'Route already exists but is deleted';
+            response.data = routeDetails;
             response.isValid = false;
         }
 
@@ -63,7 +70,32 @@ const createRoute = async(payload) => {
     }
 }
 
+const restoreRoute = async(userId, route) => {
+    try {
+        log.info('Execution for restoring deleted route controller started');
+        log.info('Call db query to restore deleted route');
+        const updatedRoute = await dbConnect.restoreRoute(userId, route);
+
+        log.success('Execution for restoring deleted route record completed');
+        return {
+            resType: 'REQUEST_COMPLETED',
+            resMsg: 'Route Restored Successfully',
+            data: updatedRoute,
+            isValid: true
+        };
+    } catch (err) {
+        log.error(`Error while working with db to restore deleted route record : ${err}`);
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: 'Some error occurred while working with db to restore delete route',
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 export {
     isRouteAvailable,
-    createRoute
+    createRoute,
+    restoreRoute
 };
