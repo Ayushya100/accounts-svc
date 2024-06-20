@@ -4,6 +4,7 @@ import {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
+    getSettingInfoByLabel,
     getSettingInfoById,
     getSystemUserSettingInfo,
     getUserAssignableSettings,
@@ -29,7 +30,8 @@ import {
     createUserSettings,
     getUserDashboardSetup,
     getDashboardSettingByUserId,
-    updateUserDashboardSetting
+    updateUserDashboardSetting,
+    updateSystemDashboardSetting
 } from './settings.db.js';
 import {
     isUserByUsernameOrEmailAvailable,
@@ -66,6 +68,7 @@ export default {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
+    getSettingInfoByLabel,
     getSettingInfoById,
     getSystemUserSettingInfo,
     getUserAssignableSettings,
@@ -117,5 +120,6 @@ export default {
     findScopeById,
     createNewScope,
     findRouteById,
-    createNewRoute
+    createNewRoute,
+    updateSystemDashboardSetting
 };

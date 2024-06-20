@@ -29,6 +29,9 @@ POST - register-setting
 - setting-info API: The 'setting-info' API retrieves details of dashboard settings available in the system, which users can utilize.  
 GET - /setting-info  
 GET - /setting-info/:label
+- setting-info API:  The 'setting-info' API allows users to update the information of dashboard settings in the database. User can update multiple records at once or update a single record by providing its 'setupId'.  
+PUT - /setting-info  
+PUT - /setting-info/:id
 #### Service Route APIs
 - register-route API: The 'register-route' API allows for the registration of new service routes in the database, enabling the system to trigger requests based on these routes.  
 POST - /register-route

@@ -115,7 +115,7 @@ const validateNewScopePayload = (payload) => {
         isValid: true
     };
 
-    if (!payload.roleId || !payload.scope || !payload.scopeDesc) {
+    if (!payload.roleId || !payload.scope || !payload.scopeDescription) {
         response.resType = 'BAD_REQUEST';
         response.resMsg = `Required parameter is missing`;
         response.isValid = false;

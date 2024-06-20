@@ -22,7 +22,7 @@ const getSettingInfo = async(req, res, next) => {
             settingInfo = await dashboardController.getAllSettings();
         } else {
             log.info(`Call controller function to retrieve the setting info for requested id or category name : ${label}`);
-            settingInfo = await dashboardController.getSettingInfoById(label);
+            settingInfo = await dashboardController.getSettingInfoByLabel(label);
         }
 
         if (!settingInfo.isValid) {

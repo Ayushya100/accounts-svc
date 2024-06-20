@@ -41,6 +41,39 @@ const getAllSettings = async() => {
     }
 }
 
+const getSettingInfoByLabel = async(settingLabel) => {
+    try {
+        log.info(`Execution for retrieving setting info for provided label (${settingLabel}) controller started`);
+        log.info('Call db query to get the details of setting for requested label');
+        const settingDetail = await dbConnect.getSettingInfoByLabel(settingLabel);
+
+        if (!settingDetail || settingDetail.length === 0) {
+            log.error('No information found for requested setting label');
+            return {
+                resType: 'NOT_FOUND',
+                resMsg: 'Setting info not found',
+                isValid: false
+            };
+        }
+
+        log.success(`Execution for retrieving setting info for provided label (${settingLabel}) completed successfully`);
+        return {
+            resType: 'SUCCESS',
+            resMsg: 'Setting info retrieved successfully',
+            data: settingDetail,
+            isValid: true
+        };
+    } catch (err) {
+        log.error(`Error while working with db to get setting info for requested label : ${settingLabel}`);
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: 'Some error occurred while working with db.',
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 const getSettingInfoById = async(settingId) => {
     try {
         log.info(`Execution for retrieving setting info for provided id (${settingId}) controller started`);
@@ -76,5 +109,6 @@ const getSettingInfoById = async(settingId) => {
 
 export {
     getAllSettings,
+    getSettingInfoByLabel,
     getSettingInfoById
 }
