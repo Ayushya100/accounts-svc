@@ -337,6 +337,51 @@
         "isDeleted": false
     },
     {
+        "_id": "664df5881cdeca2e843c8de7",
+        "path": "api/v1.0/users/:userId/user-setup/:settingId",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "GET",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df5881cdeca2e843c8de6",
+        "path": "api/v1.0/users/:userId/user-setup",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "PUT",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df5881cdeca2e843c8de5",
+        "path": "api/v1.0/users/:userId/user-setup/:settingId",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "PUT",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
         "_id": "664df5921cdeca2e843c8deb",
         "path": "api/v1.0/users/user-info/:userId",
         "microservice": "accounts-svc",
@@ -467,6 +512,49 @@
         "createdOn": "2024-05-28T12:06:22.194Z",
         "createdBy": "SYSTEM",
         "modifiedOn": "2024-05-28T12:06:22.194Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "6655da7c0b6f9f9caee65825",
+        "path": "api/v1.0/users/sync-setup",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "POST",
+        "validations": [],
+        "createdOn": "2024-05-28T12:06:22.194Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-28T12:06:22.194Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8db5",
+        "path": "api/v1.0/users/setting-info",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "PUT",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8db6",
+        "path": "api/v1.0/users/setting-info/:id",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "PUT",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
         "modifiedBy": "SYSTEM",
         "isDeleted": false
     }

@@ -38,7 +38,7 @@ const updateAllUserDashboardSetup = async(userId, payload, userDashboardSettings
         if (updatedSetupDetails) {
             log.info('Execution for updating user setting records completed successfully');
             return {
-                resType: 'SUCCESS',
+                resType: 'REQUEST_COMPLETED',
                 resMsg: 'Dashboard settings updated successfully',
                 data: updatedSetupDetails,
                 isValid: true
@@ -83,14 +83,14 @@ const updateUserDashboardSetupById = async(userId, settingId, payload, userDashb
         if (updatedSetupDetails) {
             log.info('Execution for updating user setting record completed successfully');
             return {
-                resType: 'SUCCESS',
+                resType: 'REQUEST_COMPLETED',
                 resMsg: 'Dashboard setting updated successfully',
                 data: updatedSetupDetails,
                 isValid: true
             };
         }
 
-        log.error(`Error occurred while updating setting record for requested setting by id : ${settingId}`);
+        log.error(`Error occurred while updating setting record for requested setting id : ${settingId}`);
         return {
             resType: 'NOT_FOUND',
             resMsg: 'No Dashboard Setting Found',

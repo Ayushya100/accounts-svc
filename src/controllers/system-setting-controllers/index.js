@@ -7,7 +7,11 @@ import {
     validateNewScopePayload
 } from './validatePayload.controller.js';
 import { isSettingAvailable, createSetting } from './registerSetting.controller.js';
-import { getAllSettings, getSettingInfoById } from './getSettingInfo.controller.js';
+import {
+    getAllSettings,
+    getSettingInfoByLabel,
+    getSettingInfoById
+} from './getSettingInfo.controller.js';
 import {
     isRouteAvailable,
     createRoute,
@@ -29,6 +33,7 @@ import { deleteUserScope } from './deleteUserScope.controller.js';
 import { getAllAppRouteInfo, getAppRoutebyId } from './getAppRoute.controller.js';
 import { updateAppRoute } from './updateAppRoute.controller.js';
 import { deleteAppRoute } from './deleteUserRoute.controller.js';
+import { updateAllSettings, updateSettingInfoById } from './updateSetting.controller.js';
 
 export default {
     validateCreateSettingPayload,
@@ -38,6 +43,7 @@ export default {
     isSettingAvailable,
     createSetting,
     getAllSettings,
+    getSettingInfoByLabel,
     getSettingInfoById,
     isRouteAvailable,
     createRoute,
@@ -60,5 +66,7 @@ export default {
     getAllAppRouteInfo,
     getAppRoutebyId,
     updateAppRoute,
-    deleteAppRoute
+    deleteAppRoute,
+    updateAllSettings,
+    updateSettingInfoById
 };

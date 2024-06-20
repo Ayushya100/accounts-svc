@@ -54,9 +54,11 @@ app.post(`${USERS_API}/refresh-token`, routes.userRoutes.refreshAccessToken);
 app.use(verifyToken(tokenKey));
 
 // System Setting Routes
-app.post(`${USERS_API}/register-setting`, routes.settingRoutes.registerSetting);
-app.get(`${USERS_API}/setting-info`, routes.settingRoutes.getSettingInfo);
-app.get(`${USERS_API}/setting-info/:label`, routes.settingRoutes.getSettingInfo);
+app.post(`${USERS_API}/register-setting`, verifyScope('SETTING.U'), routes.settingRoutes.registerSetting);
+app.get(`${USERS_API}/setting-info`, verifyScope('SETTING.V'), routes.settingRoutes.getSettingInfo);
+app.get(`${USERS_API}/setting-info/:label`, verifyScope('SETTING.V'), routes.settingRoutes.getSettingInfo);
+app.put(`${USERS_API}/setting-info`, verifyScope('SETTING.U'), routes.settingRoutes.updateSetting);
+app.put(`${USERS_API}/setting-info/:id`, verifyScope('SETTING.U'), routes.settingRoutes.updateSetting);
 
 // System Routes
 app.post(`${USERS_API}/register-route`, verifyScope('ROUTE.U'), routes.settingRoutes.registerRoute);

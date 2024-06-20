@@ -251,5 +251,38 @@
       "modifiedOn": "2024-06-02T10:45:46.105Z",
       "modifiedBy": "SYSTEM",
       "isDeleted": false
+    },
+    {
+        "_id":  "66718de79a07fb7b2994d3b9",
+        "roleId": "6646d19389ca97a9889f6b77",
+        "scope": "SETTING.U",
+        "scopeDescription": "Dashboard Setting - Update",
+        "createdOn": "2024-06-18T13:38:12.542Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:38:12.547Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ec52338c5361a59f86a",
+        "roleId": "6646d19389ca97a9889f6b77",
+        "scope": "SETTING.V",
+        "scopeDescription": "Dashboard Setting - View",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ecc2338c5361a59f86e",
+        "roleId": "6646d19389ca97a9889f6b77",
+        "scope": "SETTING.D",
+        "scopeDescription": "Dashboard Setting - Delete",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
     }
 ]

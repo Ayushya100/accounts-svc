@@ -39,7 +39,7 @@ const getAllSettings = async() => {
     return await settingDB.find(query, null);
 }
 
-const getSettingInfoById = async(settingLabel) => {
+const getSettingInfoByLabel = async(settingLabel) => {
     let query;
     if (Types.ObjectId.isValid(settingLabel)) {
         query = {
@@ -52,6 +52,14 @@ const getSettingInfoById = async(settingLabel) => {
             isDeleted: false
         };
     }
+    return await settingDB.findOne(query, null);
+}
+
+const getSettingInfoById = async(settingLabel) => {
+    let query = {
+        _id : settingLabel,
+        isDeleted: false
+    };
 
     return await settingDB.findOne(query, null);
 }
@@ -165,7 +173,7 @@ const isScopeAvailable = async(payload) => {
     const query = {
         roleId: payload.roleId,
         scope: payload.scope.toUpperCase(),
-        scopeDescription: payload.scopeDesc,
+        scopeDescription: payload.scopeDescription,
         isDeleted: false
     };
     return await scopeDB.findOne(query, null);
@@ -362,10 +370,55 @@ const updateUserDashboardSetting = async(userId, payload, settingId, isAllUpdate
     }
 }
 
+const updateSystemDashboardSetting = async(userId, settingRecord, isAllUpdate = false) => {
+    if (isAllUpdate) {
+        const updateQuery = settingRecord.map(record => ({
+            updateOne: {
+                filter: {
+                    _id: record._id,
+                    isDeleted: false
+                },
+                update: {
+                    $set: {
+                        categoryName: record.categoryName,
+                        categoryDescription: record.categoryDescription,
+                        categoryType: record.categoryType,
+                        subCategory: record.subCategory,
+                        type: record.type,
+                        isPeriodic: record.isPeriodic,
+                        duration: record.duration,
+                        default: record.default,
+                        modifiedOn: Date.now(),
+                        modifiedBy: userId
+                    }
+                }
+            }
+        }));
+        return await settingDB.bulkWrite(updateQuery);
+    } else {
+        const query = {
+            _id: settingRecord._id,
+            isDeleted: false
+        };
+        const queryPayload = {
+            categoryName: settingRecord.categoryName,
+            categoryDescription: settingRecord.categoryDescription,
+            categoryType: settingRecord.categoryType,
+            subCategory: settingRecord.subCategory,
+            type: settingRecord.type,
+            isPeriodic: settingRecord.isPeriodic,
+            duration: settingRecord.duration,
+            default: settingRecord.default
+        };
+        return await settingDB.findByIdAndUpdate(userId, query, queryPayload, null);
+    }
+}
+
 export {
     isSettingAvailable,
     registerNewSetting,
     getAllSettings,
+    getSettingInfoByLabel,
     getSettingInfoById,
     getSystemUserSettingInfo,
     getUserAssignableSettings,
@@ -391,5 +444,6 @@ export {
     createUserSettings,
     getUserDashboardSetup,
     getDashboardSettingByUserId,
-    updateUserDashboardSetting
+    updateUserDashboardSetting,
+    updateSystemDashboardSetting
 };
