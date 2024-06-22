@@ -96,6 +96,9 @@ app.get(`${USERS_API}/:userId/user-setup/:settingId`, verifyScope('SETUP.V'), ro
 app.put(`${USERS_API}/:userId/user-setup`, verifyScope('SETUP.U'), routes.userSetting.updateUserDashboardSetup);
 app.put(`${USERS_API}/:userId/user-setup/:settingId`, verifyScope('SETUP.U'), routes.userSetting.updateUserDashboardSetup);
 
+// Payment Option Routes
+app.post(`${USERS_API}/:userId/register-account`, verifyScope('PAYMENT.U'), routes.paymentRoutes.registerAccount);
+
 // Error Handler middleware
 app.use(errorHandler);
 

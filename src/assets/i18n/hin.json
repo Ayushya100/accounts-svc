@@ -1,0 +1,58 @@
+{
+    "userRoutes": {
+
+    },
+    "settingRoutes": {
+
+    },
+    "userSettingRoutes": {
+
+    },
+    "setupRoutes": {
+        "Setup sync completed successfully for": "सेटअप सिंक सफलतापूर्वक पूरा हुआ",
+        "service routes": "सेवा मार्गों के लिए",
+        "user roles": "उपयोगकर्ता भूमिकाओं के लिए",
+        "role scopes": "भूमिका के दायरे के लिए",
+        "and dashboard settings": "और डैशबोर्ड सेटिंग्स के लिए"
+    },
+    "paymentRoutes": {
+        "Required Parameter is missing": "आवश्यक पैरामीटर गुम है",
+        "accountName": "खाता नाम",
+        "accountNumber": "खाता संख्या",
+        "accountType": "खाते का प्रकार",
+        "accountDate": "खाता दिनांक",
+        "holderName": "धारक का नाम",
+        "Account Date cannot be future date": "खाता दिनांक भविष्य की दिनांक नहीं हो सकती",
+        "Provided Account Type is not valid to be registered": "प्रदान किया गया खाता प्रकार पंजीकृत होने के लिए मान्य नहीं है",
+        "Provided Account Number does not follow the required pattern (number should be 11-16 digits long)": "प्रदान किया गया खाता नंबर आवश्यक पैटर्न का पालन नहीं करता है (संख्या 11-16 अंक लंबी होनी चाहिए)",
+        "debitFrom": "खर्चे के लिए",
+        "creditTo": "जमा करने के लिए",
+        "taskType": "कार्य प्रकार",
+        "duration": "अवधि",
+        "durationCount": "अवधि गणना",
+        "interestApplicable": "क्या ब्याज लागू है",
+        "interestRate": "ब्याज दर",
+        "startDate": "आरंभ करने की तिथि",
+        "endDate": "अंतिम तिथि",
+        "afterEndDepositTo": "समाप्ति के बाद जमा करने के लिए",
+        "nextDepositDate": "अगली जमा तिथि",
+        "Interest Rate is required": "ब्याज दर आवश्यक है",
+        "After Task completion deposit Bank info is required": "कार्य पूरा होने के बाद जमा बैंक की जानकारी आवश्यक है",
+        "Start date cannot be past date": "आरंभ तिथि पिछली तिथि नहीं हो सकती",
+        "Next Deposit date cannot be past date": "अगली जमा तिथि पिछली तिथि नहीं हो सकती",
+        "End date cannot be past date or smaller than the start date": "समाप्ति तिथि पिछली तिथि या प्रारंभ तिथि से छोटी नहीं हो सकती",
+        "Provided Task Type is not valid to be registered": "कार्य प्रकार पंजीकृत होने के लिए मान्य नहीं है",
+        "Provided Duration is not valid to be registered": "अवधि पंजीकृत होने के लिए मान्य नहीं है",
+        "Task is required for recurring account": "आवर्ती खाते के लिए कार्य आवश्यक है",
+        "Some error occurred while working with db to check for existing account for provided account number": "उपलब्ध कराए गए खाता नंबर के लिए मौजूदा खाते की जांच करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Account already exists with same account number": "प्रदान किया गया खाता नंबर पहले से मौजूद है",
+        "Some error occurred while working with db to create new payment account": "नया भुगतान खाता बनाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Account created successfully": "खाता सफलतापूर्वक बनाया गया",
+        "For provided account type, a task cannot be assigned": "प्रदत्त खाता प्रकार के लिए कोई कार्य निर्दिष्ट नहीं किया जा सकता",
+        "Some error occurred while working with db to create new account task": "नया खाता कार्य बनाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Some error occurred while working with db to check for existing account with provided account token": "दिए गए खाता टोकन के साथ मौजूदा खाते की जांच करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि हुई",
+        "No Account Information available for provided account token for account task creation": "खाता कार्य निर्माण के लिए प्रदान किए गए खाता टोकन के लिए कोई खाता जानकारी उपलब्ध नहीं है",
+        "Account Information available": "खाता जानकारी उपलब्ध है",
+        "Task created successfully": "कार्य सफलतापूर्वक बनाया गया"
+    }
+}

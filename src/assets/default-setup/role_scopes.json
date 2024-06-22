@@ -143,17 +143,6 @@
         "isDeleted": false
     },
     {
-        "_id": "664cbdccc4b8a943fbde9cb5",
-        "roleId": "66475320b4df6c9461899d52",
-        "scope": "USER.V",
-        "scopeDescription": "User Details - View",
-        "createdOn": "2024-05-21T15:16:52.116Z",
-        "createdBy": "SYSTEM",
-        "modifiedOn": "2024-05-21T15:16:52.116Z",
-        "modifiedBy": "SYSTEM",
-        "isDeleted": false
-    },
-    {
         "_id": "6655d64d0b6f9f9caee657f6",
         "roleId": "6646d19389ca97a9889f6b77",
         "scope": "USER.U",
@@ -189,17 +178,6 @@
     {
         "_id": "665c4db462f17433a46e7f66",
         "roleId": "6646d19389ca97a9889f6b77",
-        "scope": "SETUP.V",
-        "scopeDescription": "User Setup - View",
-        "createdOn": "2024-06-02T10:45:46.105Z",
-        "createdBy": "SYSTEM",
-        "modifiedOn": "2024-06-02T10:45:46.105Z",
-        "modifiedBy": "SYSTEM",
-        "isDeleted": false
-    },
-    {
-        "_id": "665c4dbd62f17433a46e7f6a",
-        "roleId": "66475320b4df6c9461899d52",
         "scope": "SETUP.V",
         "scopeDescription": "User Setup - View",
         "createdOn": "2024-06-02T10:45:46.105Z",
@@ -279,6 +257,72 @@
         "roleId": "6646d19389ca97a9889f6b77",
         "scope": "SETTING.D",
         "scopeDescription": "Dashboard Setting - Delete",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ecc2338c5361a59f87e",
+        "roleId": "6646d19389ca97a9889f6b77",
+        "scope": "PAYMENT.U",
+        "scopeDescription": "Payment Account - Update",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ecc2338c5361a59f88e",
+        "roleId": "6646d0b3718c3160d4c9d9a2",
+        "scope": "PAYMENT.U",
+        "scopeDescription": "Payment Account - Update",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ecc2338c5361a59f89e",
+        "roleId": "6646d19389ca97a9889f6b77",
+        "scope": "PAYMENT.V",
+        "scopeDescription": "Payment Account - View",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ecc2338c5361a59f90e",
+        "roleId": "6646d0b3718c3160d4c9d9a2",
+        "scope": "PAYMENT.V",
+        "scopeDescription": "Payment Account - View",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ecc2338c5361a59f91e",
+        "roleId": "6646d19389ca97a9889f6b77",
+        "scope": "PAYMENT.D",
+        "scopeDescription": "Payment Account - Delete",
+        "createdOn": "2024-06-18T13:41:48.953Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-06-18T13:41:48.953Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "66718ecc2338c5361a59f92e",
+        "roleId": "6646d0b3718c3160d4c9d9a2",
+        "scope": "PAYMENT.D",
+        "scopeDescription": "Payment Account - Delete",
         "createdOn": "2024-06-18T13:41:48.953Z",
         "createdBy": "SYSTEM",
         "modifiedOn": "2024-06-18T13:41:48.953Z",

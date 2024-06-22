@@ -1,0 +1,58 @@
+{
+    "userRoutes": {
+
+    },
+    "settingRoutes": {
+
+    },
+    "userSettingRoutes": {
+
+    },
+    "setupRoutes": {
+        "Setup sync completed successfully for": "Setup sync completed successfully for",
+        "service routes": "service routes",
+        "user roles": "user roles",
+        "role scopes": "role scopes",
+        "and dashboard settings": "and dashboard settings"
+    },
+    "paymentRoutes": {
+        "Required Parameter is missing": "Required Parameter is missing",
+        "accountName": "Account Name",
+        "accountNumber": "Account Number",
+        "accountType": "Account Type",
+        "accountDate": "Account Date",
+        "holderName": "Holder Name",
+        "Account Date cannot be future date": "Account Date cannot be future date",
+        "Provided Account Type is not valid to be registered": "Provided Account Type is not valid to be registered",
+        "Provided Account Number does not follow the required pattern (number should be 11-16 digits long)": "Provided Account Number does not follow the required pattern (number should be 11-16 digits long)",
+        "debitFrom": "Debit From",
+        "creditTo": "Credit To",
+        "taskType": "Task Type",
+        "duration": "Duration",
+        "durationCount": "Duration Count",
+        "interestApplicable": "Interest Applicable",
+        "interestRate": "Interest Rate",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "afterEndDepositTo": "After End Deposit To",
+        "nextDepositDate": "Next Deposit Date",
+        "Interest Rate is required": "Interest Rate is required",
+        "After Task completion deposit Bank info is required": "After Task completion deposit Bank info is required",
+        "Start date cannot be past date": "Start date cannot be past date",
+        "Next Deposit date cannot be past date": "Next Deposit date cannot be past date",
+        "End date cannot be past date or smaller than the start date": "End date cannot be past date or smaller than the start date",
+        "Provided Task Type is not valid to be registered": "Provided Task Type is not valid to be registered",
+        "Provided Duration is not valid to be registered": "Provided Duration is not valid to be registered",
+        "Task is required for recurring account": "Task is required for recurring account",
+        "Some error occurred while working with db to check for existing account with provided account number": "Some error occurred while working with db to check for existing account with provided account number",
+        "Account already exists with same account number": "Account already exists with same account number",
+        "Some error occurred while working with db to create new payment account": "Some error occurred while working with db to create new payment account",
+        "Account created successfully": "Account created successfully",
+        "For provided account type, a task cannot be assigned": "For provided account type, a task cannot be assigned",
+        "Some error occurred while working with db to create new account task": "Some error occurred while working with db to create new account task",
+        "Some error occurred while working with db to check for existing account with provided account token": "Some error occurred while working with db to check for existing account with provided account token",
+        "No Account Information available for provided account token for account task creation": "No Account Information available for provided account token for account task creation",
+        "Account Information available": "Account Information available",
+        "Task created successfully": "Task created successfully"
+    }
+}
