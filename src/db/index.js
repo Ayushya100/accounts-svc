@@ -63,6 +63,12 @@ import {
     findSettingById,
     createNewSetting
 } from './setup.db.js';
+import {
+    isAccountByAccNumberAvailable,
+    isAccountByTokenAvailable,
+    createAccount,
+    createTask
+} from './payments.db.js';
 
 export default {
     isSettingAvailable,
@@ -121,5 +127,9 @@ export default {
     createNewScope,
     findRouteById,
     createNewRoute,
-    updateSystemDashboardSetting
+    updateSystemDashboardSetting,
+    isAccountByAccNumberAvailable,
+    createAccount,
+    isAccountByTokenAvailable,
+    createTask
 };

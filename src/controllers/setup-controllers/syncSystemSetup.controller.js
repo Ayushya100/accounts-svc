@@ -3,6 +3,7 @@
 import dbConnect from '../../db/index.js';
 import { readJsonFileSync } from '../../utils/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: sync-system-setup';
 
@@ -131,30 +132,30 @@ const processDashboardSettingsSync = async() => {
 const syncSetup = async() => {
     try {
         log.info('Execution for syncing default setup controller started');
-        let message = 'Setup sync completed successfully for ';
+        let message = `${translate('setupRoutes', 'Setup sync completed successfully for')} `;
         
         log.info('Call function to sync service routes');
         const serviceRoutesResponse = await processServiceRoutesSync();
         if (serviceRoutesResponse.isValid) {
-            message += 'service routes';
+            message += `${translate('setupRoutes', 'service routes')}`;
         }
 
         log.info('Call function to sync user roles');
         const userRolesResponse = await processUserRoleSync();
         if (userRolesResponse.isValid) {
-            message += ', user roles';
+            message += `, ${translate('setupRoutes', 'user roles')}`;
         }
 
         log.info('Call function to sync user roles');
         const roleScopesResponse = await processRoleScopeSync();
         if (roleScopesResponse.isValid) {
-            message += ', role scopes';
+            message += `, ${translate('setupRoutes', 'role scopes')}`;
         }
 
         log.info('Call function to sync dashboard setup');
         const dashboardSettingsResponse = await processDashboardSettingsSync();
         if (dashboardSettingsResponse.isValid) {
-            message += ', and dashboard settings';
+            message += `, ${translate('setupRoutes', 'and dashboard settings')}`;
         }
 
         log.info('Execution for syncing default setup execution completed');

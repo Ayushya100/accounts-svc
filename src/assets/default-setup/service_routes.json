@@ -557,5 +557,20 @@
         "modifiedOn": "2024-05-22T05:11:34.119Z",
         "modifiedBy": "SYSTEM",
         "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8db7",
+        "path": "api/v1.0/users/:userId/register-account",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "POST",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
     }
 ]
