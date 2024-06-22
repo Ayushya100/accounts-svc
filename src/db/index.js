@@ -67,7 +67,9 @@ import {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
     createAccount,
-    createTask
+    createTask,
+    getAllUserAccount,
+    getUserAccountByToken
 } from './payments.db.js';
 
 export default {
@@ -131,5 +133,7 @@ export default {
     isAccountByAccNumberAvailable,
     createAccount,
     isAccountByTokenAvailable,
-    createTask
+    createTask,
+    getAllUserAccount,
+    getUserAccountByToken
 };

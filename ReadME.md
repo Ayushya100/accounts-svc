@@ -92,5 +92,11 @@ DELETE - /profile-image/:userId
 PUT - /deactivate-user/:userId
 - logout-user API: The 'logout-user' API allows users to log out from the system, invalidating their current session and access token.  
 POST - /logout-user
+#### Payment APIs
+- register-account API: This API will be used to register user bank or investment accounts in the database. It ensures that users can add their financial accounts to the system for tracking and management purposes.  
+POST - :userId/register-account
+- account-info API: This API is used to retrieve information about user bank or investment accounts from the database. Users can either get details of all their accounts or a specific account by providing an account ID.  
+GET - :userId/account-info  
+GET - :userId/account-info/:token
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!

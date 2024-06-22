@@ -98,6 +98,8 @@ app.put(`${USERS_API}/:userId/user-setup/:settingId`, verifyScope('SETUP.U'), ro
 
 // Payment Option Routes
 app.post(`${USERS_API}/:userId/register-account`, verifyScope('PAYMENT.U'), routes.paymentRoutes.registerAccount);
+app.get(`${USERS_API}/:userId/account-info`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getAccountInfo);
+app.get(`${USERS_API}/:userId/account-info/:token`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getAccountInfo);
 
 // Error Handler middleware
 app.use(errorHandler);

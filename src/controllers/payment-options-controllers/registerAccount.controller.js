@@ -17,7 +17,7 @@ const log = logger(header);
 const registerLog = createNewLog(header);
 
 const checkAccountByAccNumber = async(accountNumber) => {
-    registerLog.createInfoLog('Start checking if account with provided account number is available');
+    registerLog.createDebugLog('Start checking if account with provided account number is available');
 
     try {
         log.info('Execution for checking if account with provided account number started');
@@ -51,7 +51,7 @@ const checkAccountByAccNumber = async(accountNumber) => {
 }
 
 const registerAccount = async(userId, payload) => {
-    registerLog.createInfoLog('Start creating new payment account in system started');
+    registerLog.createDebugLog('Start creating new payment account in system started');
 
     try {
         log.info('Execution for creating new payment account started');
@@ -78,6 +78,8 @@ const registerAccount = async(userId, payload) => {
                 accountDate: convertFullDateToString(decryptPaymentData(newAccount.accountDate, 'ACCOUNT')),
                 holderName: decryptPaymentData(newAccount.holderName, 'ACCOUNT')
             };
+
+            log.info('Execution for registering new account in db completed successfully');
             return {
                 resType: 'REQUEST_COMPLETED',
                 resMsg: translate('paymentRoutes', 'Account created successfully'),
@@ -104,7 +106,7 @@ const registerAccount = async(userId, payload) => {
 }
 
 const createTask = async(userId, accountInfo, taskPayload) => {
-    registerLog.createInfoLog('Start creating new payment account task started');
+    registerLog.createDebugLog('Start creating new payment account task started');
 
     try {
         log.info('Execution for creating new account task started');
