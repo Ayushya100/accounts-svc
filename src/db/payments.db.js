@@ -40,9 +40,28 @@ const createTask = async(payload) => {
     return await taskDB.create(payload);
 }
 
+const getAllUserAccount = async(userId, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        isDeleted: false
+    };
+    return await accountDB.find(query, fields);
+}
+
+const getUserAccountByToken = async(userId, accountToken, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        token: accountToken,
+        isDeleted: false
+    };
+    return await accountDB.findOne(query, fields);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
     createAccount,
-    createTask
+    createTask,
+    getAllUserAccount,
+    getUserAccountByToken
 };

@@ -53,6 +53,10 @@
         "Some error occurred while working with db to check for existing account with provided account token": "दिए गए खाता टोकन के साथ मौजूदा खाते की जांच करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि हुई",
         "No Account Information available for provided account token for account task creation": "खाता कार्य निर्माण के लिए प्रदान किए गए खाता टोकन के लिए कोई खाता जानकारी उपलब्ध नहीं है",
         "Account Information available": "खाता जानकारी उपलब्ध है",
-        "Task created successfully": "कार्य सफलतापूर्वक बनाया गया"
+        "Task created successfully": "कार्य सफलतापूर्वक बनाया गया",
+        "Some error occurred while working with db to retrieve all account info for requested user": "अनुरोधित उपयोगकर्ता के लिए सभी खाता जानकारी पुनर्प्राप्त करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Some error occurred while working with db to retrieve account info for requested account": "अनुरोधित खाते के लिए खाता जानकारी पुनर्प्राप्त करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "User account information retrieved successfully": "उपयोगकर्ता खाते की जानकारी सफलतापूर्वक पुनर्प्राप्त की गई",
+        "No account information found": "कोई खाता जानकारी नहीं मिली"
     }
 }

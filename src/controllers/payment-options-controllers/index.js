@@ -8,6 +8,7 @@ import {
     sendAccountCreationMailPayload
 } from './registerAccount.controller.js';
 import { checkAccountByToken } from './shared.controller.js';
+import { getAllUserAccount, getUserAccountByToken } from './getAccountInfo.controller.js';
 
 export default {
     validateRegisterAccountPayload,
@@ -15,5 +16,7 @@ export default {
     registerAccount,
     createTask,
     checkAccountByToken,
-    sendAccountCreationMailPayload
+    sendAccountCreationMailPayload,
+    getAllUserAccount,
+    getUserAccountByToken
 };

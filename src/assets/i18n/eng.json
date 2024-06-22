@@ -53,6 +53,10 @@
         "Some error occurred while working with db to check for existing account with provided account token": "Some error occurred while working with db to check for existing account with provided account token",
         "No Account Information available for provided account token for account task creation": "No Account Information available for provided account token for account task creation",
         "Account Information available": "Account Information available",
-        "Task created successfully": "Task created successfully"
+        "Task created successfully": "Task created successfully",
+        "Some error occurred while working with db to retrieve all account info for requested user": "Some error occurred while working with db to retrieve all account info for requested user",
+        "Some error occurred while working with db to retrieve account info for requested account": "Some error occurred while working with db to retrieve account info for requested account",
+        "User account information retrieved successfully": "User account information retrieved successfully",
+        "No account information found": "No account information found"
     }
 }
