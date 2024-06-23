@@ -100,5 +100,9 @@ GET - :userId/account-info
 GET - :userId/account-info/:token
 - account-info API: This API is used to update details of a user's bank or investment account in the database. Users can modify account information by providing the necessary account details along with the account ID.  
 PUT - :userId/account-info/:token
+- deactivate-account API: This API is used to deactivate a user's bank or investment account, preventing it from being used for payments. This can be useful for users who want to temporarily disable an account without deleting it.  
+PUT - :userId/deactivate-account/:token
+- reactivate-account API: This API is used to reactivate a user's previously deactivated bank or investment account, allowing it to be used for payments once again.  
+PUT - :userId/reactivate-account/:token
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!

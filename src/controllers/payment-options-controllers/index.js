@@ -10,6 +10,7 @@ import {
 import { checkAccountByToken } from './shared.controller.js';
 import { getAllUserAccount, getUserAccountByToken } from './getAccountInfo.controller.js';
 import { updateAccountInfo } from './updateAccountInfo.controller.js';
+import { deactivateAccount, reactivateAccount } from './deactivateReactivateAccount.controller.js';
 
 export default {
     validateRegisterAccountPayload,
@@ -21,5 +22,7 @@ export default {
     sendAccountCreationMailPayload,
     getAllUserAccount,
     getUserAccountByToken,
-    updateAccountInfo
+    updateAccountInfo,
+    deactivateAccount,
+    reactivateAccount
 };

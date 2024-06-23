@@ -58,7 +58,7 @@ const getAllUserAccount = async(userId, filterOptions) => {
 
             log.info('Execution for retrieving user account information retrieved successfully');
             return {
-                resType: 'REQUEST_COMPLETED',
+                resType: 'SUCCESS',
                 resMsg: translate('paymentRoutes', 'User account information retrieved successfully'),
                 data: userAccounts,
                 isValid: true
@@ -98,7 +98,7 @@ const getUserAccountByToken = async(userId, accountToken, filterOptions) => {
 
             log.info('Execution for retrieving user account information retrieved successfully');
             return {
-                resType: 'REQUEST_COMPLETED',
+                resType: 'SUCCESS',
                 resMsg: translate('paymentRoutes', 'User account information retrieved successfully'),
                 data: userAccount,
                 isValid: true
