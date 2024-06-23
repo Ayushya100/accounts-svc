@@ -62,6 +62,14 @@
         "Account number cannot be updated": "खाता संख्या अद्यतन नहीं किया जा सकता",
         "Account date cannot be updated": "खाता दिनांक अद्यतन नहीं किया जा सकता",
         "Some error occurred while working with db to update payment account info": "भुगतान खाते की जानकारी अद्यतन करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
-        "Account updated successfully": "खाता सफलतापूर्वक अपडेट किया गया"
+        "Account updated successfully": "खाता सफलतापूर्वक अपडेट किया गया",
+        "Some error occurred while working with db to deactivate payment account info": "भुगतान खाता जानकारी निष्क्रिय करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Account not found to deactivate": "खाता निष्क्रिय करने के लिए नहीं मिला",
+        "Account not found to update information": "जानकारी अद्यतन करने के लिए खाता नहीं मिला",
+        "Account deactivated successfully": "खाता सफलतापूर्वक निष्क्रिय कर दिया गया",
+        "Some error occurred while working with db to reactivate payment account info": "भुगतान खाता जानकारी पुनः सक्रिय करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Account not found to reactivate": "खाता पुनः सक्रिय करने के लिए नहीं मिला",
+        "Account reactivated successfully": "खाता सफलतापूर्वक पुनः सक्रिय हो गया",
+        "Internal Error occurred while working with reactivate account router function": "खाता राउटर फ़ंक्शन को पुनः सक्रिय करने के साथ काम करते समय आंतरिक त्रुटि उत्पन्न हुई"
     }
 }

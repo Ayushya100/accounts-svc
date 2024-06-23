@@ -2,8 +2,11 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
-import { decryptPaymentData, encryptPaymentData } from '../../utils/payment.js';
-import { translate } from '../../utils/i18n.js';
+import {
+    translate,
+    decryptPaymentData,
+    encryptPaymentData
+} from '../../utils/index.js';
 
 const header = 'controller: update-account-controller';
 
@@ -38,7 +41,7 @@ const updateAccountInfo = async(userId, accountToken, payload) => {
 
             log.info('Execution for updating payment account info in db completed successfully');
             return {
-                resType: 'REQUEST_COMPLETED',
+                resType: 'REQUEST_ACCEPTED',
                 resMsg: translate('paymentRoutes', 'Account updated successfully'),
                 data: data,
                 isValid: true
@@ -47,8 +50,8 @@ const updateAccountInfo = async(userId, accountToken, payload) => {
         
         log.error('Error while updating payment account info in database');
         return {
-            resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: translate('paymentRoutes', 'Some error occurred while working with db to update payment account info'),
+            resType: 'NOT_FOUND',
+            resMsg: translate('paymentRoutes', 'Account not found to update information'),
             isValid: false
         };
     } catch (err) {

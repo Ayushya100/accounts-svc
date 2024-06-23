@@ -66,6 +66,19 @@ const updateAccountByToken = async(userId, accountToken, payload) => {
     return await accountDB.findOneAndUpdate(userId, query, payload, null);
 }
 
+const deactivateReactivateAccountByToken = async(userId, accountToken, isActive) => {
+    const query = {
+        userId: userId,
+        token: accountToken,
+        isDeleted: false
+    };
+    const payload = {
+        isActive: isActive
+    };
+    const fields = 'userId token isActive isDeleted';
+    return await accountDB.findOneAndUpdate(userId, query, payload, fields);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
@@ -73,5 +86,6 @@ export {
     createTask,
     getAllUserAccount,
     getUserAccountByToken,
-    updateAccountByToken
+    updateAccountByToken,
+    deactivateReactivateAccountByToken
 };

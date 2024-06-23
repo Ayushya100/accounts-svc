@@ -62,6 +62,14 @@
         "Account number cannot be updated": "Account number cannot be updated",
         "Account date cannot be updated": "Account date cannot be updated",
         "Some error occurred while working with db to update payment account info": "Some error occurred while working with db to update payment account info",
-        "Account updated successfully": "Account updated successfully"
+        "Account updated successfully": "Account updated successfully",
+        "Some error occurred while working with db to deactivate payment account info": "Some error occurred while working with db to deactivate payment account info",
+        "Account not found to deactivate": "Account not found to deactivate",
+        "Account not found to update information": "Account not found to update information",
+        "Account deactivated successfully": "Account deactivated successfully",
+        "Some error occurred while working with db to reactivate payment account info": "Some error occurred while working with db to reactivate payment account info",
+        "Account not found to reactivate": "Account not found to reactivate",
+        "Account reactivated successfully": "Account reactivated successfully",
+        "Internal Error occurred while working with reactivate account router function": "Internal Error occurred while working with reactivate account router function"
     }
 }
