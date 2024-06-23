@@ -57,6 +57,11 @@
         "Some error occurred while working with db to retrieve all account info for requested user": "अनुरोधित उपयोगकर्ता के लिए सभी खाता जानकारी पुनर्प्राप्त करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
         "Some error occurred while working with db to retrieve account info for requested account": "अनुरोधित खाते के लिए खाता जानकारी पुनर्प्राप्त करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
         "User account information retrieved successfully": "उपयोगकर्ता खाते की जानकारी सफलतापूर्वक पुनर्प्राप्त की गई",
-        "No account information found": "कोई खाता जानकारी नहीं मिली"
+        "No account information found": "कोई खाता जानकारी नहीं मिली",
+        "Account name cannot be updated": "खाता नाम अद्यतन नहीं किया जा सकता",
+        "Account number cannot be updated": "खाता संख्या अद्यतन नहीं किया जा सकता",
+        "Account date cannot be updated": "खाता दिनांक अद्यतन नहीं किया जा सकता",
+        "Some error occurred while working with db to update payment account info": "भुगतान खाते की जानकारी अद्यतन करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Account updated successfully": "खाता सफलतापूर्वक अपडेट किया गया"
     }
 }

@@ -57,11 +57,21 @@ const getUserAccountByToken = async(userId, accountToken, fields) => {
     return await accountDB.findOne(query, fields);
 }
 
+const updateAccountByToken = async(userId, accountToken, payload) => {
+    const query = {
+        userId: userId,
+        token: accountToken,
+        isDeleted: false
+    };
+    return await accountDB.findOneAndUpdate(userId, query, payload, null);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
     createAccount,
     createTask,
     getAllUserAccount,
-    getUserAccountByToken
+    getUserAccountByToken,
+    updateAccountByToken
 };

@@ -195,6 +195,45 @@ const validateRegisterAccountPayload = (payload) => {
     return response;
 }
 
+const validateUpdateAccountPayload = (payload) => {
+    returnValidateStarted('Update Account');
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true,
+        data: payload
+    };
+
+    if (payload.accountName) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Account name cannot be updated')}`;
+        response.isValid = false;
+    }
+    
+    if (payload.accountNumber) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Account number cannot be updated')}`;
+        response.isValid = false;
+    }
+
+    if (payload.accountDate) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Account date cannot be updated')}`;
+        response.isValid = false;
+    }
+
+    if (payload.accountType && !validateAccountType(payload.accountType)) {
+        preValidationSuccessfull = false;
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Provided Account Type is not valid to be registered')}`;
+        response.isValid = false;
+    }
+
+    returnValidationConfirmation();
+    return response;
+}
+
 export {
-    validateRegisterAccountPayload
+    validateRegisterAccountPayload,
+    validateUpdateAccountPayload
 };

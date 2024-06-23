@@ -88,14 +88,14 @@ const registerAccount = async(userId, payload) => {
             };
         }
 
-        log.error('Error while creating new payload account in database');
+        log.error('Error while creating new payment account in database');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: translate('paymentRoutes', 'Some error occurred while working with db to create new payment account'),
             isValid: false
         };
     } catch (err) {
-        log.error('Error while working with db to create new payment account.');
+        log.error('Error while working with db to create new payment account');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: translate('paymentRoutes', 'Some error occurred while working with db to create new payment account'),

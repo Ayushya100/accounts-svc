@@ -98,5 +98,7 @@ POST - :userId/register-account
 - account-info API: This API is used to retrieve information about user bank or investment accounts from the database. Users can either get details of all their accounts or a specific account by providing an account ID.  
 GET - :userId/account-info  
 GET - :userId/account-info/:token
+- account-info API: This API is used to update details of a user's bank or investment account in the database. Users can modify account information by providing the necessary account details along with the account ID.  
+PUT - :userId/account-info/:token
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!

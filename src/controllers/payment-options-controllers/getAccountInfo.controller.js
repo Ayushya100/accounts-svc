@@ -11,15 +11,13 @@ const log = logger(header);
 const registerLog = createNewLog(header);
 
 const fields = (filterOptions) => {
-    let accountFields;
+    let accountFields = null;
     if (filterOptions) {
         const filterValues = JSON.parse(filterOptions);
     
         if (filterValues.fields) {
             accountFields = filterValues.fields.split(',').map((field) => field.trim()).join(' ');
         }
-    } else {
-        accountFields = 'token accountName accountNumber holderName';
     }
     return accountFields;
 }
@@ -47,7 +45,7 @@ const getAllUserAccount = async(userId, filterOptions) => {
 
     try {
         log.info('Execution for retrieving user account informations started');
-        const accountFields = fields(filterOptions);
+        const accountFields = filterOptions ? fields(filterOptions) : null;
 
         log.info('Call db query to retrieve all user accounts');
         let userAccounts = await dbConnect.getAllUserAccount(userId, accountFields);
@@ -89,7 +87,7 @@ const getUserAccountByToken = async(userId, accountToken, filterOptions) => {
 
     try {
         log.info('Execution for retrieving user account information started');
-        const accountFields = fields(filterOptions);
+        const accountFields = filterOptions ? fields(filterOptions) : null;
 
         log.info('Call db query to retrieve user account for requtested token');
         let userAccount = await dbConnect.getUserAccountByToken(userId, accountToken, accountFields);
