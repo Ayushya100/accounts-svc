@@ -57,6 +57,11 @@
         "Some error occurred while working with db to retrieve all account info for requested user": "Some error occurred while working with db to retrieve all account info for requested user",
         "Some error occurred while working with db to retrieve account info for requested account": "Some error occurred while working with db to retrieve account info for requested account",
         "User account information retrieved successfully": "User account information retrieved successfully",
-        "No account information found": "No account information found"
+        "No account information found": "No account information found",
+        "Account name cannot be updated": "Account name cannot be updated",
+        "Account number cannot be updated": "Account number cannot be updated",
+        "Account date cannot be updated": "Account date cannot be updated",
+        "Some error occurred while working with db to update payment account info": "Some error occurred while working with db to update payment account info",
+        "Account updated successfully": "Account updated successfully"
     }
 }
