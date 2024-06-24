@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: get-setting-info';
 
@@ -17,7 +18,7 @@ const getAllSettings = async() => {
             log.info('No setting info available');
             return {
                 resType: 'CONTENT_NOT_AVAILABLE',
-                resMsg: 'No Dashboard setting record found',
+                resMsg: translate('settingRoutes', 'No Dashboard setting record found'),
                 data: [],
                 isValid: true
             };
@@ -26,7 +27,7 @@ const getAllSettings = async() => {
         log.info('Execution for retrieving all settings info completed successfully');
         return {
             resType: 'SUCCESS',
-            resMsg: 'All settings found',
+            resMsg: translate('settingRoutes', 'All settings found'),
             data: settingDetails,
             isValid: true
         };
@@ -34,7 +35,7 @@ const getAllSettings = async() => {
         log.error('Error while working with db to get all setting records');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to retrieve setting records',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to retrieve setting records'),
             stack: err.stack,
             isValid: false
         };

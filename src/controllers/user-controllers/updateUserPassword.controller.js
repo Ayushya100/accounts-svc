@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: update-user-password-controller';
 
@@ -20,8 +21,8 @@ const updateUserPassword = async(userId, payload) => {
             if (isPasswordUpdated) {
                 log.info('Execution for updating user password completed');
                 return {
-                    resType: 'REQUEST_COMPLETED',
-                    resMsg: 'User password updated successfully',
+                    resType: 'REQUEST_ACCEPTED',
+                    resMsg: translate('userRoutes', 'User password updated successfully'),
                     data: isPasswordUpdated,
                     isValid: true
                 };
@@ -30,7 +31,7 @@ const updateUserPassword = async(userId, payload) => {
             log.error('BAD_REQUEST - Password does not match')
             return {
                 resType: 'BAD_REQUEST',
-                resMsg: 'User Password not match',
+                resMsg: translate('userRoutes', 'User Password not match'),
                 isValid: false
             };
         }
@@ -38,14 +39,14 @@ const updateUserPassword = async(userId, payload) => {
         log.error('New password and old password are same');
         return {
             resType: 'BAD_REQUEST',
-            resMsg: 'New password cannot be same as old password',
+            resMsg: translate('userRoutes', 'New password cannot be same as old password'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with update user password controller');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: err,
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to update the user password'),
             stack: err.stack,
             isValid: false
         };

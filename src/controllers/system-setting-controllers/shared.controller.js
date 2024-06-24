@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: shared-service-controller';
 const log = logger(header);
@@ -11,7 +12,7 @@ const isDefaultUserAvailable = async() => {
         log.info('Execution to check for default user role controller started');
         let response = {
             resType: 'SUCCESS',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: translate('settingRoutes', 'VALIDATION SUCCESSFULL'),
             isValid: true
         };
 
@@ -20,7 +21,7 @@ const isDefaultUserAvailable = async() => {
         if (!routeDetails) {
             log.error(`Default user role not found`);
             response.resType = 'NOT_FOUND';
-            response.resMsg = 'Default user role not found';
+            response.resMsg = translate('settingRoutes', 'Default user role not found');
             response.isValid = false;
         }
         
@@ -30,7 +31,7 @@ const isDefaultUserAvailable = async() => {
         log.error(`Error while working with db to check for default user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for default user role record',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to check for default user role record'),
             stack: err.stack,
             isValid: false
         };
@@ -42,7 +43,7 @@ const isUserRoleByIdAvailable = async(roleId) => {
         log.info('Execution to check for user role for provided id controller started');
         let response = {
             resType: 'SUCCESS',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: translate('settingRoutes', 'VALIDATION SUCCESSFULL'),
             isValid: true
         };
 
@@ -51,7 +52,7 @@ const isUserRoleByIdAvailable = async(roleId) => {
         if (!routeDetails) {
             log.error(`User role for provided id (${roleId}) not found`);
             response.resType = 'NOT_FOUND';
-            response.resMsg = 'User role not found';
+            response.resMsg = translate('settingRoutes', 'User role not found');
             response.isValid = false;
         }
         
@@ -61,7 +62,7 @@ const isUserRoleByIdAvailable = async(roleId) => {
         log.error(`Error while working with db to check for user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for user role record',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to check for user role record'),
             stack: err.stack,
             isValid: false
         };

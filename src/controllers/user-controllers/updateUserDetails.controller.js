@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: update-user-details-controller';
 
@@ -26,8 +27,8 @@ const updateUserDetails = async(userId, userRecord, payload) => {
 
         log.info('Execution for updating user details completed');
         return {
-            resType: 'REQUEST_COMPLETED',
-            resMsg: 'User details updated successfully',
+            resType: 'REQUEST_ACCEPTED',
+            resMsg: translate('userRoutes', 'User details updated successfully'),
             data: updatedUserInfo,
             isValid: true
         };
@@ -35,7 +36,7 @@ const updateUserDetails = async(userId, userRecord, payload) => {
         log.error('Error while working with update user details controller');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: err,
+            resMsg:  translate('userRoutes', 'Some error occurred while working with db to update the user details'),
             stack: err.stack,
             isValid: false
         };

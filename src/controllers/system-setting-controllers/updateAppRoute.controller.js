@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: update-app-route';
 const log = logger(header);
@@ -23,7 +24,7 @@ const updateAppRoute = async(userId, routeId, payload, routeInfo) => {
         log.info('Execution for updating app route info completed successfully');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'App route updated',
+            resMsg: translate('settingRoutes', 'App route updated'),
             data: appRouteDetails,
             isValid: true
         };
@@ -31,7 +32,7 @@ const updateAppRoute = async(userId, routeId, payload, routeInfo) => {
         log.error('Error while working with db to update the app route record');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to update app route',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to update app route'),
             stack: err.stack,
             isValid: false
         };

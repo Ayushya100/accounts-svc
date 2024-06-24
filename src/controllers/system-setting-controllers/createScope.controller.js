@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: create-user-scope';
 const log = logger(header);
@@ -11,7 +12,7 @@ const isUserScopeAvailable = async(payload) => {
         log.info('Execution to check for existing user scope controller started');
         let response = {
             resType: 'SUCCESS',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: translate('settingRoutes', 'VALIDATION SUCCESSFULL'),
             isValid: true
         };
 
@@ -20,7 +21,7 @@ const isUserScopeAvailable = async(payload) => {
         if (scopeDetails) {
             log.error(`Conflict, record already exists for requested user scope code : ${payload.scope}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'User scope already exists with same code';
+            response.resMsg = translate('settingRoutes', 'User scope already exists with same code');
             response.isValid = false;
         }
 
@@ -30,7 +31,7 @@ const isUserScopeAvailable = async(payload) => {
         log.error(`Error while working with db to check for existing user scope record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing user scope record',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to check for existing user scope record'),
             stack: err.stack,
             isValid: false
         };
@@ -48,7 +49,7 @@ const createUserScope = async(payload) => {
         log.success('Execution for creating new record completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'User Scope Created Successfully',
+            resMsg: translate('settingRoutes', 'User Scope Created Successfully'),
             data: newUserScope,
             isValid: true
         };
@@ -56,7 +57,7 @@ const createUserScope = async(payload) => {
         log.error(`Error while working with db to register new user scope record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new user scope',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to register new user scope'),
             stack: err.stack,
             isValid: false
         };

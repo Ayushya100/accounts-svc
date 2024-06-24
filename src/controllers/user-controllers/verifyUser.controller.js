@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: verify-user-controller';
 
@@ -26,8 +27,8 @@ const verifyUser = async(payload) => {
 
             log.info('Execution for verifying user completed successfully');
             return {
-                resType: 'REQUEST_COMPLETED',
-                resMsg: 'User Verification successful',
+                resType: 'REQUEST_ACCEPTED',
+                resMsg: translate('userRoutes', 'User Verification successful'),
                 data: verifiedUser,
                 isValid: true
             };
@@ -36,14 +37,14 @@ const verifyUser = async(payload) => {
         log.error('Bad request, user verification failed');
         return {
             resType: 'BAD_REQUEST',
-            resMsg: 'User Verification failed!',
+            resMsg: translate('userRoutes', 'User Verification failed!'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to verify the user');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to verify the user',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to verify the user'),
             stack: err.stack,
             isValid: false
         };

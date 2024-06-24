@@ -2,9 +2,9 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: get-user-setup-controller';
-
 const log = logger(header);
 
 const getAllUserDashboardSetting = async(userId) => {
@@ -17,7 +17,7 @@ const getAllUserDashboardSetting = async(userId) => {
             log.info('Execution for retrieving settings info for requested user completed successfully');
             return {
                 resType: 'SUCCESS',
-                resMsg: 'Dashboard setup details found',
+                resMsg: translate('userSettingRoutes', 'Dashboard setup details found'),
                 data: userDashboardSettings,
                 isValid: true
             };
@@ -26,14 +26,14 @@ const getAllUserDashboardSetting = async(userId) => {
         log.error(`No setting records found for provided user id : ${userId}`);
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'No user setup found',
+            resMsg: translate('userSettingRoutes', 'No user setup found'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to get all setting records for user');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to retrieve all settings records for requested user',
+            resMsg: translate('userSettingRoutes', 'Some error occurred while working with db to retrieve all settings records for requested user'),
             stack: err.stack,
             isValid: false
         };
@@ -50,7 +50,7 @@ const getUserDashboardSettingById = async(userId, settingId) => {
             log.info('Execution for retrieving setting info for requested setting id completed successfully');
             return {
                 resType: 'SUCCESS',
-                resMsg: 'Dashboard setup details found',
+                resMsg: translate('userSettingRoutes', 'Dashboard setup details found'),
                 data: userDashboardSetting,
                 isValid: true
             };
@@ -59,14 +59,14 @@ const getUserDashboardSettingById = async(userId, settingId) => {
         log.error('No setting record found for provided setting id');
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'No dashboard setup Found',
+            resMsg: translate('userSettingRoutes', 'No dashboard setup Found'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to get desired setting record for requested user');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to retrieve requested setting info for requested user',
+            resMsg: translate('userSettingRoutes', 'Some error occurred while working with db to retrieve requested setting info for requested user'),
             stack: err.stack,
             isValid: false
         };

@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { createNewLog, logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: get-user-dtl-info-controller';
 
@@ -25,7 +26,7 @@ const getUserDtlInfo = async(userId) => {
 
             return {
                 resType: 'SUCCESS',
-                resMsg: 'User Info found',
+                resMsg: translate('userRoutes', 'User Info found'),
                 data: {
                     userRecord: userRecord,
                     userRole: additionalData.userRole.roleCode,
@@ -43,7 +44,7 @@ const getUserDtlInfo = async(userId) => {
         log.error('No user record found');
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'User not found',
+            resMsg:  translate('userRoutes', 'User not found'),
             data: null,
             isValid: false
         };
@@ -51,7 +52,7 @@ const getUserDtlInfo = async(userId) => {
         log.error(`Error while working with db to retrieve user detail info for provided id : ${userId}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: err,
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to get the details for requested user'),
             stack: err.stack,
             isValid: false
         };

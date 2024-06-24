@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: update-user-role';
 const log = logger(header);
@@ -21,7 +22,7 @@ const updateUserRole = async(userId, roleId, payload, roleInfo) => {
         log.info('Execution for updating user role info completed successfully');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'User role updated',
+            resMsg: translate('settingRoutes', 'User role updated'),
             data: userRoleDetails,
             isValid: true
         };
@@ -29,7 +30,7 @@ const updateUserRole = async(userId, roleId, payload, roleInfo) => {
         log.error('Error while working with db to updating user role record');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to update user role',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to update user role'),
             stack: err.stack,
             isValid: false
         };

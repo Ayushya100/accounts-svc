@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: register-user-controller';
 
@@ -15,7 +16,7 @@ const checkUserByUserNameOrEmail = async(payload) => {
         log.info('Execution for checking user with provided userName or emailId started');
         const response = {
             resType: 'SUCCESS',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
             isValid: true
         };
 
@@ -25,7 +26,7 @@ const checkUserByUserNameOrEmail = async(payload) => {
         if (userFound) {
             log.error('User already exist with same username or emailId');
             response.resType = 'CONFLICT';
-            response.resMsg = 'User already exist with same username or emailId.',
+            response.resMsg = translate('userRoutes', 'User already exist with same username or emailId'),
             response.isValid = false;
         }
 
@@ -35,7 +36,7 @@ const checkUserByUserNameOrEmail = async(payload) => {
         log.error('Error while working with db to check for existing user with provided userName or emailId');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing user with provided userName or emailId',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to check for existing user with provided userName or emailId'),
             stack: err.stack,
             isValid: false
         };
@@ -74,7 +75,7 @@ const createNewUser = async(payload) => {
             log.info('Execution for registering new user completed');
             return {
                 resType: 'REQUEST_COMPLETED',
-                resMsg: 'User Created Successfully',
+                resMsg: translate('userRoutes', 'User Created Successfully'),
                 data: newUser,
                 isValid: true
             };
@@ -83,14 +84,14 @@ const createNewUser = async(payload) => {
         log.error('Error while calling the db query to register new user');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'User creation failed - some error occurred',
+            resMsg: translate('userRoutes', 'User creation failed - some error occurred'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to register new user');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new user',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to register new user'),
             stack: err.stack,
             isValid: false
         };

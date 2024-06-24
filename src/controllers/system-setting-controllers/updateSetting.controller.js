@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: update-setting';
 
@@ -21,7 +22,7 @@ const updateAllSettings = async(userId, payload, settingData) => {
             if (settingRecord.length === 0) {
                 return {
                     resType: 'NOT_FOUND',
-                    resMsg: `Provided dashboard setting id (${record._id}) is incorrect, cannot proceed further.`,
+                    resMsg: `${translate('settingRoutes', 'Provided dashboard setting id')} (${record._id}) ${translate('settingRoutes', 'is incorrect, cannot proceed further')}`,
                     isValid: false
                 };
             }
@@ -47,7 +48,7 @@ const updateAllSettings = async(userId, payload, settingData) => {
             log.info('Execution for updating all dashboard setting records completed successfully');
             return {
                 resType: 'REQUEST_COMPLETED',
-                resMsg: 'Dashboard settings updated successfully',
+                resMsg: translate('settingRoutes', 'Dashboard settings updated successfully'),
                 data: updatedDashboardSettings,
                 isValid: true
             };
@@ -56,14 +57,14 @@ const updateAllSettings = async(userId, payload, settingData) => {
         log.error('Some error occurred while updating system dashboard setting records');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while updating system dashboard setting records',
+            resMsg: translate('settingRoutes', 'Some error occurred while updating system dashboard setting records'),
             isValid: false
         };
     } catch (err) {
         log.error(`Error while working with db to update all dashboard settings info.`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to update all dashboard settings info',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to update all dashboard settings info'),
             stack: err.stack,
             isValid: false
         };
@@ -86,7 +87,7 @@ const updateSettingInfoById = async(userId, settingId, payload, settingRecord) =
         if (!isValidToProceed) {
             return {
                 resType: 'BAD_REQUEST',
-                resMsg: `Provided value for requested setting '${settingId}' does not match with its type - Cannot proceed with update`,
+                resMsg: `${translate('settingRoutes', 'Provided value for requested setting')} '${settingId}' ${translate('settingRoutes', 'does not match with its type - Cannot proceed with update')}`,
                 isValid: false
             };
         }
@@ -110,7 +111,7 @@ const updateSettingInfoById = async(userId, settingId, payload, settingRecord) =
             log.info('Execution for updating Dashboard setting record completed successfully');
             return {
                 resType: 'REQUEST_COMPLETED',
-                resMsg: 'Dashboard Setting Details Updated successfully',
+                resMsg: translate('settingRoutes', 'Dashboard Setting Details Updated successfully'),
                 data: updatedDashboardSettings,
                 isValid: true
             };
@@ -119,14 +120,14 @@ const updateSettingInfoById = async(userId, settingId, payload, settingRecord) =
         log.error(`Error occurred while updating dashboard setting record for requested setting id : ${settingId}`);
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'No Dashboard Setting Found',
+            resMsg: translate('settingRoutes', 'No Dashboard Setting Found'),
             isValid: false
         };
     } catch (err) {
         log.error(`Error while working with db to update dashboard setting info for requested id : ${settingId}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to dashboard update setting info',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to dashboard update setting info'),
             stack: err.stack,
             isValid: false
         };

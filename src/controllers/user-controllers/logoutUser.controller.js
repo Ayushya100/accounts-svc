@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: logout-user-controller';
 
@@ -19,7 +20,7 @@ const logoutUser = async(userId) => {
         log.info('Execution for logging out user completed');
         return {
             resType: 'SUCCESS',
-            resMsg: 'User LoggedOut Successfully',
+            resMsg: translate('userRoutes', 'User LoggedOut Successfully'),
             data: null,
             isValid: true
         };
@@ -27,7 +28,7 @@ const logoutUser = async(userId) => {
         log.error('Error while working with db to logout user.');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to logout user',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to logout user'),
             stack: err.stack,
             isValid: false
         };
