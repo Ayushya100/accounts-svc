@@ -71,7 +71,8 @@ import {
     getAllUserAccount,
     getUserAccountByToken,
     updateAccountByToken,
-    deactivateReactivateAccountByToken
+    deactivateReactivateAccountByToken,
+    deleteAccountByToken
 } from './payments.db.js';
 
 export default {
@@ -139,5 +140,6 @@ export default {
     getAllUserAccount,
     getUserAccountByToken,
     updateAccountByToken,
-    deactivateReactivateAccountByToken
+    deactivateReactivateAccountByToken,
+    deleteAccountByToken
 };

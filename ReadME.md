@@ -104,5 +104,7 @@ PUT - :userId/account-info/:token
 PUT - :userId/deactivate-account/:token
 - reactivate-account API: This API is used to reactivate a user's previously deactivated bank or investment account, allowing it to be used for payments once again.  
 PUT - :userId/reactivate-account/:token
+- delete-account API: This API is used to soft delete a user's bank or investment account from the system. Instead of permanently removing the account, it will be marked as deleted by setting a flag to true.  
+PUT - :userId/delete-account/:token
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
