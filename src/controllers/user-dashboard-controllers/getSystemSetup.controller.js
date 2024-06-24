@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: get-system-setup-controller';
 const log = logger(header);
@@ -31,7 +32,7 @@ const getSystemSetup = async() => {
             log.info('Execution for retrieving setup info for SYSTEM completed successfully');
             return {
                 resType: 'SUCCESS',
-                resMsg: 'System setup details retrieved successfully',
+                resMsg: translate('userSettingRoutes', 'System setup details retrieved successfully'),
                 data: setupDetails,
                 isValid: true
             };
@@ -40,14 +41,14 @@ const getSystemSetup = async() => {
         log.error('No setup info found for SYSTEM');
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'No System Setup Found',
+            resMsg: translate('userSettingRoutes', 'No System Setup Found'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to get all setup records for SYSTEM');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to get setup records for SYSTEM',
+            resMsg: translate('userSettingRoutes', 'Some error occurred while working with db to get setup records for SYSTEM'),
             stack: err.stack,
             isValid: false
         };

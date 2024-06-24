@@ -3,6 +3,7 @@
 import jwt from 'jsonwebtoken';
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: refresh-token-controller';
 
@@ -18,7 +19,7 @@ const isTokenAvailableAndActive = (refreshToken) => {
             log.error('Token not found');
             return next({
                 resType: 'BAD_REQUEST',
-                resMsg: 'Token not found',
+                resMsg: translate('userRoutes', 'Token not found'),
                 isValid: false
             });
         }
@@ -28,7 +29,7 @@ const isTokenAvailableAndActive = (refreshToken) => {
         log.info('Token verification completed successfully');
         return {
             resType: 'SUCCESS',
-            resMsg: 'TOKEN VERIFIED',
+            resMsg: translate('userRoutes', 'Token Verified successfully'),
             data: decodedRefreshToken,
             isValid: true
         };
@@ -36,7 +37,7 @@ const isTokenAvailableAndActive = (refreshToken) => {
         log.error('Unauthorized access token got expired or not found');
         return {
             resType: 'UNAUTHORIZED',
-            resMsg: 'UNAUTHORIZED ACCESS - TOKEN EXPIRED / NOT FOUND',
+            resMsg: translate('userRoutes', 'UNAUTHORIZED ACCESS - TOKEN EXPIRED / NOT FOUND'),
             stack: err.stack,
             isValid: false
         };
@@ -52,8 +53,8 @@ const refreshTokens = async(userId) => {
 
         log.info('Execution for generating new tokens completed');
         return {
-            resType: 'REQUEST_COMPLETED',
-            resMsg: 'Tokens has been refreshed successfully',
+            resType: 'REQUEST_ACCEPTED',
+            resMsg: translate('userRoutes', 'Tokens has been refreshed successfully'),
             data: refreshedTokens,
             isValid: true
         };
@@ -61,7 +62,7 @@ const refreshTokens = async(userId) => {
         log.error('Error while working with db to generate access and refresh tokens');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to refresh user tokens',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to refresh user tokens'),
             stack: err.stack,
             isValid: false
         };

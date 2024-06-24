@@ -24,7 +24,7 @@ const processServiceRoutesSync = async() => {
         log.success('Execution for syncing service routes completed successfully');
         return {
             resType: 'SUCCESS',
-            resMsg: 'Service routes sync completed successfully',
+            resMsg: translate('setupRoutes', 'Service routes sync completed successfully'),
             data: serviceRoutes,
             isValid: true
         };
@@ -32,7 +32,7 @@ const processServiceRoutesSync = async() => {
         log.error('Error while working with db to sync service routes.');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to sync service routes',
+            resMsg: translate('setupRoutes', 'Some error occurred while working with db to sync service routes'),
             stack: err.stack,
             isValid: false
         };
@@ -54,7 +54,7 @@ const processUserRoleSync = async() => {
         log.success('Execution for syncing user roles completed successfully');
         return {
             resType: 'SUCCESS',
-            resMsg: 'User roles sync completed successfully',
+            resMsg: translate('setupRoutes', 'User roles sync completed successfully'),
             data: userRoles,
             isValid: true
         };
@@ -62,7 +62,7 @@ const processUserRoleSync = async() => {
         log.error('Error while working with db to sync user roles.');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to sync user roles',
+            resMsg: translate('setupRoutes', 'Some error occurred while working with db to sync user roles'),
             stack: err.stack,
             isValid: false
         };
@@ -84,7 +84,7 @@ const processRoleScopeSync = async() => {
         log.success('Execution for syncing role scopes completed successfully');
         return {
             resType: 'SUCCESS',
-            resMsg: 'Role scopes sync completed successfully',
+            resMsg: translate('setupRoutes', 'Role scopes sync completed successfully'),
             data: roleScopes,
             isValid: true
         };
@@ -92,7 +92,7 @@ const processRoleScopeSync = async() => {
         log.error('Error while working with db to sync role scopes.');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to sync role scopes',
+            resMsg: translate('setupRoutes', 'Some error occurred while working with db to sync role scopes'),
             stack: err.stack,
             isValid: false
         };
@@ -114,7 +114,7 @@ const processDashboardSettingsSync = async() => {
         log.success('Execution for syncing dashboard settings completed successfully');
         return {
             resType: 'SUCCESS',
-            resMsg: 'Dashboard settings sync completed successfully',
+            resMsg: translate('setupRoutes', 'Dashboard settings sync completed successfully'),
             data: dashboardSettings,
             isValid: true
         };
@@ -122,7 +122,7 @@ const processDashboardSettingsSync = async() => {
         log.error('Error while working with db to sync dashboard settings.');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to sync dashboard settings',
+            resMsg: translate('setupRoutes', 'Some error occurred while working with db to sync dashboard settings'),
             stack: err.stack,
             isValid: false
         };

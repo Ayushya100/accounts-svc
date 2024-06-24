@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: get-user-role-info';
 const log = logger(header);
@@ -16,7 +17,7 @@ const getAllUserRole = async() => {
             log.info('No user role info available');
             return {
                 resType: 'CONTENT_NOT_AVAILABLE',
-                resMsg: 'No User role records found',
+                resMsg: translate('settingRoutes', 'No User role records found'),
                 data: [],
                 isValid: true
             };
@@ -25,7 +26,7 @@ const getAllUserRole = async() => {
         log.info('Execution for retrieving all user role info completed successfully');
         return {
             resType: 'SUCCESS',
-            resMsg: 'User roles found',
+            resMsg: translate('settingRoutes', 'User roles found'),
             data: userRoleDetails,
             isValid: true
         };
@@ -33,7 +34,7 @@ const getAllUserRole = async() => {
         log.error('Error while working with db to get all user role records');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to retrieve user role records',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to retrieve user role records'),
             stack: err.stack,
             isValid: false
         };
@@ -50,7 +51,7 @@ const getUserRoleById = async(roleId) => {
             log.error('No information found for requested user role');
             return {
                 resType: 'NOT_FOUND',
-                resMsg: 'User role not found',
+                resMsg: translate('settingRoutes', 'User role not found'),
                 isValid: false
             };
         }
@@ -58,7 +59,7 @@ const getUserRoleById = async(roleId) => {
         log.success(`Execution for retrieving user role info for provided role id (${roleId}) completed successfully`);
         return {
             resType: 'SUCCESS',
-            resMsg: 'User Role retrieved successfully',
+            resMsg: translate('settingRoutes', 'User Role retrieved successfully'),
             data: userRoleDetails,
             isValid: true
         };
@@ -66,7 +67,7 @@ const getUserRoleById = async(roleId) => {
         log.error(`Error while working with db to get user role info for requested id : ${roleId}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to retrieve record of user role for provided id',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to retrieve record of user role for provided id'),
             stack: err.stack,
             isValid: false
         };

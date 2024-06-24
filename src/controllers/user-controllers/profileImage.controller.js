@@ -37,8 +37,8 @@ const updateProfileImage = async(user, userId, imagePath) => {
 
         log.info('Execution for uploading an image over cloudinary completed');
         return {
-            resType: 'REQUEST_COMPLETED',
-            resMsg: 'User image updated successfully',
+            resType: 'REQUEST_ACCEPTED',
+            resMsg: translate('userRoutes', 'User image updated successfully'),
             data: updatedUserInfo,
             isValid: true
         };
@@ -66,8 +66,8 @@ const deleteProfileImage = async(userRecord, userId) => {
 
             log.info('Execution for deleting an image from cloudinary completed');
             return {
-                resType: 'REQUEST_COMPLETED',
-                resMsg: 'User image deleted successfully',
+                resType: 'REQUEST_ACCEPTED',
+                resMsg: translate('userRoutes', 'User image deleted successfully'),
                 data: updatedUserInfo,
                 isValid: true
             };
@@ -76,7 +76,7 @@ const deleteProfileImage = async(userRecord, userId) => {
         log.error('Failed to delete an image from cloudinary server');
         return {
             resType: 'BAD_REQUEST',
-            resMsg: 'Unable to delete image or image does not exists',
+            resMsg: translate('userRoutes', 'Unable to delete image or image does not exists'),
             isValid: false
         };
     } catch (err) {

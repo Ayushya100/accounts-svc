@@ -2,9 +2,9 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: register-setting';
-
 const log = logger(header);
 
 const isSettingAvailable = async(payload) => {
@@ -12,7 +12,7 @@ const isSettingAvailable = async(payload) => {
         log.info('Execution to check for existing setting controller started');
         let response = {
             resType: 'SUCCESS',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: translate('settingRoutes', 'VALIDATION SUCCESSFULL'),
             isValid: true
         };
 
@@ -22,7 +22,7 @@ const isSettingAvailable = async(payload) => {
         if (settingDetails) {
             log.error(`Conflict, record already exists for requested category with name : ${payload.categoryName}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'Setting already exists with same category name';
+            response.resMsg = translate('settingRoutes', 'Setting already exists with same category name');
             response.isValid = false;
         }
 
@@ -32,7 +32,7 @@ const isSettingAvailable = async(payload) => {
         log.error(`Error while working with db to check for existing setting record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing setting record',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to check for existing setting record'),
             stack: err.stack,
             isValid: false
         };
@@ -62,7 +62,7 @@ const createSetting = async(payload) => {
         log.success('Execution for new record completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'Setting Created Successfully',
+            resMsg: translate('settingRoutes', 'Setting Created Successfully'),
             data: newSetting,
             isValid: true
         };
@@ -70,7 +70,7 @@ const createSetting = async(payload) => {
         log.error(`Error while working with db to register new setting record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new setting',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to register new setting'),
             stack: err.stack,
             isValid: false
         };

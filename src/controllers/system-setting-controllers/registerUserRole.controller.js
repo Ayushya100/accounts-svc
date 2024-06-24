@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: register-user-role';
 const log = logger(header);
@@ -11,7 +12,7 @@ const isUserRoleAvailable = async(payload) => {
         log.info('Execution to check for existing user role controller started');
         let response = {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: translate('settingRoutes', 'VALIDATION SUCCESSFULL'),
             data: null,
             isValid: true
         };
@@ -22,12 +23,12 @@ const isUserRoleAvailable = async(payload) => {
         if (roleDetails && !roleDetails.isDeleted) {
             log.error(`Conflict, record already exists for requested user role code : ${payload.roleCode}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'User role already exists with same role code';
+            response.resMsg = translate('settingRoutes', 'User role already exists with same role code');
             response.isValid = false;
         } else if (roleDetails && roleDetails.isDeleted) {
             log.error(`Role already exists but is deleted, need to restore or update the role with provided code`);
             response.resType = 'SUCCESS';
-            response.resMsg = 'User Role already exists but is deleted';
+            response.resMsg = translate('settingRoutes', 'User Role already exists but is deleted');
             response.data = roleDetails;
             response.isValid = false;
         }
@@ -38,7 +39,7 @@ const isUserRoleAvailable = async(payload) => {
         log.error(`Error while working with db to check for existing user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing user role record',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to check for existing user role record'),
             stack: err.stack,
             isValid: false
         };
@@ -56,7 +57,7 @@ const createUserRole = async(payload) => {
         log.success('Execution for creating new record completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'User Role Created Successfully',
+            resMsg: translate('settingRoutes', 'User Role Created Successfully'),
             data: newUserRole,
             isValid: true
         };
@@ -64,7 +65,7 @@ const createUserRole = async(payload) => {
         log.error(`Error while working with db to register new user role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new user role',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to register new user role'),
             stack: err.stack,
             isValid: false
         };
@@ -80,7 +81,7 @@ const restoreRole = async(userId, role) => {
         log.success('Execution for restoring deleted role record completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'Role Restored Successfully',
+            resMsg: translate('settingRoutes', 'Role Restored Successfully'),
             data: updatedRole,
             isValid: true
         };
@@ -88,7 +89,7 @@ const restoreRole = async(userId, role) => {
         log.error(`Error while working with db to restore deleted role record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to restore deleted role',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to restore deleted role'),
             stack: err.stack,
             isValid: false
         };

@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: register-route';
 
@@ -12,7 +13,7 @@ const isRouteAvailable = async(payload) => {
         log.info('Execution to check for the records of existing route controller started');
         let response = {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'VALIDATION SUCCESSFULL',
+            resMsg: translate('settingRoutes', 'VALIDATION SUCCESSFULL'),
             data: null,
             isValid: true
         };
@@ -23,12 +24,12 @@ const isRouteAvailable = async(payload) => {
         if (routeDetails && !routeDetails.isDeleted) {
             log.error(`Conflict, record already exists for requested route with provided end-point : ${payload.path}`);
             response.resType = 'CONFLICT';
-            response.resMsg = 'Route already exists with same end-point';
+            response.resMsg = translate('settingRoutes', 'Route already exists with same end-point');
             response.isValid = false;
         } else if (routeDetails && routeDetails.isDeleted) {
             log.error(`Route already exists but is deleted, need to restore or update the route with provided endpoint`);
             response.resType = 'SUCCESS';
-            response.resMsg = 'Route already exists but is deleted';
+            response.resMsg = translate('settingRoutes', 'Route already exists but is deleted');
             response.data = routeDetails;
             response.isValid = false;
         }
@@ -39,7 +40,7 @@ const isRouteAvailable = async(payload) => {
         log.error(`Error while working with db to check for existing route record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check for existing route record.',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to check for existing route record'),
             stack: err.stack,
             isValid: false
         };
@@ -55,7 +56,7 @@ const createRoute = async(payload) => {
         log.success('Execution for registering new route record completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'Route Created Successfully',
+            resMsg: translate('settingRoutes', 'Route Created Successfully'),
             data: newRoute,
             isValid: true
         };
@@ -63,7 +64,7 @@ const createRoute = async(payload) => {
         log.error(`Error while working with db to register new route record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to register new route',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to register new route'),
             stack: err.stack,
             isValid: false
         };
@@ -79,7 +80,7 @@ const restoreRoute = async(userId, route) => {
         log.success('Execution for restoring deleted route record completed');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'Route Restored Successfully',
+            resMsg: translate('settingRoutes', 'Route Restored Successfully'),
             data: updatedRoute,
             isValid: true
         };
@@ -87,7 +88,7 @@ const restoreRoute = async(userId, route) => {
         log.error(`Error while working with db to restore deleted route record : ${err}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to restore deleted route',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to restore deleted route'),
             stack: err.stack,
             isValid: false
         };

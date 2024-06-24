@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: delete-user-scope';
 const log = logger(header);
@@ -15,7 +16,7 @@ const deleteUserScope = async(userId, roleId, scopeId) => {
         log.info('Execution for deleting user scope completed successfully');
         return {
             resType: 'REQUEST_ACCEPTED',
-            resMsg: 'User scope deleted successfully',
+            resMsg: translate('settingRoutes', 'User scope deleted successfully'),
             data: userScopeDetails,
             isValid: true
         };
@@ -23,7 +24,7 @@ const deleteUserScope = async(userId, roleId, scopeId) => {
         log.error('Error while working with db to delete user scope');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to delete user scope',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to delete user scope'),
             stack: err.stack,
             isValid: false
         };

@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: update-user-scope';
 const log = logger(header);
@@ -21,7 +22,7 @@ const updatedUserScope = async(userId, scopeId, payload, scopeInfo) => {
         log.info('Execution for updating user scope info completed successfully');
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'User scope updated',
+            resMsg: translate('settingRoutes', 'User scope updated'),
             data: userScopeDetails,
             isValid: true
         };
@@ -29,7 +30,7 @@ const updatedUserScope = async(userId, scopeId, payload, scopeInfo) => {
         log.error('Error while working with db to updating user scope record');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to update user scope',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to update user scope'),
             stack: err.stack,
             isValid: false
         };

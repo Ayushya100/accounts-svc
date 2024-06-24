@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: login-user-controller';
 
@@ -27,7 +28,7 @@ const isUserValid = async(payload) => {
                 log.info('Execution for checking user authorization completed successfully');
                 return {
                     resType: 'SUCCESS',
-                    resMsg: 'VALIDATION SUCCESSFULL',
+                    resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
                     data: isUserAvailable,
                     isValid: true
                 };
@@ -36,7 +37,7 @@ const isUserValid = async(payload) => {
             log.error('Unauthorized user - credentials invalid');
             return {
                 resType: 'UNAUTHORIZED',
-                resMsg: 'Unauthorized user - credentials invalid',
+                resMsg: translate('userRoutes', 'Unauthorized user - credentials invalid'),
                 isValid: false
             };
         }
@@ -44,14 +45,14 @@ const isUserValid = async(payload) => {
         log.error('User not found');
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'User not found',
+            resMsg: translate('userRoutes', 'User not found'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to check if user is authorized');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to check if user is authorized',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to check if user is authorized'),
             stack: err.stack,
             isValid: false
         };
@@ -69,7 +70,7 @@ const isUserVerified = async(user) => {
             log.info('Execution for checking user verification completed');
             return {
                 resType: 'SUCCESS',
-                resMsg: 'User verified',
+                resMsg: translate('userRoutes', 'User verified'),
                 isValid: true
             };
         }
@@ -80,7 +81,7 @@ const isUserVerified = async(user) => {
         log.error('The user is not verified yet');
         return {
             resType: 'BAD_REQUEST',
-            resMsg: 'User not yet verified',
+            resMsg: translate('userRoutes', 'User not yet verified'),
             data: updatedUserInfo,
             isValid: false
         };
@@ -88,7 +89,7 @@ const isUserVerified = async(user) => {
         log.error('Error while working with db to generate new verification code');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to generate new verification code',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to generate new verification code'),
             stack: err.stack,
             isValid: false
         };
@@ -122,7 +123,7 @@ const generateAccessAndRefreshTokens = async(userId) => {
         log.info('Execution for generating tokens completed');
         return {
             resType: 'SUCCESS',
-            resMsg: 'Login successfull',
+            resMsg: translate('userRoutes', 'Login successfull'),
             data: loggedInUser,
             isValid: true
         };
@@ -130,7 +131,7 @@ const generateAccessAndRefreshTokens = async(userId) => {
         log.error('Error while working with db to generate access and refresh tokens');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to generate access and refresh tokens',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to generate access and refresh tokens'),
             stack: err.stack,
             isValid: false
         };

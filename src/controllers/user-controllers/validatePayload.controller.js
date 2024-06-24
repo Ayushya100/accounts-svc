@@ -2,6 +2,7 @@
 
 import { logger } from 'lib-finance-service';
 import validators from '../../assets/validators/payloadValidators.js';
+import { translate } from '../../utils/index.js';
 
 const log = logger('controller: validate-payload');
 
@@ -34,7 +35,7 @@ const validateRegisterUserPayload = (payload) => {
     returnValidateStarted('Register User');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true,
         data: payload
     };
@@ -43,12 +44,12 @@ const validateRegisterUserPayload = (payload) => {
 
     if (!payload.firstName || !payload.userName || !payload.emailId || !payload.password) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Required Parameter is missing';
+        response.resMsg = translate('userRoutes', 'Required Parameter is missing');
         response.isValid = false;
 
         for (const field of mandatoryFilds) {
             if (!payload[field]) {
-                response.resMsg += `: ${field}`;
+                response.resMsg += `: ${translate('userRoutes', field)}`;
                 break;
             }
         }
@@ -56,19 +57,19 @@ const validateRegisterUserPayload = (payload) => {
 
     if (payload.userName && !validUserName(payload.userName)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Pattern invalid. Provided username doesnot match the required pattern. UserName should be only alpha-numeric of length 4-24 characters long without any special characters`;
+        response.resMsg = translate('userRoutes', 'Pattern invalid Provided username doesnot match the required pattern UserName should be only alpha-numeric of length 4-24 characters long without any special characters');
         response.isValid = false;
     }
     
     if (payload.emailId && !validEmailId(payload.emailId)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Pattern invalid. Provided Email ID doesnot match the required pattern.';
+        response.resMsg = translate('userRoutes', 'Pattern invalid Provided Email ID doesnot match the required pattern');
         response.isValid = false;
     }
 
     if (payload.password && !validPassword(payload.password)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Pattern invalid. Provided Password doesnot match the required pattern. Password should be between 8 and 16 characters long. It can be alpha-numeric and only @ is allowed.`;
+        response.resMsg = translate('userRoutes', 'Pattern invalid Provided Password doesnot match the required pattern Password should be between 8 and 16 characters long It can be alpha-numeric and only @ is allowed');
         response.isValid = false;
     }
 
@@ -81,13 +82,13 @@ const validateUserVerificationPayload = (verificationCode) => {
     returnValidateStarted('Validate User Verification');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true
     };
 
     if (!verificationCode) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Required parameter is missing';
+        response.resMsg = translate('userRoutes', 'Required Parameter is missing');
         response.isValid = false;
     }
 
@@ -100,19 +101,19 @@ const validateUserLoginPayload = (payload) => {
     returnValidateStarted('Validate User Login');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true
     };
 
     if (!payload.userNameOrEmail) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Required parameter is missing: UserName of EmailId should be provided';
+        response.resMsg = translate('userRoutes', 'Required parameter is missing: UserName of EmailId should be provided');
         response.isValid = false;
     }
     
     if (!payload.password) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Required parameter is missing: password';
+        response.resMsg = translate('userRoutes', 'Required parameter is missing: password');
         response.isValid = false;
     }
 
@@ -125,19 +126,19 @@ const validateUserDetailsPayload = (payload) => {
     returnValidateStarted('Validate User Details');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true
     };
 
     if (payload.contactNumber && !validContactNumber(payload.contactNumber)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Pattern invalid. Contact Number incorrect';
+        response.resMsg = translate('userRoutes', 'Pattern invalid Contact Number incorrect');
         response.isValid = false;
     }
     
     if (payload.userName !== '' && payload.userName !== undefined && !validUserName(payload.userName)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Pattern invalid. Username incorrect';
+        response.resMsg = translate('userRoutes', 'Pattern invalid Username incorrect');
         response.isValid = false;
     }
 
@@ -150,19 +151,19 @@ const validatePasswordUpdatePayload = (payload) => {
     returnValidateStarted('Validate Password Update');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true
     };
 
     if (!payload.oldPassword || !payload.newPassword) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Required Parameters are missing';
+        response.resMsg = translate('userRoutes', 'Required Parameters are missing');
         response.isValid = false;
     }
 
     if (!validPassword(payload.newPassword)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Pattern invalid. New Password incorrect';
+        response.resMsg = translate('userRoutes', 'Pattern invalid New Password incorrect');
         response.isValid = false;
     }
 
@@ -175,13 +176,13 @@ const validateProfileImagePayload = (profileImagePath) => {
     returnValidateStarted('Validate Profile Image');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true
     };
     
     if (!profileImagePath) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Profile image is missing';
+        response.resMsg = translate('userRoutes', 'Profile image is missing');
         response.isValid = false;
     }
 
@@ -194,13 +195,13 @@ const validateDeactivateUserPayload = (payload) => {
     returnValidateStarted('Validate Deactivate User');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true
     };
 
     if (!payload.userName || !payload.password) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Required Parameters are missing';
+        response.resMsg = translate('userRoutes', 'Required Parameters are missing');
         response.isValid = false;
     }
 

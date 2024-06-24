@@ -25,7 +25,7 @@ const checkAccountByToken = async(userId, accountToken) => {
             };
         }
 
-        log.info('No Account information available for provided account token');
+        log.error('No Account information available for provided account token');
         return {
             resType: 'NOT_FOUND',
             resMsg: translate('paymentRoutes', 'No Account Information available for provided account token for account task creation'),

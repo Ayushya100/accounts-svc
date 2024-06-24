@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { createNewLog, logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: shared-user-controller';
 
@@ -19,7 +20,7 @@ const checkUserById = async(userId) => {
             log.info('Execution for checking existing user record completed');
             return {
                 resType: 'SUCCESS',
-                resMsg: 'VALIDATION SUCCESSFUL',
+                resMsg: translate('userRoutes', 'VALIDATION SUCCESSFUL'),
                 data: isUserAvailable,
                 isValid: true
             };
@@ -28,7 +29,7 @@ const checkUserById = async(userId) => {
         log.error('No user found');
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'User not found',
+            resMsg: translate('userRoutes', 'User not found'),
             data: null,
             isValid: false
         };
@@ -36,7 +37,7 @@ const checkUserById = async(userId) => {
         log.error(`Error while working with db to check for existing user for provided id : ${userId}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: err,
+            resMsg: translate('userRoutes', 'Some error occurred while checking for existing user record for provided id'),
             stack: err.stack,
             isValid: false
         };

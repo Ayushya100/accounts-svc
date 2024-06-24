@@ -1,8 +1,13 @@
 'use strict';
 
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const log = logger('controller: validate-payload');
+
+const returnValidateStarted = (type) => {
+    log.info(`Payload verification execution started for ${type}`);
+}
 
 const returnValidationConfirmation = () => {
     log.info('Requested Payload validation completed successfully');
@@ -13,10 +18,10 @@ const isValidMethod = (method) => {
 }
 
 const validateCreateSettingPayload = (payload) => {
-    log.info('Payload verification execution started');
+    returnValidateStarted('Create Setting');
     let response = {
         resType: 'SUCCESS',
-        resMsg: 'VALIDATION SUCCESSFULL',
+        resMsg: translate('settingRoutes', 'VALIDATION SUCCESSFULL'),
         isValid: true
     };
 
@@ -24,12 +29,12 @@ const validateCreateSettingPayload = (payload) => {
 
     if (!payload.categoryName || !payload.categoryDescription || !payload.categoryType || !payload.subCategory || payload.isPeriodic === '') {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Required parameter is missing`;
+        response.resMsg = translate('settingRoutes', 'Required parameter is missing');
         response.isValid = false;
 
         for(const field of mandatoryFields) {
             if (!payload[field]) {
-                response.resMsg += `: ${field}`;
+                response.resMsg += `: ${translate('settingRoutes', field)}`;
                 break;
             }
         }
@@ -37,13 +42,13 @@ const validateCreateSettingPayload = (payload) => {
 
     if (payload.defaultValue === null || payload.defaultValue === undefined) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Required parameter is missing: defaultValue`;
+        response.resMsg = translate('settingRoutes', 'Required parameter is missing: Default Value');
         response.isValid = false;
     }
 
     if (payload.isPeriodic && !payload.duration) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Required parameter cannot be empty - duration missing`;
+        response.resMsg = translate('settingRoutes', 'Required parameter cannot be empty - duration missing');
         response.isValid = false;
     }
 
@@ -52,7 +57,7 @@ const validateCreateSettingPayload = (payload) => {
 }
 
 const validateNewRoutePayload = (payload) => {
-    log.info('Payload verification execution started');
+    returnValidateStarted('New Route');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -63,7 +68,7 @@ const validateNewRoutePayload = (payload) => {
 
     if (!payload.path || !payload.microservice || !payload.port || !payload.method) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Required parameter is missing`;
+        response.resMsg = translate('settingRoutes', 'Required parameter is missing');
         response.isValid = false;
 
         for(const field of mandatoryFields) {
@@ -76,12 +81,12 @@ const validateNewRoutePayload = (payload) => {
 
     if (payload.port && typeof payload.port !== 'number') {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Provided port is not a valid number`;
+        response.resMsg = translate('settingRoutes', 'Provided port is not a valid number');
         response.isValid = false;
     }
     if (payload.method && !isValidMethod(payload.method)) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Provided method is not a valid API method. Only GET, POST, PUT and DELETE methods are allowed as a method.`;
+        response.resMsg = translate('settingRoutes', 'Provided method is not a valid API method Only GET, POST, PUT and DELETE methods are allowed as a method');
         response.isValid = false;
     }
 
@@ -90,7 +95,7 @@ const validateNewRoutePayload = (payload) => {
 }
 
 const validateNewUserRolePayload = (payload) => {
-    log.info('Payload verification execution started');
+    returnValidateStarted('New User Role');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -99,7 +104,7 @@ const validateNewUserRolePayload = (payload) => {
 
     if (!payload.roleCode || !payload.roleName || !payload.isDefault) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Required parameter is missing`;
+        response.resMsg = translate('settingRoutes', 'Required parameter is missing');
         response.isValid = false;
     }
 
@@ -108,7 +113,7 @@ const validateNewUserRolePayload = (payload) => {
 }
 
 const validateNewScopePayload = (payload) => {
-    log.info('Payload verification execution started');
+    returnValidateStarted('New Scope');
     let response = {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
@@ -117,7 +122,7 @@ const validateNewScopePayload = (payload) => {
 
     if (!payload.roleId || !payload.scope || !payload.scopeDescription) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = `Required parameter is missing`;
+        response.resMsg = translate('settingRoutes', 'Required parameter is missing');
         response.isValid = false;
     }
 

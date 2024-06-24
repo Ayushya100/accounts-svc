@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: delete-user-role';
 const log = logger(header);
@@ -15,7 +16,7 @@ const deleteUserRole = async(userId, roleId) => {
         log.info('Execution for deleting user role completed successfully');
         return {
             resType: 'REQUEST_ACCEPTED',
-            resMsg: 'User role deleted successfully',
+            resMsg: translate('settingRoutes', 'User role deleted successfully'),
             data: userRoleDetails,
             isValid: true
         };
@@ -23,7 +24,7 @@ const deleteUserRole = async(userId, roleId) => {
         log.error('Error while working with db to delete user role');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to delete user role',
+            resMsg: translate('settingRoutes', 'Some error occurred while working with db to delete user role'),
             stack: err.stack,
             isValid: false
         };

@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: deactivate-user';
 
@@ -22,7 +23,7 @@ const validateUserCredentials = async(userId, payload) => {
                 log.info('User credential validation successfull');
                 return {
                     resType: 'SUCCESS',
-                    resMsg: 'VALIDATION SUCCESSFULL',
+                    resMsg: translate('userRoutes', 'VALIDATION SUCCESSFULL'),
                     isValid: true
                 };
             }
@@ -30,7 +31,7 @@ const validateUserCredentials = async(userId, payload) => {
             log.error('Unauthorized access - credentials invalid');
             return {
                 resType: 'UNAUTHORIZED',
-                resMsg: 'Credentials invalid',
+                resMsg: translate('userRoutes', 'Credentials invalid'),
                 isValid: false
             };
         }
@@ -45,7 +46,7 @@ const validateUserCredentials = async(userId, payload) => {
         log.error('Error while working with db to validate user.');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to validate user credentials',
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to validate user credentials'),
             stack: err.stack,
             isValid: false
         };
@@ -63,8 +64,8 @@ const deactivateUser = async(userId) => {
         if (isUserDeactivated) {
             log.info('User deactivated successfully');
             return {
-                resType: 'REQUEST_COMPLETED',
-                resMsg: 'User deactivated successfully',
+                resType: 'REQUEST_ACCEPTED',
+                resMsg: translate('userRoutes', 'User deactivated successfully'),
                 data: isUserDeactivated,
                 isValid: true
             };
@@ -73,14 +74,14 @@ const deactivateUser = async(userId) => {
         log.error('Failed to deactivate the user');
         return {
             resType: 'BAD_REQUEST',
-            resMsg: 'Operation failed to deactivate the user',
+            resMsg: translate('userRoutes', 'Operation failed to deactivate the user'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to deactivate user controller function');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: err,
+            resMsg: translate('userRoutes', 'Some error occurred while working with db to deactivate the user'),
             stack: err.stack,
             isValid: false
         };

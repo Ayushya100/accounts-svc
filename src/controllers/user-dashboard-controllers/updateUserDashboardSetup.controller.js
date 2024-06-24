@@ -2,6 +2,7 @@
 
 import dbConnect from '../../db/index.js';
 import { logger, createNewLog } from 'lib-finance-service';
+import { translate } from '../../utils/index.js';
 
 const header = 'controller: update-user-setup-controller';
 
@@ -16,7 +17,7 @@ const updateAllUserDashboardSetup = async(userId, payload, userDashboardSettings
             if (setupRecord.length === 0) {
                 return {
                     resType: 'NOT_FOUND',
-                    resMsg: `Provided id is incorrect for which requested value is '${record.value}'`,
+                    resMsg: `${translate('userSettingRoutes', 'Provided id is incorrect for which requested value is')}'${record.value}'`,
                     isValid: false
                 };
             }
@@ -25,7 +26,7 @@ const updateAllUserDashboardSetup = async(userId, payload, userDashboardSettings
             if (typeof record.value !== setupRecord.type) {
                 return {
                     resType: 'BAD_REQUEST',
-                    resMsg: `Provided value for '${setupRecord.categoryName}' does not match with its type - Cannot proceed with update`,
+                    resMsg: `${translate('userSettingRoutes', 'Provided value for')} '${setupRecord.categoryName}' ${translate('userSettingRoutes', 'does not match with its type - Cannot proceed with update')}`,
                     isValid: false
                 };
             }
@@ -38,8 +39,8 @@ const updateAllUserDashboardSetup = async(userId, payload, userDashboardSettings
         if (updatedSetupDetails) {
             log.info('Execution for updating user setting records completed successfully');
             return {
-                resType: 'REQUEST_COMPLETED',
-                resMsg: 'Dashboard settings updated successfully',
+                resType: 'REQUEST_ACCEPTED',
+                resMsg: translate('userSettingRoutes', 'Dashboard settings updated successfully'),
                 data: updatedSetupDetails,
                 isValid: true
             };
@@ -48,14 +49,14 @@ const updateAllUserDashboardSetup = async(userId, payload, userDashboardSettings
         log.error('Some error occurred while updating setting records for provided user');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while updating user setup records',
+            resMsg: translate('userSettingRoutes', 'Some error occurred while working with db to update user setup records'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to update setup records controller');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to update user setup records',
+            resMsg: translate('userSettingRoutes', 'Some error occurred while working with db to update user setup records'),
             stack: err.stack,
             isValid: false
         };
@@ -72,7 +73,7 @@ const updateUserDashboardSetupById = async(userId, settingId, payload, userDashb
         if (typeof payload.value !== setupRecord.type) {
             return {
                 resType: 'BAD_REQUEST',
-                resMsg: `Provided value for '${setupRecord.categoryName}' does not match with its type - Cannot proceed with update`,
+                resMsg: `${translate('userSettingRoutes', 'Provided value for')} '${setupRecord.categoryName}' ${translate('userSettingRoutes', 'does not match with its type - Cannot proceed with update')}`,
                 isValid: false
             };
         }
@@ -83,8 +84,8 @@ const updateUserDashboardSetupById = async(userId, settingId, payload, userDashb
         if (updatedSetupDetails) {
             log.info('Execution for updating user setting record completed successfully');
             return {
-                resType: 'REQUEST_COMPLETED',
-                resMsg: 'Dashboard setting updated successfully',
+                resType: 'REQUEST_ACCEPTED',
+                resMsg: translate('userSettingRoutes', 'Dashboard setting updated successfully'),
                 data: updatedSetupDetails,
                 isValid: true
             };
@@ -93,14 +94,14 @@ const updateUserDashboardSetupById = async(userId, settingId, payload, userDashb
         log.error(`Error occurred while updating setting record for requested setting id : ${settingId}`);
         return {
             resType: 'NOT_FOUND',
-            resMsg: 'No Dashboard Setting Found',
+            resMsg: translate('userSettingRoutes', 'No Dashboard Setting Found'),
             isValid: false
         };
     } catch (err) {
         log.error('Error while working with db to update requested user setup record controller');
         return {
             resType: 'INTERNAL_SERVER_ERROR',
-            resMsg: 'Some error occurred while working with db to update user setup record',
+            resMsg: translate('userSettingRoutes', 'Some error occurred while working with db to update user setup record'),
             stack: err.stack,
             isValid: false
         };
