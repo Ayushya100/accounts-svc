@@ -11,6 +11,7 @@ import { checkAccountByToken } from './shared.controller.js';
 import { getAllUserAccount, getUserAccountByToken } from './getAccountInfo.controller.js';
 import { updateAccountInfo } from './updateAccountInfo.controller.js';
 import { deactivateAccount, reactivateAccount } from './deactivateReactivateAccount.controller.js';
+import { deleteAccountInfo } from './deleteAccountInfo.controller.js';
 
 export default {
     validateRegisterAccountPayload,
@@ -24,5 +25,6 @@ export default {
     getUserAccountByToken,
     updateAccountInfo,
     deactivateAccount,
-    reactivateAccount
+    reactivateAccount,
+    deleteAccountInfo
 };

@@ -223,6 +223,9 @@
         "Some error occurred while working with db to reactivate payment account info": "Some error occurred while working with db to reactivate payment account info",
         "Account not found to reactivate": "Account not found to reactivate",
         "Account reactivated successfully": "Account reactivated successfully",
-        "Internal Error occurred while working with reactivate account router function": "Internal Error occurred while working with reactivate account router function"
+        "Internal Error occurred while working with reactivate account router function": "Internal Error occurred while working with reactivate account router function",
+        "Some error occurred while working with db to delete payment account info": "Some error occurred while working with db to delete payment account info",
+        "Account not found to delete": "Account not found to delete",
+        "Account deleted successfully": "Account deleted successfully"
     }
 }

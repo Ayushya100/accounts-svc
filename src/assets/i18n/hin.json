@@ -222,6 +222,9 @@
         "Some error occurred while working with db to reactivate payment account info": "भुगतान खाता जानकारी पुनः सक्रिय करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
         "Account not found to reactivate": "खाता पुनः सक्रिय करने के लिए नहीं मिला",
         "Account reactivated successfully": "खाता सफलतापूर्वक पुनः सक्रिय हो गया",
-        "Internal Error occurred while working with reactivate account router function": "खाता राउटर फ़ंक्शन को पुनः सक्रिय करने के साथ काम करते समय आंतरिक त्रुटि उत्पन्न हुई"
+        "Internal Error occurred while working with reactivate account router function": "खाता राउटर फ़ंक्शन को पुनः सक्रिय करने के साथ काम करते समय आंतरिक त्रुटि उत्पन्न हुई",
+        "Some error occurred while working with db to delete payment account info": "भुगतान खाते की जानकारी हटाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Account not found to delete": "हटाने के लिए खाता नहीं मिला",
+        "Account deleted successfully": "खाता सफलतापूर्वक हटा दिया गया"
     }
 }
