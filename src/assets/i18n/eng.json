@@ -226,6 +226,20 @@
         "Internal Error occurred while working with reactivate account router function": "Internal Error occurred while working with reactivate account router function",
         "Some error occurred while working with db to delete payment account info": "Some error occurred while working with db to delete payment account info",
         "Account not found to delete": "Account not found to delete",
-        "Account deleted successfully": "Account deleted successfully"
+        "Account deleted successfully": "Account deleted successfully",
+        "Account Token": "Account Token",
+        "Payment Name": "Payment Mode Name",
+        "Payment Type": "Payment Type",
+        "UPI Account Number": "UPI Account Number",
+        "Mobile Number": "Mobile Number",
+        "Username": "Username",
+        "Provided Payment Type is not valid to be registered": "Provided Payment Type is not valid to be registered",
+        "Provided mobile number is incorrect (number should be 10 digits long)": "Provided mobile number is incorrect (number should be 10 digits long)",
+        "Some error occurred while working with db to check for existing payment option account with provided account details": "Some error occurred while working with db to check for existing payment option account with provided account details",
+        "Payment Account already exists for provided account information": "Payment Account already exists for provided account information",
+        "Some error occurred while working with db to create new payment option account": "Some error occurred while working with db to create new payment option account",
+        "Payment method added successfully": "Payment method added successfully",
+        "Payment Account already exists with same account information": "Payment Account already exists with same account information",
+        "Not valid account type": "Not a valid account type (only SAVINGS, CURRENT, and SALARY accounts allowed)"
     }
 }

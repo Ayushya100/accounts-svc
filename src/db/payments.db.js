@@ -3,10 +3,15 @@
 import mongoose from 'mongoose';
 
 // Import DB Templates
-import { userAccountTemplate, taskAccountTemplate } from 'lib-finance-service';
+import {
+    userAccountTemplate,
+    taskAccountTemplate,
+    paymentMethodsTemplate
+} from 'lib-finance-service';
 
 const accountDB = new userAccountTemplate();
 const taskDB = new taskAccountTemplate();
+const paymentDB = new paymentMethodsTemplate();
 
 const isAccountByAccNumberAvailable = async(encryptedAccountNumber) => {
     const query = {
@@ -93,6 +98,14 @@ const deleteAccountByToken = async(userId, accountToken) => {
     return await accountDB.findOneAndUpdate(userId, query, payload, fields);
 }
 
+const isPaymentOptionAvailable = async(query) => {
+    return await paymentDB.findOne(query, null);
+}
+
+const createPaymentAccount = async(payload) => {
+    return await paymentDB.create(payload);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
@@ -102,5 +115,7 @@ export {
     getUserAccountByToken,
     updateAccountByToken,
     deactivateReactivateAccountByToken,
-    deleteAccountByToken
+    deleteAccountByToken,
+    isPaymentOptionAvailable,
+    createPaymentAccount
 };

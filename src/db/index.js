@@ -72,7 +72,9 @@ import {
     getUserAccountByToken,
     updateAccountByToken,
     deactivateReactivateAccountByToken,
-    deleteAccountByToken
+    deleteAccountByToken,
+    isPaymentOptionAvailable,
+    createPaymentAccount
 } from './payments.db.js';
 
 export default {
@@ -141,5 +143,7 @@ export default {
     getUserAccountByToken,
     updateAccountByToken,
     deactivateReactivateAccountByToken,
-    deleteAccountByToken
+    deleteAccountByToken,
+    isPaymentOptionAvailable,
+    createPaymentAccount
 };

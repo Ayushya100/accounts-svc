@@ -225,6 +225,20 @@
         "Internal Error occurred while working with reactivate account router function": "खाता राउटर फ़ंक्शन को पुनः सक्रिय करने के साथ काम करते समय आंतरिक त्रुटि उत्पन्न हुई",
         "Some error occurred while working with db to delete payment account info": "भुगतान खाते की जानकारी हटाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
         "Account not found to delete": "हटाने के लिए खाता नहीं मिला",
-        "Account deleted successfully": "खाता सफलतापूर्वक हटा दिया गया"
+        "Account deleted successfully": "खाता सफलतापूर्वक हटा दिया गया",
+        "Account Token": "खाता टोकन",
+        "Payment Name": "भुगतान मोड नाम",
+        "Payment Type": "भुगतान प्रकार",
+        "UPI Account Number": "यूपीआई खाता संख्या",
+        "Mobile Number": "मोबाइल नंबर",
+        "Username": "उपयोगकर्ता नाम",
+        "Provided Payment Type is not valid to be registered": "प्रदान किया गया भुगतान प्रकार पंजीकृत होने के लिए मान्य नहीं है",
+        "Provided mobile number is incorrect (number should be 10 digits long)": "दिया गया मोबाइल नंबर गलत है (नंबर 10 अंक लंबा होना चाहिए)",
+        "Some error occurred while working with db to check for existing payment option account with provided account details": "उपलब्ध कराए गए खाता विवरण के साथ मौजूदा भुगतान विकल्प की जांच करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Payment Account already exists for provided account information": "प्रदान की गई खाता जानकारी के लिए भुगतान खाता पहले से मौजूद है",
+        "Some error occurred while working with db to create new payment option account": "नया भुगतान विकल्प खाता बनाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Payment method added successfully": "भुगतान विधि सफलतापूर्वक जोड़ी गई",
+        "Payment Account already exists with same account information": "प्रदान किया गया भुगतान खाता की जानकारी के साथ पहले से मौजूद है",
+        "Not valid account type": "मान्य खाता प्रकार नहीं (केवल बचत, चालू और वेतन खाते की अनुमति है)"
     }
 }
