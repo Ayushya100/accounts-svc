@@ -55,6 +55,18 @@ const validateAccountNumber = (accountNumber) => {
     return validators.accountNumber.test(accountNumber);
 }
 
+const validatePaymentType = (accountType) => {
+    const availableAccountType = [
+        'CASH', 'UPI', 'WALLET', 'INTERNET-BANKING', 'MOBILE-BANKING', 'CHEQUE', 'DEMAND-DRAFT'
+    ];
+    accountType = accountType.toUpperCase();
+    return availableAccountType.includes(accountType);
+}
+
+const validatePhoneNumber = (phoneNumber) => {
+    return validators.contactNumber.test(phoneNumber);
+}
+
 const validateTaskPayload = (payload) => {
     let response = {
         resType: 'SUCCESS',
@@ -195,6 +207,7 @@ const validateRegisterAccountPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameter check to update account info
 const validateUpdateAccountPayload = (payload) => {
     returnValidateStarted('Update Account');
     let response = {
@@ -233,7 +246,75 @@ const validateUpdateAccountPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameter check for register payment
+const validateRegisterPaymentPayload = (payload) => {
+    returnValidateStarted('Register Payment');
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true,
+        data: payload
+    };
+
+    if (!payload.paymentType) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${translate('paymentRoutes', 'Payment Type')}`;
+        response.isValid = false;
+    }
+    
+    let baseTest = true;
+    if (payload.paymentType && !validatePaymentType(payload.paymentType)) {
+        baseTest = false;
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Provided Payment Type is not valid to be registered')}`;
+        response.isValid = false;
+    }
+
+    if (baseTest && payload.paymentType && payload.paymentType.toUpperCase() !== 'CASH' && !payload.paymentName) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${translate('paymentRoutes', 'Payment Name')}`;
+        response.isValid = false;
+    }
+
+    if (baseTest && payload.paymentType && !payload.accountToken &&
+        (payload.paymentType.toUpperCase() !== 'CASH' && payload.paymentType.toUpperCase() !== 'WALLET')
+    ) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${translate('paymentRoutes', 'Account Token')}`;
+        response.isValid = false;
+    }
+
+    // For UPI payload validation
+    if (baseTest && payload.paymentType.toUpperCase() === 'UPI' && !payload.paymentNumber) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${translate('paymentRoutes', 'UPI Account Number')}`;
+        response.isValid = false;
+    }
+
+    // For MOBILE-BANKING payload validation
+    if (baseTest && payload.paymentType.toUpperCase() === 'MOBILE-BANKING' && !payload.paymentNumber) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${'Mobile Number'}`;
+        response.isValid = false;
+    }
+
+    if (baseTest && payload.paymentType.toUpperCase() === 'MOBILE-BANKING' && payload.paymentNumber && !validatePhoneNumber(payload.paymentNumber)) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = translate('paymentRoutes', 'Provided mobile number is incorrect (number should be 10 digits long)');
+        response.isValid = false;
+    }
+
+    // For INTERNET-BANKING payload validation
+    if (baseTest && payload.paymentType.toUpperCase() === 'INTERNET-BANKING' && !payload.paymentNumber) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${translate('paymentRoutes', 'Username')}`;
+        response.isValid = false;
+    }
+    return response;
+}
+
 export {
     validateRegisterAccountPayload,
-    validateUpdateAccountPayload
+    validateUpdateAccountPayload,
+    validateRegisterPaymentPayload
 };

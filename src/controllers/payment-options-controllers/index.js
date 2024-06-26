@@ -1,6 +1,10 @@
 'use strict';
 
-import { validateRegisterAccountPayload, validateUpdateAccountPayload } from './validatePayload.controller.js';
+import {
+    validateRegisterAccountPayload,
+    validateUpdateAccountPayload,
+    validateRegisterPaymentPayload
+} from './validatePayload.controller.js';
 import {
     checkAccountByAccNumber,
     registerAccount,
@@ -12,10 +16,12 @@ import { getAllUserAccount, getUserAccountByToken } from './getAccountInfo.contr
 import { updateAccountInfo } from './updateAccountInfo.controller.js';
 import { deactivateAccount, reactivateAccount } from './deactivateReactivateAccount.controller.js';
 import { deleteAccountInfo } from './deleteAccountInfo.controller.js';
+import { checkPaymentOptionAccount, registerPaymentOptionAccount } from './registerPaymentOptions.controller.js';
 
 export default {
     validateRegisterAccountPayload,
     validateUpdateAccountPayload,
+    validateRegisterPaymentPayload,
     checkAccountByAccNumber,
     registerAccount,
     createTask,
@@ -26,5 +32,7 @@ export default {
     updateAccountInfo,
     deactivateAccount,
     reactivateAccount,
-    deleteAccountInfo
+    deleteAccountInfo,
+    checkPaymentOptionAccount,
+    registerPaymentOptionAccount
 };

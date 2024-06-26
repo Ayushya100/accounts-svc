@@ -10,7 +10,9 @@ import {
     encryptPaymentData,
     decryptPaymentData,
     convertDateToString,
-    convertFullDateToString
+    convertFullDateToString,
+    maskUPINumber,
+    generateRandomNumberForToken
 } from './payment.js';
 
 export {
@@ -24,5 +26,7 @@ export {
     encryptPaymentData,
     decryptPaymentData,
     convertDateToString,
-    convertFullDateToString
+    convertFullDateToString,
+    maskUPINumber,
+    generateRandomNumberForToken
 };

@@ -17,10 +17,31 @@ const maskPaymentNumber = (accountNumber) => {
     return `${startVisibleValue}${maskedDigits}${endVisibleValue}`;
 }
 
-const generatePaymentToken = (accountNumber, type = 'PAYMENT', byteSize = 32) => {
-    log.info(`Token generation started for : ${accountNumber}`);
+const maskUPINumber = (accountNumber) => {
+    log.info(`UPI account number masking requested for ${accountNumber}`);
+    const visibleValue = accountNumber.split('@');
+    const endVisibleValue = visibleValue[0].slice(-2);
+    const startVisibleValue = visibleValue[0].substring(0, 4);
+    let maskedDigits = '*'.repeat(visibleValue[0].length - 6);
+    visibleValue[0] = `${startVisibleValue}${maskedDigits}${endVisibleValue}`;
+
+    log.info('UPI account number masking completed');
+    return visibleValue.join('@');
+}
+
+const generateRandomNumberForToken = () => {
+    const randomBytes = crypto.randomBytes(5);
+    let randomNumber = '';
+    for (let i = 0; i < 5; i++) {
+        randomNumber += (randomBytes[i] % 10).toString();
+    }
+    return parseInt(randomNumber);
+}
+
+const generatePaymentToken = (accountName, type = 'PAYMENT', byteSize = 32) => {
+    log.info(`Token generation started for : ${accountName}`);
     const method = type === 'ACCOUNT' ? process.env.ACCOUNT_TOKEN_METHOD : process.env.PAYMENT_TOKEN_METHOD;
-    const hashedData = crypto.createHash(method).update(accountNumber).digest('hex');
+    const hashedData = crypto.createHash(method).update(accountName).digest('hex');
     const randomBytes = crypto.randomBytes(byteSize).toString('hex');
     const token = `${hashedData}${randomBytes}`;
 
@@ -81,5 +102,7 @@ export {
     encryptPaymentData,
     decryptPaymentData,
     convertDateToString,
-    convertFullDateToString
+    convertFullDateToString,
+    maskUPINumber,
+    generateRandomNumberForToken
 };
