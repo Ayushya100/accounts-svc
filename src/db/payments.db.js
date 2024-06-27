@@ -132,6 +132,15 @@ const getPaymentAccountByType = async(userId, accountType, fields) => {
     return await paymentDB.find(query, fields);
 }
 
+const updatePaymentAccountByToken = async(userId, accountToken, payload) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        token: accountToken,
+        isDeleted: false
+    };
+    return await paymentDB.findOneAndUpdate(userId, query, payload, null);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
@@ -146,5 +155,6 @@ export {
     createPaymentAccount,
     getAllUserPaymentAccount,
     getPaymentAccountByToken,
-    getPaymentAccountByType
+    getPaymentAccountByType,
+    updatePaymentAccountByToken
 };

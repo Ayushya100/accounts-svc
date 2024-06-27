@@ -310,11 +310,33 @@ const validateRegisterPaymentPayload = (payload) => {
         response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${translate('paymentRoutes', 'Username')}`;
         response.isValid = false;
     }
+    
+    returnValidationConfirmation();
+    return response;
+}
+
+const validateUpdatePaymentPayload = (payload) => {
+    returnValidateStarted('Update Payment Mode Account payload');
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true,
+        data: payload
+    };
+
+    if (!payload.paymentNumber) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}: ${translate('paymentRoutes', 'Account Number')}`;
+        response.isValid = false;
+    }
+
+    returnValidationConfirmation();
     return response;
 }
 
 export {
     validateRegisterAccountPayload,
     validateUpdateAccountPayload,
-    validateRegisterPaymentPayload
+    validateRegisterPaymentPayload,
+    validateUpdatePaymentPayload
 };

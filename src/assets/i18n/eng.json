@@ -246,6 +246,13 @@
         "No payment account information found": "No payment account information found",
         "Some error occurred while working with db to retrieve payment account info for requested account token": "Some error occurred while working with db to retrieve payment account info for requested account token",
         "Some error occurred while working with db to retrieve account info for requested account type": "Some error occurred while working with db to retrieve account info for requested account type",
-        "Invalid payment type": "Invalid payment type"
+        "Invalid payment type": "Invalid payment type",
+        "Some error occurred while working with db to update payment mode account info": "Some error occurred while working with db to update payment mode account info",
+        "Some error occurred while working with db to validate payment mode account info": "Some error occurred while working with db to validate payment mode account info",
+        "Account info is valid to update": "Account info is valid to update",
+        "Requested new Account info already exists, cannot update current info": "Requested new Account info already exists, cannot update current info",
+        "Payment mode Account updated successfully": "Payment mode Account updated successfully",
+        "Payment mode Account not found to update information": "Payment mode Account not found to update information",
+        "Account Number": "Account Number"
     }
 }
