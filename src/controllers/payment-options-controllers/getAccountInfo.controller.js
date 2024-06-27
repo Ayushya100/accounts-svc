@@ -2,8 +2,7 @@
 
 import { logger, createNewLog } from 'lib-finance-service';
 import dbConnect from '../../db/index.js';
-import { translate } from '../../utils/i18n.js';
-import { convertFullDateToString, decryptPaymentData, maskPaymentNumber } from '../../utils/payment.js';
+import { convertFullDateToString, decryptPaymentData, maskPaymentNumber, translate } from '../../utils/index.js';
 
 const header = 'controller: get-account-info';
 
@@ -65,14 +64,14 @@ const getAllUserAccount = async(userId, filterOptions) => {
             };
         }
 
-        log.error('No user account information found');
+        log.info('No user account information found');
         return {
-            resType: 'NOT_FOUND',
+            resType: 'CONTENT_NOT_AVAILABLE',
             resMsg: translate('paymentRoutes', 'No account information found'),
-            isValid: false
+            isValid: true
         };
     } catch (err) {
-        log.error(`Error while working with db to check for retrieveing all account info for requested user : ${userId}`);
+        log.error(`Error while working with db for retrieveing all account info for requested user : ${userId}`);
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: translate('paymentRoutes', 'Some error occurred while working with db to retrieve all account info for requested user'),

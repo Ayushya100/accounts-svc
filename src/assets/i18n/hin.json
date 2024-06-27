@@ -239,6 +239,12 @@
         "Some error occurred while working with db to create new payment option account": "नया भुगतान विकल्प खाता बनाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
         "Payment method added successfully": "भुगतान विधि सफलतापूर्वक जोड़ी गई",
         "Payment Account already exists with same account information": "प्रदान किया गया भुगतान खाता की जानकारी के साथ पहले से मौजूद है",
-        "Not valid account type": "मान्य खाता प्रकार नहीं (केवल बचत, चालू और वेतन खाते की अनुमति है)"
+        "Not valid account type": "मान्य खाता प्रकार नहीं (केवल बचत, चालू और वेतन खाते की अनुमति है)",
+        "Some error occurred while working with db to retrieve all payment account info for requested user": "अनुरोधित उपयोगकर्ता के लिए सभी भुगतान खाता जानकारी पुनर्प्राप्त करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि हुई",
+        "User payment account information retrieved successfully": "उपयोगकर्ता भुगतान खाते की जानकारी सफलतापूर्वक पुनर्प्राप्त की गई",
+        "No payment account information found": "कोई भुगतान खाते की जानकारी नहीं मिली",
+        "Some error occurred while working with db to retrieve payment account info for requested account token": "अनुरोधित खाता टोकन के लिए भुगतान खाता जानकारी पुनर्प्राप्त करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि हुई",
+        "Some error occurred while working with db to retrieve account info for requested account type": "अनुरोधित खाता प्रकार के लिए खाता जानकारी पुनर्प्राप्त करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Invalid payment type": "अमान्य भुगतान प्रकार"
     }
 }

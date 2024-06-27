@@ -106,5 +106,11 @@ PUT - :userId/deactivate-account/:token
 PUT - :userId/reactivate-account/:token
 - delete-account API: This API is used to soft delete a user's bank or investment account from the system. Instead of permanently removing the account, it will be marked as deleted by setting a flag to true.  
 PUT - :userId/delete-account/:token
+- register-payment API: The 'register-payment' API allows users to register new payment options in the system. This API supports a variety of payment methods, including cash, wallet, UPI, mobile banking, internet banking, cheque, and demand draft.  
+POST - :userId/register-payment
+- payment-account-info API: The 'payment-account-info' API allows users to retrieve their payment account information. Users can either retrieve all of their payment accounts, specific account information by passing its token, or get account details by payment category.  
+GET - :userId/payment-account-info  
+GET - :userId/payment-account-info/:token  
+GET - :userId/payment-account-info/type/:paymentType
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
