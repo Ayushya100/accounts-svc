@@ -252,6 +252,9 @@
         "Requested new Account info already exists, cannot update current info": "अनुरोधित नई खाता जानकारी पहले से मौजूद है, वर्तमान जानकारी अपडेट नहीं की जा सकती",
         "Payment mode Account updated successfully": "भुगतान मोड खाता सफलतापूर्वक अपडेट किया गया",
         "Payment mode Account not found to update information": "भुगतान मोड खाते में जानकारी अद्यतन नहीं पाई गई",
-        "Account Number": "खाता संख्या"
+        "Account Number": "खाता संख्या",
+        "Already deactive account, cannot proceed to re-deactivate": "पहले से ही निष्क्रिय खाता, पुनः निष्क्रिय करने के लिए आगे नहीं बढ़ सकता",
+        "Some error occurred while working with db to deactivate payment mode account": "भुगतान मोड खाते को निष्क्रिय करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Payment mode account not found to deactivate": "भुगतान मोड खाता निष्क्रिय नहीं पाया गया"
     }
 }

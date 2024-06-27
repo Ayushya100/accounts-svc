@@ -114,5 +114,7 @@ GET - :userId/payment-account-info/:token
 GET - :userId/payment-account-info/type/:paymentType
 - payment-account-info API: The 'payment-account-info' API allows users to update the payment account information for a specified account. Users are only allowed to update the payment account number.  
 PUT - :userId/payment-account-info/:token
+- deactivate-payment-account API: The 'deactivate-payment-account' API allows users to deactivate a specific payment mode account, making it unavailable for future transactions.  
+PUT - :userId/deactivate-payment-account/:token
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!

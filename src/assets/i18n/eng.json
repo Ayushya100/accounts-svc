@@ -253,6 +253,9 @@
         "Requested new Account info already exists, cannot update current info": "Requested new Account info already exists, cannot update current info",
         "Payment mode Account updated successfully": "Payment mode Account updated successfully",
         "Payment mode Account not found to update information": "Payment mode Account not found to update information",
-        "Account Number": "Account Number"
+        "Account Number": "Account Number",
+        "Already deactive account, cannot proceed to re-deactivate": "Already deactive account, cannot proceed to re-deactivate",
+        "Some error occurred while working with db to deactivate payment mode account": "Some error occurred while working with db to deactivate payment mode account",
+        "Payment mode account not found to deactivate": "Payment mode account not found to deactivate"
     }
 }
