@@ -256,6 +256,9 @@
         "Account Number": "Account Number",
         "Already deactive account, cannot proceed to re-deactivate": "Already deactive account, cannot proceed to re-deactivate",
         "Some error occurred while working with db to deactivate payment mode account": "Some error occurred while working with db to deactivate payment mode account",
-        "Payment mode account not found to deactivate": "Payment mode account not found to deactivate"
+        "Payment mode account not found to deactivate": "Payment mode account not found to deactivate",
+        "Some error occurred while working with db to reactivate payment mode account info": "Some error occurred while working with db to reactivate payment mode account info",
+        "Payment mode account not found to reactivate": "Payment mode account not found to reactivate",
+        "Already active account, cannot proceed to re-activate": "Already active account, cannot proceed to re-activate"
     }
 }
