@@ -3,7 +3,8 @@
 import {
     validateRegisterAccountPayload,
     validateUpdateAccountPayload,
-    validateRegisterPaymentPayload
+    validateRegisterPaymentPayload,
+    validateUpdatePaymentPayload
 } from './validatePayload.controller.js';
 import {
     checkAccountByAccNumber,
@@ -22,11 +23,13 @@ import {
     getPaymentAccountByToken,
     getPaymentAccountByPaymentType
 } from './getPaymentAccountInfo.controller.js';
+import { updatePaymentAccountInfo } from './updatePaymentAccountInfo.controller.js';
 
 export default {
     validateRegisterAccountPayload,
     validateUpdateAccountPayload,
     validateRegisterPaymentPayload,
+    validateUpdatePaymentPayload,
     checkAccountByAccNumber,
     registerAccount,
     createTask,
@@ -42,5 +45,6 @@ export default {
     registerPaymentOptionAccount,
     getAllPaymentAccount,
     getPaymentAccountByToken,
-    getPaymentAccountByPaymentType
+    getPaymentAccountByPaymentType,
+    updatePaymentAccountInfo
 };

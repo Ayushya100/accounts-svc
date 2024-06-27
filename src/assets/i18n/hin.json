@@ -245,6 +245,13 @@
         "No payment account information found": "कोई भुगतान खाते की जानकारी नहीं मिली",
         "Some error occurred while working with db to retrieve payment account info for requested account token": "अनुरोधित खाता टोकन के लिए भुगतान खाता जानकारी पुनर्प्राप्त करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि हुई",
         "Some error occurred while working with db to retrieve account info for requested account type": "अनुरोधित खाता प्रकार के लिए खाता जानकारी पुनर्प्राप्त करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
-        "Invalid payment type": "अमान्य भुगतान प्रकार"
+        "Invalid payment type": "अमान्य भुगतान प्रकार",
+        "Some error occurred while working with db to update payment mode account info": "भुगतान मोड खाता जानकारी अद्यतन करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Some error occurred while working with db to validate payment mode account info": "भुगतान मोड खाता जानकारी को मान्य करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Account info is valid to update": "खाता जानकारी अद्यतन करने के लिए मान्य है",
+        "Requested new Account info already exists, cannot update current info": "अनुरोधित नई खाता जानकारी पहले से मौजूद है, वर्तमान जानकारी अपडेट नहीं की जा सकती",
+        "Payment mode Account updated successfully": "भुगतान मोड खाता सफलतापूर्वक अपडेट किया गया",
+        "Payment mode Account not found to update information": "भुगतान मोड खाते में जानकारी अद्यतन नहीं पाई गई",
+        "Account Number": "खाता संख्या"
     }
 }

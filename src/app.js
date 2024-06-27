@@ -108,6 +108,7 @@ app.post(`${USERS_API}/:userId/register-payment`, verifyScope('PAYMENT.U'), rout
 app.get(`${USERS_API}/:userId/payment-account-info`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getPaymentAccountInfo);
 app.get(`${USERS_API}/:userId/payment-account-info/:token`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getPaymentAccountInfo);
 app.get(`${USERS_API}/:userId/payment-account-info/type/:paymentType`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getPaymentAccountInfo);
+app.put(`${USERS_API}/:userId/payment-account-info/:token`, verifyScope('PAYMENT.U'), routes.paymentRoutes.updatePaymentAccountInfo);
 
 // Error Handler middleware
 app.use(errorHandler);
