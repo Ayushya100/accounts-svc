@@ -662,5 +662,65 @@
         "modifiedOn": "2024-05-22T05:11:34.119Z",
         "modifiedBy": "SYSTEM",
         "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8dc5",
+        "path": "api/v1.0/users/:userId/register-payment",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "POST",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8dc6",
+        "path": "api/v1.0/users/:userId/payment-account-info",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "GET",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8dc7",
+        "path": "api/v1.0/users/:userId/payment-account-info/:token",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "GET",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8dc8",
+        "path": "api/v1.0/users/:userId/payment-account-info/type/:paymentType",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "GET",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
     }
 ]

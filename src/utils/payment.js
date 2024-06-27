@@ -11,18 +11,21 @@ const maskPaymentNumber = (accountNumber) => {
     log.info(`Payment account number masking requested for ${accountNumber}`);
     const endVisibleValue = accountNumber.slice(-4);
     const startVisibleValue = accountNumber.substring(0, 2);
-    let maskedDigits = '*'.repeat(accountNumber.length - 6);
+    let maskedDigits = accountNumber.length >= 12 ? '*'.repeat(accountNumber.length - 6) : '*'.repeat(accountNumber.length - 4);
 
+    let visibleAccountNumber = accountNumber.length >= 12 ?
+        `${startVisibleValue}${maskedDigits}${endVisibleValue}` :
+        `${maskedDigits}${endVisibleValue}`;
     log.info('Payment account number masking completed');
-    return `${startVisibleValue}${maskedDigits}${endVisibleValue}`;
+    return visibleAccountNumber;
 }
 
 const maskUPINumber = (accountNumber) => {
     log.info(`UPI account number masking requested for ${accountNumber}`);
     const visibleValue = accountNumber.split('@');
     const endVisibleValue = visibleValue[0].slice(-2);
-    const startVisibleValue = visibleValue[0].substring(0, 4);
-    let maskedDigits = '*'.repeat(visibleValue[0].length - 6);
+    const startVisibleValue = visibleValue[0].substring(0, 2);
+    let maskedDigits = '*'.repeat(visibleValue[0].length - 4);
     visibleValue[0] = `${startVisibleValue}${maskedDigits}${endVisibleValue}`;
 
     log.info('UPI account number masking completed');

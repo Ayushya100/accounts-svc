@@ -105,6 +105,9 @@ app.put(`${USERS_API}/:userId/deactivate-account/:token`, verifyScope('PAYMENT.U
 app.put(`${USERS_API}/:userId/reactivate-account/:token`, verifyScope('PAYMENT.U'), routes.paymentRoutes.reactivateAccount);
 app.put(`${USERS_API}/:userId/delete-account/:token`, verifyScope('PAYMENT.U'), routes.paymentRoutes.deleteAccountInfo);
 app.post(`${USERS_API}/:userId/register-payment`, verifyScope('PAYMENT.U'), routes.paymentRoutes.registerPaymentMethod);
+app.get(`${USERS_API}/:userId/payment-account-info`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getPaymentAccountInfo);
+app.get(`${USERS_API}/:userId/payment-account-info/:token`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getPaymentAccountInfo);
+app.get(`${USERS_API}/:userId/payment-account-info/type/:paymentType`, verifyScope('PAYMENT.V'), routes.paymentRoutes.getPaymentAccountInfo);
 
 // Error Handler middleware
 app.use(errorHandler);

@@ -106,6 +106,32 @@ const createPaymentAccount = async(payload) => {
     return await paymentDB.create(payload);
 }
 
+const getAllUserPaymentAccount = async(userId, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        isDeleted: false
+    };
+    return await paymentDB.find(query, fields);
+}
+
+const getPaymentAccountByToken = async(userId, accountToken, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        token: accountToken,
+        isDeleted: false
+    };
+    return await paymentDB.findOne(query, fields);
+}
+
+const getPaymentAccountByType = async(userId, accountType, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        paymentType: accountType,
+        isDeleted: false
+    };
+    return await paymentDB.find(query, fields);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
@@ -117,5 +143,8 @@ export {
     deactivateReactivateAccountByToken,
     deleteAccountByToken,
     isPaymentOptionAvailable,
-    createPaymentAccount
+    createPaymentAccount,
+    getAllUserPaymentAccount,
+    getPaymentAccountByToken,
+    getPaymentAccountByType
 };
