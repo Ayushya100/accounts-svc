@@ -24,6 +24,7 @@ import {
     getPaymentAccountByPaymentType
 } from './getPaymentAccountInfo.controller.js';
 import { updatePaymentAccountInfo } from './updatePaymentAccountInfo.controller.js';
+import { deactivatePaymentAccount } from './deactivateReactivatePaymentAccount.controller.js';
 
 export default {
     validateRegisterAccountPayload,
@@ -46,5 +47,6 @@ export default {
     getAllPaymentAccount,
     getPaymentAccountByToken,
     getPaymentAccountByPaymentType,
-    updatePaymentAccountInfo
+    updatePaymentAccountInfo,
+    deactivatePaymentAccount
 };
