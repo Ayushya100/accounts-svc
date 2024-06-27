@@ -4,8 +4,8 @@ import { buildApiResponse, responseCodes, logger, createNewLog } from 'lib-finan
 import controllers from '../../controllers/index.js';
 import { translate } from '../../utils/index.js';
 
-const header = 'route: reactivate-account';
-const msg = 'Reactivate Account Router started';
+const header = 'route: reactivate-payment-mode-account';
+const msg = 'Reactivate Payment mode Account Router started';
 
 const log = logger(header);
 const registerLog = createNewLog(header);
@@ -13,13 +13,13 @@ const userController = controllers.userController;
 const paymentController = controllers.paymentController;
 
 // API Function
-const reactivateAccount = async(req, res, next) => {
+const reactivatePaymentAccount = async(req, res, next) => {
     log.info(msg);
     registerLog.createInfoLog(msg);
 
     try {
         const userId = req.params.userId;
-        const accountToken = req.params.token;
+        const paymentToken = req.params.token;
 
         log.info('Call controller function to check if user exists or not');
         const userAvailable = await userController.checkUserById(userId);
@@ -27,12 +27,12 @@ const reactivateAccount = async(req, res, next) => {
             throw userAvailable;
         }
 
-        log.info('Call controller function to retrieve the user account info for provided token');
-        const userAccountRecord = await paymentController.getUserAccountByToken(userId, accountToken, null);
-        if (!userAccountRecord.isValid) {
-            throw userAccountRecord;
+        log.info('Call controller function to retrieve the user payment account info for provided token');
+        const paymentAccountRecord = await paymentController.getPaymentAccountByToken(userId, paymentToken, null);
+        if (!paymentAccountRecord.isValid) {
+            throw paymentAccountRecord;
         }
-        if (userAccountRecord.data.isActive) {
+        if (paymentAccountRecord.data.isActive) {
             throw {
                 resType: 'BAD_REQUEST',
                 resMsg: translate('paymentRoutes', 'Already active account, cannot proceed to re-activate'),
@@ -40,19 +40,19 @@ const reactivateAccount = async(req, res, next) => {
             };
         }
 
-        log.info('Call controller function to reactivate payment account for requested account');
-        const updatedAccountInfo = await paymentController.reactivateAccount(userId, accountToken);
+        log.info('Call controller function to reactivate payment mode account for requested account');
+        const updatedAccountInfo = await paymentController.reactivatePaymentAccount(userId, paymentToken);
         if (!updatedAccountInfo.isValid) {
             throw updatedAccountInfo;
         }
-        
-        log.success(`Successfully reactivated account in db`);
+
+        log.success(`Successfully deactivated payment mode account in db`);
         res.status(responseCodes[updatedAccountInfo.resType]).json(
             buildApiResponse(updatedAccountInfo)
         );
     } catch (err) {
         if (err.resType === 'INTERNAL_SERVER_ERROR') {
-            log.error('Internal Error occurred while working with reactivate account router function');
+            log.error('Internal Error occurred while working with reactivate payment mode account router function');
         } else {
             log.error(`Error occurred : ${err.resMsg}`);
         }
@@ -60,4 +60,4 @@ const reactivateAccount = async(req, res, next) => {
     }
 }
 
-export default reactivateAccount;
+export default reactivatePaymentAccount;

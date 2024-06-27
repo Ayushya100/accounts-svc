@@ -635,7 +635,7 @@
     },
     {
         "_id": "664df49a1cdeca2e843c8dc3",
-        "path": "api/v1.0/users/:userId/reactivate-account/:token",
+        "path": "api/v1.0/users/:userId/activate-account/:token",
         "microservice": "accounts-svc",
         "port": 3200,
         "method": "PUT",
@@ -741,6 +741,21 @@
     {
         "_id": "664df49a1cdeca2e843c8dd0",
         "path": "api/v1.0/users/:userId/deactivate-payment-account/:token",
+        "microservice": "accounts-svc",
+        "port": 3200,
+        "method": "PUT",
+        "validations": [
+            "requiresAuth"
+        ],
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "664df49a1cdeca2e843c8dd1",
+        "path": "api/v1.0/users/:userId/activate-payment-account/:token",
         "microservice": "accounts-svc",
         "port": 3200,
         "method": "PUT",

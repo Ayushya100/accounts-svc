@@ -255,6 +255,9 @@
         "Account Number": "खाता संख्या",
         "Already deactive account, cannot proceed to re-deactivate": "पहले से ही निष्क्रिय खाता, पुनः निष्क्रिय करने के लिए आगे नहीं बढ़ सकता",
         "Some error occurred while working with db to deactivate payment mode account": "भुगतान मोड खाते को निष्क्रिय करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
-        "Payment mode account not found to deactivate": "भुगतान मोड खाता निष्क्रिय नहीं पाया गया"
+        "Payment mode account not found to deactivate": "भुगतान मोड खाता निष्क्रिय नहीं पाया गया",
+        "Some error occurred while working with db to reactivate payment mode account info": "भुगतान मोड खाता जानकारी को पुनः सक्रिय करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Payment mode account not found to reactivate": "भुगतान मोड खाता पुनः सक्रिय नहीं हुआ",
+        "Already active account, cannot proceed to re-activate": "पहले से ही सक्रिय खाता, पुनः सक्रिय करने के लिए आगे नहीं बढ़ सकता"
     }
 }

@@ -102,8 +102,8 @@ GET - :userId/account-info/:token
 PUT - :userId/account-info/:token
 - deactivate-account API: This API is used to deactivate a user's bank or investment account, preventing it from being used for payments. This can be useful for users who want to temporarily disable an account without deleting it.  
 PUT - :userId/deactivate-account/:token
-- reactivate-account API: This API is used to reactivate a user's previously deactivated bank or investment account, allowing it to be used for payments once again.  
-PUT - :userId/reactivate-account/:token
+- activate-account API: This API is used to reactivate a user's previously deactivated bank or investment account, allowing it to be used for payments once again.  
+PUT - :userId/activate-account/:token
 - delete-account API: This API is used to soft delete a user's bank or investment account from the system. Instead of permanently removing the account, it will be marked as deleted by setting a flag to true.  
 PUT - :userId/delete-account/:token
 - register-payment API: The 'register-payment' API allows users to register new payment options in the system. This API supports a variety of payment methods, including cash, wallet, UPI, mobile banking, internet banking, cheque, and demand draft.  
@@ -116,5 +116,7 @@ GET - :userId/payment-account-info/type/:paymentType
 PUT - :userId/payment-account-info/:token
 - deactivate-payment-account API: The 'deactivate-payment-account' API allows users to deactivate a specific payment mode account, making it unavailable for future transactions.  
 PUT - :userId/deactivate-payment-account/:token
+- activate-payment-account API: The 'activate-payment-account' API allows users to reactivate a specific payment mode account, making it available for future transactions.  
+PUT - :userId/activate-payment-account/:token
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
