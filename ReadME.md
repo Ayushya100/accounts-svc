@@ -118,5 +118,7 @@ PUT - :userId/payment-account-info/:token
 PUT - :userId/deactivate-payment-account/:token
 - activate-payment-account API: The 'activate-payment-account' API allows users to reactivate a specific payment mode account, making it available for future transactions.  
 PUT - :userId/activate-payment-account/:token
+- delete-payment-account API: The delete-payment-account API allows users to soft delete a specific payment account in the system. A soft delete means the account will be marked as deleted and won't be available for transactions, but it will not be permanently removed from the database.  
+PUT - :userId/delete-payment-account/:token
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!

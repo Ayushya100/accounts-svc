@@ -10,7 +10,7 @@ const log = logger(header);
 const registerLog = createNewLog(header);
 
 const deleteAccountInfo = async(userId, accountToken) => {
-    registerLog.createDebugLog('Start soft deleting account info in system started');
+    registerLog.createDebugLog('Start deleting account info in system started');
 
     try {
         log.info('Execution for deleting payment account started');
@@ -31,7 +31,7 @@ const deleteAccountInfo = async(userId, accountToken) => {
             resType: 'NOT_FOUND',
             resMsg: translate('paymentRoutes', 'Account not found to delete'),
             isValid: false
-        }
+        };
     } catch (err) {
         log.error('Error while working with db to delete payment account info');
         return {

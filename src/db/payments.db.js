@@ -64,7 +64,7 @@ const getUserAccountByToken = async(userId, accountToken, fields) => {
 
 const updateAccountByToken = async(userId, accountToken, payload) => {
     const query = {
-        userId: userId,
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
         token: accountToken,
         isDeleted: false
     };
@@ -73,7 +73,7 @@ const updateAccountByToken = async(userId, accountToken, payload) => {
 
 const deactivateReactivateAccountByToken = async(userId, accountToken, isActive) => {
     const query = {
-        userId: userId,
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
         token: accountToken,
         isDeleted: false
     };
@@ -86,7 +86,7 @@ const deactivateReactivateAccountByToken = async(userId, accountToken, isActive)
 
 const deleteAccountByToken = async(userId, accountToken) => {
     const query = {
-        userId: userId,
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
         token: accountToken,
         isDeleted: false
     };
@@ -154,6 +154,20 @@ const deactivateReactivatePaymentAccountByToken = async(userId, accountToken, is
     return await paymentDB.findOneAndUpdate(userId, query, payload, fields);
 }
 
+const deletePaymentAccountByToken = async(userId, accountToken) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        token: accountToken,
+        isDeleted: false
+    };
+    const payload = {
+        isActive: false,
+        isDeleted: true
+    };
+    const fields = 'userId token isActive isDeleted';
+    return await paymentDB.findOneAndUpdate(userId, query, payload, fields);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
@@ -170,5 +184,6 @@ export {
     getPaymentAccountByToken,
     getPaymentAccountByType,
     updatePaymentAccountByToken,
-    deactivateReactivatePaymentAccountByToken
+    deactivateReactivatePaymentAccountByToken,
+    deletePaymentAccountByToken
 };
