@@ -259,6 +259,7 @@
         "Payment mode account not found to deactivate": "Payment mode account not found to deactivate",
         "Some error occurred while working with db to reactivate payment mode account info": "Some error occurred while working with db to reactivate payment mode account info",
         "Payment mode account not found to reactivate": "Payment mode account not found to reactivate",
-        "Already active account, cannot proceed to re-activate": "Already active account, cannot proceed to re-activate"
+        "Already active account, cannot proceed to re-activate": "Already active account, cannot proceed to re-activate",
+        "Some error occurred while working with db to delete payment mode account info": "Some error occurred while working with db to delete payment mode account info"
     }
 }
