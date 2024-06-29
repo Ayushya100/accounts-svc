@@ -32,6 +32,11 @@ import {
     registerCard,
     sendCardCreationMailPayload
 } from './registerCard.controller.js';
+import {
+    getAllUserCards,
+    getCardByToken,
+    getCardByType
+} from './getCardInfo.controller.js';
 
 export default {
     validateRegisterAccountPayload,
@@ -61,5 +66,8 @@ export default {
     deletePaymentAccountInfo,
     checkCardByCardNumber,
     registerCard,
-    sendCardCreationMailPayload
+    sendCardCreationMailPayload,
+    getAllUserCards,
+    getCardByToken,
+    getCardByType
 };

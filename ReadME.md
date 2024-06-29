@@ -159,5 +159,9 @@ PUT - :userId/delete-payment-account/:token
 **FUEL:** A card used to pay for fuel expenses. Not linked to an account.  
 **CAMPUS:** A card used within a campus for various services, such as dining, bookstore purchases, and access to facilities. Not linked to a campus account.  
 POST - :userId/register-card
+- card-info API: The 'card-info' API allows users to retrieve information about their cards. Users can retrieve information for all their cards, for a specific card by card token, or for a specific type of cards.  
+GET - :userId/card-info  
+GET - :userId/card-info/:token  
+GET - :userId/card-info/type/:cardType
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!

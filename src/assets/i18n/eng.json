@@ -271,6 +271,10 @@
         "Card already exists with same card number": "Card already exists with same card number",
         "Some error occurred while working with db to register new card": "Some error occurred while working with db to register new card",
         "Card created successfully": "Card created successfully",
-        "Provided linkage account is not of valid type to assign to the new card": "Provided linkage account is not of valid type to assign to the new card"
+        "Provided linkage account is not of valid type to assign to the new card": "Provided linkage account is not of valid type to assign to the new card",
+        "Some error occurred while working with db to retrieve all user card info for requested user": "Some error occurred while working with db to retrieve all user card info for requested user",
+        "No user card information found": "No user card information found",
+        "User card retrieved successfully": "User card retrieved successfully",
+        "Invalid card type": "Invalid card type"
     }
 }

@@ -13,6 +13,7 @@ import deactivatePaymentAccount from './deactivatePaymentAccount.route.js';
 import reactivatePaymentAccount from './reactivatePaymentAccount.route.js';
 import deletePaymentAccountInfo from './deletePaymentAccount.route.js';
 import registerCard from './registerCard.route.js';
+import getCardInfo from './getCardInfo.route.js';
 
 export default {
     registerAccount,
@@ -27,5 +28,6 @@ export default {
     deactivatePaymentAccount,
     reactivatePaymentAccount,
     deletePaymentAccountInfo,
-    registerCard
+    registerCard,
+    getCardInfo
 };

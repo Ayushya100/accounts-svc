@@ -82,7 +82,10 @@ import {
     deactivateReactivatePaymentAccountByToken,
     deletePaymentAccountByToken,
     isCardByCardNumberAvailable,
-    registerCard
+    registerCard,
+    getAllUserCards,
+    getCardByToken,
+    getCardByType
 } from './payments.db.js';
 
 export default {
@@ -161,5 +164,8 @@ export default {
     deactivateReactivatePaymentAccountByToken,
     deletePaymentAccountByToken,
     isCardByCardNumberAvailable,
-    registerCard
+    registerCard,
+    getAllUserCards,
+    getCardByToken,
+    getCardByType
 };

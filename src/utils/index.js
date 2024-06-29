@@ -15,6 +15,7 @@ import {
     generateRandomNumberForToken,
     getLastDateOfMonth
 } from './payment.js';
+import { filterFields } from './formatData.js';
 
 export {
     sendMail,
@@ -30,5 +31,6 @@ export {
     convertFullDateToString,
     maskUPINumber,
     generateRandomNumberForToken,
-    getLastDateOfMonth
+    getLastDateOfMonth,
+    filterFields
 };
