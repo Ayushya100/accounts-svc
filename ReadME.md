@@ -93,7 +93,22 @@ PUT - /deactivate-user/:userId
 - logout-user API: The 'logout-user' API allows users to log out from the system, invalidating their current session and access token.  
 POST - /logout-user
 #### Payment APIs
-- register-account API: This API will be used to register user bank or investment accounts in the database. It ensures that users can add their financial accounts to the system for tracking and management purposes.  
+- register-account API: This API will be used to register user bank or investment accounts in the database. It ensures that users can add their financial accounts to the system for tracking and management purposes. Below is a list of account types that can be created, along with a brief description of each account.  
+**SAVINGS:** A bank account that allows users to save money while earning interest. It's usually linked to a debit card.  
+**CURRENT:** A bank account primarily used for business transactions with no limit on the number of transactions.  
+**SALARY:** A bank account specifically designed for salaried employees to receive their monthly salary.  
+**RECURRING:** An account where users can deposit a fixed amount of money at regular intervals, typically earning higher interest than a savings account.  
+**FIXED_DEPOSIT:** An investment account where a lump sum amount is deposited for a fixed tenure with a fixed interest rate.  
+**NRI:** Non-Resident Indian accounts designed for Indians residing abroad, allowing them to manage their income earned in India.  
+**DEMAT:** An account to hold financial securities (equity or debt) in electronic form.  
+**EPF:** Employees' Provident Fund account where both employer and employee contribute for the employee's retirement savings.  
+**PPF:** Public Provident Fund account offering tax benefits and long-term savings with a fixed interest rate.  
+**NPS:** National Pension System account designed for long-term retirement savings with tax benefits.  
+**MUTUAL_FUNDS:** An account to manage investments in various mutual fund schemes.  
+**GOLD_SAVINGS:** An account for investing in gold savings schemes, typically offered by banks and financial institutions.  
+**GOVT_BONDS:** An account for investing in government bonds, which are considered a secure investment option.  
+**HEALTH_SAVINGS:** A health savings account (HSA) used to save for medical expenses with tax benefits.  
+**INSURANCE:** An account to manage various insurance policies, including life, health, and general insurance.  
 POST - :userId/register-account
 - account-info API: This API is used to retrieve information about user bank or investment accounts from the database. Users can either get details of all their accounts or a specific account by providing an account ID.  
 GET - :userId/account-info  
@@ -107,6 +122,13 @@ PUT - :userId/activate-account/:token
 - delete-account API: This API is used to soft delete a user's bank or investment account from the system. Instead of permanently removing the account, it will be marked as deleted by setting a flag to true.  
 PUT - :userId/delete-account/:token
 - register-payment API: The 'register-payment' API allows users to register new payment options in the system. This API supports a variety of payment methods, including cash, wallet, UPI, mobile banking, internet banking, cheque, and demand draft.  
+**CASH:** Physical currency used for transactions. Not linked to a bank account.  
+**UPI:** Unified Payments Interface, a real-time payment system allowing instant transfer of money between bank accounts through a mobile device. Linked to a bank account.  
+**WALLET:** Digital wallets that store funds and can be used for online transactions. Examples include Paytm, Google Pay, etc. Not necessarily linked to a bank account but can be funded from one.  
+**INTERNET-BANKING:** Online banking services that allow users to conduct financial transactions via the internet. Linked to a bank account.  
+**MOBILE-BANKING:** Banking services provided via a mobile application. Linked to a bank account.  
+**CHEQUE:** A written, dated, and signed instrument that directs a bank to pay a specific amount of money to the bearer. Linked to a bank account.  
+**DEMAND-DRAFT:** A prepaid negotiable instrument used for transferring money from one bank account to another. Linked to a bank account.  
 POST - :userId/register-payment
 - payment-account-info API: The 'payment-account-info' API allows users to retrieve their payment account information. Users can either retrieve all of their payment accounts, specific account information by passing its token, or get account details by payment category.  
 GET - :userId/payment-account-info  
@@ -121,21 +143,21 @@ PUT - :userId/activate-payment-account/:token
 - delete-payment-account API: The delete-payment-account API allows users to soft delete a specific payment account in the system. A soft delete means the account will be marked as deleted and won't be available for transactions, but it will not be permanently removed from the database.  
 PUT - :userId/delete-payment-account/:token
 - register-card API: The 'register-card' API allows users to create a new card in the system. Below is a list of card types that can be created, along with a brief description of each card and whether they are linked to an account.  
-1. CREDIT: A card that allows users to borrow money up to a certain limit for purchases, with the obligation to repay with interest. Linked to an account.
-2. DEBIT: A card that deducts money directly from a user's checking account to pay for purchases. Linked to an account.
-3. PREPAID: A card that is preloaded with funds and used until the balance is exhausted. Not linked to an account.
-4. MEAL: A card provided by employers to employees for purchasing meals. Not linked to an account.
-5. RESTAURANT: A card specifically for use at restaurants. Not linked to an account.
-6. PUBLIC_TRANSIT: A card for use in public transportation systems. Not linked to an account.
-7. TRAVEL: A card for use in booking travel-related services such as flights and hotels. Not linked to an account.
-8. GIFT: A card preloaded with a specific amount of money, often given as a gift. Not linked to an account.
-9. STORE_CREDIT: A card issued by a store, allowing the holder to purchase goods and services from that store. Linked to an account.
-10. CORPORATE_CREDIT: A credit card issued to employees for business expenses. Linked to a corporate account.
-11. PROCUREMENT: A card used by businesses to purchase goods and services. Linked to a business account.
-12. HEALTH_SAVINGS: A card linked to a health savings account (HSA) for medical expenses. Linked to an HSA account.
-13. INSURANCE: A card provided by an insurance company for managing and paying insurance-related expenses. Linked to an insurance account.
-14. FUEL: A card used to pay for fuel expenses. Not linked to an account.
-15. CAMPUS: A card used within a campus for various services, such as dining, bookstore purchases, and access to facilities. Not linked to a campus account.  
+**CREDIT:** A card that allows users to borrow money up to a certain limit for purchases, with the obligation to repay with interest. Linked to an account.  
+**DEBIT:** A card that deducts money directly from a user's checking account to pay for purchases. Linked to an account.  
+**PREPAID:** A card that is preloaded with funds and used until the balance is exhausted. Not linked to an account.  
+**MEAL:** A card provided by employers to employees for purchasing meals. Not linked to an account.  
+**RESTAURANT:** A card specifically for use at restaurants. Not linked to an account.  
+**PUBLIC_TRANSIT:** A card for use in public transportation systems. Not linked to an account.  
+**TRAVEL:** A card for use in booking travel-related services such as flights and hotels. Not linked to an account.  
+**GIFT:** A card preloaded with a specific amount of money, often given as a gift. Not linked to an account.  
+**STORE_CREDIT:** A card issued by a store, allowing the holder to purchase goods and services from that store. Linked to an account.  
+**CORPORATE_CREDIT:** A credit card issued to employees for business expenses. Linked to a corporate account.  
+**PROCUREMENT:** A card used by businesses to purchase goods and services. Linked to a business account.  
+**HEALTH_SAVINGS:** A card linked to a health savings account (HSA) for medical expenses. Linked to an HSA account.  
+**INSURANCE:** A card provided by an insurance company for managing and paying insurance-related expenses. Linked to an insurance account.  
+**FUEL:** A card used to pay for fuel expenses. Not linked to an account.  
+**CAMPUS:** A card used within a campus for various services, such as dining, bookstore purchases, and access to facilities. Not linked to a campus account.  
 POST - :userId/register-card
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
