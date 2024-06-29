@@ -4,7 +4,8 @@ import {
     validateRegisterAccountPayload,
     validateUpdateAccountPayload,
     validateRegisterPaymentPayload,
-    validateUpdatePaymentPayload
+    validateUpdatePaymentPayload,
+    validateRegisterCardPayload
 } from './validatePayload.controller.js';
 import {
     checkAccountByAccNumber,
@@ -26,12 +27,18 @@ import {
 import { updatePaymentAccountInfo } from './updatePaymentAccountInfo.controller.js';
 import { deactivatePaymentAccount, reactivatePaymentAccount } from './deactivateReactivatePaymentAccount.controller.js';
 import { deletePaymentAccountInfo } from './deletePaymentAccountInfo.controller.js';
+import {
+    checkCardByCardNumber,
+    registerCard,
+    sendCardCreationMailPayload
+} from './registerCard.controller.js';
 
 export default {
     validateRegisterAccountPayload,
     validateUpdateAccountPayload,
     validateRegisterPaymentPayload,
     validateUpdatePaymentPayload,
+    validateRegisterCardPayload,
     checkAccountByAccNumber,
     registerAccount,
     createTask,
@@ -51,5 +58,8 @@ export default {
     updatePaymentAccountInfo,
     deactivatePaymentAccount,
     reactivatePaymentAccount,
-    deletePaymentAccountInfo
+    deletePaymentAccountInfo,
+    checkCardByCardNumber,
+    registerCard,
+    sendCardCreationMailPayload
 };

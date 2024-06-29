@@ -45,7 +45,9 @@ const validateAccountType = (accountType) => {
         'NPS',
         'MUTUAL_FUNDS',
         'GOLD_SAVINGS',
-        'GOVT_BONDS'
+        'GOVT_BONDS',
+        'HEALTH_SAVINGS',
+        'INSURANCE'
     ];
     accountType = accountType.toUpperCase();
     return availableAccountType.includes(accountType);
@@ -315,6 +317,7 @@ const validateRegisterPaymentPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameter check for update payment
 const validateUpdatePaymentPayload = (payload) => {
     returnValidateStarted('Update Payment Mode Account payload');
     let response = {
@@ -334,9 +337,105 @@ const validateUpdatePaymentPayload = (payload) => {
     return response;
 }
 
+const validateCardTypePayload = (cardType) => {
+    const availableCardTypes = [
+        'CREDIT',
+        'DEBIT',
+        'PREPAID',
+        'MEAL',
+        'RESTAURANT',
+        'PUBLIC_TRANSIT',
+        'TRAVEL',
+        'GIFT',
+        'STORE_CREDIT',
+        'CORPORATE_CREDIT',
+        'PROCUREMENT',
+        'HEALTH_SAVINGS',
+        'INSURANCE',
+        'FUEL',
+        'CAMPUS'
+    ];
+    return availableCardTypes.includes(cardType);
+}
+
+const validateCardTypeWithAccountPayload = (cardType) => {
+    const availableCardTypes = [
+        'CREDIT',
+        'DEBIT',
+        'STORE_CREDIT',
+        'CORPORATE_CREDIT',
+        'PROCUREMENT',
+        'HEALTH_SAVINGS',
+        'INSURANCE'
+    ];
+    return availableCardTypes.includes(cardType);
+}
+
+const validateCreditCardPayload = (cardType) => {
+    const availableCardTypes = ['CREDIT', 'STORE_CREDIT', 'CORPORATE_CREDIT'];
+    return availableCardTypes.includes(cardType);
+}
+
+const validateCardNumber = (cardNumber) => {
+    return validators.cardNumber.test(cardNumber);
+}
+
+// Mandatory parameter check for register card
+const validateRegisterCardPayload = (payload) => {
+    returnValidateStarted('Register Card payload');
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true,
+        data: payload
+    };
+
+    const mandatoryFields = ['cardType', 'cardNumber', 'expirationDate', 'holderName'];
+    if (!payload.cardType || !payload.cardNumber || !payload.expirationDate || !payload.holderName) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Required Parameter is missing')}`;
+        response.isValid = false;
+
+        for (const field of mandatoryFields) {
+            if (!payload[field]) {
+                response.resMsg += `: ${translate('paymentRoutes', field)}`;
+                break;
+            }
+        }
+    }
+
+    if (payload.cardType && !validateCardTypePayload(payload.cardType.toUpperCase())) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Provided Card Type is not valid to be registered')}`;
+        response.isValid = false;
+    }
+
+    if (payload.cardType && validateCardTypeWithAccountPayload(payload.cardType.toUpperCase()) && !payload.accountToken) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Provided Card Type should have the account information to link with the card')}`;
+        response.isValid = false;
+    }
+
+    if (payload.cardType && validateCreditCardPayload(payload.cardType.toUpperCase()) && !payload.balance) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Credit limit is required for credit cards')}`;
+        response.isValid = false;
+    }
+
+    if (payload.cardNumber && !validateCardNumber(payload.cardNumber)) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `${translate('paymentRoutes', 'Provided Card Number does not follow the required pattern (number should be 16 digits long)')}`;
+        response.isValid = false;
+    }
+
+    returnValidationConfirmation();
+    return response;
+}
+
 export {
     validateRegisterAccountPayload,
     validateUpdateAccountPayload,
     validateRegisterPaymentPayload,
-    validateUpdatePaymentPayload
+    validateUpdatePaymentPayload,
+    validateRegisterCardPayload
 };

@@ -49,7 +49,7 @@ const registerAccount = async(req, res, next) => {
         if (payload.task && accountType.includes(accountInfo.data.accountType)) {
             log.info(`Task cannot be created for ${accountInfo.data.accountType} type of account`);
             accountInfo.resMsg += `. ${translate('paymentRoutes', 'For provided account type, a task cannot be assigned')}`;
-        } else {
+        } else if (payload.task && !accountType.includes(accountInfo.data.accountType)) {
             let canProceedToTask = true;
             log.info('Call controller function to validate if provided debit account is valid or not');
             const debitAccount = await paymentController.checkAccountByToken(userId, payload.task.debitFrom);

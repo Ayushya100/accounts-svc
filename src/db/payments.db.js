@@ -6,16 +6,19 @@ import mongoose from 'mongoose';
 import {
     userAccountTemplate,
     taskAccountTemplate,
-    paymentMethodsTemplate
+    paymentMethodsTemplate,
+    cardMethodsTemplate
 } from 'lib-finance-service';
 
 const accountDB = new userAccountTemplate();
 const taskDB = new taskAccountTemplate();
 const paymentDB = new paymentMethodsTemplate();
+const cardDB = new cardMethodsTemplate();
 
 const isAccountByAccNumberAvailable = async(encryptedAccountNumber) => {
     const query = {
-        accountNumber: encryptedAccountNumber
+        accountNumber: encryptedAccountNumber,
+        isDeleted: false
     };
     return await accountDB.findOne(query, null);
 }
@@ -168,6 +171,28 @@ const deletePaymentAccountByToken = async(userId, accountToken) => {
     return await paymentDB.findOneAndUpdate(userId, query, payload, fields);
 }
 
+const isCardByCardNumberAvailable = async(encryptedCardNumber) => {
+    const query = {
+        cardNumber: encryptedCardNumber,
+        isDeleted: false
+    };
+    return await cardDB.findOne(query, null);
+}
+
+const registerCard = async(userId, payload) => {
+    const cardPayload = {
+        userId: userId,
+        accountId: payload.accountId,
+        token: payload.token,
+        cardNumber: payload.cardNumber,
+        cardType: payload.cardType,
+        expirationDate: payload.expirationDate,
+        holderName: payload.holderName,
+        balance: payload.balance
+    };
+    return await cardDB.create(cardPayload);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
@@ -185,5 +210,7 @@ export {
     getPaymentAccountByType,
     updatePaymentAccountByToken,
     deactivateReactivatePaymentAccountByToken,
-    deletePaymentAccountByToken
+    deletePaymentAccountByToken,
+    isCardByCardNumberAvailable,
+    registerCard
 };
