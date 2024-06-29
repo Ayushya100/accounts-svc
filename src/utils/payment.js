@@ -99,6 +99,13 @@ const convertFullDateToString = (date) => {
     return `${date.year}-${date.month}-${date.day}`;
 }
 
+const getLastDateOfMonth = (date) => {
+    const [month, year] = date.split('/').map(Number);
+    const lastDateOfMonth = new Date(year, month, 0);
+    lastDateOfMonth.setHours(23, 59, 59, 999);
+    return lastDateOfMonth;
+}
+
 export {
     maskPaymentNumber,
     generatePaymentToken,
@@ -107,5 +114,6 @@ export {
     convertDateToString,
     convertFullDateToString,
     maskUPINumber,
-    generateRandomNumberForToken
+    generateRandomNumberForToken,
+    getLastDateOfMonth
 };

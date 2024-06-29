@@ -12,7 +12,8 @@ import {
     convertDateToString,
     convertFullDateToString,
     maskUPINumber,
-    generateRandomNumberForToken
+    generateRandomNumberForToken,
+    getLastDateOfMonth
 } from './payment.js';
 
 export {
@@ -28,5 +29,6 @@ export {
     convertDateToString,
     convertFullDateToString,
     maskUPINumber,
-    generateRandomNumberForToken
+    generateRandomNumberForToken,
+    getLastDateOfMonth
 };

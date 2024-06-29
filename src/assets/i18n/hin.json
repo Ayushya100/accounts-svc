@@ -259,6 +259,17 @@
         "Some error occurred while working with db to reactivate payment mode account info": "भुगतान मोड खाता जानकारी को पुनः सक्रिय करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
         "Payment mode account not found to reactivate": "भुगतान मोड खाता पुनः सक्रिय नहीं हुआ",
         "Already active account, cannot proceed to re-activate": "पहले से ही सक्रिय खाता, पुनः सक्रिय करने के लिए आगे नहीं बढ़ सकता",
-        "Some error occurred while working with db to delete payment mode account info": "भुगतान मोड खाता जानकारी हटाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई"
+        "Some error occurred while working with db to delete payment mode account info": "भुगतान मोड खाता जानकारी हटाने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "cardType": "कार्ड का प्रकार",
+        "cardNumber": "कार्ड संख्या",
+        "expirationDate": "समाप्ति तिथि",
+        "Provided Card Type is not valid to be registered": "प्रदान किया गया कार्ड प्रकार पंजीकृत होने के लिए मान्य नहीं है",
+        "Provided Card Type should have the account information to link with the card": "प्रदान किए गए कार्ड के प्रकार में कार्ड के साथ लिंक करने के लिए खाते की जानकारी होनी चाहिए",
+        "Credit limit is required for credit cards": "क्रेडिट कार्ड के लिए क्रेडिट लिमिट जरूरी है",
+        "Provided Card Number does not follow the required pattern (number should be 16 digits long)": "प्रदान किया गया कार्ड नंबर आवश्यक पैटर्न का पालन नहीं करता है (संख्या 16 अंक लंबी होनी चाहिए)",
+        "Card already exists with same card number": "समान कार्ड नंबर वाला कार्ड पहले से मौजूद है",
+        "Some error occurred while working with db to register new card": "नया कार्ड पंजीकृत करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "Card created successfully": "कार्ड सफलतापूर्वक बनाया गया",
+        "Provided linkage account is not of valid type to assign to the new card": "नए कार्ड को आवंटित करने के लिए प्रदान किया गया लिंकेज खाता वैध प्रकार का नहीं है"
     }
 }

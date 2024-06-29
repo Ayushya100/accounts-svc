@@ -120,5 +120,22 @@ PUT - :userId/deactivate-payment-account/:token
 PUT - :userId/activate-payment-account/:token
 - delete-payment-account API: The delete-payment-account API allows users to soft delete a specific payment account in the system. A soft delete means the account will be marked as deleted and won't be available for transactions, but it will not be permanently removed from the database.  
 PUT - :userId/delete-payment-account/:token
+- register-card API: The 'register-card' API allows users to create a new card in the system. Below is a list of card types that can be created, along with a brief description of each card and whether they are linked to an account.  
+1. CREDIT: A card that allows users to borrow money up to a certain limit for purchases, with the obligation to repay with interest. Linked to an account.
+2. DEBIT: A card that deducts money directly from a user's checking account to pay for purchases. Linked to an account.
+3. PREPAID: A card that is preloaded with funds and used until the balance is exhausted. Not linked to an account.
+4. MEAL: A card provided by employers to employees for purchasing meals. Not linked to an account.
+5. RESTAURANT: A card specifically for use at restaurants. Not linked to an account.
+6. PUBLIC_TRANSIT: A card for use in public transportation systems. Not linked to an account.
+7. TRAVEL: A card for use in booking travel-related services such as flights and hotels. Not linked to an account.
+8. GIFT: A card preloaded with a specific amount of money, often given as a gift. Not linked to an account.
+9. STORE_CREDIT: A card issued by a store, allowing the holder to purchase goods and services from that store. Linked to an account.
+10. CORPORATE_CREDIT: A credit card issued to employees for business expenses. Linked to a corporate account.
+11. PROCUREMENT: A card used by businesses to purchase goods and services. Linked to a business account.
+12. HEALTH_SAVINGS: A card linked to a health savings account (HSA) for medical expenses. Linked to an HSA account.
+13. INSURANCE: A card provided by an insurance company for managing and paying insurance-related expenses. Linked to an insurance account.
+14. FUEL: A card used to pay for fuel expenses. Not linked to an account.
+15. CAMPUS: A card used within a campus for various services, such as dining, bookstore purchases, and access to facilities. Not linked to a campus account.  
+POST - :userId/register-card
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
