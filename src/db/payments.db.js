@@ -193,6 +193,32 @@ const registerCard = async(userId, payload) => {
     return await cardDB.create(cardPayload);
 }
 
+const getAllUserCards = async(userId, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        isDeleted: false
+    };
+    return await cardDB.find(query, fields);
+}
+
+const getCardByToken = async(userId, cardToken, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        token: cardToken,
+        isDeleted: false
+    };
+    return await cardDB.findOne(query, fields);
+}
+
+const getCardByType = async(userId, cardType, fields) => {
+    const query = {
+        userId: new mongoose.mongoose.Types.ObjectId(userId),
+        cardType: cardType,
+        isDeleted: false
+    };
+    return await cardDB.find(query, fields);
+}
+
 export {
     isAccountByAccNumberAvailable,
     isAccountByTokenAvailable,
@@ -212,5 +238,8 @@ export {
     deactivateReactivatePaymentAccountByToken,
     deletePaymentAccountByToken,
     isCardByCardNumberAvailable,
-    registerCard
+    registerCard,
+    getAllUserCards,
+    getCardByToken,
+    getCardByType
 };

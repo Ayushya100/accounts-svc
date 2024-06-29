@@ -270,6 +270,10 @@
         "Card already exists with same card number": "समान कार्ड नंबर वाला कार्ड पहले से मौजूद है",
         "Some error occurred while working with db to register new card": "नया कार्ड पंजीकृत करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
         "Card created successfully": "कार्ड सफलतापूर्वक बनाया गया",
-        "Provided linkage account is not of valid type to assign to the new card": "नए कार्ड को आवंटित करने के लिए प्रदान किया गया लिंकेज खाता वैध प्रकार का नहीं है"
+        "Provided linkage account is not of valid type to assign to the new card": "नए कार्ड को आवंटित करने के लिए प्रदान किया गया लिंकेज खाता वैध प्रकार का नहीं है",
+        "Some error occurred while working with db to retrieve all user card info for requested user": "अनुरोधित उपयोगकर्ता के लिए सभी उपयोगकर्ता कार्ड जानकारी पुनर्प्राप्त करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि उत्पन्न हुई",
+        "No user card information found": "कोई उपयोगकर्ता कार्ड जानकारी नहीं मिली",
+        "User card retrieved successfully": "उपयोगकर्ता कार्ड सफलतापूर्वक पुनर्प्राप्त किया गया",
+        "Invalid card type": "अमान्य कार्ड प्रकार"
     }
 }

@@ -2,24 +2,18 @@
 
 import { logger, createNewLog } from 'lib-finance-service';
 import dbConnect from '../../db/index.js';
-import { decryptPaymentData, maskPaymentNumber, maskUPINumber, translate } from '../../utils/index.js';
+import {
+    decryptPaymentData,
+    filterFields,
+    maskPaymentNumber,
+    maskUPINumber,
+    translate
+} from '../../utils/index.js';
 
 const header = 'controller: get-payment-account-info';
 
 const log = logger(header);
 const registerLog = createNewLog(header);
-
-const fields = (filterOptions) => {
-    let accountFields = null;
-    if (filterOptions) {
-        const filterValues = JSON.parse(filterOptions);
-
-        if (filterValues.fields) {
-            accountFields = filterValues.fields.split(',').map((field) => field.trim()).join(' ');
-        }
-    }
-    return accountFields;
-}
 
 const formatResponse = (accountInfo) => {
     const fields = ['paymentName', 'paymentNumber'];
@@ -42,12 +36,12 @@ const getAllPaymentAccount = async(userId, filterOptions) => {
 
     try {
         log.info('Execution for retrieving user payment account informations started');
-        const accountFields = filterOptions ? fields(filterOptions) : null;
+        const accountFields = filterOptions ? filterFields(filterOptions) : null;
 
         log.info('Call db query to retrieve all user payment accounts');
         let userPaymentAccounts = await dbConnect.getAllUserPaymentAccount(userId, accountFields);
 
-        if (userPaymentAccounts) {
+        if (userPaymentAccounts.length > 0) {
             log.info('Data format into readable format started');
             userPaymentAccounts.forEach(accountInfo => {
                 accountInfo = formatResponse(accountInfo);
@@ -84,7 +78,7 @@ const getPaymentAccountByToken = async(userId, accountToken, filterOptions) => {
 
     try {
         log.info('Execution for retrieving account information started');
-        const accountFields = filterOptions ? fields(filterOptions) : null;
+        const accountFields = filterOptions ? filterFields(filterOptions) : null;
 
         log.info('Call db query to retrieve payment account information started');
         let paymentAccount = await dbConnect.getPaymentAccountByToken(userId, accountToken, accountFields);
@@ -134,12 +128,12 @@ const getPaymentAccountByPaymentType = async(userId, paymentType, filterOptions)
             };
         }
 
-        const accountFields = filterOptions ? fields(filterOptions) : null;
+        const accountFields = filterOptions ? filterFields(filterOptions) : null;
 
         log.info('Call db query to retrieve user payment accounts for requested payment type');
         let paymentAccount = await dbConnect.getPaymentAccountByType(userId, paymentType, accountFields);
 
-        if (paymentAccount) {
+        if (paymentAccount.length > 0) {
             log.info('Data format into readable format started');
             paymentAccount.forEach(accountInfo => {
                 accountInfo = formatResponse(accountInfo);
