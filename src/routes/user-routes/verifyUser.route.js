@@ -42,7 +42,7 @@ const verifyUser = async(req, res, next) => {
         log.info('Call controller function to build payload to be send to user for verification completion');
         const mailPayload = userController.sendVerificationSuccessfulMailPayload(userValidated.data);
 
-        const mailResponse = await sendMail(mailPayload);
+        const mailResponse = await sendMail(req.protocol, mailPayload);
         userValidated.resMsg = `${userValidated.resMsg} - ${mailResponse.message}`;
 
         log.success(`User Verification completed successfully`);

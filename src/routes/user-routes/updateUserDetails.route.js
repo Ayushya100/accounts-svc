@@ -41,7 +41,7 @@ const updateUserDetails = async(req, res, next) => {
         registerLog.createInfoLog('User details updated successfully', null, updatedUser);
         log.info('Call controller function to build payload to be send to user for details update confimation');
         const mailPayload = userController.sendUpdateDetailsMailPayload(updatedUser.data);
-        const mailResponse = await sendMail(mailPayload);
+        const mailResponse = await sendMail(req.protocol, mailPayload);
         updatedUser.resMsg = `${updatedUser.resMsg} - ${mailResponse.message}`;
 
         log.success(`Successfully updated user details in db for provided user id : ${userId}`);

@@ -46,7 +46,7 @@ const registerUser = async(req, res, next) => {
         log.info('Call controller function to build payload to be send to user for verification');
         const mailPayload = userController.sendVerificationMailPayload(userCreated.data);
 
-        const mailResponse = await sendMail(mailPayload);
+        const mailResponse = await sendMail(req.protocol, mailPayload);
         userCreated.resMsg = `${userCreated.resMsg} - ${mailResponse.message}`;
 
         log.success(`Successfully registered new user in db`);

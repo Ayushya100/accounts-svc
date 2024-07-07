@@ -161,10 +161,10 @@ const sendAccountCreationMailPayload = (userData, payload) => {
         emailType: 'ACCOUNT_REGISTRATION_MAIL',
         context: {
             fullName: userData.firstName + ' ' + userData.lastName,
-            accountName: payload.data.accountData.accountName,
-            accountNumber: payload.data.accountData.accountNumber,
-            holderName: payload.data.accountData.holderName,
-            accountDate: payload.data.accountData.accountDate
+            accountName: payload.data.accountName,
+            accountNumber: payload.data.accountNumber,
+            holderName: payload.data.holderName,
+            accountDate: payload.data.accountDate
         }
     };
 

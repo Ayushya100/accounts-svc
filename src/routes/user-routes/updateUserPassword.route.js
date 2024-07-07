@@ -41,7 +41,7 @@ const updateUserPassword = async(req, res, next) => {
         registerLog.createInfoLog('User password updated successfully', null, updatedUser);
         log.info('Call controller function to build payload to be send to user for password update confimation');
         const mailPayload = userController.sendUpdatePasswordMailPayload(updatedUser.data);
-        const mailResponse = await sendMail(mailPayload);
+        const mailResponse = await sendMail(req.protocol, mailPayload);
         updatedUser.resMsg = `${updatedUser.resMsg} - ${mailResponse.message}`;
 
         log.success(`Successfully updated user password in db for provided user id : ${userId}`);

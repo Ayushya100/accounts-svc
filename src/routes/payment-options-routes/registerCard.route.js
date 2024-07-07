@@ -76,7 +76,7 @@ const registerCard = async(req, res, next) => {
         log.info('Call controller function to build payload to be send to user for card creation confirmation');
         const mailPayload = paymentController.sendCardCreationMailPayload(userAvailable.data, cardInfo.data);
 
-        const mailResponse = await sendMail(mailPayload);
+        const mailResponse = await sendMail(req.protocol, mailPayload);
         cardInfo.resMsg = `${cardInfo.resMsg} - ${mailResponse.message}`;
 
         log.success(`Successfully registered new card in db`);

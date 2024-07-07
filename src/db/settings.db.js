@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import {
     dashboardSettingTemplate,
     roleScopeTemplate,
+    serviceConfigTemplate,
     serviceRoutesTemplate,
     userDashboardTemplate,
     userRoleTemplate
@@ -17,6 +18,7 @@ const dashboardDB = new userDashboardTemplate();
 const roleDB = new userRoleTemplate();
 const routeDB = new serviceRoutesTemplate();
 const scopeDB = new roleScopeTemplate();
+const configDB = new serviceConfigTemplate();
 
 const isSettingAvailable = async(payload) => {
     const query = {
@@ -88,6 +90,15 @@ const isRouteAvailable = async(payload) => {
         method: payload.method
     };
     return await routeDB.findOne(query, null);
+}
+
+const isServiceAvailable = async(payload) => {
+    const query = {
+        microservice: payload.microservice,
+        environment: payload.environment,
+        protocol: payload.protocol
+    };
+    return await configDB.findOne(query, null);
 }
 
 const restoreRoute = async(userId, route) => {
@@ -423,6 +434,7 @@ export {
     getSystemUserSettingInfo,
     getUserAssignableSettings,
     isRouteAvailable,
+    isServiceAvailable,
     restoreRoute,
     isUserRoleAvailable,
     restoreRole,

@@ -166,7 +166,10 @@
         "Role scopes sync completed successfully": "Role scopes sync completed successfully",
         "Some error occurred while working with db to sync role scopes": "Some error occurred while working with db to sync role scopes",
         "Dashboard settings sync completed successfully": "Dashboard settings sync completed successfully",
-        "Some error occurred while working with db to sync dashboard settings": "Some error occurred while working with db to sync dashboard settings"
+        "Some error occurred while working with db to sync dashboard settings": "Some error occurred while working with db to sync dashboard settings",
+        "Some error occurred while working with db to sync service configs": "Some error occurred while working with db to sync service configs",
+        "Service configs sync completed successfully": "Service configs sync completed successfully",
+        "service configs": "service configs"
     },
     "paymentRoutes": {
         "Required Parameter is missing": "Required Parameter is missing",

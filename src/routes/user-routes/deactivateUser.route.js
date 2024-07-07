@@ -47,7 +47,7 @@ const deactivateUser = async(req, res, next) => {
         registerLog.createInfoLog('User deactivated successfully', null, updatedUser);
         log.info('Call controller function to build payload to be send to user for user deactivation confimation');
         const mailPayload = userController.sendAccountDeactivateMailPayload(updatedUser.data);
-        const mailResponse = await sendMail(mailPayload);
+        const mailResponse = await sendMail(req.protocol, mailPayload);
         updatedUser.resMsg = `${updatedUser.resMsg} - ${mailResponse.message}`;
 
         log.success(`Successfully deactivated user in db for provided user id : ${userId}`);

@@ -1,0 +1,50 @@
+[
+    {
+        "_id": "668a19a81a995894d3cd5a4e",
+        "microservice": "accounts-svc",
+        "environment": "dev",
+        "protocol": "http",
+        "port": 3200,
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "668a19a81a995894d3cd5a5e",
+        "microservice": "accounts-svc",
+        "environment": "dev",
+        "protocol": "https",
+        "port": 6200,
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "668a19a81a995894d3cd5a6e",
+        "microservice": "email-svc",
+        "environment": "dev",
+        "protocol": "http",
+        "port": 4000,
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    },
+    {
+        "_id": "668a19a81a995894d3cd5a7e",
+        "microservice": "email-svc",
+        "environment": "dev",
+        "protocol": "https",
+        "port": 6400,
+        "createdOn": "2024-05-22T05:11:34.119Z",
+        "createdBy": "SYSTEM",
+        "modifiedOn": "2024-05-22T05:11:34.119Z",
+        "modifiedBy": "SYSTEM",
+        "isDeleted": false
+    }
+]
