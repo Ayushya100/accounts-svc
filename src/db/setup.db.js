@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import {
     dashboardSettingTemplate,
     roleScopeTemplate,
+    serviceConfigTemplate,
     serviceRoutesTemplate,
     userRoleTemplate
 } from 'lib-finance-service';
@@ -14,6 +15,7 @@ const routeDB = new serviceRoutesTemplate();
 const settingDB = new dashboardSettingTemplate();
 const roleDB = new userRoleTemplate();
 const scopeDB = new roleScopeTemplate();
+const configDB = new serviceConfigTemplate();
 
 const findRouteById = async(routeId) => {
     const query = {
@@ -24,6 +26,17 @@ const findRouteById = async(routeId) => {
 
 const createNewRoute = async(route) => {
     return await routeDB.create(route);
+}
+
+const findConfigById = async(configId) => {
+    const query = {
+        _id: configId
+    };
+    return await configDB.findById(query, null);
+}
+
+const createNewConfig = async(config) => {
+    return await configDB.create(config);
 }
 
 const findRoleById = async(roleId) => {
@@ -67,5 +80,7 @@ export {
     findScopeById,
     createNewScope,
     findSettingById,
-    createNewSetting
+    createNewSetting,
+    findConfigById,
+    createNewConfig
 };

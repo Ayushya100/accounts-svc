@@ -39,6 +39,36 @@ const processServiceRoutesSync = async() => {
     }
 }
 
+const processServiceConfigsSync = async() => {
+    try {
+        log.info('Execution for syncing service configs controller started');
+        const serviceConfigs = readJsonFileSync('service_configs');
+
+        for (const configs of serviceConfigs) {
+            const existingConfig = await dbConnect.findConfigById(configs._id);
+            if (!existingConfig) {
+                dbConnect.createNewConfig(configs);
+            }
+        }
+
+        log.success('Execution for syncing service configs completed successfully');
+        return {
+            resType: 'SUCCESS',
+            resMsg: translate('setupRoutes', 'Service configs sync completed successfully'),
+            data: serviceConfigs,
+            isValid: true
+        };
+    } catch (err) {
+        log.error('Error while working with db to sync service configs.');
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: translate('setupRoutes', 'Some error occurred while working with db to sync service configs'),
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 const processUserRoleSync = async() => {
     try {
         log.info('Execution for syncing user roles controller started');
@@ -138,6 +168,12 @@ const syncSetup = async() => {
         const serviceRoutesResponse = await processServiceRoutesSync();
         if (serviceRoutesResponse.isValid) {
             message += `${translate('setupRoutes', 'service routes')}`;
+        }
+
+        log.info('Call function to sync service configs');
+        const serviceConfigsResponse = await processServiceConfigsSync();
+        if (serviceConfigsResponse.isValid) {
+            message += `${translate('setupRoutes', 'service configs')}`
         }
 
         log.info('Call function to sync user roles');

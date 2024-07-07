@@ -165,7 +165,10 @@
         "Role scopes sync completed successfully": "भूमिका स्कोप सिंक सफलतापूर्वक पूरा हुआ",
         "Some error occurred while working with db to sync role scopes": "रोल स्कोप को सिंक करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
         "Dashboard settings sync completed successfully": "डैशबोर्ड सेटिंग्स सिंक सफलतापूर्वक पूरा हुआ",
-        "Some error occurred while working with db to sync dashboard settings": "डैशबोर्ड सेटिंग्स को सिंक करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई"
+        "Some error occurred while working with db to sync dashboard settings": "डैशबोर्ड सेटिंग्स को सिंक करने के लिए डेटाबेस के साथ काम करते समय कुछ त्रुटि हुई",
+        "Some error occurred while working with db to sync service configs": "सेवा कॉन्फ़िगरेशन को सिंक करने के लिए डीबी के साथ काम करते समय कुछ त्रुटि हुई",
+        "Service configs sync completed successfully": "सेवा कॉन्फ़िगरेशन समन्वयन सफलतापूर्वक पूरा हुआ",
+        "service configs": "सेवा विन्यास"
     },
     "paymentRoutes": {
         "Required Parameter is missing": "आवश्यक पैरामीटर गुम है",

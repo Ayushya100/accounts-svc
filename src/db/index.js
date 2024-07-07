@@ -9,6 +9,7 @@ import {
     getSystemUserSettingInfo,
     getUserAssignableSettings,
     isRouteAvailable,
+    isServiceAvailable,
     restoreRoute,
     isUserRoleAvailable,
     restoreRole,
@@ -61,7 +62,9 @@ import {
     findScopeById,
     createNewScope,
     findSettingById,
-    createNewSetting
+    createNewSetting,
+    findConfigById,
+    createNewConfig
 } from './setup.db.js';
 import {
     isAccountByAccNumberAvailable,
@@ -97,6 +100,7 @@ export default {
     getSystemUserSettingInfo,
     getUserAssignableSettings,
     isRouteAvailable,
+    isServiceAvailable,
     restoreRoute,
     isUserRoleAvailable,
     restoreRole,
@@ -167,5 +171,7 @@ export default {
     registerCard,
     getAllUserCards,
     getCardByToken,
-    getCardByType
+    getCardByType,
+    findConfigById,
+    createNewConfig
 };

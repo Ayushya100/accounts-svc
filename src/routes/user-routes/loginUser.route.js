@@ -43,7 +43,7 @@ const loginUser = async(req, res, next) => {
             log.info('Call controller function to build payload to be send to user for verification');
             const verificationPayload = userController.sendVerificationMailPayload(isUserVerified.data);
 
-            await sendMail(verificationPayload);
+            await sendMail(req.protocol, verificationPayload);
             throw isUserVerified;
         } else if (!isUserVerified.isValid) {
             throw isUserVerified;
@@ -53,7 +53,7 @@ const loginUser = async(req, res, next) => {
         const activeUser = await userController.isUserActive(isUserValid.data);
         if (activeUser) {
             const reactivatePayload = userController.sendAccountReactivationMailPayload(isUserValid.data);
-            await sendMail(reactivatePayload);
+            await sendMail(req.protocol, reactivatePayload);
         }
 
         log.info('Call controller function to login the user and setup the tokens');

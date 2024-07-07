@@ -82,7 +82,7 @@ const registerAccount = async(req, res, next) => {
         log.info('Call controller function to build payload to be send to user for confirmation');
         const mailPayload = paymentController.sendAccountCreationMailPayload(userAvailable.data, accountInfo);
         
-        const mailResponse = await sendMail(mailPayload);
+        const mailResponse = await sendMail(req.protocol, mailPayload);
         accountInfo.resMsg = `${accountInfo.resMsg} - ${mailResponse.message}`;
 
         log.success(`Successfully registered new account and task in db`);
