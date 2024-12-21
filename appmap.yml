@@ -1,0 +1,8 @@
+name: accounts-svc
+appmap_dir: tmp/appmap
+language: javascript
+packages:
+  - path: .
+    exclude:
+      - node_modules
+      - .yarn
