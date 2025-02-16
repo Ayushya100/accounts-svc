@@ -1,0 +1,31 @@
+{
+  "name": "accounts-svc",
+  "version": "1.0.0",
+  "description": "Welcome to the GitHub repository for **Finance Tracker Accounts SVC** - This service is responsible for managing user accounts and their information. It provides functionality for user registration, authentication, and profile management, allowing users to securely manage their expenses, investments, and incomes\r ## Project Status: Under Development\r ### What's Happening Now:\r - The service is currently being developed to create the functionalities to register and manage user accounts related information.\r ## Features\r #### Overview\r Our system provides essential APIs designed specifically for integration within a finance tracker application. These APIs facilitate secure user authentication, profile management, role-based access control, and dynamic system configuration.\r #### Key Features",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start-appmap": "npx appmap-node nodemon src/index.js",
+    "start": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+  },
+  "keywords": [
+    "node.js",
+    "expressJS",
+    "javascript",
+    "accounts-svc"
+  ],
+  "author": "Ayushya Jaiswal",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0"
+  },
+  "devDependencies": {
+    "appmap-node": "^2.24.3",
+    "nodemon": "^3.1.9"
+  }
+}
