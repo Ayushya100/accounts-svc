@@ -8,6 +8,7 @@ const router = new Router('health-check');
 // API Function
 const healthCheck = (req, res, next) => {
     try {
+        router.logMsg();
         router.logRequest(req);
         router.logInfo('success', 'Health check successful');
         router.logInfo('info', `Service is healthy. Uptime : ${process.uptime()} seconds | Timestamp : ${Date.now()} | Hostname : ${os.hostname()}`);

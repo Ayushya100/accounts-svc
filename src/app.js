@@ -3,7 +3,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import { errorHandler } from 'lib-finance-svc'
+import { paramValidator, errorHandler } from 'lib-finance-svc'
 import { USERS_API, COOKIE_OPTIONS } from './constants.js';
 
 // Routes
@@ -32,6 +32,10 @@ app.use(cookieParser(COOKIE_OPTIONS));
 
 // Health Check Route
 app.get(`${USERS_API}/health`, routes.healthCheck);
+
+// System Setup Route
+app.get(`${USERS_API}/service-info`, routes.serviceRoutes.getServiceConfig);
+app.get(`${USERS_API}/service-info/:svcId`, paramValidator, routes.serviceRoutes.getServiceConfig);
 
 // Error Handler middleware
 app.use(errorHandler);
