@@ -1,26 +1,56 @@
 'use strict';
 
-import { exec } from 'lib-finance-svc';
+import { exec, logger } from 'lib-finance-svc';
 
-const fetchServiceDetail = async(serviceId = '') => {
+const log = logger('db');
+
+const executeQuery = async(query, params = []) => {
     try {
-        let query = `SELECT id, microservice, environment, protocol, port, TO_CHAR(created_on, 'YYYY-MM-DD') created_on, TO_CHAR(modified_on, 'YYYY-MM-DD') modified_on
-            FROM svc_configs
-            WHERE is_deleted = false`;
-        const params = [];
-
-        if (serviceId !== '') {
-            query += ' AND id = ?';
-            params.push(serviceId);
-        }
-        
-        const result = await exec(query, params);
-        return result;
+        return await exec(query, params);
     } catch (err) {
-        console.log(err);
+        log.error(JSON.stringify(err));
     }
 }
 
+const fetchServiceDetail = async(serviceId = '', microservice = '', environment = '', protocol = '') => {
+    let query = `SELECT id, microservice, environment, protocol, port, TO_CHAR(created_on, 'YYYY-MM-DD') created_on, TO_CHAR(modified_on, 'YYYY-MM-DD') modified_on
+        FROM svc_configs
+        WHERE is_deleted = false`;
+    const params = [];
+
+    if (serviceId !== '') {
+        query += ' AND id = ?';
+        params.push(serviceId);
+    }
+
+    if (microservice !== '') {
+        query += ' AND microservice = ?';
+        params.push(microservice);
+    }
+
+    if (environment !== '') {
+        query += ' AND environment = ?';
+        params.push(environment);
+    }
+
+    if (protocol !== '') {
+        query += ' AND protocol = ?';
+        params.push(protocol);
+    }
+    
+    const result = await executeQuery(query, params);
+    return result;
+}
+
+const registerService = async(serviceConfig) => {
+    let query = `INSERT INTO svc_configs (microservice, environment, protocol, port)
+        VALUES (?, ?, ?, ?)`;
+
+    const result = await executeQuery(query, [serviceConfig.microservice, serviceConfig.environment, serviceConfig.protocol, serviceConfig.port]);
+    return result;
+}
+
 export {
-    fetchServiceDetail
+    fetchServiceDetail,
+    registerService
 };

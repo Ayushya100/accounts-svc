@@ -2,6 +2,7 @@
 
 import { Router, buildApiResponse } from 'lib-finance-svc';
 import controller from '../../controllers/index.js';
+import utils from '../../utils/index.js';
 
 const router = new Router('get-service-config');
 const serviceController = controller.serviceController;
@@ -36,11 +37,7 @@ const getServiceConfig = async(req, res, next) => {
             res.status(serviceConfigs.status).json(buildApiResponse(serviceConfigs));
         }
     } catch (err) {
-        if (err.status === 500) {
-            router.logInfo('error', 'Some error occurred while working with get service configuration router function');
-        } else {
-            router.logInfo('error', `Error occurred while processing the request at router level! Error : ${err.status} - ${err.message}`);
-        }
+        router.logInfo('error', utils.logError(err));
         next(err);
     }
 }

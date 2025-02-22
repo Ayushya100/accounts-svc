@@ -66,6 +66,32 @@ components:
         - environment
         - protocol
         - port
+
+    newService:
+      type: object
+      properties:
+        microservice:
+          type: string
+          description: Service Name
+          minLength: 1
+        environment:
+          type: string
+          description: Service Environment
+          minLength: 2
+        protocol:
+          type: string
+          description: Service Protocol
+          minLength: 4
+        port:
+          type: string
+          description: Service Port
+          minLength: 2
+          maxLength: 5
+      required:
+        - microservice
+        - environment
+        - protocol
+        - port
     
     healthCheckResponse:
       type: object
@@ -129,7 +155,7 @@ components:
         data:
           type: array
 
-    invalidIdErrorResponse:
+    invalidPayloadErrorResponse:
       type: object
       properties:
         statusCode:
@@ -139,6 +165,9 @@ components:
           type: string
           example: 'Bad Request'
         message:
+          type: string
+          example: 'Invalid request parameters'
+        userMessage:
           type: string
           example: 'Invalid request parameters'
         devMessage:
@@ -161,9 +190,35 @@ components:
         message:
           type: string
           example: 'No info found'
+        userMessage:
+          type: string
+          example: 'No info found'
         devMessage:
           type: string
           example: 'No Info found'
+        data:
+          type: array
+        error:
+          type: array
+
+    conflictServiceInfo:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 409
+        type:
+          type: string
+          example: 'Conflict'
+        message:
+          type: string
+          example: 'Conflicting Service Information'
+        userMessage:
+          type: string
+          example: 'Conflicting Service Information'
+        devMessage:
+          type: string
+          example: 'Conflicting Service Information'
         data:
           type: array
         error:
@@ -179,6 +234,9 @@ components:
           type: string
           example: 'Internal Server Error'
         message:
+          type: string
+          example: 'Internal Server Error'
+        userMessage:
           type: string
           example: 'Internal Server Error'
         devMessage:
@@ -251,17 +309,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/serviceInfoResponse'
         '400':
-          description: Invalid id parameter
+          description: BAD REQUEST
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/invalidIdErrorResponse'
+                $ref: '#/components/schemas/invalidPayloadErrorResponse'
         '404':
           description: No service info with the given `serviceId` was found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/notFoundErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /register-service:
+    post:
+      operationId: registerServiceInfo
+      summary: Register new Service Information
+      description: Register new service information in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newService'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceInfoResponse'
+        '201':
+          description: REQUEST COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceInfoResponse'
+        '400':
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invalidPayloadErrorResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflictServiceInfo'
         '500':
           description: Internal Server Error
           content:
