@@ -16,43 +16,43 @@ const getAllServiceConfig = async() => {
         controller.logInfo('success', 'Service configuration list retrieved successfully');
         if (serviceConfigList.rowCount === 0) {
             return {
-                resCode: 204,
-                resMsg: 'No service configuration record exist',
+                status: 204,
+                message: 'No service configuration record exist',
                 data: serviceConfigList.rows,
                 isValid: true
             };
         }
 
         return {
-            resCode: 200,
-            resMsg: 'All service configurations found',
-            data: serviceConfigList,
+            status: 200,
+            message: 'All service configurations found',
+            data: serviceConfigList.rows,
             isValid: true
         };
     } catch (err) {
         controller.logInfo('error', 'Error while working with db to get all service configuration records');
         return {
-            resCode: 500,
-            resMsg: 'Some error occurred while working with db to fetch service configurations',
+            status: 500,
+            message: 'Some error occurred while working with db to fetch service configurations',
             stack: err.stack,
             isValid: false
         };
     }
 }
 
-const getServiceDetail = async(svcId) => {
+const getServiceDetail = async(serviceId) => {
     try {
         controller.logMsg();
         controller.logInfo('info', 'Execution for retrieving the service detail controller started');
 
-        controller.logInfo('info', `Call db query to get the detail of requested service by id : ${svcId}`);
-        const serviceDetail = await fetchServiceDetail(svcId);
+        controller.logInfo('info', `Call db query to get the detail of requested service by id : ${serviceId}`);
+        const serviceDetail = await fetchServiceDetail(serviceId);
 
         if (serviceDetail.rowCount === 0) {
-            controller.logInfo('error', `No record found for requested service by id : ${svcId}`);
+            controller.logInfo('error', `No record found for requested service by id : ${serviceId}`);
             return {
-                resCode: 404,
-                resMsg: 'No service record found for requested id',
+                status: 404,
+                message: 'No service info with the given serviceId was found',
                 data: [],
                 isValid: false
             }
@@ -60,16 +60,16 @@ const getServiceDetail = async(svcId) => {
 
         controller.logInfo('success', 'Service configuration detail retrieved successfully');
         return {
-            resCode: 200,
-            resmsg: 'Service details retrieved',
-            data: serviceDetail,
+            status: 200,
+            message: 'Service details retrieved',
+            data: serviceDetail.rows,
             isValid: true
         };
     } catch (err) {
         controller.logInfo('error', 'Error while working with db to get the service configuration record for provided id');
         return {
-            resCode: 500,
-            resMsg: 'Some error occurred while working with db to fetch service detail',
+            status: 500,
+            message: 'Some error occurred while working with db to fetch service detail',
             stack: err.stack,
             isValid: false
         };

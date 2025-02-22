@@ -1,43 +1,29 @@
 'use strict';
 
-import express from 'express';
 import cookieParser from 'cookie-parser';
-import rateLimit from 'express-rate-limit';
-import { paramValidator, errorHandler } from 'lib-finance-svc'
-import { USERS_API, COOKIE_OPTIONS } from './constants.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import { paramValidator, App } from 'lib-finance-svc'
 
-// Routes
+import { USERS_API, COOKIE_OPTIONS } from './constants.js';
 import routes from './routes/index.js';
 
-const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const openapiSpec = path.join(__dirname, 'openapi.yaml');
 
-// Setting up Middlewares
-app.use(express.json({
-    limit: '64kb' // Maximum request body size
-}));
-
-app.use(express.urlencoded({
-    limit: '32kb',
-    extended: false
-}));
-
-app.use(rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 minutes max
-    max: 200 // Limit each IP to 200 requestes per windowMs
-}));
-
-app.use(express.static('public'));
+const appInstance = new App(openapiSpec);
+const app = appInstance.app;
 
 app.use(cookieParser(COOKIE_OPTIONS));
 
-// Health Check Route
+// // Health Check Route
 app.get(`${USERS_API}/health`, routes.healthCheck);
 
-// System Setup Route
+// // System Setup Route
 app.get(`${USERS_API}/service-info`, routes.serviceRoutes.getServiceConfig);
-app.get(`${USERS_API}/service-info/:svcId`, paramValidator, routes.serviceRoutes.getServiceConfig);
+app.get(`${USERS_API}/service-info/:serviceId`, paramValidator, routes.serviceRoutes.getServiceConfig);
 
-// Error Handler middleware
-app.use(errorHandler);
+appInstance.registerErrorHandler();
 
 export default app;
