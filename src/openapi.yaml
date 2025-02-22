@@ -1,0 +1,270 @@
+openapi: 3.0.0
+info:
+  title: Accounts Service
+  version: 1.0.0
+  description: The Accounts Service is responsible for managing user-related operations and system configurations.
+    User Management - Create, retrieve, update and delete user accounts.
+    Authentication & Authorization - Handle user authentication, session management, and access control.
+    System Configurations - Manage system-specific setting such as API configurations, user scopes and groups.
+
+servers:
+  - url: http://192.168.0.106:3200/accounts-svc/api/v1.0
+    description: Local development server
+
+components:
+  parameters:
+    serviceId:
+      name: serviceId
+      description: Service Id
+      in: path
+      required: true
+      schema:
+        type: string
+  
+  schemas:
+    healthCheckData:
+      title: Schema for Health Check Data
+      type: object
+      properties:
+        uptime:
+          type: string
+        timestamp:
+          type: string
+        hostname:
+          type: string
+
+    serviceInfo:
+      title: Schema for Service Info
+      type: object
+      properties:
+        id:
+          type: string
+          description: Service Id
+        microservice:
+          type: string
+          description: Service Name
+        environment:
+          type: string
+          description: Service Environment
+        protocol:
+          type: string
+          description: Service Protocol
+        port:
+          type: string
+          description: Service Port
+        created_on:
+          type: string
+          format: date
+          description: Service created date
+        modified_on:
+          type: string
+          format: date
+          description: Service modified date
+      required:
+        - id
+        - microservice
+        - environment
+        - protocol
+        - port
+    
+    healthCheckResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+        data:
+          $ref: '#/components/schemas/healthCheckData'
+
+    serviceInfoResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'Success'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/serviceInfo'
+
+    noContentResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 204
+        type:
+          type: string
+          example: 'No Content'
+        message:
+          type: string
+          example: 'No Content'
+        devMessage:
+          type: string
+          example: 'No Content'
+        success:
+          type: boolean
+        data:
+          type: array
+
+    invalidIdErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 400
+        type:
+          type: string
+          example: 'Bad Request'
+        message:
+          type: string
+          example: 'Invalid request parameters'
+        devMessage:
+          type: string
+          example: 'Invalid request parameters'
+        data:
+          type: array
+        error:
+          type: array
+
+    notFoundErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        type:
+          type: string
+          example: 'Not Found'
+        message:
+          type: string
+          example: 'No info found'
+        devMessage:
+          type: string
+          example: 'No Info found'
+        data:
+          type: array
+        error:
+          type: array
+    
+    internalServerErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 500
+        type:
+          type: string
+          example: 'Internal Server Error'
+        message:
+          type: string
+          example: 'Internal Server Error'
+        devMessage:
+          type: string
+          example: 'Internal Server Error'
+        data:
+          type: array
+        error:
+          type: array
+
+paths:
+  /health:
+    get:
+      operationId: healthCheck
+      summary: Service Health Check
+      description: Check the health status of the service.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthCheckResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /service-info:
+    get:
+      operationId: getServiceInfo
+      summary: Get Service Information
+      description: Retrieve the service information including the service name, version, port and protocol.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceInfoResponse'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+        default:
+          description: Unexpected error
+
+  /service-info/{serviceId}:
+    get:
+      operationId: getServiceInfoById
+      summary: Get Service Information by Id
+      description: Retrieve the service information by the given service ID.
+      parameters:
+        - $ref: '#/components/parameters/serviceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceInfoResponse'
+        '400':
+          description: Invalid id parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invalidIdErrorResponse'
+        '404':
+          description: No service info with the given `serviceId` was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'

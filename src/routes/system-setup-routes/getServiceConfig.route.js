@@ -12,18 +12,18 @@ const getServiceConfig = async(req, res, next) => {
         router.logMsg();
         router.logRequest(req);
         
-        const svcId = req.params.svcId;
+        const serviceId = req.params.serviceId;
 
-        if (svcId) {
+        if (serviceId) {
             router.logInfo('info', 'Call controller function to retrieve service info by id');
-            const serviceDetail = await serviceController.getServiceDetail(svcId);
+            const serviceDetail = await serviceController.getServiceDetail(serviceId);
 
             if (!serviceDetail.isValid) {
                 throw serviceDetail;
             }
 
             router.logInfo('success', 'Successfully retrieved requested service detail from db');
-            res.status(serviceDetail.resCode).json(buildApiResponse(serviceDetail));
+            res.status(serviceDetail.status).json(buildApiResponse(serviceDetail));
         } else {
             router.logInfo('info', 'Call controller function to retrieve all service infos');
             const serviceConfigs = await serviceController.getAllServiceConfig();
@@ -33,13 +33,13 @@ const getServiceConfig = async(req, res, next) => {
             }
 
             router.logInfo('success', 'Successfully retrieved requested service configuration records from db');
-            res.status(serviceConfigs.resCode).json(buildApiResponse(serviceConfigs));
+            res.status(serviceConfigs.status).json(buildApiResponse(serviceConfigs));
         }
     } catch (err) {
-        if (err.resCode === 500) {
+        if (err.status === 500) {
             router.logInfo('error', 'Some error occurred while working with get service configuration router function');
         } else {
-            router.logInfo('error', `Error occurred while processing the request at router level! Error : ${err.resCode} - ${err.resMsg}`);
+            router.logInfo('error', `Error occurred while processing the request at router level! Error : ${err.status} - ${err.message}`);
         }
         next(err);
     }
