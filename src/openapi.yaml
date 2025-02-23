@@ -92,6 +92,27 @@ components:
         - environment
         - protocol
         - port
+
+    updateService:
+      type: object
+      properties:
+        microservice:
+          type: string
+          description: Service Name
+          minLength: 1
+        environment:
+          type: string
+          description: Service Environment
+          minLength: 2
+        protocol:
+          type: string
+          description: Service Protocol
+          minLength: 4
+        port:
+          type: string
+          description: Service Port
+          minLength: 2
+          maxLength: 5
     
     healthCheckResponse:
       type: object
@@ -322,6 +343,48 @@ paths:
                 $ref: '#/components/schemas/notFoundErrorResponse'
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    put:
+      operationId: updateServiceInfo
+      summary: Update existing Service Information
+      description: Update existing service information in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateService'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceInfoResponse'
+        '400':
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invalidPayloadErrorResponse'
+        '404':
+          description: No service info for the given `serviceId` found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundErrorResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflictServiceInfo'
+        '500':
+          description: INTERNAL SERVER ERROR
           content:
             application/json:
               schema:

@@ -1,8 +1,13 @@
 'use strict';
 
-import { fetchServiceDetail, registerService } from './system.db.js';
+import {
+    fetchServiceDetail,
+    registerService,
+    updateService
+} from './system.db.js';
 
 export {
     fetchServiceDetail,
-    registerService
+    registerService,
+    updateService
 };
