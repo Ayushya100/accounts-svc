@@ -24,6 +24,7 @@ app.get(`${USERS_API}/health`, routes.healthCheck);
 app.get(`${USERS_API}/service-info`, routes.serviceRoutes.getServiceConfig);
 app.get(`${USERS_API}/service-info/:serviceId`, paramValidator, routes.serviceRoutes.getServiceConfig);
 app.post(`${USERS_API}/register-service`, routes.serviceRoutes.registerServiceConfig);
+app.put(`${USERS_API}/service-info/:serviceId`, paramValidator, routes.serviceRoutes.updateServiceConfig);
 
 appInstance.registerErrorHandler();
 
