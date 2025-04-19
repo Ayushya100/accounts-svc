@@ -17,5 +17,6 @@ Our system provides essential APIs designed specifically for integration within 
 Our APIs are integrated seamlessly into our finance tracker application to enhance user management, security, and operational efficiency.
 ### Security
 Robust security measures are integrated in our finance tracker application. Implemented HTTPS encryption for secure data transmission and added validation for JWT bearer tokens to authenticate and authorize user access. Protected sensitive financial information and adhere to industry best practices for data security and privacy.
+
 ---
 **Finance Tracker** - Simplifying Financial Management for Everyone!
