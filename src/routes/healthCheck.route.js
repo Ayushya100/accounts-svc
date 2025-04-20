@@ -1,18 +1,15 @@
 'use strict';
 
 import os from 'os';
-import { Router, buildApiResponse } from 'finance-lib';
+import { logger, buildApiResponse } from 'finance-lib';
 
-const router = new Router('health-check');
+const log = logger('Router: health-check');
 
 // API Function
 const healthCheck = (req, res, next) => {
   try {
-    router.logMsg();
-    router.logRequest(req);
-    router.logInfo('success', 'Health check successful');
-    router.logInfo(
-      'info',
+    log.info('Health check successfull');
+    log.info(
       `Service is healthy. Uptime : ${process.uptime()} seconds | Timestamp : ${new Date().toISOString()} | Hostname : ${os.hostname()}`
     );
 
@@ -28,7 +25,7 @@ const healthCheck = (req, res, next) => {
       })
     );
   } catch (err) {
-    router.logInfo('error', `Health check failed! Error : ${err.message}`);
+    log.error(`Health check failed! Error : ${err.message}`);
     next({
       status: 500,
       message: 'Service is unhealthy',

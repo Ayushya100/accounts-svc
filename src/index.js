@@ -20,5 +20,6 @@ serviceConfig.PORT = process.env.PORT || serviceConfig.PORT;
 serviceConfig.PROTOCOL = process.env.PROTOCOL || serviceConfig.PROTOCOL;
 
 const service = new AccountService(serviceConfig, true);
+service.getUserContext();
 service.buildConnection();
 service.testConnection();
