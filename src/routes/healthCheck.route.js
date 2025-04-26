@@ -9,9 +9,7 @@ const log = logger('Router: health-check');
 const healthCheck = (req, res, next) => {
   try {
     log.info('Health check successfull');
-    log.info(
-      `Service is healthy. Uptime : ${process.uptime()} seconds | Timestamp : ${new Date().toISOString()} | Hostname : ${os.hostname()}`
-    );
+    log.info(`Service is healthy. Uptime : ${process.uptime()} seconds | Timestamp : ${new Date().toISOString()} | Hostname : ${os.hostname()}`);
 
     res.status(200).json(
       buildApiResponse({
@@ -29,6 +27,8 @@ const healthCheck = (req, res, next) => {
     next({
       status: 500,
       message: 'Service is unhealthy',
+      data: [],
+      errors: err,
       stack: err.stack,
     });
   }

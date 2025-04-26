@@ -13,6 +13,34 @@ servers:
 
 components:
   schemas:
+    registerUserPayload:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: First Name
+          minLength: 1
+        lastName:
+          type: string
+          description: Last Name
+        username:
+          type: string
+          description: Username
+          pattern: '^[a-zA-Z0-9]{4,24}$'
+        emailId:
+          type: string
+          description: Email Id
+          pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+        password:
+          type: string
+          description: Password
+          pattern: '^[a-zA-Z0-9@]{8,32}$'
+      required:
+        - firstName
+        - username
+        - emailId
+        - password
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -44,6 +72,67 @@ components:
           example: true
         data:
           $ref: '#/components/schemas/healthCheckData'
+
+    registerUserResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'REQUEST_COMPLETED'
+        message:
+          type: string
+          example: 'Request Completed'
+        devMessage:
+          type: string
+          example: 'Request Completed'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+    
+    roleNotFound:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        type:
+          type: string
+          example: 'NOT_FOUND'
+        message:
+          type: string
+          example: 'Resource Not Found'
+        devMessage:
+          type: string
+          example: Not Found. Requested resource does not exist.
+        error:
+          type: array
+        data:
+          type: array
+
+    userAlreadyExist:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 409
+        type:
+          type: string
+          example: 'CONFLICT'
+        message:
+          type: string
+          example: 'Resource already exist'
+        devMessage:
+          type: string
+          example: 'Resource already exist'
+        error:
+          type: array
+        data:
+          type: array
 
     internalServerErrorResponse:
       type: object
@@ -78,6 +167,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/healthCheckSuccessResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /register-user:
+    post:
+      operationId: registerUser
+      summary: Register New User
+      description: An API to register a user in the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerUserPayload'
+      responses:
+        '201':
+          description: REQUEST_COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/roleNotFound'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userAlreadyExist'
         '500':
           description: Internal Server Error
           content:
