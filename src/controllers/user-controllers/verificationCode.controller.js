@@ -41,7 +41,7 @@ const sendVerificationMailToUser = async (userInfo) => {
   const options = {
     name: fullName,
     userEmail: userInfo.email,
-    link: `${serviceConfig.serviceName}/verify-user/${userInfo.id}/${userInfo.verification.verificationToken}`,
+    link: `${serviceConfig.serviceName}/api/v1.0/verify-user/${userInfo.id}/${userInfo.verification.verificationToken}`,
   };
 
   const emailResponse = await sendMail('VERIFY_MAIL', 'PLAIN', options);
