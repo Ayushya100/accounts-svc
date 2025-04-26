@@ -9,4 +9,6 @@ const serviceConfig = {
   PROTOCOL: 'http',
 };
 
-export { USERS_API, serviceConfig };
+const SALT_ROUNDS = 10;
+
+export { USERS_API, serviceConfig, SALT_ROUNDS };

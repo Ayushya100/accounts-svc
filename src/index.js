@@ -12,6 +12,7 @@ dotenv.config({
 class AccountService extends Service {
   registerServiceEndpoints() {
     this.app.get(`${USERS_API}/health`, routes.healthCheck);
+    this.app.post(`${USERS_API}/register-user`, routes.users.registerUser);
   }
 }
 
