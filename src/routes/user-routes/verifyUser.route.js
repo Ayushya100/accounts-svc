@@ -20,14 +20,25 @@ const verifyUserEmail = async (req, res, next) => {
       throw isUserAvailable;
     }
 
-    log.info('Call controller function to verify user email via the provided token');
-    const verifyUser = await userController.verifyUserToken(userId, token, isUserAvailable.data);
-    if (!verifyUser.isValid) {
-      throw verifyUser;
+    let isAlreadyVerified = false;
+    let response;
+    if (isUserAvailable.data.isEmailVerified) {
+      log.info('User already verified');
+      isAlreadyVerified = true;
+      response = isUserAvailable;
+    }
+
+    if (!isAlreadyVerified) {
+      log.info('Call controller function to verify user email via the provided token');
+      const verifyUser = await userController.verifyUserToken(userId, token, isUserAvailable.data);
+      if (!verifyUser.isValid) {
+        throw verifyUser;
+      }
+      response = verifyUser;
     }
 
     log.success('User email verification completed successfully!');
-    res.status(200).json(buildApiResponse(verifyUser));
+    res.status(200).json(buildApiResponse(response));
   } catch (err) {
     if (err.statusCode === '500') {
       log.error(`Error occurred while processing the request in router. Error: ${JSON.stringify(err)}`);

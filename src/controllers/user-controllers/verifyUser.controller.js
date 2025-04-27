@@ -3,7 +3,7 @@
 import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'finance-lib';
 import { fetchUserMetaInfo, verifyUserEmail } from '../../db/index.js';
 import { generateEmailVerificationCode } from './verificationCode.controller.js';
-import { sendVerificationMailToUser } from './verificationCode.controller.js';
+import { sendVerificationMailToUser, sendVerificationConfirmationMailToUser } from '../../utils/index.js';
 
 const log = logger('Controller: verify-user');
 
@@ -79,6 +79,40 @@ const verifyUserToken = async (userId, token, userInfo) => {
     log.info('Complete user verification');
     let isEmailVerified = await verifyUserEmail(userId);
     isEmailVerified = isEmailVerified.rows[0];
+
+    const emailData = {
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
+      email: userInfo.email,
+      tableData: [
+        {
+          name: 'First Name',
+          description: userInfo.firstName,
+        },
+        {
+          name: 'Last Name',
+          description: userInfo.lastName || 'No data provided',
+        },
+        {
+          name: 'Username',
+          description: userInfo.username,
+        },
+        {
+          name: 'Registered Email Id',
+          description: userInfo.email,
+        },
+        {
+          name: 'Account Creation Date',
+          description: userInfo.createdDate.split(' ')[0],
+        },
+        {
+          name: 'Account Verified',
+          description: 'Yes',
+        },
+      ],
+    };
+
+    await sendVerificationConfirmationMailToUser(emailData);
 
     log.success('User email has been verified successfully.');
     return {

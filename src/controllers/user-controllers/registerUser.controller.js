@@ -4,8 +4,9 @@ import bcrypt from 'bcrypt';
 import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'finance-lib';
 import { isUsernameEmailInUse, createNewUser, fetchDefaultUserRole } from '../../db/index.js';
 import { SALT_ROUNDS } from '../../constants.js';
-import { generateEmailVerificationCode, sendVerificationMailToUser } from './verificationCode.controller.js';
+import { generateEmailVerificationCode } from './verificationCode.controller.js';
 import { getUserInfoById } from './getUserInfo.controller.js';
+import { sendVerificationMailToUser } from '../../utils/index.js';
 
 const log = logger('Controller: register-user');
 
