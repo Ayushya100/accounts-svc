@@ -33,9 +33,11 @@ const getUserInfo = async (id) => {
   const query = `SELECT U.ID, R.ROLE_CD, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID, U.LOGIN_TYPE, U.IS_VERIFIED
         , U.CREATED_DATE, U.MODIFIED_DATE, U.LOGIN_COUNT, U.LAST_LOGIN
         FROM USERS U
-        INNER JOIN USER_ROLE R ON R.ID = U.ROLE_ID;`;
+        INNER JOIN USER_ROLE R ON R.ID = U.ROLE_ID
+        WHERE U.ID = ?;`;
+  const params = [id];
 
-  return await exec(query);
+  return await exec(query, params);
 };
 
 const registerEmailVerification = async (userId, verificationCode, verificationCodeExpiry) => {
@@ -60,4 +62,26 @@ const registerEmailVerification = async (userId, verificationCode, verificationC
   return record;
 };
 
-export { fetchDefaultUserRole, isUsernameEmailInUse, createNewUser, getUserInfo, registerEmailVerification };
+const fetchUserMetaInfo = async (userId) => {
+  let query = `SELECT ID, USER_ID, VERIFICATION_TOKEN, VERIFICATION_TOKEN_EXP, FORGOT_PASSWORD_TOKEN, FORGOT_PASSWORD_TOKEN_EXP
+    , CREATED_DATE, MODIFIED_DATE
+    FROM USER_METADATA
+    WHERE IS_DELETED = false AND USER_ID = ?`;
+  let params = [userId];
+
+  return await exec(query, params);
+};
+
+const verifyUserEmail = async (userId) => {
+  let query = `UPDATE USER_METADATA SET VERIFICATION_TOKEN = NULL, VERIFICATION_TOKEN_EXP = now()
+    WHERE USER_ID = ?`;
+  const params = [userId];
+  await exec(query, params);
+
+  query = `UPDATE USERS SET IS_VERIFIED = true
+    WHERE ID = ?
+    RETURNING IS_VERIFIED`;
+  return await exec(query, params);
+};
+
+export { fetchDefaultUserRole, isUsernameEmailInUse, createNewUser, getUserInfo, registerEmailVerification, fetchUserMetaInfo, verifyUserEmail };

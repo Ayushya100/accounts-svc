@@ -1,10 +1,12 @@
 'use strict';
 
 import bcrypt from 'bcrypt';
-import { logger, convertIdToPrettyString, convertToNativeTimeZone } from 'finance-lib';
-import { isUsernameEmailInUse, createNewUser, fetchDefaultUserRole, getUserInfo } from '../../db/index.js';
+import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'finance-lib';
+import { isUsernameEmailInUse, createNewUser, fetchDefaultUserRole } from '../../db/index.js';
 import { SALT_ROUNDS } from '../../constants.js';
-import { generateEmailVerificationCode, sendVerificationMailToUser } from './verificationCode.controller.js';
+import { generateEmailVerificationCode } from './verificationCode.controller.js';
+import { getUserInfoById } from './getUserInfo.controller.js';
+import { sendVerificationMailToUser } from '../../utils/index.js';
 
 const log = logger('Controller: register-user');
 
@@ -110,38 +112,33 @@ const registerNewUser = async (payload) => {
     const data = await createNewUser(userPayload);
 
     log.info('Call db query to fetch the details about newly added user.');
-    let registeredUserInfo = await getUserInfo(data.rows[0].id);
-    registeredUserInfo = registeredUserInfo.rows[0];
+    let userInfo = await getUserInfoById(data.rows[0].id);
+    if (!userInfo.isValid) {
+      log.error('Failed to register the user in system!');
+      return {
+        status: 500,
+        message: 'Some error occurred to register the user in system. Please try after sometime.',
+        data: userInfo.data,
+        errors: userInfo.errors,
+        stack: `${userInfo.stack}, registerNewUser function call`,
+        isValid: false,
+      };
+    }
 
-    const verificationCodeGenerated = await generateEmailVerificationCode(registeredUserInfo.id);
+    const userId = convertPrettyStringToId(userInfo.data.id);
+    const verificationCodeGenerated = await generateEmailVerificationCode(userId);
 
     let message = 'User registered successfully';
-    const user = {
-      id: convertIdToPrettyString(registeredUserInfo.id),
-      role: registeredUserInfo.role_cd,
-      firstName: registeredUserInfo.first_name,
-      lastName: registeredUserInfo.last_Name,
-      username: registeredUserInfo.username,
-      email: registeredUserInfo.email_id,
-      loginType: registeredUserInfo.login_type,
-      isEmailVerified: registeredUserInfo.is_verified,
-      lastLogin: registeredUserInfo.last_login,
-      loginCount: registeredUserInfo.login_count,
-      createdDate: convertToNativeTimeZone(registeredUserInfo.created_date),
-      modifiedDate: convertToNativeTimeZone(registeredUserInfo.modified_date),
-    };
-
     if (!verificationCodeGenerated.isValid) {
       message += '. Failed to generate the verification code. Try logging in to verify your email.';
-      user['verification'] = {};
+      userInfo.data['verification'] = {};
     } else {
-      user['verification'] = {
+      userInfo.data['verification'] = {
         verificationToken: verificationCodeGenerated.rows[0].verification_token,
         verificationTokenExp: convertToNativeTimeZone(verificationCodeGenerated.rows[0].verification_token_exp),
       };
 
-      const emailResponse = await sendVerificationMailToUser(user);
-
+      const emailResponse = await sendVerificationMailToUser(userInfo.data);
       if (!emailResponse.emailStatus) {
         message += '. Failed to send the verification mail. Kindly try to login after sometime.';
       } else {
@@ -153,7 +150,7 @@ const registerNewUser = async (payload) => {
     return {
       status: 201,
       message: message,
-      data: { user },
+      data: userInfo.data,
       isValid: true,
     };
   } catch (err) {

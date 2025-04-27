@@ -1,13 +1,18 @@
 {
     "VERIFY_MAIL": {
         "subject": "Welcome to Finance Tracker - Verify Your Email and Activate Your Account.",
-        "intro": "We are thrilled to welcome you to Finance Tracker! Thank you for choosing us as your trusted platform. Your journey toward financial empowerment and success begins here.\n\nTo ensure the security and integrity of your account, we kindly ask you to verify your email address and activate your account.",
+        "intro": "We are thrilled to welcome you to Finance Tracker! Thank you for choosing us as your trusted platform. Your journey toward financial empowerment and success begins here.<br>To ensure the security and integrity of your account, we kindly ask you to verify your email address and activate your account.",
         "instructions": "Verify Your Email",
         "btnColor": "#22BC66",
         "btnText": "Verify your Account",
-        "outro": "After verifying your email, you can log in to your account and start exploring all the powerful features that Finance Tracker offers.\n\nIf you didn't register for an account with us, please ignore this email.\n\nWe're excited to have you join our community of financially savvy users. Together, we can help you achieve your financial goals and make smart money decisions.\n\nThank you for choosing Finance Tracker, and welcome aboard!"
+        "outro": "After verifying your email, you can log in to your account and start exploring all the powerful features that Finance Tracker offers.<br>If you didn't register for an account with us, please ignore this email.<br>We're excited to have you join our community of financially savvy users. Together, we can help you achieve your financial goals and make smart money decisions.<br>Thank you for choosing Finance Tracker, and welcome aboard!"
     },
-    "RESEND_MAIL": {
-        "name": "Testing 2"
+    "VERIFY_CONFIRM_MAIL": {
+        "subject": "Account Verified - Welcome to Finance Tracker.",
+        "intro": "Congratulations! Your account has been successfully verified and is now active. Welcome to Finance Tracker - your gateway to financial empowerment.<br>We're thrilled to have you as a member of our community. As a verified user, you can now access all the amazing features and benefits that Finance Tracker offers. Here are some of your basic details for your reference:",
+        "instructions": "",
+        "btnColor": "",
+        "btnText": "",
+        "outro": "With your account now verified, you can start making the most of our platform right away. Whether you want to track your daily expenses, track investment, register income, or work toward your financial goals, we've got you covered.<br>Thank you for trusting Finance Tracker as your financial partner. We look forward to supporting you on your financial journey."
     }
 }

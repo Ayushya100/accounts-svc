@@ -1,9 +1,8 @@
 'use strict';
 
-import { logger, sendMail } from 'finance-lib';
+import { logger } from 'finance-lib';
 import { v4 as uuidv4 } from 'uuid';
 import { registerEmailVerification } from '../../db/index.js';
-import { serviceConfig } from '../../constants.js';
 
 const log = logger('Controller: verification-code');
 
@@ -31,23 +30,4 @@ const generateEmailVerificationCode = async (userId) => {
   }
 };
 
-const sendVerificationMailToUser = async (userInfo) => {
-  log.info('Verification email send to user process initiated');
-  let fullName = userInfo.firstName;
-  if (userInfo.lastName) {
-    fullName += ` ${userInfo.lastName}`;
-  }
-
-  const options = {
-    name: fullName,
-    userEmail: userInfo.email,
-    link: `${serviceConfig.serviceName}/verify-user/${userInfo.id}/${userInfo.verification.verificationToken}`,
-  };
-
-  const emailResponse = await sendMail('VERIFY_MAIL', 'PLAIN', options);
-
-  log.info('Verification email send completed');
-  return emailResponse;
-};
-
-export { generateEmailVerificationCode, sendVerificationMailToUser };
+export { generateEmailVerificationCode };
