@@ -33,8 +33,8 @@ const getUserInfo = async (id) => {
   const query = `SELECT U.ID, R.ROLE_CD, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID, U.LOGIN_TYPE, U.IS_VERIFIED
         , U.CREATED_DATE, U.MODIFIED_DATE, U.LOGIN_COUNT, U.LAST_LOGIN
         FROM USERS U
-        INNER JOIN USER_ROLE R ON R.ID = U.ROLE_ID
-        WHERE U.ID = ?;`;
+        INNER JOIN USER_ROLE R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
+        WHERE U.ID = ? AND U.IS_DELETED = false;`;
   const params = [id];
 
   return await exec(query, params);
@@ -84,4 +84,51 @@ const verifyUserEmail = async (userId) => {
   return await exec(query, params);
 };
 
-export { fetchDefaultUserRole, isUsernameEmailInUse, createNewUser, getUserInfo, registerEmailVerification, fetchUserMetaInfo, verifyUserEmail };
+const getUserInfoByUsernameOrPassword = async (usernameEmail) => {
+  const query = `SELECT U.ID, R.ROLE_CD, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID, U.LOGIN_TYPE, U.IS_VERIFIED
+        , U.CREATED_DATE, U.MODIFIED_DATE, U.LOGIN_COUNT, U.LAST_LOGIN, U.IS_DELETED
+        FROM USERS U
+        INNER JOIN USER_ROLE R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
+        WHERE (U.USERNAME = ? OR U.EMAIL_ID = ?) AND U.IS_DELETED = false;`;
+  const params = [usernameEmail, usernameEmail];
+
+  return await exec(query, params);
+};
+
+const getUserPasskey = async (userId) => {
+  const query = `SELECT password FROM USERS WHERE ID = ?`;
+  const params = [userId];
+  return await exec(query, params);
+};
+
+const storeUserToken = async(userId, token, lastLogin) => {
+  console.log(userId);
+  console.log(token);
+  console.log(lastLogin);
+  let query = `UPDATE USER_METADATA SET REFRESH_TOKEN = ?
+    WHERE USER_ID = ?`;
+  let params = [token, userId];
+  await exec(query, params);
+
+  if (lastLogin) {
+    query = `UPDATE USERS SET LAST_LOGIN = ?
+      WHERE ID = ?`;
+    params = [lastLogin, userId];
+    await exec(query, params);
+  }
+
+  return true;
+}
+
+export {
+  fetchDefaultUserRole,
+  isUsernameEmailInUse,
+  createNewUser,
+  getUserInfo,
+  registerEmailVerification,
+  fetchUserMetaInfo,
+  verifyUserEmail,
+  getUserInfoByUsernameOrPassword,
+  getUserPasskey,
+  storeUserToken
+};

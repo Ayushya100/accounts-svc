@@ -2,8 +2,10 @@
 
 import registerUser from './registerUser.route.js';
 import verifyUserEmail from './verifyUser.route.js';
+import loginUser from './loginUser.route.js';
 
 export default {
   registerUser,
   verifyUserEmail,
+  loginUser,
 };

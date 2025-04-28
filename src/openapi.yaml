@@ -31,6 +31,21 @@ components:
         type: string
 
   schemas:
+    Username:
+      type: string
+      description: Username for the account
+      pattern: '^[a-zA-Z0-9]{4,24}$'
+
+    EmailId:
+      type: string
+      description: The email id of user
+      pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+
+    Password:
+      type: string
+      description: user account password
+      pattern: '^[a-zA-Z0-9@_.&*#$]{8,32}$'
+  
     registerUserPayload:
       type: object
       properties:
@@ -44,19 +59,34 @@ components:
         username:
           type: string
           description: Username
-          pattern: '^[a-zA-Z0-9]{4,24}$'
+          $ref: '#/components/schemas/Username'
         emailId:
           type: string
           description: Email Id
-          pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+          $ref: '#/components/schemas/EmailId'
         password:
           type: string
           description: Password
-          pattern: '^[a-zA-Z0-9@]{8,32}$'
+          $ref: '#/components/schemas/Password'
       required:
         - firstName
         - username
         - emailId
+        - password
+
+    loginUserPayload:
+      type: object
+      properties:
+        usernameEmail:
+          type: string
+          description: Username or Email Id
+          minLength: 1
+        password:
+          type: string
+          description: Password
+          $ref: '#/components/schemas/Password'
+      required:
+        - usernameEmail
         - password
 
     healthCheckData:
@@ -69,6 +99,121 @@ components:
           type: string
         hostname:
           type: string
+
+    verificationData:
+      title: Schema for User Verification Data
+      type: object
+      properties:
+        verificationToken:
+          type: string
+        verificationTokenExp:
+          type: string
+
+    loginUserData:
+      title: Schema for Login User Data
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+          example: First Name
+        lastName:
+          type: string
+          example: Last Name
+        email:
+          type: string
+          example: email@exmp.xyz
+        username:
+          type: string
+          example: username
+        loginType:
+          type: string
+          example: EMAIL_PASSWORD
+        isEmailVerified:
+          type: boolean
+          example: true
+        role:
+          type: string
+          example: USER
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+      required:
+        - id
+        - firstName
+        - email
+        - username
+        - loginType
+        - isEmailVerified
+        - role
+        - createdDate
+        - modifiedDate
+
+    registerUserResponseData:
+      title: Schema for Register User Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+          example: First Name
+        email:
+          type: string
+          example: email@exmp.xyz
+        username:
+          type: string
+          example: username
+        loginType:
+          type: string
+          example: EMAIL_PASSWORD
+        isEmailVerified:
+          type: boolean
+          example: true
+        role:
+          type: string
+          example: USER
+        lastLogin:
+          type: string
+        loginCount:
+          type: integer
+          example: 0
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+        verification:
+          type: object
+          $ref: '#/components/schemas/verificationData'
+      required:
+        - id
+        - firstName
+        - email
+        - username
+        - loginType
+        - isEmailVerified
+        - role
+        - createdDate
+        - modifiedDate
+        - verification
+
+    loginUserResponseData:
+      title: Schema for Login User Response Data
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        user:
+          type: object
+          $ref: '#/components/schemas/loginUserData'
+      required:
+        - accessToken
+        - refreshToken
+        - user
 
     healthCheckSuccessResponse:
       type: object
@@ -111,6 +256,7 @@ components:
           example: true
         data:
           type: object
+          $ref: '#/components/schemas/registerUserResponseData'
 
     verifyUserResponse:
       type: object
@@ -132,6 +278,28 @@ components:
           example: true
         data:
           type: object
+
+    loginUserResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/loginUserResponseData'
 
     badRequestResponse:
       type: object
@@ -349,6 +517,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/badEvent'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /login:
+    post:
+      operationId: loginUser
+      summary: Login User
+      description: An API to login a user which exist in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginUserPayload'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginUserResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gone'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
