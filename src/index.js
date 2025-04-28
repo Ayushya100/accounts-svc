@@ -14,6 +14,7 @@ class AccountService extends Service {
     this.app.get(`${USERS_API}/health`, routes.healthCheck);
     this.app.post(`${USERS_API}/register-user`, routes.users.registerUser);
     this.app.put(`${USERS_API}/verify-user/:userId/:token`, routes.users.verifyUserEmail);
+    this.app.post(`${USERS_API}/login`, routes.users.loginUser);
   }
 }
 
