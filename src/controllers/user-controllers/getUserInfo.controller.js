@@ -1,7 +1,7 @@
 'use strict';
 
 import { logger, convertPrettyStringToId, convertIdToPrettyString, convertToNativeTimeZone } from 'finance-lib';
-import { getUserInfo, getUserInfoByUsernameOrPassword } from '../../db/index.js';
+import { getUserInfo, getUserInfoByUsernameOrPassword, getUserDtl } from '../../db/index.js';
 
 const log = logger('Controller: get-user-info');
 
@@ -118,4 +118,61 @@ const getUserInfoByUsernameOrEmail = async (usernameEmail) => {
   }
 };
 
-export { getUserInfoById, getUserInfoByUsernameOrEmail };
+const getUserDetailInfoById = async (userId) => {
+  try {
+    log.info(`Controller for fetching user details for the requested user id: ${userId}`);
+    userId = convertPrettyStringToId(userId);
+
+    log.info('Call db query to fetch user details by the id');
+    let userInfo = await getUserDtl(userId);
+    if (userInfo.rowCount === 0) {
+      log.error('No user available in system or soft-deleted');
+      return {
+        status: 404,
+        message: 'Requested user does not exists in system',
+        data: [],
+        errors: [],
+        stack: 'getUserDetailInfoById function call',
+        isValid: false,
+      };
+    }
+
+    userInfo = userInfo.rows[0];
+    const data = {
+      id: convertIdToPrettyString(userInfo.id),
+      role: userInfo.role_desc,
+      firstName: userInfo.first_name,
+      lastName: userInfo.last_name,
+      username: userInfo.username,
+      email: userInfo.email_id,
+      gender: userInfo.gender,
+      dob: userInfo.dob,
+      contactNumber: userInfo.contact_number,
+      profileImgURI: userInfo.profile_img_uri,
+      isVerified: userInfo.is_verified,
+      lastLogin: convertToNativeTimeZone(userInfo.last_login),
+      createdDate: convertToNativeTimeZone(userInfo.created_date),
+      modifiedDate: convertToNativeTimeZone(userInfo.modified_date),
+    };
+
+    log.success('User info retrieved successfully');
+    return {
+      status: 200,
+      message: 'User Profile fetched successfully',
+      data: data,
+      isValid: true,
+    };
+  } catch (err) {
+    log.error(`Error occurred while fetching user info for the requested user id`);
+    return {
+      status: 500,
+      message: 'An Error occurred while fetching user info for the requested user id.',
+      data: [],
+      errors: err,
+      stack: err.stack,
+      isValid: false,
+    };
+  }
+};
+
+export { getUserInfoById, getUserInfoByUsernameOrEmail, getUserDetailInfoById };

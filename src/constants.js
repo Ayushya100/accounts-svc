@@ -13,7 +13,7 @@ const SALT_ROUNDS = 10;
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: true
+  secure: true,
 };
 
 export { USERS_API, serviceConfig, SALT_ROUNDS, COOKIE_OPTIONS };

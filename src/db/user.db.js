@@ -101,24 +101,32 @@ const getUserPasskey = async (userId) => {
   return await exec(query, params);
 };
 
-const storeUserToken = async(userId, token, lastLogin) => {
-  console.log(userId);
-  console.log(token);
-  console.log(lastLogin);
+const storeUserToken = async (userId, token, lastLogin) => {
   let query = `UPDATE USER_METADATA SET REFRESH_TOKEN = ?
     WHERE USER_ID = ?`;
   let params = [token, userId];
   await exec(query, params);
 
   if (lastLogin) {
-    query = `UPDATE USERS SET LAST_LOGIN = ?
+    query = `UPDATE USERS SET LAST_LOGIN = ?, LOGIN_COUNT = LOGIN_COUNT + 1
       WHERE ID = ?`;
     params = [lastLogin, userId];
     await exec(query, params);
   }
 
   return true;
-}
+};
+
+const getUserDtl = async (userId) => {
+  const query = `SELECT U.ID, R.ROLE_DESC, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID, U.GENDER, U.DOB
+    , U.CONTACT_NUMBER, U.PROFILE_IMG_URI, U.IS_VERIFIED, U.LAST_LOGIN, U.CREATED_DATE, U.MODIFIED_DATE
+    FROM USERS U
+    INNER JOIN USER_ROLE R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
+    WHERE U.IS_DELETED = false AND U.IS_VERIFIED = true AND U.ID = ?`;
+  const params = [userId];
+
+  return await exec(query, params);
+};
 
 export {
   fetchDefaultUserRole,
@@ -130,5 +138,6 @@ export {
   verifyUserEmail,
   getUserInfoByUsernameOrPassword,
   getUserPasskey,
-  storeUserToken
+  storeUserToken,
+  getUserDtl,
 };
