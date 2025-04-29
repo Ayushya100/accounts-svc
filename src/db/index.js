@@ -10,7 +10,8 @@ import {
   verifyUserEmail,
   getUserInfoByUsernameOrPassword,
   getUserPasskey,
-  storeUserToken
+  storeUserToken,
+  getUserDtl,
 } from './user.db.js';
 
 export {
@@ -23,5 +24,6 @@ export {
   verifyUserEmail,
   getUserInfoByUsernameOrPassword,
   getUserPasskey,
-  storeUserToken
+  storeUserToken,
+  getUserDtl,
 };

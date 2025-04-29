@@ -1,6 +1,6 @@
 'use strict';
 
-import { Service } from 'finance-lib';
+import { Service, verifyUserId } from 'finance-lib';
 import dotenv from 'dotenv';
 import { USERS_API, serviceConfig } from './constants.js';
 import routes from './routes/index.js';
@@ -10,11 +10,15 @@ dotenv.config({
 });
 
 class AccountService extends Service {
-  registerServiceEndpoints() {
+  registerPublicEndpoints() {
     this.app.get(`${USERS_API}/health`, routes.healthCheck);
     this.app.post(`${USERS_API}/register-user`, routes.users.registerUser);
     this.app.put(`${USERS_API}/verify-user/:userId/:token`, routes.users.verifyUserEmail);
     this.app.post(`${USERS_API}/login`, routes.users.loginUser);
+  }
+
+  registerServiceEndpoints() {
+    this.app.get(`${USERS_API}/user/:userId`, verifyUserId, routes.users.userInfo);
   }
 }
 

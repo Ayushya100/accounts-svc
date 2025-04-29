@@ -115,15 +115,15 @@ const grantUserAccess = async (userInfo) => {
   try {
     log.info('Access grant operation initiated');
     const userData = userInfo.data;
-    userData.accessToken = await generateUserAccessToken(userData.user);  
+    userData.accessToken = await generateUserAccessToken(userData.user);
     userData.refreshToken = await generateUserRefreshToken(userData.user);
-    
+
     const userId = convertPrettyStringToId(userData.user.id);
     let currentLoginTime = new Date(Date.now());
     currentLoginTime = convertToNativeTimeZone(currentLoginTime);
 
     log.info('Call db query to update required info');
-    await storeUserToken(userId, userData.refreshToken, currentLoginTime)
+    await storeUserToken(userId, userData.refreshToken, currentLoginTime);
 
     return {
       status: 200,

@@ -38,10 +38,11 @@ const loginUser = async (req, res, next) => {
     }
 
     log.success('User login operation completed');
-    res.status(200)
-    .cookie('accessToken', accessGranted.data.accessToken, COOKIE_OPTIONS)
-    .cookie('refreshToken', accessGranted.data.refreshToken, COOKIE_OPTIONS)
-    .json(buildApiResponse(accessGranted));
+    res
+      .status(200)
+      .cookie('accessToken', accessGranted.data.accessToken, COOKIE_OPTIONS)
+      .cookie('refreshToken', accessGranted.data.refreshToken, COOKIE_OPTIONS)
+      .json(buildApiResponse(accessGranted));
   } catch (err) {
     if (err.statusCode === '500') {
       log.error(`Error occurred while processing the request in router. Error: ${JSON.stringify(err)}`);
