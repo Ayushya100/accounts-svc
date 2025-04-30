@@ -128,6 +128,14 @@ const getUserDtl = async (userId) => {
   return await exec(query, params);
 };
 
+const logoutUser = async (userId) => {
+  const query = `UPDATE USER_METADATA SET REFRESH_TOKEN = '', MODIFIED_BY = ?
+    WHERE USER_ID = ? AND IS_DELETED = false`;
+  const params = [userId, userId];
+
+  return exec(query, params);
+};
+
 export {
   fetchDefaultUserRole,
   isUsernameEmailInUse,
@@ -140,4 +148,5 @@ export {
   getUserPasskey,
   storeUserToken,
   getUserDtl,
+  logoutUser,
 };

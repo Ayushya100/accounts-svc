@@ -12,6 +12,7 @@ import {
   getUserPasskey,
   storeUserToken,
   getUserDtl,
+  logoutUser,
 } from './user.db.js';
 
 export {
@@ -26,4 +27,5 @@ export {
   getUserPasskey,
   storeUserToken,
   getUserDtl,
+  logoutUser,
 };
