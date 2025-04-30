@@ -130,7 +130,7 @@ const getUserDtl = async (userId) => {
 
 const logoutUser = async (userId) => {
   const query = `UPDATE USER_METADATA SET REFRESH_TOKEN = '', MODIFIED_BY = ?
-    WHERE USER_ID = ?`;
+    WHERE USER_ID = ? AND IS_DELETED = false`;
   const params = [userId, userId];
 
   return exec(query, params);
