@@ -15,6 +15,8 @@ import {
   logoutUser,
 } from './user.db.js';
 
+import { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById } from './system.db.js';
+
 export {
   fetchDefaultUserRole,
   isUsernameEmailInUse,
@@ -28,4 +30,9 @@ export {
   storeUserToken,
   getUserDtl,
   logoutUser,
+  isRoleAvailable,
+  getDefaultRole,
+  deactivateRole,
+  registerNewRole,
+  getUserRoleById,
 };
