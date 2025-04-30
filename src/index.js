@@ -19,6 +19,7 @@ class AccountService extends Service {
 
   registerServiceEndpoints() {
     this.app.get(`${USERS_API}/user/:userId`, verifyUserId, routes.users.userInfo);
+    this.app.post(`${USERS_API}/user/logout`, routes.users.logoutUser);
   }
 }
 

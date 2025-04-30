@@ -5,6 +5,7 @@ import { generateEmailVerificationCode } from './verificationCode.controller.js'
 import { getUserInfoById, getUserInfoByUsernameOrEmail, getUserDetailInfoById } from './getUserInfo.controller.js';
 import { verifyUserToken } from './verifyUser.controller.js';
 import { isVerifiedUser, verifyUserCreds, grantUserAccess } from './loginUser.controller.js';
+import { logout } from './logoutUser.controller.js';
 
 export default {
   verifyUsernameEmailAlreadyTaken,
@@ -17,4 +18,5 @@ export default {
   verifyUserCreds,
   grantUserAccess,
   getUserDetailInfoById,
+  logout,
 };
