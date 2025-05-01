@@ -31,6 +31,7 @@ class AccountService extends Service {
     this.app.get(`${USERS_API}/setup/user-scope/:scopeId`, routes.settingRoutes.getUserScopeById);
     this.app.put(`${USERS_API}/setup/user-scope/:scopeId`, routes.settingRoutes.updateUserScope);
     this.app.delete(`${USERS_API}/setup/user-scope/:scopeId`, routes.settingRoutes.deleteUserScope);
+    this.app.get(`${USERS_API}/setup/assigned-scope/:roleId`, routes.settingRoutes.getAssignedScopes);
     this.app.get(`${USERS_API}/setup/unassigned-scope/:roleId`, routes.settingRoutes.getUnassignedScopes);
 
     // User routes
