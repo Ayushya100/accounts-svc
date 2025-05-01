@@ -40,4 +40,11 @@ const getUserRoleById = async (roleId) => {
   return exec(query, params);
 };
 
-export { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById };
+const getUserRoles = async () => {
+  const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT, CREATED_DATE, MODIFIED_DATE
+        FROM USER_ROLE
+        WHERE IS_DELETED = false`;
+  return exec(query);
+};
+
+export { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById, getUserRoles };
