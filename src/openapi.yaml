@@ -132,6 +132,21 @@ components:
       required:
         - roleDesc
 
+    registerUserScopePayload:
+      type: object
+      properties:
+        scopeCode:
+          type: string
+          description: Scope Code
+          minLength: 2
+        scopeDesc:
+          type: string
+          description: Scope Description
+          minLength: 1
+      required:
+        - scopeCode
+        - scopeDesc
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -569,6 +584,27 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerUserRoleResponseData'
+
+    registerUserScopeResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'REQUEST_COMPLETED'
+        message:
+          type: string
+          example: 'Request Completed'
+        devMessage:
+          type: string
+          example: 'Request Completed'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
 
     noContentResponse:
       type: object
@@ -1146,6 +1182,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/user-scope:
+    post:
+      operationId: RegisterUserScope
+      summary: Register New User Scope
+      description: An API to register new user scope in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerUserScopePayload'
+      responses:
+        '201':
+          description: REQUEST_COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserScopeResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userAlreadyExist'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

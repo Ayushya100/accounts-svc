@@ -45,7 +45,7 @@ const verifyUserRoleExist = async (roleCd) => {
 
 const registerNewUserRole = async (payload) => {
   try {
-    log.info('Call controller function to register new user role in system');
+    log.info('Controller function to register new user role in system initiated');
     const providedDefaultVal = payload.default || null;
     payload['default'] = payload.default || false;
 
@@ -76,7 +76,7 @@ const registerNewUserRole = async (payload) => {
 
     log.success('New role registered successfully in system');
     return {
-      status: 200,
+      status: 201,
       message: 'New user role registered',
       data: newRoleDtl.data,
       isValid: true,

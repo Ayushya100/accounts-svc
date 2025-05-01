@@ -5,6 +5,7 @@ import getAllUserRoles from './getAllUserRoles.route.js';
 import getUserRoleById from './getUserRoleById.route.js';
 import updateUserRole from './updateUserRole.route.js';
 import deleteUserRole from './deleteUserRole.route.js';
+import registerUserScope from './registerUserScope.route.js';
 
 export default {
   registerUserRole,
@@ -12,4 +13,5 @@ export default {
   getUserRoleById,
   updateUserRole,
   deleteUserRole,
+  registerUserScope,
 };

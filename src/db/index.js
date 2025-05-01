@@ -15,7 +15,19 @@ import {
   logoutUser,
 } from './user.db.js';
 
-import { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById, getUserRoles, updateUserRoleById, deleteUserRoleById } from './system.db.js';
+import {
+  isRoleAvailable,
+  getDefaultRole,
+  deactivateRole,
+  registerNewRole,
+  getUserRoleById,
+  getUserRoles,
+  updateUserRoleById,
+  deleteUserRoleById,
+  isScopeAvailable,
+  registerNewScope,
+  getUserScopeById,
+} from './system.db.js';
 
 export {
   fetchDefaultUserRole,
@@ -38,4 +50,7 @@ export {
   getUserRoles,
   updateUserRoleById,
   deleteUserRoleById,
+  isScopeAvailable,
+  registerNewScope,
+  getUserScopeById,
 };
