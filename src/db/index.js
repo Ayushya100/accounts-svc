@@ -32,6 +32,9 @@ import {
   deleteUserScopeById,
   unassignedScopesByRoleId,
   assignedScopesByRoleId,
+  getMultipleScopesByIds,
+  assignScopesToRole,
+  unassignScopesToRole,
 } from './system.db.js';
 
 export {
@@ -63,4 +66,7 @@ export {
   deleteUserScopeById,
   unassignedScopesByRoleId,
   assignedScopesByRoleId,
+  getMultipleScopesByIds,
+  assignScopesToRole,
+  unassignScopesToRole,
 };

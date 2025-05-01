@@ -166,6 +166,15 @@ components:
       required:
         - scopeDesc
 
+    updateScopeAssignmentPayload:
+      type: object
+      properties:
+        scopes:
+          type: array
+          description: Scope ID
+      required:
+        - scopes
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -418,6 +427,21 @@ components:
       required:
         - scopeCode
         - scopeDesc
+
+    updateScopeAssignmentResponseData:
+      title: Schema for Fetching User Scopes for Requested Role Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        roleCode:
+          type: string
+        roleDesc:
+          type: string
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/getUserScopeResponseData'
 
     emptyResponse:
       type: object
@@ -725,6 +749,28 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerUserScopeResponseData'
+
+    updateScopeAssignmentResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/updateScopeAssignmentResponseData'
 
     noContentResponse:
       type: object
@@ -1562,6 +1608,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getUserScopeResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    put:
+      operationId: updateScopesAssignmentForRoleId
+      summary: Update Scopes assignment for Role ID
+      description: An API to update the user scopes assignment for requested role ID.
+      parameters:
+        - $ref: '#/components/parameters/RoleIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateScopeAssignmentPayload'
+      responses:
+        '201':
+          description: REQUEST_COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateScopeAssignmentResponse'
         '400':
           description: BAD_REQUEST
           content:

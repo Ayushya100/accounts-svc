@@ -127,6 +127,26 @@ const assignedScopesByRoleId = async (roleId) => {
   return exec(query, params);
 };
 
+const getMultipleScopesByIds = async (idsPlaceholder, scopeIdArr) => {
+  const query = `SELECT ID FROM USER_SCOPE WHERE ID IN (${idsPlaceholder}) AND IS_DELETED = false;`;
+  const params = scopeIdArr;
+  return exec(query, params);
+};
+
+const assignScopesToRole = async (idsPlaceholder, bindings) => {
+  const query = `INSERT INTO ROLE_SCOPE (ROLE_ID, SCOPE_ID) VALUES ${idsPlaceholder}`;
+  const params = bindings;
+  return exec(query, params);
+};
+
+const unassignScopesToRole = async (userId, roleId, idsPlaceholder, scopeIdArr) => {
+  const query = `UPDATE ROLE_SCOPE SET IS_DELETED = true, MODIFIED_BY = '${userId}'
+    WHERE ROLE_ID = '${roleId}' AND SCOPE_ID IN (${idsPlaceholder});`;
+  const params = scopeIdArr;
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -144,4 +164,7 @@ export {
   deleteUserScopeById,
   unassignedScopesByRoleId,
   assignedScopesByRoleId,
+  getMultipleScopesByIds,
+  assignScopesToRole,
+  unassignScopesToRole,
 };
