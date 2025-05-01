@@ -306,6 +306,31 @@ components:
         - active
         - default
 
+    getUserRoleResponseData:
+      title: Schema for Fetching User Role Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        roleCode:
+          type: string
+        roleDesc:
+          type: string
+        active:
+          type: boolean
+        default:
+          type: boolean
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+      required:
+        - id
+        - roleCode
+        - roleDesc
+        - active
+        - default
+
     emptyResponse:
       type: object
       properties:
@@ -456,6 +481,50 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerUserRoleResponseData'
+    
+    getUserRolesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getUserRoleResponseData'
+
+    noContentResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 204
+        type:
+          type: string
+          example: 'CONTENT_NOT_AVAILABLE'
+        message:
+          type: string
+          example: 'No content available'
+        devMessage:
+          type: string
+          example: 'No content available'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
 
     badRequestResponse:
       type: object
@@ -855,6 +924,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userAlreadyExist'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+    
+    get:
+      operationId: GetUserRoles
+      summary: Get all User Roles
+      description: An API to fetch all user roles exist in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserRolesResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

@@ -1,7 +1,8 @@
 'use strict';
 
-import { convertIdToPrettyString, convertToNativeTimeZone, logger } from 'finance-lib';
-import { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById } from '../../db/index.js';
+import { logger } from 'finance-lib';
+import { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole } from '../../db/index.js';
+import { getRoleById } from './getUserRole.controller.js';
 
 const log = logger('Controller: register-user-role');
 
@@ -60,23 +61,24 @@ const registerNewUserRole = async (payload) => {
     const newRole = await registerNewRole(payload);
     const newRoleId = newRole.rows[0].id;
 
-    let newRoleDtl = await getUserRoleById(newRoleId);
-    newRoleDtl = newRoleDtl.rows[0];
-    newRoleDtl = {
-      id: convertIdToPrettyString(newRoleDtl.id),
-      roleCode: newRoleDtl.role_cd,
-      roleDesc: newRoleDtl.role_desc,
-      active: newRoleDtl.is_active,
-      default: newRoleDtl.is_default,
-      createdDate: convertToNativeTimeZone(newRoleDtl.created_date),
-      modifiedDate: convertToNativeTimeZone(newRoleDtl.modified_date),
-    };
+    const newRoleDtl = await getRoleById(newRoleId);
+    if (!newRoleDtl.isValid) {
+      log.error('Error while fetching newly created user role from system');
+      return {
+        status: 404,
+        message: 'An error occurred while registering new user role in system',
+        data: [],
+        errors: [],
+        stack: 'registerNewUserRole function call',
+        isValid: false,
+      };
+    }
 
     log.success('New role registered successfully in system');
     return {
       status: 200,
       message: 'New user role registered',
-      data: newRoleDtl,
+      data: newRoleDtl.data,
       isValid: true,
     };
   } catch (err) {
