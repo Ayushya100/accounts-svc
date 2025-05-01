@@ -53,7 +53,7 @@ const getScopeById = async (scopeId) => {
   }
 };
 
-const getAllUserScopes = async() => {
+const getAllUserScopes = async () => {
   try {
     log.info('Controller function to fetch all user scopes from system initiated');
     log.info('Call db query to fetch all user scopes from db');
@@ -64,7 +64,7 @@ const getAllUserScopes = async() => {
         status: 204,
         message: 'No user scope found',
         data: [],
-        isValid: true
+        isValid: true,
       };
     }
 
@@ -73,7 +73,7 @@ const getAllUserScopes = async() => {
       return {
         id: convertIdToPrettyString(scopeDtl.id),
         scopeCode: scopeDtl.scope_cd,
-        scopeDesc: scopeDtl.scope_desc
+        scopeDesc: scopeDtl.scope_desc,
       };
     });
 
@@ -82,7 +82,7 @@ const getAllUserScopes = async() => {
       status: 200,
       message: 'User scopes fetched successfully',
       data: scopeDtls,
-      isValid: true
+      isValid: true,
     };
   } catch (err) {
     log.error('Error while retrieving all user roles from system');
@@ -95,6 +95,6 @@ const getAllUserScopes = async() => {
       isValid: false,
     };
   }
-}
+};
 
 export { getScopeById, getAllUserScopes };
