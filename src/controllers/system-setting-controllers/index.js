@@ -6,6 +6,7 @@ import { updateUserRole } from './updateUserRole.controller.js';
 import { deleteRole } from './deleteUserRole.controller.js';
 import { verifyUserScopeExist, registerNewUserScope } from './registerUserScope.controller.js';
 import { getScopeById, getAllUserScopes } from './getUserScope.controller.js';
+import { updateUserScope } from './updateUserScope.controller.js';
 
 export default {
   verifyUserRoleExist,
@@ -18,4 +19,5 @@ export default {
   registerNewUserScope,
   getScopeById,
   getAllUserScopes,
+  updateUserScope,
 };

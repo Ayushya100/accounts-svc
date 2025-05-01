@@ -28,6 +28,7 @@ import {
   registerNewScope,
   getUserScopeById,
   getUserScopes,
+  updateUserScopeById,
 } from './system.db.js';
 
 export {
@@ -55,4 +56,5 @@ export {
   registerNewScope,
   getUserScopeById,
   getUserScopes,
+  updateUserScopeById,
 };
