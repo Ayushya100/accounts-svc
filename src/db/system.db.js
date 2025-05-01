@@ -78,11 +78,11 @@ const registerNewScope = async (payload) => {
   return exec(query, params);
 };
 
-const getUserScopeById = async (scopeId) => {
+const getUserScopeById = async (scopeId, deletedRecord) => {
   const query = `SELECT ID, SCOPE_CD, SCOPE_DESC, CREATED_DATE, MODIFIED_DATE
     FROM USER_SCOPE
-    WHERE IS_DELETED = false AND ID = ?;`;
-  const params = [scopeId];
+    WHERE IS_DELETED = ? AND ID = ?;`;
+  const params = [deletedRecord, scopeId];
 
   return exec(query, params);
 };
@@ -96,6 +96,13 @@ const updateUserScopeById = async (userId, scopeId, payload) => {
   const query = `UPDATE USER_SCOPE SET SCOPE_DESC = ?, MODIFIED_BY = ?
     WHERE IS_DELETED = false AND ID = ?;`;
   const params = [payload.scopeDesc, userId, scopeId];
+
+  return exec(query, params);
+};
+
+const deleteUserScopeById = async (userId, scopeId) => {
+  const query = `UPDATE USER_SCOPE SET IS_DELETED = true, MODIFIED_BY = ? WHERE ID = ?;`;
+  const params = [userId, scopeId];
 
   return exec(query, params);
 };
@@ -114,4 +121,5 @@ export {
   getUserScopeById,
   getUserScopes,
   updateUserScopeById,
+  deleteUserScopeById,
 };

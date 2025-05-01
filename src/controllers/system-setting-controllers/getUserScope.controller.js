@@ -5,13 +5,13 @@ import { getUserScopeById, getUserScopes } from '../../db/index.js';
 
 const log = logger('Controller: get-user-scope');
 
-const getScopeById = async (scopeId) => {
+const getScopeById = async (scopeId, deletedRecord = false) => {
   try {
     log.info('Controller function to fetch user scope by id process initiated');
     scopeId = convertPrettyStringToId(scopeId);
 
     log.info(`Call db query to fetch scope details for provided id: ${scopeId}`);
-    let scopeDtl = await getUserScopeById(scopeId);
+    let scopeDtl = await getUserScopeById(scopeId, deletedRecord);
     if (scopeDtl.rowCount === 0) {
       log.error('User scope requested with the id does not exists in system');
       return {

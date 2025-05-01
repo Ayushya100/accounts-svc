@@ -29,6 +29,7 @@ import {
   getUserScopeById,
   getUserScopes,
   updateUserScopeById,
+  deleteUserScopeById,
 } from './system.db.js';
 
 export {
@@ -57,4 +58,5 @@ export {
   getUserScopeById,
   getUserScopes,
   updateUserScopeById,
+  deleteUserScopeById,
 };
