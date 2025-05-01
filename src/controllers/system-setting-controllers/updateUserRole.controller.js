@@ -8,7 +8,7 @@ const log = logger('Controller: update-user-role');
 
 const updateUserRole = async (userId, roleId, roleDtl, payload) => {
   try {
-    log.info('Call controller function to update user role in system');
+    log.info('Controller function to update user role in system initiated');
     if (roleDtl.default && (payload.active !== null && payload.active !== undefined) && !payload.active) {
       log.error('Cannot deactivate default user role');
       return {
