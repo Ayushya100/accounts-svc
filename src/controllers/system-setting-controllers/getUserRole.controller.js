@@ -78,8 +78,6 @@ const getAllUserRoles = async () => {
         roleDesc: roleDtl.role_desc,
         active: roleDtl.is_active,
         default: roleDtl.is_default,
-        createdDate: convertToNativeTimeZone(roleDtl.created_date),
-        modifiedDate: convertToNativeTimeZone(roleDtl.modified_date),
       };
     });
 

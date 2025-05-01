@@ -12,7 +12,7 @@ const isRoleAvailable = async (roleCd) => {
 };
 
 const getDefaultRole = async () => {
-  const query = `SELECT ID FROM USER_ROLE WHERE IS_DELETED = false AND IS_DEFAULT = true;`;
+  const query = `SELECT ID FROM USER_ROLE WHERE IS_DELETED = false AND IS_ACTIVE = true AND IS_DEFAULT = true;`;
   return exec(query);
 };
 
@@ -41,10 +41,16 @@ const getUserRoleById = async (roleId) => {
 };
 
 const getUserRoles = async () => {
-  const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT, CREATED_DATE, MODIFIED_DATE
-        FROM USER_ROLE
-        WHERE IS_DELETED = false`;
+  const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT FROM USER_ROLE WHERE IS_DELETED = false`;
   return exec(query);
 };
 
-export { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById, getUserRoles };
+const updateUserRoleById = async (userId, payload) => {
+  const query = `UPDATE USER_ROLE SET ROLE_DESC = ?, IS_ACTIVE = ?, IS_DEFAULT = ?, MODIFIED_BY = ?
+    WHERE ID = ? AND IS_DELETED = false;`;
+  const params = [payload.roleDesc, payload.active, payload.default, userId, payload.id];
+
+  return exec(query, params);
+};
+
+export { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById, getUserRoles, updateUserRoleById };

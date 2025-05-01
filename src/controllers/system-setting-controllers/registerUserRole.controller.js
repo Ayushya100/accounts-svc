@@ -53,7 +53,7 @@ const registerNewUserRole = async (payload) => {
       log.info('Call db query to deactivate existing default role');
       const currentActiveRole = await getDefaultRole();
       if (currentActiveRole.rowCount === 1) {
-        deactivateRole(currentActiveRole.rows[0].id);
+        await deactivateRole(currentActiveRole.rows[0].id);
       }
     }
 
