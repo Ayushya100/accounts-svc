@@ -27,6 +27,7 @@ import {
   isScopeAvailable,
   registerNewScope,
   getUserScopeById,
+  getUserScopes
 } from './system.db.js';
 
 export {
@@ -53,4 +54,5 @@ export {
   isScopeAvailable,
   registerNewScope,
   getUserScopeById,
+  getUserScopes
 };
