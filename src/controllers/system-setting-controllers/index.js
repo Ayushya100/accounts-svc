@@ -17,5 +17,5 @@ export default {
   verifyUserScopeExist,
   registerNewUserScope,
   getScopeById,
-  getAllUserScopes
+  getAllUserScopes,
 };
