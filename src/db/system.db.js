@@ -107,6 +107,16 @@ const deleteUserScopeById = async (userId, scopeId) => {
   return exec(query, params);
 };
 
+const unassignedScopedByRoleId = async (roleId) => {
+  const query = `SELECT ID, SCOPE_CD, SCOPE_DESC FROM USER_SCOPE
+    WHERE IS_DELETED = false AND ID NOT IN (
+      SELECT SCOPE_ID FROM ROLE_SCOPE WHERE ROLE_ID = ? AND IS_DELETED = false
+    );`;
+  const params = [roleId];
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -122,4 +132,5 @@ export {
   getUserScopes,
   updateUserScopeById,
   deleteUserScopeById,
+  unassignedScopedByRoleId,
 };
