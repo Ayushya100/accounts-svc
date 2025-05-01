@@ -61,4 +61,42 @@ const deleteUserRoleById = async (userId, roleId) => {
   return exec(query, params);
 };
 
-export { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById, getUserRoles, updateUserRoleById, deleteUserRoleById };
+const isScopeAvailable = async (scopeCode) => {
+  const query = `SELECT ID, SCOPE_CD, SCOPE_DESC, IS_DELETED FROM USER_SCOPE
+    WHERE IS_DELETED = false AND SCOPE_CD = ?;`;
+  const params = [scopeCode];
+
+  return exec(query, params);
+};
+
+const registerNewScope = async (payload) => {
+  const query = `INSERT INTO USER_SCOPE (SCOPE_CD, SCOPE_DESC)
+    VALUES(?, ?)
+    RETURNING ID`;
+  const params = [payload.scopeCode, payload.scopeDesc];
+
+  return exec(query, params);
+};
+
+const getUserScopeById = async (scopeId) => {
+  const query = `SELECT ID, SCOPE_CD, SCOPE_DESC, CREATED_DATE, MODIFIED_DATE
+    FROM USER_SCOPE
+    WHERE IS_DELETED = false AND ID = ?;`;
+  const params = [scopeId];
+
+  return exec(query, params);
+};
+
+export {
+  isRoleAvailable,
+  getDefaultRole,
+  deactivateRole,
+  registerNewRole,
+  getUserRoleById,
+  getUserRoles,
+  updateUserRoleById,
+  deleteUserRoleById,
+  isScopeAvailable,
+  registerNewScope,
+  getUserScopeById,
+};

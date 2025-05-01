@@ -25,6 +25,9 @@ class AccountService extends Service {
     this.app.put(`${USERS_API}/setup/user-role/:roleId`, routes.settingRoutes.updateUserRole);
     this.app.delete(`${USERS_API}/setup/user-role/:roleId`, routes.settingRoutes.deleteUserRole);
 
+    // User Scope routes
+    this.app.post(`${USERS_API}/setup/user-scope`, routes.settingRoutes.registerUserScope);
+
     // User routes
     this.app.get(`${USERS_API}/user/:userId`, verifyUserId, routes.users.userInfo);
     this.app.post(`${USERS_API}/user/logout`, routes.users.logoutUser);
