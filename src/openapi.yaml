@@ -116,6 +116,22 @@ components:
         - roleCode
         - roleDesc
 
+    updateUserRolePayload:
+      type: object
+      properties:
+        roleDesc:
+          type: string
+          description: Role Description
+          minLength: 1
+        default:
+          type: boolean
+          description: Is default user role
+        active:
+          type: boolean
+          description: Is active user role
+      required:
+        - roleDesc
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -329,10 +345,6 @@ components:
           type: boolean
         default:
           type: boolean
-        createdDate:
-          type: string
-        modifiedDate:
-          type: string
       required:
         - id
         - roleCode
@@ -520,6 +532,28 @@ components:
         statusCode:
           type: integer
           example: 200,
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerUserRoleResponseData'
+
+    updateUserRoleResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
         type:
           type: string
           example: 'SUCCESS'
@@ -1012,6 +1046,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getUserRoleByIdResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    put:
+      operationId: updateUserRoleInfoById
+      summary: Update User Role Info by ID
+      description: An API to update the user role info for requested ID.
+      parameters:
+        - $ref: '#/components/parameters/RoleIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateUserRolePayload'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateUserRoleResponse'
         '400':
           description: BAD_REQUEST
           content:

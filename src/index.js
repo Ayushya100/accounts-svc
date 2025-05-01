@@ -22,6 +22,7 @@ class AccountService extends Service {
     this.app.post(`${USERS_API}/setup/user-role`, routes.settingRoutes.registerUserRole);
     this.app.get(`${USERS_API}/setup/user-role`, routes.settingRoutes.getAllUserRoles);
     this.app.get(`${USERS_API}/setup/user-role/:roleId`, routes.settingRoutes.getUserRoleById);
+    this.app.put(`${USERS_API}/setup/user-role/:roleId`, routes.settingRoutes.updateUserRole);
 
     // User routes
     this.app.get(`${USERS_API}/user/:userId`, verifyUserId, routes.users.userInfo);
