@@ -3,13 +3,13 @@
 import { buildApiResponse, logger } from 'finance-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Router: get-unassigned-scopes');
+const log = logger('Router: get-assigned-scopes');
 const settingController = controllers.settingController;
 
 // API Function
-const getUnassignedScopes = async (req, res, next) => {
+const getAssignedScopes = async (req, res, next) => {
   try {
-    log.info('Get unassigned user scopes for requested role id operation initiated');
+    log.info('Get assigned user scopes for requested role id operation initiated');
     const roleId = req.params.roleId;
 
     log.info('Call controller function to check if provided role id exists or not');
@@ -18,13 +18,13 @@ const getUnassignedScopes = async (req, res, next) => {
       throw roleDtl;
     }
 
-    log.info('Call controller function to fetch unassigned user scopes for role');
-    const scopeDtl = await settingController.getUnassignedScopes(roleId);
+    log.info('Call controller function to fetch assigned user scopes for role');
+    const scopeDtl = await settingController.getAssignedScopes(roleId);
     if (!scopeDtl.isValid) {
       throw scopeDtl;
     }
 
-    log.success('Unassigned user scopes fetched successfully');
+    log.success('Assigned user scopes fetched successfully');
     res.status(200).json(buildApiResponse(scopeDtl));
   } catch (err) {
     if (err.statusCode === '500') {
@@ -36,4 +36,4 @@ const getUnassignedScopes = async (req, res, next) => {
   }
 };
 
-export default getUnassignedScopes;
+export default getAssignedScopes;

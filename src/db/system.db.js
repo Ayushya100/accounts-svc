@@ -107,11 +107,21 @@ const deleteUserScopeById = async (userId, scopeId) => {
   return exec(query, params);
 };
 
-const unassignedScopedByRoleId = async (roleId) => {
+const unassignedScopesByRoleId = async (roleId) => {
   const query = `SELECT ID, SCOPE_CD, SCOPE_DESC FROM USER_SCOPE
     WHERE IS_DELETED = false AND ID NOT IN (
       SELECT SCOPE_ID FROM ROLE_SCOPE WHERE ROLE_ID = ? AND IS_DELETED = false
     );`;
+  const params = [roleId];
+
+  return exec(query, params);
+};
+
+const assignedScopesByRoleId = async (roleId) => {
+  const query = `SELECT S.ID, S.SCOPE_CD, S.SCOPE_DESC
+    FROM ROLE_SCOPE R
+    INNER JOIN USER_SCOPE S ON S.ID = R.SCOPE_ID AND S.IS_DELETED = false
+    WHERE R.IS_DELETED = false AND R.ROLE_ID = ?;`;
   const params = [roleId];
 
   return exec(query, params);
@@ -132,5 +142,6 @@ export {
   getUserScopes,
   updateUserScopeById,
   deleteUserScopeById,
-  unassignedScopedByRoleId,
+  unassignedScopesByRoleId,
+  assignedScopesByRoleId,
 };
