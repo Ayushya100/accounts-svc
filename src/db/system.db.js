@@ -92,6 +92,14 @@ const getUserScopes = async () => {
   return exec(query);
 };
 
+const updateUserScopeById = async (userId, scopeId, payload) => {
+  const query = `UPDATE USER_SCOPE SET SCOPE_DESC = ?, MODIFIED_BY = ?
+    WHERE IS_DELETED = false AND ID = ?;`;
+  const params = [payload.scopeDesc, userId, scopeId];
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -105,4 +113,5 @@ export {
   registerNewScope,
   getUserScopeById,
   getUserScopes,
+  updateUserScopeById,
 };
