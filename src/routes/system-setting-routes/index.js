@@ -12,6 +12,7 @@ import updateUserScope from './updateUserScope.route.js';
 import deleteUserScope from './deleteUserScope.route.js';
 import getUnassignedScopes from './getUnassignedScopes.route.js';
 import getAssignedScopes from './getAssignedScopes.route.js';
+import assignScopesToRole from './assignScopeToRole.route.js';
 
 export default {
   registerUserRole,
@@ -26,4 +27,5 @@ export default {
   deleteUserScope,
   getUnassignedScopes,
   getAssignedScopes,
+  assignScopesToRole,
 };

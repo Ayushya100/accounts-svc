@@ -8,7 +8,7 @@ import { verifyUserScopeExist, registerNewUserScope } from './registerUserScope.
 import { getScopeById, getAllUserScopes } from './getUserScope.controller.js';
 import { updateUserScope } from './updateUserScope.controller.js';
 import { deleteScope } from './deleteUserScope.controller.js';
-import { getUnassignedScopes, getAssignedScopes } from './roleScope.controller.js';
+import { getUnassignedScopes, getAssignedScopes, updateRoleScopeSet } from './roleScope.controller.js';
 
 export default {
   verifyUserRoleExist,
@@ -25,4 +25,5 @@ export default {
   deleteScope,
   getUnassignedScopes,
   getAssignedScopes,
+  updateRoleScopeSet,
 };
