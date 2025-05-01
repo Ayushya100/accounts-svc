@@ -12,6 +12,9 @@ const getAllUserRoles = async (req, res, next) => {
     log.info('Get all user roles request process initiated');
     log.info('Call controller function to fetch all user roles from system');
     const userRolesDtl = await settingController.getAllUserRoles();
+    if (!userRolesDtl.isValid) {
+      throw userRolesDtl;
+    }
 
     log.success('User roles fetched successfully');
     res.status(200).json(buildApiResponse(userRolesDtl));

@@ -1,7 +1,7 @@
 'use strict';
 
 import { convertIdToPrettyString, convertPrettyStringToId, convertToNativeTimeZone, logger } from 'finance-lib';
-import { getUserScopeById } from '../../db/index.js';
+import { getUserScopeById, getUserScopes } from '../../db/index.js';
 
 const log = logger('Controller: get-user-scope');
 
@@ -53,4 +53,48 @@ const getScopeById = async (scopeId) => {
   }
 };
 
-export { getScopeById };
+const getAllUserScopes = async() => {
+  try {
+    log.info('Controller function to fetch all user scopes from system initiated');
+    log.info('Call db query to fetch all user scopes from db');
+    let userScopesDtl = await getUserScopes();
+    if (userScopesDtl.rowCount === 0) {
+      log.info('No user scope available to display');
+      return {
+        status: 204,
+        message: 'No user scope found',
+        data: [],
+        isValid: true
+      };
+    }
+
+    userScopesDtl = userScopesDtl.rows;
+    const scopeDtls = userScopesDtl.map((scopeDtl) => {
+      return {
+        id: convertIdToPrettyString(scopeDtl.id),
+        scopeCode: scopeDtl.scope_cd,
+        scopeDesc: scopeDtl.scope_desc
+      };
+    });
+
+    log.success('User scopes retrieval operation completed successfully');
+    return {
+      status: 200,
+      message: 'User scopes fetched successfully',
+      data: scopeDtls,
+      isValid: true
+    };
+  } catch (err) {
+    log.error('Error while retrieving all user roles from system');
+    return {
+      status: 500,
+      message: 'An error occurred while retrieving all user roles from system',
+      data: [],
+      errors: err,
+      stack: err.stack,
+      isValid: false,
+    };
+  }
+}
+
+export { getScopeById, getAllUserScopes };

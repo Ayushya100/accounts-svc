@@ -87,6 +87,11 @@ const getUserScopeById = async (scopeId) => {
   return exec(query, params);
 };
 
+const getUserScopes = async() => {
+  const query = `SELECT ID, SCOPE_CD, SCOPE_DESC FROM USER_SCOPE WHERE IS_DELETED = false;`;
+  return exec(query);
+}
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -99,4 +104,5 @@ export {
   isScopeAvailable,
   registerNewScope,
   getUserScopeById,
+  getUserScopes
 };

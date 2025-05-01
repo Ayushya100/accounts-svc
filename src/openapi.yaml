@@ -322,7 +322,7 @@ components:
         - modifiedDate
 
     registerUserRoleResponseData:
-      title: Schema for Register User Role Response Data
+      title: Schema for User Role Detail Response Data
       type: object
       properties:
         id:
@@ -366,6 +366,39 @@ components:
         - roleDesc
         - active
         - default
+
+    registerUserScopeResponseData:
+      title: Schema for User Scope Detail Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        scopeCode:
+          type: string
+        scopeDesc:
+          type: string
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+      required:
+        - id
+        - scopeCode
+        - scopeDesc
+
+    getUserScopeResponseData:
+      title: Schema for Fetching User Scope Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        scopeCode:
+          type: string
+        scopeDesc:
+          type: string
+      required:
+        - scopeCode
+        - scopeDesc
 
     emptyResponse:
       type: object
@@ -605,6 +638,30 @@ components:
           example: true
         data:
           type: object
+          $ref: '#/components/schemas/registerUserScopeResponseData'
+
+    getUserScopeResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getUserScopeResponseData'
 
     noContentResponse:
       type: object
@@ -1225,6 +1282,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userAlreadyExist'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    get:
+      operationId: GetUserScopes
+      summary: Get all User Scopes
+      description: An API to fetch all user scopes exist in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserScopeResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
