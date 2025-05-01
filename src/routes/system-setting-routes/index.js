@@ -10,6 +10,7 @@ import getAllUserScopes from './getAllUserScope.route.js';
 import getUserScopeById from './getUserScopeById.route.js';
 import updateUserScope from './updateUserScope.route.js';
 import deleteUserScope from './deleteUserScope.route.js';
+import getUnassignedScopes from './getUnassignedScopes.route.js';
 
 export default {
   registerUserRole,
@@ -22,4 +23,5 @@ export default {
   getUserScopeById,
   updateUserScope,
   deleteUserScope,
+  getUnassignedScopes,
 };
