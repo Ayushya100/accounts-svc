@@ -30,6 +30,15 @@ components:
       schema:
         type: string
 
+    RoleIdParam:
+      name: roleId
+      description: The ID of role to verify
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
+
   schemas:
     Username:
       type: string
@@ -505,6 +514,28 @@ components:
           items:
             $ref: '#/components/schemas/getUserRoleResponseData'
 
+    getUserRoleByIdResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200,
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerUserRoleResponseData'
+
     noContentResponse:
       type: object
       properties:
@@ -960,6 +991,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/user-role/{roleId}:
+    get:
+      operationId: getUserRoleInfoById
+      summary: Get User Role Info by ID
+      description: An API to retrieve the user role info for requested ID.
+      parameters:
+        - $ref: '#/components/parameters/RoleIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserRoleByIdResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
