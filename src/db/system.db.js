@@ -53,4 +53,12 @@ const updateUserRoleById = async (userId, payload) => {
   return exec(query, params);
 };
 
-export { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById, getUserRoles, updateUserRoleById };
+const deleteUserRoleById = async (userId, roleId) => {
+  const query = `UPDATE USER_ROLE SET IS_DELETED = true, IS_ACTIVE = false, MODIFIED_BY = ?
+    WHERE ID = ? AND IS_DELETED = false AND IS_DEFAULT = false;`;
+  const params = [userId, roleId];
+
+  return exec(query, params);
+};
+
+export { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole, getUserRoleById, getUserRoles, updateUserRoleById, deleteUserRoleById };
