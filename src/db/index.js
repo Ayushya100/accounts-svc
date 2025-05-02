@@ -35,6 +35,9 @@ import {
   getMultipleScopesByIds,
   assignScopesToRole,
   unassignScopesToRole,
+  isServiceAvailable,
+  registerNewService,
+  getServiceById,
 } from './system.db.js';
 
 export {
@@ -69,4 +72,7 @@ export {
   getMultipleScopesByIds,
   assignScopesToRole,
   unassignScopesToRole,
+  isServiceAvailable,
+  registerNewService,
+  getServiceById,
 };
