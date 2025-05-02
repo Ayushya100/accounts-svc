@@ -5,6 +5,7 @@ import getAllServiceConfig from './getAllServiceConfig.route.js';
 import getServiceConfigById from './getServiceConfigById.route.js';
 import registerRouteConfig from './registerRouteConfig.route.js';
 import getAllRouteConfig from './getAllRouteConfig.route.js';
+import getRouteConfigById from './getRouteConfigById.route.js';
 
 export default {
   registerServiceConfig,
@@ -12,4 +13,5 @@ export default {
   getServiceConfigById,
   registerRouteConfig,
   getAllRouteConfig,
+  getRouteConfigById,
 };
