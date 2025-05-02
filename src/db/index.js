@@ -39,6 +39,9 @@ import {
   registerNewService,
   getServiceById,
   getServiceConfig,
+  isRouteAvailable,
+  registerNewRoute,
+  getRouteById,
 } from './system.db.js';
 
 export {
@@ -77,4 +80,7 @@ export {
   registerNewService,
   getServiceById,
   getServiceConfig,
+  isRouteAvailable,
+  registerNewRoute,
+  getRouteById,
 };

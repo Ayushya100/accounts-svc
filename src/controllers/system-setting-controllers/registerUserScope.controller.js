@@ -16,7 +16,7 @@ const verifyUserScopeExist = async (scopeCd) => {
       return {
         status: 409,
         message: 'User scope already exists',
-        data: scopeDtl.rows,
+        data: [],
         errors: [],
         stack: 'verifyUserScopeExist function call',
         isValid: false,

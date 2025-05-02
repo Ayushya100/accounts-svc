@@ -212,6 +212,30 @@ components:
         - protocol
         - port
 
+    registerNewRoutePayload:
+      type: object
+      properties:
+        svcId:
+          type: string
+          description: Assigned service ID
+          minLength: 1
+        path:
+          type: string
+          description: Route Path
+          minLength: 1
+        method:
+          type: string
+          description: Route Method
+          enum:
+            - GET
+            - PUT
+            - POST
+            - DELETE
+      required:
+        - svcId
+        - path
+        - method
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -525,6 +549,34 @@ components:
         - environment
         - protocol
         - port
+
+    getServiceSummaryData:
+      title: Schema for fetching Service summary Data
+      type: object
+      properties:
+        id:
+          type: string
+        microservice:
+          type: string
+      required:
+        - id
+        - microservice
+
+    registerServiceRouteResponseData:
+      title: Schema for fetching Service Route Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        method:
+          type: string
+        validations:
+          type: array
+        service:
+          type: object
+          $ref: '#/components/schemas/getServiceSummaryData'
 
     emptyResponse:
       type: object
@@ -921,6 +973,28 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerAppServiceResponseData'
+
+    registerServiceRouteResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerServiceRouteResponseData'
 
     noContentResponse:
       type: object
@@ -1938,6 +2012,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/app-route:
+    post:
+      operationId: RegisterServiceRoute
+      summary: Register New Service Route
+      description: An API to register new service route in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerNewRoutePayload'
+      responses:
+        '201':
+          description: REQUEST_COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerServiceRouteResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userAlreadyExist'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

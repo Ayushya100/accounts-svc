@@ -176,6 +176,32 @@ const getServiceConfig = async () => {
   return exec(query);
 };
 
+const isRouteAvailable = async (payload) => {
+  const query = `SELECT ID FROM PATH_CONFIG WHERE SVC_ID = ? AND PATH = ? AND METHOD = ? AND IS_DELETED = false;`;
+  const params = [payload.svcId, payload.path, payload.method];
+
+  return exec(query, params);
+};
+
+const registerNewRoute = async (payload) => {
+  const query = `INSERT INTO PATH_CONFIG (SVC_ID, PATH, METHOD, VALIDATIONS)
+    VALUES(?, ?, ?, ?)
+    RETURNING ID;`;
+  const params = [payload.svcId, payload.path, payload.method, payload.validations];
+
+  return exec(query, params);
+};
+
+const getRouteById = async (routeId) => {
+  const query = `SELECT P.ID, S.ID AS SVC_ID, P.PATH, P.METHOD, P.VALIDATIONS, P.CREATED_DATE, P.MODIFIED_DATE, S.MICROSERVICE
+    FROM PATH_CONFIG P
+    INNER JOIN SVC_CONFIG S ON S.ID = P.SVC_ID AND S.IS_DELETED = false
+    WHERE P.ID = ? AND P.IS_DELETED = false;`;
+  const params = [routeId];
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -200,4 +226,7 @@ export {
   registerNewService,
   getServiceById,
   getServiceConfig,
+  isRouteAvailable,
+  registerNewRoute,
+  getRouteById,
 };

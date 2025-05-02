@@ -16,7 +16,7 @@ const verifyUserRoleExist = async (roleCd) => {
       return {
         status: 409,
         message: 'User role already exists',
-        data: roleDtl.rows,
+        data: [],
         errors: [],
         stack: 'verifyUserRoleExist function call',
         isValid: false,
