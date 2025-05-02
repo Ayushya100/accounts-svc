@@ -3,7 +3,7 @@
 import { convertIdToPrettyString, convertPrettyStringToId, convertToNativeTimeZone, logger } from 'finance-lib';
 import { getRouteById, getRouteConfig } from '../../db/index.js';
 
-const log = logger('Controller: get-service-config');
+const log = logger('Controller: get-route-config');
 
 const getRouteInfoById = async (routeId, deletedRecord = false) => {
   try {
@@ -33,7 +33,7 @@ const getRouteInfoById = async (routeId, deletedRecord = false) => {
       createdDate: convertToNativeTimeZone(configDtl.created_date),
       modifiedDate: convertToNativeTimeZone(configDtl.modified_date),
       service: {
-        id: configDtl.svc_id,
+        id: convertIdToPrettyString(configDtl.svc_id),
         microservice: configDtl.microservice,
       },
     };

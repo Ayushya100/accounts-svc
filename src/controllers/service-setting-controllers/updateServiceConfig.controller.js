@@ -4,7 +4,7 @@ import { convertPrettyStringToId, logger } from 'finance-lib';
 import { updateServiceInfoById } from '../../db/system.db.js';
 import { getServiceInfoById } from './getServiceConfig.controller.js';
 
-const log = logger('Controller: update-user-role');
+const log = logger('Controller: update-service-config');
 
 const updateServiceConfig = async (userId, svcId, svcDtl, payload) => {
   try {

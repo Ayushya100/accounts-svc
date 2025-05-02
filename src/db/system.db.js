@@ -233,6 +233,14 @@ const deleteRouteInfoById = async (routeId, userId) => {
   return exec(query, params);
 };
 
+const updateRouteInfoById = async (routeId, userId, payload) => {
+  const query = `UPDATE PATH_CONFIG SET PATH = ?, METHOD = ?, VALIDATIONS = ?, SVC_ID = ?, MODIFIED_BY = ?
+    WHERE ID = ? AND IS_DELETED = false;`;
+  const params = [payload.path, payload.method, payload.validations, payload.svcId, userId, routeId];
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -264,4 +272,5 @@ export {
   updateServiceInfoById,
   deleteServiceInfoById,
   deleteRouteInfoById,
+  updateRouteInfoById,
 };

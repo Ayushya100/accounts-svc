@@ -4,7 +4,7 @@ import { convertPrettyStringToId, logger } from 'finance-lib';
 import { deleteServiceInfoById } from '../../db/index.js';
 import { getServiceInfoById } from './getServiceConfig.controller.js';
 
-const log = logger('Controller: delete-user-role');
+const log = logger('Controller: delete-service-config');
 
 const deleteService = async (userId, svcId) => {
   try {

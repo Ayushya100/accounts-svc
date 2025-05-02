@@ -46,6 +46,7 @@ import {
   updateServiceInfoById,
   deleteServiceInfoById,
   deleteRouteInfoById,
+  updateRouteInfoById,
 } from './system.db.js';
 
 export {
@@ -91,4 +92,5 @@ export {
   updateServiceInfoById,
   deleteServiceInfoById,
   deleteRouteInfoById,
+  updateRouteInfoById,
 };

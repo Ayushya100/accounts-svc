@@ -263,10 +263,34 @@ components:
             - PUT
             - POST
             - DELETE
+        validations:
+          type: array
       required:
         - svcId
         - path
         - method
+
+    updateRoutePayload:
+      type: object
+      properties:
+        svcId:
+          type: string
+          description: Assigned service ID
+          minLength: 1
+        path:
+          type: string
+          description: Route Path
+          minLength: 1
+        method:
+          type: string
+          description: Route Method
+          enum:
+            - GET
+            - PUT
+            - POST
+            - DELETE
+        validations:
+          type: array
 
     healthCheckData:
       title: Schema for Health Check Data
@@ -2340,6 +2364,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getRouteConfigByIdResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    put:
+      operationId: updateRouteConfigurationById
+      summary: Update Route Configuration for ID
+      description: An API to update the route configuration for requested ID.
+      parameters:
+        - $ref: '#/components/parameters/RouteIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateRoutePayload'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateRouteResponse'
         '400':
           description: BAD_REQUEST
           content:

@@ -9,6 +9,7 @@ import getRouteConfigById from './getRouteConfigById.route.js';
 import updateServiceConfig from './updateServiceConfig.route.js';
 import deleteServiceConfig from './deleteServiceConfig.route.js';
 import deleteRouteConfig from './deleteRouteConfig.rotue.js';
+import updateRouteConfig from './updateRouteConfig.route.js';
 
 export default {
   registerServiceConfig,
@@ -20,4 +21,5 @@ export default {
   updateServiceConfig,
   deleteServiceConfig,
   deleteRouteConfig,
+  updateRouteConfig,
 };
