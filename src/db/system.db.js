@@ -192,12 +192,12 @@ const registerNewRoute = async (payload) => {
   return exec(query, params);
 };
 
-const getRouteById = async (routeId) => {
+const getRouteById = async (routeId, deletedRecord) => {
   const query = `SELECT P.ID, S.ID AS SVC_ID, P.PATH, P.METHOD, P.VALIDATIONS, P.CREATED_DATE, P.MODIFIED_DATE, S.MICROSERVICE
     FROM PATH_CONFIG P
     INNER JOIN SVC_CONFIG S ON S.ID = P.SVC_ID AND S.IS_DELETED = false
-    WHERE P.ID = ? AND P.IS_DELETED = false;`;
-  const params = [routeId];
+    WHERE P.ID = ? AND P.IS_DELETED = ?;`;
+  const params = [routeId, deletedRecord];
 
   return exec(query, params);
 };
@@ -222,6 +222,13 @@ const updateServiceInfoById = async (svcId, userId, payload) => {
 const deleteServiceInfoById = async (svcId, userId) => {
   const query = `UPDATE SVC_CONFIG SET IS_DELETED = true, MODIFIED_BY = ? WHERE ID = ? AND IS_DELETED = false;`;
   const params = [userId, svcId];
+
+  return exec(query, params);
+};
+
+const deleteRouteInfoById = async (routeId, userId) => {
+  const query = `UPDATE PATH_CONFIG SET IS_DELETED = true, MODIFIED_BY = ? WHERE ID = ?  AND IS_DELETED = false;`;
+  const params = [userId, routeId];
 
   return exec(query, params);
 };
@@ -256,4 +263,5 @@ export {
   getRouteConfig,
   updateServiceInfoById,
   deleteServiceInfoById,
+  deleteRouteInfoById,
 };

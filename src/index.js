@@ -44,6 +44,7 @@ class AccountService extends Service {
     this.app.post(`${USERS_API}/setup/app-route`, routes.serviceRoutes.registerRouteConfig);
     this.app.get(`${USERS_API}/setup/app-route`, routes.serviceRoutes.getAllRouteConfig);
     this.app.get(`${USERS_API}/setup/app-route/:routeId`, routes.serviceRoutes.getRouteConfigById);
+    this.app.delete(`${USERS_API}/setup/app-route/:routeId`, routes.serviceRoutes.deleteRouteConfig);
 
     // User routes
     this.app.get(`${USERS_API}/user/:userId`, verifyUserId, routes.users.userInfo);

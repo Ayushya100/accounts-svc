@@ -6,6 +6,7 @@ import { verifyRouteConfigExist, registerNewRouteConfig } from './registerRouteC
 import { getRouteInfoById, getAllRouteInfo } from './getRouteConfig.controller.js';
 import { updateServiceConfig } from './updateServiceConfig.controller.js';
 import { deleteService } from './deleteServiceConfig.controller.js';
+import { deleteRoute } from './deleteRouteConfig.controller.js';
 
 export default {
   verifyConfigExist,
@@ -18,4 +19,5 @@ export default {
   getAllRouteInfo,
   updateServiceConfig,
   deleteService,
+  deleteRoute,
 };
