@@ -1,7 +1,7 @@
 'use strict';
 
 import { convertIdToPrettyString, convertPrettyStringToId, convertToNativeTimeZone, logger } from 'finance-lib';
-import { getRouteById } from '../../db/index.js';
+import { getRouteById, getRouteConfig } from '../../db/index.js';
 
 const log = logger('Controller: get-service-config');
 
@@ -58,4 +58,52 @@ const getRouteInfoById = async (routeId) => {
   }
 };
 
-export { getRouteInfoById };
+const getAllRouteInfo = async () => {
+  try {
+    log.info('Controller function to fetch all route configurations from system activated');
+    log.info('Call db query to fetch all route config from db');
+    let routeDtl = await getRouteConfig();
+    if (routeDtl.rowCount === 0) {
+      log.info('No route configuration available to display');
+      return {
+        status: 204,
+        message: 'No route config found',
+        data: [],
+        isValid: true,
+      };
+    }
+
+    routeDtl = routeDtl.rows;
+    const data = routeDtl.map((routeDtl) => {
+      return {
+        id: convertIdToPrettyString(routeDtl.id),
+        path: routeDtl.path,
+        method: routeDtl.method,
+        service: {
+          id: convertIdToPrettyString(routeDtl.svc_id),
+          microservice: routeDtl.microservice,
+        },
+      };
+    });
+
+    log.success('Route configuration operation completed successfully');
+    return {
+      status: 200,
+      message: 'Route configuration fetched successfully',
+      data: data,
+      isValid: true,
+    };
+  } catch (err) {
+    log.error('Error while retrieving all route configurations from system');
+    return {
+      status: 500,
+      message: 'An error occurred while retrieving all route configurations from system',
+      data: [],
+      errors: err,
+      stack: err.stack,
+      isValid: false,
+    };
+  }
+};
+
+export { getRouteInfoById, getAllRouteInfo };

@@ -577,6 +577,31 @@ components:
         service:
           type: object
           $ref: '#/components/schemas/getServiceSummaryData'
+      required:
+        - id
+        - path
+        - method
+        - validations
+        - service
+
+    getRouteConfigResponseData:
+      title: Schema for fetching Route configuration Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        method:
+          type: string
+        service:
+          type: object
+          $ref: '#/components/schemas/getServiceSummaryData'
+      required:
+        - id
+        - path
+        - method
+        - service
 
     emptyResponse:
       type: object
@@ -995,6 +1020,29 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerServiceRouteResponseData'
+
+    getRouteConfigResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getRouteConfigResponseData'
 
     noContentResponse:
       type: object
@@ -2055,6 +2103,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userAlreadyExist'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    get:
+      operationId: GetRouteConfigs
+      summary: Get All Route Configurations
+      description: An API to fetch all route configurations exist in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRouteConfigResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
