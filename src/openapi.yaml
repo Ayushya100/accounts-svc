@@ -496,6 +496,27 @@ components:
         - protocol
         - port
 
+    getServiceConfigResponseData:
+      title: Schema for fetching Service configuration Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        microservice:
+          type: string
+        environment:
+          type: string
+        protocol:
+          type: string
+        port:
+          type: string
+      required:
+        - id
+        - microservice
+        - environment
+        - protocol
+        - port
+
     emptyResponse:
       type: object
       properties:
@@ -846,6 +867,29 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerAppServiceResponseData'
+    
+    getServiceConfigResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getServiceConfigResponseData'
 
     noContentResponse:
       type: object
@@ -1788,6 +1832,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userAlreadyExist'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    get:
+      operationId: GetServiceConfigs
+      summary: Get All Service Configurations
+      description: An API to fetch all the service configurations exist in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getServiceConfigResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

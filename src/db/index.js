@@ -38,6 +38,7 @@ import {
   isServiceAvailable,
   registerNewService,
   getServiceById,
+  getServiceConfig,
 } from './system.db.js';
 
 export {
@@ -75,4 +76,5 @@ export {
   isServiceAvailable,
   registerNewService,
   getServiceById,
+  getServiceConfig,
 };

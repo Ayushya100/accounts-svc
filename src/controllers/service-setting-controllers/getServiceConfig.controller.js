@@ -1,7 +1,7 @@
 'use strict';
 
 import { convertIdToPrettyString, convertPrettyStringToId, convertToNativeTimeZone, logger } from 'finance-lib';
-import { getServiceById } from '../../db/index.js';
+import { getServiceById, getServiceConfig } from '../../db/index.js';
 
 const log = logger('Controller: get-service-config');
 
@@ -55,4 +55,50 @@ const getServiceInfoById = async (svcId) => {
   }
 };
 
-export { getServiceInfoById };
+const getAllServiceInfo = async () => {
+  try {
+    log.info('Controller function to fetch all service configurations from system activated');
+    log.info('Call db query to fetch all service config from db');
+    let serviceDtl = await getServiceConfig();
+    if (serviceDtl.rowCount === 0) {
+      log.info('No service configuration available to display');
+      return {
+        status: 204,
+        message: 'No service config found',
+        data: [],
+        isValid: true,
+      };
+    }
+
+    serviceDtl = serviceDtl.rows;
+    const data = serviceDtl.map((svcDtl) => {
+      return {
+        id: convertIdToPrettyString(svcDtl.id),
+        microservice: svcDtl.microservice,
+        environment: svcDtl.environment,
+        protocol: svcDtl.protocol,
+        port: svcDtl.port,
+      };
+    });
+
+    log.success('Service configuration operation completed successfully');
+    return {
+      status: 200,
+      message: 'Service configuration fetched successfully',
+      data: data,
+      isValid: true,
+    };
+  } catch (err) {
+    log.error('Error while retrieving all service configurations from system');
+    return {
+      status: 500,
+      message: 'An error occurred while retrieving all service configurations from system',
+      data: [],
+      errors: err,
+      stack: err.stack,
+      isValid: false,
+    };
+  }
+};
+
+export { getServiceInfoById, getAllServiceInfo };
