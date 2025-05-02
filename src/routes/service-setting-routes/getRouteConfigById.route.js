@@ -3,7 +3,7 @@
 import { logger, buildApiResponse } from 'finance-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Router: get-user-role-by-id');
+const log = logger('Router: get-route-config-by-id');
 const serviceController = controllers.serviceController;
 
 // API Function

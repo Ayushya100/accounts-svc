@@ -4,7 +4,7 @@ import { convertPrettyStringToId, logger } from 'finance-lib';
 import { deleteRouteInfoById } from '../../db/index.js';
 import { getRouteInfoById } from './getRouteConfig.controller.js';
 
-const log = logger('Controller: delete-user-role');
+const log = logger('Controller: delete-route-config');
 
 const deleteRoute = async (userId, routeId) => {
   try {

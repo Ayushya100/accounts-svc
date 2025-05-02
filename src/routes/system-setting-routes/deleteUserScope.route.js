@@ -3,7 +3,7 @@
 import { logger, buildApiResponse } from 'finance-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Router: delete-user-role-by-id');
+const log = logger('Router: delete-user-scope-by-id');
 const settingController = controllers.settingController;
 
 // API Function
