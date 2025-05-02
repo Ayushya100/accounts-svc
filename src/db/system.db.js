@@ -171,6 +171,11 @@ const getServiceById = async (svcId) => {
   return exec(query, params);
 };
 
+const getServiceConfig = async () => {
+  const query = `SELECT ID, MICROSERVICE, ENVIRONMENT, PROTOCOL, PORT FROM SVC_CONFIG WHERE IS_DELETED = false;`;
+  return exec(query);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -194,4 +199,5 @@ export {
   isServiceAvailable,
   registerNewService,
   getServiceById,
+  getServiceConfig,
 };
