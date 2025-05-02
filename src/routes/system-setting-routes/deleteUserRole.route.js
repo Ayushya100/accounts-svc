@@ -25,6 +25,7 @@ const deleteUserRole = async (req, res, next) => {
       throw deleteRoleDtl;
     }
 
+    log.success('Role deletion operation completed successfully');
     res.status(200).json(buildApiResponse(roleDtl));
   } catch (err) {
     if (err.statusCode === '500') {
