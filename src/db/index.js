@@ -45,6 +45,7 @@ import {
   getRouteConfig,
   updateServiceInfoById,
   deleteServiceInfoById,
+  deleteRouteInfoById,
 } from './system.db.js';
 
 export {
@@ -89,4 +90,5 @@ export {
   getRouteConfig,
   updateServiceInfoById,
   deleteServiceInfoById,
+  deleteRouteInfoById,
 };

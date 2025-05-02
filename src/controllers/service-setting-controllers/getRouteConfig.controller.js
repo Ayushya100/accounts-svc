@@ -5,13 +5,13 @@ import { getRouteById, getRouteConfig } from '../../db/index.js';
 
 const log = logger('Controller: get-service-config');
 
-const getRouteInfoById = async (routeId) => {
+const getRouteInfoById = async (routeId, deletedRecord = false) => {
   try {
     log.info('Controller function to fetch route info by id process initiated');
     routeId = convertPrettyStringToId(routeId);
 
     log.info(`Call db query to fetch route details for provided id: ${routeId}`);
-    let configDtl = await getRouteById(routeId);
+    let configDtl = await getRouteById(routeId, deletedRecord);
     if (configDtl.rowCount === 0) {
       log.error('Route configuration requested with the id does not exists in system');
       return {
