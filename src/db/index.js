@@ -42,6 +42,7 @@ import {
   isRouteAvailable,
   registerNewRoute,
   getRouteById,
+  getRouteConfig,
 } from './system.db.js';
 
 export {
@@ -83,4 +84,5 @@ export {
   isRouteAvailable,
   registerNewRoute,
   getRouteById,
+  getRouteConfig,
 };

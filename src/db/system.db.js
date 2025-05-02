@@ -202,6 +202,15 @@ const getRouteById = async (routeId) => {
   return exec(query, params);
 };
 
+const getRouteConfig = async () => {
+  const query = `SELECT P.ID, S.ID AS SVC_ID, P.PATH, P.METHOD, S.MICROSERVICE
+    FROM PATH_CONFIG P
+    INNER JOIN SVC_CONFIG S ON S.ID = P.SVC_ID AND S.IS_DELETED = false
+    WHERE P.IS_DELETED = false;`;
+
+  return exec(query);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -229,4 +238,5 @@ export {
   isRouteAvailable,
   registerNewRoute,
   getRouteById,
+  getRouteConfig,
 };
