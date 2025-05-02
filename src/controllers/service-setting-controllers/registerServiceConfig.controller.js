@@ -16,7 +16,7 @@ const verifyConfigExist = async (payload) => {
       return {
         status: 409,
         message: 'Service config already exists',
-        data: configDtl.rows,
+        data: [],
         errors: [],
         stack: 'verifyConfigExist function call',
         isValid: false,

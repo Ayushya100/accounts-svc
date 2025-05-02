@@ -24,7 +24,7 @@ const registerServiceConfig = async (req, res, next) => {
       throw serviceDtl;
     }
 
-    log.success('User service registeration completed successfully');
+    log.success('Service registeration completed successfully');
     res.status(201).json(buildApiResponse(serviceDtl));
   } catch (err) {
     if (err.statusCode === '500') {
