@@ -40,6 +40,7 @@ class AccountService extends Service {
     this.app.get(`${USERS_API}/setup/app-service`, routes.serviceRoutes.getAllServiceConfig);
     this.app.get(`${USERS_API}/setup/app-service/:svcId`, routes.serviceRoutes.getServiceConfigById);
     this.app.put(`${USERS_API}/setup/app-service/:svcId`, routes.serviceRoutes.updateServiceConfig);
+    this.app.delete(`${USERS_API}/setup/app-service/:svcId`, routes.serviceRoutes.deleteServiceConfig);
     this.app.post(`${USERS_API}/setup/app-route`, routes.serviceRoutes.registerRouteConfig);
     this.app.get(`${USERS_API}/setup/app-route`, routes.serviceRoutes.getAllRouteConfig);
     this.app.get(`${USERS_API}/setup/app-route/:routeId`, routes.serviceRoutes.getRouteConfigById);

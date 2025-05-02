@@ -5,13 +5,13 @@ import { getServiceById, getServiceConfig } from '../../db/index.js';
 
 const log = logger('Controller: get-service-config');
 
-const getServiceInfoById = async (svcId) => {
+const getServiceInfoById = async (svcId, deletedRecord = false) => {
   try {
     log.info('Controller function to fetch service info by id process initiated');
     svcId = convertPrettyStringToId(svcId);
 
     log.info(`Call db query to fetch service details for provided id: ${svcId}`);
-    let configDtl = await getServiceById(svcId);
+    let configDtl = await getServiceById(svcId, deletedRecord);
     if (configDtl.rowCount === 0) {
       log.error('Service configuration requested with the id does not exists in system');
       return {

@@ -5,6 +5,7 @@ import { getServiceInfoById, getAllServiceInfo } from './getServiceConfig.contro
 import { verifyRouteConfigExist, registerNewRouteConfig } from './registerRouteConfig.controller.js';
 import { getRouteInfoById, getAllRouteInfo } from './getRouteConfig.controller.js';
 import { updateServiceConfig } from './updateServiceConfig.controller.js';
+import { deleteService } from './deleteServiceConfig.controller.js';
 
 export default {
   verifyConfigExist,
@@ -16,4 +17,5 @@ export default {
   getRouteInfoById,
   getAllRouteInfo,
   updateServiceConfig,
+  deleteService,
 };

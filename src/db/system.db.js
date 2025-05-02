@@ -162,11 +162,11 @@ const registerNewService = async (payload) => {
   return exec(query, params);
 };
 
-const getServiceById = async (svcId) => {
+const getServiceById = async (svcId, deletedRecord) => {
   const query = `SELECT ID, MICROSERVICE, ENVIRONMENT, PROTOCOL, PORT, CREATED_DATE, MODIFIED_DATE
     FROM SVC_CONFIG
-    WHERE ID = ? AND IS_DELETED = false;`;
-  const params = [svcId];
+    WHERE ID = ? AND IS_DELETED = ?;`;
+  const params = [svcId, deletedRecord];
 
   return exec(query, params);
 };
@@ -219,6 +219,13 @@ const updateServiceInfoById = async (svcId, userId, payload) => {
   return exec(query, params);
 };
 
+const deleteServiceInfoById = async (svcId, userId) => {
+  const query = `UPDATE SVC_CONFIG SET IS_DELETED = true, MODIFIED_BY = ? WHERE ID = ? AND IS_DELETED = false;`;
+  const params = [userId, svcId];
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -248,4 +255,5 @@ export {
   getRouteById,
   getRouteConfig,
   updateServiceInfoById,
+  deleteServiceInfoById,
 };
