@@ -221,6 +221,29 @@ components:
         - protocol
         - port
 
+    updateServicePayload:
+      type: object
+      properties:
+        microservice:
+          type: string
+          description: Micro-service
+          minLength: 5
+        environment:
+          type: string
+          description: Environment
+          minLength: 2
+        protocol:
+          type: string
+          description: Protocol
+          minLength: 4
+          enum:
+            - HTTP
+            - HTTPS
+        port:
+          type: string
+          description: Port
+          minLength: 3
+
     registerNewRoutePayload:
       type: object
       properties:
@@ -987,6 +1010,28 @@ components:
             $ref: '#/components/schemas/getServiceConfigResponseData'
 
     getServiceConfigByIdResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerAppServiceResponseData'
+
+    updateServiceResponse:
       type: object
       properties:
         statusCode:
@@ -2073,6 +2118,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getServiceConfigByIdResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    put:
+      operationId: updateServiceConfigurationById
+      summary: Update Service configuration for ID
+      description: An API to update the service configuration for requested ID.
+      parameters:
+        - $ref: '#/components/parameters/SvcIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateServicePayload'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateServiceResponse'
         '400':
           description: BAD_REQUEST
           content:

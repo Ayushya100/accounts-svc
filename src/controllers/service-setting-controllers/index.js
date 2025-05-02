@@ -4,6 +4,7 @@ import { verifyConfigExist, registerNewConfig } from './registerServiceConfig.co
 import { getServiceInfoById, getAllServiceInfo } from './getServiceConfig.controller.js';
 import { verifyRouteConfigExist, registerNewRouteConfig } from './registerRouteConfig.controller.js';
 import { getRouteInfoById, getAllRouteInfo } from './getRouteConfig.controller.js';
+import { updateServiceConfig } from './updateServiceConfig.controller.js';
 
 export default {
   verifyConfigExist,
@@ -14,4 +15,5 @@ export default {
   registerNewRouteConfig,
   getRouteInfoById,
   getAllRouteInfo,
+  updateServiceConfig,
 };

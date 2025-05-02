@@ -43,6 +43,7 @@ import {
   registerNewRoute,
   getRouteById,
   getRouteConfig,
+  updateServiceInfoById,
 } from './system.db.js';
 
 export {
@@ -85,4 +86,5 @@ export {
   registerNewRoute,
   getRouteById,
   getRouteConfig,
+  updateServiceInfoById,
 };

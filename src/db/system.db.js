@@ -211,6 +211,14 @@ const getRouteConfig = async () => {
   return exec(query);
 };
 
+const updateServiceInfoById = async (svcId, userId, payload) => {
+  const query = `UPDATE SVC_CONFIG SET MICROSERVICE = ?, ENVIRONMENT = ?, PROTOCOL = ?, PORT = ?, MODIFIED_BY = ?
+    WHERE ID = ? AND IS_DELETED = false;`;
+  const params = [payload.microservice, payload.environment, payload.protocol, payload.port, userId, svcId];
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -239,4 +247,5 @@ export {
   registerNewRoute,
   getRouteById,
   getRouteConfig,
+  updateServiceInfoById,
 };
