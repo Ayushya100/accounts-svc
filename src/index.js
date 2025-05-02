@@ -41,6 +41,7 @@ class AccountService extends Service {
     this.app.get(`${USERS_API}/setup/app-service/:svcId`, routes.serviceRoutes.getServiceConfigById);
     this.app.post(`${USERS_API}/setup/app-route`, routes.serviceRoutes.registerRouteConfig);
     this.app.get(`${USERS_API}/setup/app-route`, routes.serviceRoutes.getAllRouteConfig);
+    this.app.get(`${USERS_API}/setup/app-route/:routeId`, routes.serviceRoutes.getRouteConfigById);
 
     // User routes
     this.app.get(`${USERS_API}/user/:userId`, verifyUserId, routes.users.userInfo);
