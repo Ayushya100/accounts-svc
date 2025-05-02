@@ -175,6 +175,34 @@ components:
       required:
         - scopes
 
+    registerAppServicePayload:
+      type: object
+      properties:
+        microservice:
+          type: string
+          description: Micro-service
+          minLength: 5
+        environment:
+          type: string
+          description: Environment
+          minLength: 2
+        protocol:
+          type: string
+          description: Protocol
+          minLength: 4
+          enum:
+            - HTTP
+            - HTTPS
+        port:
+          type: string
+          description: Port
+          minLength: 3
+      required:
+        - microservice
+        - environment
+        - protocol
+        - port
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -442,6 +470,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/getUserScopeResponseData'
+
+    registerAppServiceResponseData:
+      title: Schema for Fetching Service Configuration for Requested Service Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        microservice:
+          type: string
+        environment:
+          type: string
+        protocol:
+          type: string
+        port:
+          type: string
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+      required:
+        - id
+        - microservice
+        - environment
+        - protocol
+        - port
 
     emptyResponse:
       type: object
@@ -771,6 +824,28 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/updateScopeAssignmentResponseData'
+
+    registerAppServiceResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerAppServiceResponseData'
 
     noContentResponse:
       type: object
@@ -1670,6 +1745,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/app-service:
+    post:
+      operationId: RegisterServiceConfig
+      summary: Register New Service Configuration
+      description: An API to register new service configuration in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerAppServicePayload'
+      responses:
+        '201':
+          description: REQUEST_COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerAppServiceResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userAlreadyExist'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

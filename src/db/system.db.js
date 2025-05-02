@@ -147,6 +147,30 @@ const unassignScopesToRole = async (userId, roleId, idsPlaceholder, scopeIdArr) 
   return exec(query, params);
 };
 
+const isServiceAvailable = async (microservice, environment, protocol) => {
+  const query = `SELECT ID FROM SVC_CONFIG WHERE MICROSERVICE = ? AND ENVIRONMENT = ? AND PROTOCOL = ? AND IS_DELETED = false;`;
+  const params = [microservice, environment, protocol];
+  return exec(query, params);
+};
+
+const registerNewService = async (payload) => {
+  const query = `INSERT INTO SVC_CONFIG (MICROSERVICE, ENVIRONMENT, PROTOCOL, PORT)
+    VALUES (?, ?, ?, ?)
+    RETURNING ID`;
+  const params = [payload.microservice, payload.environment, payload.protocol, payload.port];
+
+  return exec(query, params);
+};
+
+const getServiceById = async (svcId) => {
+  const query = `SELECT ID, MICROSERVICE, ENVIRONMENT, PROTOCOL, PORT, CREATED_DATE, MODIFIED_DATE
+    FROM SVC_CONFIG
+    WHERE ID = ? AND IS_DELETED = false;`;
+  const params = [svcId];
+
+  return exec(query, params);
+};
+
 export {
   isRoleAvailable,
   getDefaultRole,
@@ -167,4 +191,7 @@ export {
   getMultipleScopesByIds,
   assignScopesToRole,
   unassignScopesToRole,
+  isServiceAvailable,
+  registerNewService,
+  getServiceById,
 };
