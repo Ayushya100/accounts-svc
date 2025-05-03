@@ -66,6 +66,15 @@ components:
         type: string
         pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
 
+    HeaderIdParam:
+      name: headerId
+      description: The ID of dashboard header to verify
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
+
   schemas:
     Username:
       type: string
@@ -2643,6 +2652,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /dashboard-header/{headerId}:
+    get:
+      operationId: getDashboardHeaderById
+      summary: Get Dashboard Header by ID
+      description: An API to retrieve the dashboard header for requested header ID.
+      parameters:
+        - $ref: '#/components/parameters/HeaderIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerDashboardHeaderResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
