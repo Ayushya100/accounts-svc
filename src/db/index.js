@@ -49,6 +49,8 @@ import {
   updateRouteInfoById,
 } from './system.db.js';
 
+import { isDashboardHeaderAvailable, registerNewHeader, getHeaderById } from './dashboard.db.js';
+
 export {
   fetchDefaultUserRole,
   isUsernameEmailInUse,
@@ -93,4 +95,7 @@ export {
   deleteServiceInfoById,
   deleteRouteInfoById,
   updateRouteInfoById,
+  isDashboardHeaderAvailable,
+  registerNewHeader,
+  getHeaderById,
 };

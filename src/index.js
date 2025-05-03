@@ -50,6 +50,9 @@ class AccountService extends Service {
     // User routes
     this.app.get(`${USERS_API}/user/:userId`, verifyScope('USER.V'), verifyUserId, routes.users.userInfo);
     this.app.post(`${USERS_API}/user/logout`, verifyScope('USER.V'), routes.users.logoutUser);
+
+    // Dashboard routes
+    this.app.post(`${USERS_API}/dashboard-header`, verifyScope('SETUP.U'), routes.dashboardRoutes.registerDashboardHeader);
   }
 }
 
