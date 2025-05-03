@@ -292,6 +292,21 @@ components:
         validations:
           type: array
 
+    registerDashboardHeaderPayload:
+      type: object
+      properties:
+        headerCode:
+          type: string
+          description: Header Code
+          minLength: 1
+        headerDesc:
+          type: string
+          description: Header Description
+          minLength: 1
+      required:
+        - headerCode
+        - headerDesc
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -658,6 +673,24 @@ components:
         - path
         - method
         - service
+
+    registerDashboardHeaderResponseData:
+      title: Schema for fetching Dashboard Header Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        headerCode:
+          type: string
+        headerDesc:
+          type: string
+        active:
+          type: boolean
+      required:
+        - id
+        - headerCode
+        - headerDesc
+        - active
 
     emptyResponse:
       type: object
@@ -1165,6 +1198,28 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerServiceRouteResponseData'
+
+    registerDashboardHeaderResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerDashboardHeaderResponseData'
 
     noContentResponse:
       type: object
@@ -2464,6 +2519,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /dashboard-header:
+    post:
+      operationId: registerDashboardHeaderRoute
+      summary: Register Dashboard Header
+      description: An API to register new Dashboard Header in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerDashboardHeaderPayload'
+      responses:
+        '201':
+          description: REQUEST_COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerDashboardHeaderResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userAlreadyExist'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
