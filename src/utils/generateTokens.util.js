@@ -1,7 +1,7 @@
 'use strict';
 
 import jwt from 'jsonwebtoken';
-import { logger } from 'finance-lib';
+import { logger } from 'common-node-lib';
 
 const log = logger('util: generate-token');
 

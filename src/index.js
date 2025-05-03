@@ -1,6 +1,6 @@
 'use strict';
 
-import { Service, verifyUserId } from 'finance-lib';
+import { Service, verifyUserId } from 'common-node-lib';
 import dotenv from 'dotenv';
 import { USERS_API, serviceConfig } from './constants.js';
 import routes from './routes/index.js';

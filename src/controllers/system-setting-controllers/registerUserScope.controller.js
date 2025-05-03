@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger } from 'finance-lib';
+import { logger } from 'common-node-lib';
 import { isScopeAvailable, registerNewScope } from '../../db/index.js';
 import { getScopeById } from './getUserScope.controller.js';
 

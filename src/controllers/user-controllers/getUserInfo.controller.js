@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger, convertPrettyStringToId, convertIdToPrettyString, convertToNativeTimeZone } from 'finance-lib';
+import { logger, convertPrettyStringToId, convertIdToPrettyString, convertToNativeTimeZone } from 'common-node-lib';
 import { getUserInfo, getUserInfoByUsernameOrPassword, getUserDtl } from '../../db/index.js';
 
 const log = logger('Controller: get-user-info');

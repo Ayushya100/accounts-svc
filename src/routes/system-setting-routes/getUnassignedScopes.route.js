@@ -1,6 +1,6 @@
 'use strict';
 
-import { buildApiResponse, logger } from 'finance-lib';
+import { buildApiResponse, logger } from 'common-node-lib';
 import controllers from '../../controllers/index.js';
 
 const log = logger('Router: get-unassigned-scopes');

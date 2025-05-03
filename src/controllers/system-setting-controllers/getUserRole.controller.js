@@ -1,6 +1,6 @@
 'use strict';
 
-import { convertIdToPrettyString, convertPrettyStringToId, convertToNativeTimeZone, logger } from 'finance-lib';
+import { convertIdToPrettyString, convertPrettyStringToId, convertToNativeTimeZone, logger } from 'common-node-lib';
 import { getUserRoleById, getUserRoles } from '../../db/index.js';
 
 const log = logger('Controller: get-user-role');

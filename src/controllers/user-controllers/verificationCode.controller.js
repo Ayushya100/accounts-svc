@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger } from 'finance-lib';
+import { logger } from 'common-node-lib';
 import { v4 as uuidv4 } from 'uuid';
 import { registerEmailVerification } from '../../db/index.js';
 

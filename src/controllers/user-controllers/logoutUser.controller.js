@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger, convertPrettyStringToId } from 'finance-lib';
+import { logger, convertPrettyStringToId } from 'common-node-lib';
 import { logoutUser } from '../../db/index.js';
 
 const log = logger('Controller: logout-user');

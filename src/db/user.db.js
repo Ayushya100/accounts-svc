@@ -1,6 +1,6 @@
 'use strict';
 
-import { exec } from 'finance-lib';
+import { exec } from 'common-node-lib';
 
 const fetchDefaultUserRole = async () => {
   const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT

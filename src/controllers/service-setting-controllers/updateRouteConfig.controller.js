@@ -1,6 +1,6 @@
 'use strict';
 
-import { convertPrettyStringToId, logger } from 'finance-lib';
+import { convertPrettyStringToId, logger } from 'common-node-lib';
 import { updateRouteInfoById } from '../../db/system.db.js';
 import { getRouteInfoById } from './getRouteConfig.controller.js';
 
