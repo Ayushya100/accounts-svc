@@ -1,6 +1,6 @@
 'use strict';
 
-import { convertPrettyStringToId, logger } from 'finance-lib';
+import { convertPrettyStringToId, logger } from 'common-node-lib';
 import { deleteServiceInfoById } from '../../db/index.js';
 import { getServiceInfoById } from './getServiceConfig.controller.js';
 

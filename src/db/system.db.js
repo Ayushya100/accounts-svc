@@ -1,6 +1,6 @@
 'use strict';
 
-import { exec } from 'finance-lib';
+import { exec } from 'common-node-lib';
 
 const isRoleAvailable = async (roleCd) => {
   const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT, IS_DELETED

@@ -1,6 +1,6 @@
 'use strict';
 
-import { convertPrettyStringToId, logger } from 'finance-lib';
+import { convertPrettyStringToId, logger } from 'common-node-lib';
 import { deleteUserScopeById } from '../../db/index.js';
 import { getScopeById } from './getUserScope.controller.js';
 

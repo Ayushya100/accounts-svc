@@ -1,6 +1,6 @@
 'use strict';
 
-import { convertPrettyStringToId, logger } from 'finance-lib';
+import { convertPrettyStringToId, logger } from 'common-node-lib';
 import { getRoleById } from './getUserRole.controller.js';
 import { deactivateRole, getDefaultRole, updateUserRoleById } from '../../db/system.db.js';
 

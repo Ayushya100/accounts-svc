@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger, sendMail } from 'finance-lib';
+import { logger, sendMail } from 'common-node-lib';
 import { serviceConfig } from '../constants.js';
 
 const log = logger('util: send-mail');

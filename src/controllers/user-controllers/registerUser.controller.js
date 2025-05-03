@@ -1,7 +1,7 @@
 'use strict';
 
 import bcrypt from 'bcrypt';
-import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'finance-lib';
+import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'common-node-lib';
 import { isUsernameEmailInUse, createNewUser, fetchDefaultUserRole } from '../../db/index.js';
 import { SALT_ROUNDS } from '../../constants.js';
 import { generateEmailVerificationCode } from './verificationCode.controller.js';

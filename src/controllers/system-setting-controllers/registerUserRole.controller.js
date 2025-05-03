@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger } from 'finance-lib';
+import { logger } from 'common-node-lib';
 import { isRoleAvailable, getDefaultRole, deactivateRole, registerNewRole } from '../../db/index.js';
 import { getRoleById } from './getUserRole.controller.js';
 

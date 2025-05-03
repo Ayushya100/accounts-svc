@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger } from 'finance-lib';
+import { logger } from 'common-node-lib';
 import { isServiceAvailable, registerNewService } from '../../db/index.js';
 import { getServiceInfoById } from './getServiceConfig.controller.js';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import { convertIdToPrettyString, convertPrettyStringToId, logger } from 'finance-lib';
+import { convertIdToPrettyString, convertPrettyStringToId, logger } from 'common-node-lib';
 import { unassignedScopesByRoleId, assignedScopesByRoleId, getMultipleScopesByIds, assignScopesToRole, unassignScopesToRole } from '../../db/index.js';
 
 const log = logger('Controller: get-role-scope');

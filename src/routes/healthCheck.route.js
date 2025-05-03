@@ -1,7 +1,7 @@
 'use strict';
 
 import os from 'os';
-import { logger, buildApiResponse } from 'finance-lib';
+import { logger, buildApiResponse } from 'common-node-lib';
 
 const log = logger('Router: health-check');
 

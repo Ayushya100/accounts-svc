@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'finance-lib';
+import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'common-node-lib';
 import { fetchUserMetaInfo, verifyUserEmail } from '../../db/index.js';
 import { generateEmailVerificationCode } from './verificationCode.controller.js';
 import { sendVerificationMailToUser, sendVerificationConfirmationMailToUser } from '../../utils/index.js';
