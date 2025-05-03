@@ -1,7 +1,7 @@
 'use strict';
 
 import { convertIdToPrettyString, convertPrettyStringToId, convertToNativeTimeZone, logger } from 'common-node-lib';
-import { getHeaderById } from '../../db/index.js';
+import { getHeaderById, getAllHeaders } from '../../db/index.js';
 
 const log = logger('Controller: get-dashboard-header');
 
@@ -54,4 +54,49 @@ const getHeaderInfoById = async (headerId, deletedRecord = false) => {
   }
 };
 
-export { getHeaderInfoById };
+const getAllDashboardHeader = async () => {
+  try {
+    log.info('Controller function to fetch all dashboard headers from system initiated');
+    log.info('Call db query to fetch all header informations');
+    let headerDtl = await getAllHeaders();
+    if (headerDtl.rowCount === 0) {
+      log.info('No header information available to display');
+      return {
+        status: 204,
+        message: 'No Dashboard Header info found',
+        data: [],
+        isValid: true,
+      };
+    }
+
+    headerDtl = headerDtl.rows;
+    const data = headerDtl.map((header) => {
+      return {
+        id: convertIdToPrettyString(header.id),
+        headerCode: header.header_cd,
+        headerDesc: header.header_desc,
+        active: header.is_active,
+      };
+    });
+
+    log.success('Dashboard header retrieval operation completed successfully');
+    return {
+      status: 200,
+      message: 'Dashboard header fetched successfully',
+      data: data,
+      isValid: true,
+    };
+  } catch (err) {
+    log.error('Error while retrieving all dashboard headers from system');
+    return {
+      status: 500,
+      message: 'An error occurred while retrieving dashboard headers from system',
+      data: [],
+      errors: err,
+      stack: err.stack,
+      isValid: false,
+    };
+  }
+};
+
+export { getHeaderInfoById, getAllDashboardHeader };

@@ -675,6 +675,28 @@ components:
         - service
 
     registerDashboardHeaderResponseData:
+      title: Schema for fetching Dashboard Header Response Detail Data
+      type: object
+      properties:
+        id:
+          type: string
+        headerCode:
+          type: string
+        headerDesc:
+          type: string
+        active:
+          type: boolean
+        createdDate:
+          type: string
+        modifiedDate:
+          type: string
+      required:
+        - id
+        - headerCode
+        - headerDesc
+        - active
+
+    getDashboardHeaderResponseData:
       title: Schema for fetching Dashboard Header Response Data
       type: object
       properties:
@@ -1220,6 +1242,29 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/registerDashboardHeaderResponseData'
+
+    getDashboardHeaderResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getDashboardHeaderResponseData'
 
     noContentResponse:
       type: object
@@ -2562,6 +2607,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userAlreadyExist'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    get:
+      operationId: GetDashboardHeaders
+      summary: Get All Dashboard Headers
+      description: An API to fetch all dashboard headers existing in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDashboardHeaderResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

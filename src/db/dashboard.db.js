@@ -26,4 +26,9 @@ const getHeaderById = async (headerId, deletedRecord) => {
   return exec(query, params);
 };
 
-export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById };
+const getAllHeaders = async () => {
+  const query = `SELECT ID, HEADER_CD, HEADER_DESC, IS_ACTIVE FROM DASHBOARD_SETUP_HEADER WHERE IS_DELETED = false;`;
+  return exec(query);
+};
+
+export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders };
