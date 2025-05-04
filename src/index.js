@@ -72,6 +72,8 @@ class AccountService extends Service {
     // this.app.get(`${USERS_API}/dashboard/:setupId`, verifyScope('SETUP.V'), );                           -- Get Dashboard Setup info for provided setup ID
     // this.app.put(`${USERS_API}/dashboard/:setupId`, verifyScope('SETUP.U'), );                           -- Update Dashboard Setup info for provided setup ID
     // this.app.delete(`${USERS_API}/dashboard/:setupId`, verifyScope('SETUP.D'), );                        -- Delete Dashboard Setup for provided setup ID
+
+    // this.app.put(`${USERS_API}/assign-dashboard/:userId`, verifyScope('SETUP.U'), );                     -- Assign Dashboard Setup to provided user ID
   }
 }
 
