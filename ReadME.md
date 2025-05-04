@@ -19,7 +19,7 @@ Our system provides essential APIs designed specifically for integration within 
 ### Usage
 Our APIs are integrated seamlessly into our application to enhance user management, security, and operational efficiency.
 ### Security
-Robust security measures are integrated in our application. Implemented HTTPS encryption for secure data transmission and added validation for JWT bearer tokens to authenticate and authorize user access. Protected sensitive financial information and adhere to industry best practices for data security and privacy.
+Robust security measures are integrated in our application. Implemented HTTPS encryption for secure data transmission and added validation for JWT bearer tokens to authenticate and authorize user access. Protected sensitive information and adhere to industry best practices for data security and privacy.
 
 ## API Endpoints
 ### Public APIs
