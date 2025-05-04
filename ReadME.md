@@ -23,48 +23,83 @@ Robust security measures are integrated in our application. Implemented HTTPS en
 
 ## API Endpoints
 ### Public APIs
-| Method | Endpoint                                               | Description                             |
-| :----- | :----------------------------------------------------- | :-------------------------------------- |
-| GET    | `/accounts-svc/api/v1.0/health`                        | Health Check Service                    |
-| POST   | `/accounts-svc/api/v1.0/register-user`                 | Register a new user                     |
-| GET    | `/accounts-svc/api/v1.0/verify-user/:userId/:token`    | Verify user email                       |
-| POST   | `/accounts-svc/api/v1.0/login`                         | Log in a user                           |
-| POST   | `/accounts-svc/api/v1.0/refresh-token`                 | Refresh user token                      |
-| POST   | `/accounts-svc/api/v1.0/request-reset`                 | Password reset request mail             |
-| POST   | `/accounts-svc/api/v1.0/reset-password/:userId`        | Reset user password                     |
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| GET    | `/accounts-svc/api/v1.0/health`                         | Health Check Service                    |
+| POST   | `/accounts-svc/api/v1.0/register-user`                  | Register a new user                     |
+| GET    | `/accounts-svc/api/v1.0/verify-user/:userId/:token`     | Verify user email                       |
+| POST   | `/accounts-svc/api/v1.0/login`                          | Log in a user                           |
+| POST   | `/accounts-svc/api/v1.0/refresh-token`                  | Refresh user token                      |
+| POST   | `/accounts-svc/api/v1.0/request-reset`                  | Password reset request mail             |
+| POST   | `/accounts-svc/api/v1.0/reset-password/:userId`         | Reset user password                     |
 
 ### User APIs
-| Method | Endpoint                                               | Description                             |
-| :----- | :----------------------------------------------------- | :-------------------------------------- |
-| GET    | `/accounts-svc/api/v1.0/user/:userId`                  | Get Logged in user info                 |
-| POST   | `/accounts-svc/api/v1.0/user/logout`                   | Logout a user                           |
-| PUT    | `/accounts-svc/api/v1.0/user/:userId`                  | Update logged in user info              |
-| PUT    | `/accounts-svc/api/v1.0/user/profile-img/:userId`      | Update user profile image               |
-| PUT    | `/accounts-svc/api/v1.0/user-password/:userId`         | Update user password on login           |
-| DELETE | `/accounts-svc/api/v1.0/user/profile-img/:userId`      | Delete user profile image               |
-| DELETE | `/accounts-svc/api/v1.0/user/deactivate-user/:userId`  | Deactivate user profile                 |
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| GET    | `/accounts-svc/api/v1.0/user/:userId`                   | Get Logged in user info                 |
+| POST   | `/accounts-svc/api/v1.0/user/logout`                    | Logout a user                           |
+| PUT    | `/accounts-svc/api/v1.0/user/:userId`                   | Update logged in user info              |
+| PUT    | `/accounts-svc/api/v1.0/user/profile-img/:userId`       | Update user profile image               |
+| PUT    | `/accounts-svc/api/v1.0/user/password/:userId`          | Update user password on login           |
+| DELETE | `/accounts-svc/api/v1.0/user/profile-img/:userId`       | Delete user profile image               |
+| DELETE | `/accounts-svc/api/v1.0/user/deactivate-user/:userId`   | Deactivate user profile                 |
 
 ### User Role APIs
-| Method | Endpoint                                               | Description                             |
-| :----- | :----------------------------------------------------- | :-------------------------------------- |
-| POST   | `/accounts-svc/api/v1.0/setup/user-role`               | Register new user role                  |
-| GET    | `/accounts-svc/api/v1.0/setup/user-role`               | Get all user roles                      |
-| GET    | `/accounts-svc/api/v1.0/setup/user-role/:roleId`       | Get user role by id                     |
-| PUT    | `/accounts-svc/api/v1.0/setup/user-role/:roleId`       | Update user role by id                  |
-| DELETE | `/accounts-svc/api/v1.0/setup/user-role/:roleId`       | Delete user role by id                  |
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| POST   | `/accounts-svc/api/v1.0/setup/role`                     | Register new user role                  |
+| GET    | `/accounts-svc/api/v1.0/setup/role`                     | Get all user roles                      |
+| GET    | `/accounts-svc/api/v1.0/setup/role/:roleId`             | Get user role by id                     |
+| PUT    | `/accounts-svc/api/v1.0/setup/role/:roleId`             | Update user role by id                  |
+| DELETE | `/accounts-svc/api/v1.0/setup/role/:roleId`             | Delete user role by id                  |
 
 ### User Scope APIs
-| Method | Endpoint                                               | Description                             |
-| :----- | :----------------------------------------------------- | :-------------------------------------- |
-| POST   | `/accounts-svc/api/v1.0/setup/user-scope`              | Register new user scope                 |
-| GET    | `/accounts-svc/api/v1.0/setup/user-scope`              | Get all user scopes                     |
-| GET    | `/accounts-svc/api/v1.0/setup/user-scope/:scopeId`     | Get user scope by id                    |
-| PUT    | `/accounts-svc/api/v1.0/setup/user-scope/:scopeId`     | Update user scope by id                 |
-| DELETE | `/accounts-svc/api/v1.0/setup/user-scope/:scopeId`     | Delete user scope by id                 |
-| GET    | `/accounts-svc/api/v1.0/setup/assigned-scope/:roleId`  | Get all assigned scopes for user role   |
-| GET    | `/accounts-svc/api/v1.0/setup/unassigned-scope/:roleId`| Get all unassigned scopes for user role |
-| PUT    | `/accounts-svc/api/v1.0/setup/assigned-scope/:roleId`  | Assign scopes to user role              |
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| POST   | `/accounts-svc/api/v1.0/setup/scope`                    | Register new user scope                 |
+| GET    | `/accounts-svc/api/v1.0/setup/scope`                    | Get all user scopes                     |
+| GET    | `/accounts-svc/api/v1.0/setup/scope/:scopeId`           | Get user scope by id                    |
+| PUT    | `/accounts-svc/api/v1.0/setup/scope/:scopeId`           | Update user scope by id                 |
+| DELETE | `/accounts-svc/api/v1.0/setup/scope/:scopeId`           | Delete user scope by id                 |
+| GET    | `/accounts-svc/api/v1.0/setup/scope/assigned/:roleId`   | Get all assigned scopes for user role   |
+| GET    | `/accounts-svc/api/v1.0/setup/scope/unassigned/:roleId` | Get all unassigned scopes for user role |
+| PUT    | `/accounts-svc/api/v1.0/setup/scope/assigned/:roleId`   | Assign scopes to user role              |
 
+### Service Registration APIs
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| POST   | `/accounts-svc/api/v1.0/setup/service`                  | Register new service in db              |
+| GET    | `/accounts-svc/api/v1.0/setup/service`                  | Get all registered services             |
+| GET    | `/accounts-svc/api/v1.0/setup/service/:svcId`           | Get registered service by id            |
+| PUT    | `/accounts-svc/api/v1.0/setup/service/:svcId`           | Update service info by id               |
+| DELETE | `/accounts-svc/api/v1.0/setup/service/:svcId`           | Delete service for provided id          |
+
+### Route Registration APIs
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| POST   | `/accounts-svc/api/v1.0/setup/route`                    | Register new route in db                |
+| GET    | `/accounts-svc/api/v1.0/setup/route`                    | Get all registered routes               |
+| GET    | `/accounts-svc/api/v1.0/setup/route/:routeId`           | Get registered route by id              |
+| PUT    | `/accounts-svc/api/v1.0/setup/route/:routeId`           | Update route info by id                 |
+| DELETE | `/accounts-svc/api/v1.0/setup/route/:routeId`           | Delete route for provided id            |
+
+### Dashboard Header APIs
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| POST   | `/accounts-svc/api/v1.0/dashboard/header`               | Register new dashboard header in db     |
+| GET    | `/accounts-svc/api/v1.0/dashboard/header`               | Get all registered headers              |
+| GET    | `/accounts-svc/api/v1.0/dashboard/header/:headerId`     | Get registered header by id             |
+| PUT    | `/accounts-svc/api/v1.0/dashboard/header/:headerId`     | Update header info by id                |
+| DELETE | `/accounts-svc/api/v1.0/dashboard/header/:headerId`     | Delete header for provided id           |
+
+### Dashboard Category APIs
+| Method | Endpoint                                                | Description                             |
+| :----- | :------------------------------------------------------ | :-------------------------------------- |
+| POST   | `/accounts-svc/api/v1.0/dashboard/category`             | Register new dashboard category in db   |
+| GET    | `/accounts-svc/api/v1.0/dashboard/category`             | Get all registered categories           |
+| GET    | `/accounts-svc/api/v1.0/dashboard/category/:categoryId` | Get registered category by id           |
+| PUT    | `/accounts-svc/api/v1.0/dashboard/category/:categoryId` | Update category info by id              |
+| DELETE | `/accounts-svc/api/v1.0/dashboard/category/:categoryId` | Delete category for provided id         |
 
 ## 🛠️ Setup Instructions
 
@@ -92,5 +127,6 @@ npm run start
 - **Validation:** OpenAPI Spec
 - **Query Builder:** Knex.js
 - **Environment Management:** dotenv
+
 ---
 **Accounts-svc** - Simplifying Management for Everyone!

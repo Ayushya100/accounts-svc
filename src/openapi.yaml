@@ -1335,6 +1335,26 @@ components:
           type: array
         data:
           type: array
+
+    forbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 403
+        type:
+          type: string
+          example: 'FORBIDDEN'
+        message:
+          type: string
+          example: 'Forbidden'
+        devMessage:
+          type: string
+          example: Forbidden access. Could not proceed with the request.
+        error:
+          type: array
+        data:
+          type: array
     
     notFound:
       type: object
@@ -1608,6 +1628,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -1645,6 +1671,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -1658,7 +1690,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/user-role:
+  /setup/role:
     post:
       operationId: RegisterUserRole
       summary: Register New User Role
@@ -1688,6 +1720,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '409':
           description: CONFLICT
           content:
@@ -1730,6 +1768,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
@@ -1737,7 +1781,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/user-role/{roleId}:
+  /setup/role/{roleId}:
     get:
       operationId: getUserRoleInfoById
       summary: Get User Role Info by ID
@@ -1763,6 +1807,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -1807,6 +1857,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -1845,6 +1901,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -1858,7 +1920,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/user-scope:
+  /setup/scope:
     post:
       operationId: RegisterUserScope
       summary: Register New User Scope
@@ -1888,6 +1950,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '409':
           description: CONFLICT
           content:
@@ -1930,6 +1998,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
@@ -1937,7 +2011,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/user-scope/{scopeId}:
+  /setup/scope/{scopeId}:
     get:
       operationId: getUserScopeInfoById
       summary: Get User Socpe Info by ID
@@ -1963,6 +2037,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2007,6 +2087,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2045,6 +2131,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2058,7 +2150,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/unassigned-scope/{roleId}:
+  /setup/scope/unassigned/{roleId}:
     get:
       operationId: getUnassignedUserScopeForRoleId
       summary: Get User Scope Info unassigned to Role ID
@@ -2084,6 +2176,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2097,7 +2195,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/assigned-scope/{roleId}:
+  /setup/scope/assigned/{roleId}:
     get:
       operationId: getAssignedUserScopeForRoleId
       summary: Get User Scope Info assigned to Role ID
@@ -2123,6 +2221,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2167,6 +2271,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2180,7 +2290,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/app-service:
+  /setup/service:
     post:
       operationId: RegisterServiceConfig
       summary: Register New Service Configuration
@@ -2210,6 +2320,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '409':
           description: CONFLICT
           content:
@@ -2252,6 +2368,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
@@ -2259,7 +2381,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/app-service/{svcId}:
+  /setup/service/{svcId}:
     get:
       operationId: getServiceConfigurationById
       summary: Get Service Configuration by ID
@@ -2285,6 +2407,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2329,6 +2457,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2367,6 +2501,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2380,7 +2520,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/app-route:
+  /setup/route:
     post:
       operationId: registerServiceRoute
       summary: Register New Service Route
@@ -2410,6 +2550,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '409':
           description: CONFLICT
           content:
@@ -2452,6 +2598,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
@@ -2459,7 +2611,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /setup/app-route/{routeId}:
+  /setup/route/{routeId}:
     get:
       operationId: getRouteConfigurationById
       summary: Get Route Configuration by ID
@@ -2485,6 +2637,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2529,6 +2687,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2567,6 +2731,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
@@ -2580,7 +2750,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /dashboard-header:
+  /dashboard/header:
     post:
       operationId: registerDashboardHeaderRoute
       summary: Register Dashboard Header
@@ -2610,6 +2780,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '409':
           description: CONFLICT
           content:
@@ -2652,6 +2828,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:
@@ -2659,7 +2841,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /dashboard-header/{headerId}:
+  /dashboard/header/{headerId}:
     get:
       operationId: getDashboardHeaderById
       summary: Get Dashboard Header by ID
@@ -2685,6 +2867,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
         '404':
           description: NOT_FOUND
           content:
