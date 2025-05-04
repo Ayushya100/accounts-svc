@@ -15,6 +15,9 @@ class AccountService extends Service {
     this.app.post(`${USERS_API}/register-user`, routes.users.registerUser);
     this.app.put(`${USERS_API}/verify-user/:userId/:token`, routes.users.verifyUserEmail);
     this.app.post(`${USERS_API}/login`, routes.users.loginUser);
+    // this.app.post(`${USERS_API}/refresh-token`, );                                                       -- Generate refresh token for user with expired access token
+    // this.app.post(`${USERS_API}/request-reset, );                                                        -- Request password reset as forgot password request
+    // this.app.post(`${USERS_API}/reset-password/:userId, );                                               -- Reset password for user after validation
   }
 
   registerServiceEndpoints() {
@@ -50,11 +53,27 @@ class AccountService extends Service {
     // User routes
     this.app.get(`${USERS_API}/user/:userId`, verifyScope('USER.V'), verifyUserId, routes.users.userInfo);
     this.app.post(`${USERS_API}/user/logout`, verifyScope('USER.V'), routes.users.logoutUser);
+    // this.app.put(`${USERS_API}/user/:userId`, verifyScope('USER.U'), verifyUserId, );                    -- Update User Info for provided user ID
+    // this.app.put(`${USERS_API}/user/profile-img/:userId`, verifyScope('USER.U'), verifyUserId, );        -- Update User Profile image for provided user ID
+    // this.app.put(`${USERS_API}/user/user-password/:userId, verifyScope('USER.U), verifyUserId, );
+    // this.app.delete(`${USERS_API}/user/profile-img/:userId`, verifyScope('USER.D'), verifyUserId, );     -- Delete User Profile image for provided user ID
+    // this.app.delete(`${USERS_API}/user/deactivate-user/:userId`, verifyScope('USER.D'), verifyUserId, ); -- Deactivate User Profile for provided user ID by soft deleting
 
     // Dashboard routes
     this.app.post(`${USERS_API}/dashboard-header`, verifyScope('SETUP.U'), routes.dashboardRoutes.registerDashboardHeader);
     this.app.get(`${USERS_API}/dashboard-header`, verifyScope('SETUP.V'), routes.dashboardRoutes.getAllDashboardHeader);
     this.app.get(`${USERS_API}/dashboard-header/:headerId`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardHeaderById);
+    // this.app.put(`${USERS_API}/dashboard-header/:headerId`, verifyScope('SETUP.U'), );                   -- Update Dashboard Header for provided header ID
+    // this.app.delete(`${USERS_API}/dashboard-header/:headerId`, verifyScope('SETUP.D'), );                -- Delete Dashboard Header for provided header ID
+
+    // Dashboard Setup routes
+    // this.app.post(`${USERS_API}/dashboard`, verifyScope('SETUP.U'), );                                   -- Register New Dashboard Setup with the provided header ID
+    // this.app.get(`${USERS_API}/dashboard`, verifyScope('SETUP.V'), );                                    -- Get all Dashboard Setup info
+    // this.app.get(`${USERS_API}/dashboard/:setupId`, verifyScope('SETUP.V'), );                           -- Get Dashboard Setup info for provided setup ID
+    // this.app.put(`${USERS_API}/dashboard/:setupId`, verifyScope('SETUP.U'), );                           -- Update Dashboard Setup info for provided setup ID
+    // this.app.delete(`${USERS_API}/dashboard/:setupId`, verifyScope('SETUP.D'), );                        -- Delete Dashboard Setup for provided setup ID
+
+    // this.app.put(`${USERS_API}/assign-dashboard/:userId`, verifyScope('SETUP.U'), );                     -- Assign Dashboard Setup to provided user ID
   }
 }
 
