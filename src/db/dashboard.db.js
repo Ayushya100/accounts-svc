@@ -31,4 +31,12 @@ const getAllHeaders = async () => {
   return exec(query);
 };
 
-export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders };
+const updateHeaderInfo = async (userId, headerId, payload) => {
+  const query = `UPDATE DASHBOARD_SETUP_HEADER SET HEADER_DESC = ?, MODIFIED_BY = ?
+    WHERE IS_DELETED = false AND ID = ?;`;
+  const params = [payload.headerDesc, userId, headerId];
+
+  return exec(query, params);
+};
+
+export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo };

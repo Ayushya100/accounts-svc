@@ -49,7 +49,7 @@ import {
   updateRouteInfoById,
 } from './system.db.js';
 
-import { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders } from './dashboard.db.js';
+import { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo } from './dashboard.db.js';
 
 export {
   fetchDefaultUserRole,
@@ -99,4 +99,5 @@ export {
   registerNewHeader,
   getHeaderById,
   getAllHeaders,
+  updateHeaderInfo,
 };
