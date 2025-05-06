@@ -63,7 +63,7 @@ class AccountService extends Service {
     this.app.post(`${USERS_API}/dashboard/header`, verifyScope('SETUP.U'), routes.dashboardRoutes.registerDashboardHeader);
     this.app.get(`${USERS_API}/dashboard/header`, verifyScope('SETUP.V'), routes.dashboardRoutes.getAllDashboardHeader);
     this.app.get(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardHeaderById);
-    // this.app.put(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.U'), );                   -- Update Dashboard Header for provided header ID
+    this.app.put(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.U'), routes.dashboardRoutes.updateDashboardHeader);
     // this.app.delete(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.D'), );                -- Delete Dashboard Header for provided header ID
 
     // Dashboard Setup routes
