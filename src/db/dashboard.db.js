@@ -18,7 +18,7 @@ const registerNewHeader = async (payload) => {
 };
 
 const getHeaderById = async (headerId, deletedRecord) => {
-  const query = `SELECT ID, HEADER_CD, HEADER_DESC, IS_ACTIVE, CREATED_DATE, MODIFIED_DATE
+  const query = `SELECT ID, HEADER_CD, HEADER_DESC, IS_ACTIVE, CORE, CREATED_DATE, MODIFIED_DATE
         FROM DASHBOARD_SETUP_HEADER
         WHERE ID = ? AND IS_DELETED = ?;`;
   const params = [headerId, deletedRecord];
@@ -45,4 +45,23 @@ const isDashboardCategoryAvailable = async (categoryCode) => {
   return exec(query, params);
 };
 
-export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo, isDashboardCategoryAvailable };
+const registerNewCategory = async (payload) => {
+  const query = `INSERT INTO DASHBOARD_SETUP (HEADER_ID, CATEGORY_CD, CATEGORY_NAME, USER_APPLICABLE, CATEGORY_TYPE, OPTIONS, VALUE)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    RETURNING ID`;
+  const params = [payload.headerId, payload.categoryCode, payload.categoryName, payload.userAllowed, payload.categoryType, [...payload.options], payload.value];
+
+  return exec(query, params);
+};
+
+const getCategoryById = async (categoryId, deletedRecord) => {
+  const query = `SELECT S.ID, S.HEADER_ID, S.CATEGORY_CD, S.CATEGORY_NAME, S.USER_APPLICABLE, S.CATEGORY_TYPE, S.OPTIONS, S.VALUE, S.CORE, H.HEADER_CD, H.HEADER_DESC
+    FROM DASHBOARD_SETUP S
+    INNER JOIN DASHBOARD_SETUP_HEADER H ON H.ID = S.HEADER_ID
+    WHERE S.IS_DELETED = ? AND S.ID = ?;`;
+  const params = [deletedRecord, categoryId];
+
+  return exec(query, params);
+};
+
+export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo, isDashboardCategoryAvailable, registerNewCategory, getCategoryById };

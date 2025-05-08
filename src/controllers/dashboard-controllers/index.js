@@ -3,7 +3,8 @@
 import { verifyHeaderExist, registerNewDashboardHeader } from './registerDashboardHeader.controller.js';
 import { getHeaderInfoById, getAllDashboardHeader } from './getDashboardHeader.controller.js';
 import { updateHeader } from './updateDashboardHeader.controller.js';
-import { verifyCategoryExist } from './registerDashboardCategory.controller.js';
+import { verifyCategoryExist, registerNewDashboardCategory } from './registerDashboardCategory.controller.js';
+import { getCategoryById } from '../../db/dashboard.db.js';
 
 export default {
   verifyHeaderExist,
@@ -12,4 +13,6 @@ export default {
   getAllDashboardHeader,
   updateHeader,
   verifyCategoryExist,
+  registerNewDashboardCategory,
+  getCategoryById,
 };
