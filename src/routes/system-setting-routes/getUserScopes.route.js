@@ -7,11 +7,19 @@ const log = logger('Router: get-all-user-scopes');
 const settingController = controllers.settingController;
 
 // API Function
-const getAllUserScopes = async (req, res, next) => {
+const getUserScopes = async (req, res, next) => {
   try {
-    log.info('Get all user scopes request process initiated');
-    log.info('Call controller function to fetch all user scopes from system');
-    const userScopesDtl = await settingController.getAllUserScopes();
+    log.info('Get user scopes request process initiated');
+    const scopeId = req.params.scopeId;
+
+    let userScopesDtl = {};
+    if (scopeId) {
+      log.info('Call controller function to fetch user scope for requested id');
+      userScopesDtl = await settingController.getScopeById(scopeId);
+    } else {
+      log.info('Call controller function to fetch all user scopes from system');
+      userScopesDtl = await settingController.getAllUserScopes();
+    }
     if (!userScopesDtl.isValid) {
       throw userScopesDtl;
     }
@@ -28,4 +36,4 @@ const getAllUserScopes = async (req, res, next) => {
   }
 };
 
-export default getAllUserScopes;
+export default getUserScopes;

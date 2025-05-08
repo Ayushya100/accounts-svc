@@ -31,6 +31,7 @@ const getServiceInfoById = async (svcId, deletedRecord = false) => {
       environment: configDtl.environment,
       protocol: configDtl.protocol,
       port: configDtl.port,
+      core: configDtl.core,
       createdDate: convertToNativeTimeZone(configDtl.created_date),
       modifiedDate: convertToNativeTimeZone(configDtl.modified_date),
     };

@@ -20,7 +20,7 @@ const deleteRouteConfig = async (req, res, next) => {
     }
 
     log.info('Call controller function to delete the route info for provided id');
-    const deletedRouteDtl = await serviceController.deleteRoute(userId, routeId);
+    const deletedRouteDtl = await serviceController.deleteRoute(userId, routeId, routeDtl.data);
     if (!deletedRouteDtl.isValid) {
       throw deletedRouteDtl;
     }

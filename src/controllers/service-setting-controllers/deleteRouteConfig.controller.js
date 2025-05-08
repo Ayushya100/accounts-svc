@@ -6,11 +6,23 @@ import { getRouteInfoById } from './getRouteConfig.controller.js';
 
 const log = logger('Controller: delete-route-config');
 
-const deleteRoute = async (userId, routeId) => {
+const deleteRoute = async (userId, routeId, routeDtl) => {
   try {
     log.info('Controller function to delete route configuration from system process initiated');
     routeId = convertPrettyStringToId(routeId);
     userId = convertPrettyStringToId(userId);
+
+    if (routeDtl.core) {
+      log.error('Cannot delete the core path configuration');
+      return {
+        status: 400,
+        message: 'Core path configuration cannot be deleted',
+        data: [],
+        errors: [],
+        stack: 'deleteScope function call',
+        isValid: false,
+      };
+    }
 
     log.info('Call db query to soft delete the route into from system');
     await deleteRouteInfoById(routeId, userId);

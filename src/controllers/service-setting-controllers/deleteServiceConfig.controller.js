@@ -6,11 +6,23 @@ import { getServiceInfoById } from './getServiceConfig.controller.js';
 
 const log = logger('Controller: delete-service-config');
 
-const deleteService = async (userId, svcId) => {
+const deleteService = async (userId, svcId, svcDtl) => {
   try {
     log.info('Controller function to delete service configuration from system process initiated');
     svcId = convertPrettyStringToId(svcId);
     userId = convertPrettyStringToId(userId);
+
+    if (svcDtl.core) {
+      log.error('Cannot delete the core service configuration');
+      return {
+        status: 400,
+        message: 'Core service configuration cannot be deleted',
+        data: [],
+        errors: [],
+        stack: 'deleteScope function call',
+        isValid: false,
+      };
+    }
 
     log.info('Call db query to soft delete the service info from system');
     await deleteServiceInfoById(svcId, userId);

@@ -1,11 +1,9 @@
 'use strict';
 
 import registerServiceConfig from './registerServiceConfig.route.js';
-import getAllServiceConfig from './getAllServiceConfig.route.js';
-import getServiceConfigById from './getServiceConfigById.route.js';
+import getServiceConfig from './getServiceConfig.route.js';
 import registerRouteConfig from './registerRouteConfig.route.js';
-import getAllRouteConfig from './getAllRouteConfig.route.js';
-import getRouteConfigById from './getRouteConfigById.route.js';
+import getRouteConfig from './getRouteConfig.route.js';
 import updateServiceConfig from './updateServiceConfig.route.js';
 import deleteServiceConfig from './deleteServiceConfig.route.js';
 import deleteRouteConfig from './deleteRouteConfig.rotue.js';
@@ -13,11 +11,9 @@ import updateRouteConfig from './updateRouteConfig.route.js';
 
 export default {
   registerServiceConfig,
-  getAllServiceConfig,
-  getServiceConfigById,
+  getServiceConfig,
   registerRouteConfig,
-  getAllRouteConfig,
-  getRouteConfigById,
+  getRouteConfig,
   updateServiceConfig,
   deleteServiceConfig,
   deleteRouteConfig,

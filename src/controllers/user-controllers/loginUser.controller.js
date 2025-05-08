@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { logger, convertPrettyStringToId, convertToNativeTimeZone } from 'common-node-lib';
 import { generateEmailVerificationCode } from './verificationCode.controller.js';
 import { sendVerificationMailToUser } from '../../utils/index.js';
-import { getUserPasskey, storeUserToken } from '../../db/index.js';
+import { getUserPasskey, storeUserToken, getUserScope } from '../../db/index.js';
 import { generateUserAccessToken, generateUserRefreshToken } from '../../utils/index.js';
 
 const log = logger('Controller: login-user');
@@ -115,6 +115,18 @@ const grantUserAccess = async (userInfo) => {
   try {
     log.info('Access grant operation initiated');
     const userData = userInfo.data;
+
+    log.info('Call db query to fetch user assigned scopes based on the role code');
+    let userScopes = await getUserScope(userData.user.role);
+    const userScopeData = [];
+    if (userScopes.rowCount > 0) {
+      userScopes = userScopes.rows;
+      for (const scope of userScopes) {
+        userScopeData.push(scope.scope_cd);
+      }
+    }
+    userData.user['scopes'] = userScopeData;
+
     userData.accessToken = await generateUserAccessToken(userData.user);
     userData.refreshToken = await generateUserRefreshToken(userData.user);
 

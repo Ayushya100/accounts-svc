@@ -39,4 +39,10 @@ const updateHeaderInfo = async (userId, headerId, payload) => {
   return exec(query, params);
 };
 
-export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo };
+const isDashboardCategoryAvailable = async (categoryCode) => {
+  const query = `SELECT ID FROM DASHBOARD_SETUP WHERE CATEGORY_CD = ? AND IS_DELETED = false;`;
+  const params = [categoryCode];
+  return exec(query, params);
+};
+
+export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo, isDashboardCategoryAvailable };

@@ -6,11 +6,23 @@ import { getScopeById } from './getUserScope.controller.js';
 
 const log = logger('Controller: delete-user-scope');
 
-const deleteScope = async (userId, scopeId) => {
+const deleteScope = async (userId, scopeId, scopeDtl) => {
   try {
     log.info('Controller function to delete user scope from system process initiated');
     scopeId = convertPrettyStringToId(scopeId);
     userId = convertPrettyStringToId(userId);
+
+    if (scopeDtl.core) {
+      log.error('Cannot delete the core user scope');
+      return {
+        status: 400,
+        message: 'Core user scope cannot be deleted',
+        data: [],
+        errors: [],
+        stack: 'deleteScope function call',
+        isValid: false,
+      };
+    }
 
     log.info('Call db query to soft delete the user scope from system');
     await deleteUserScopeById(userId, scopeId);

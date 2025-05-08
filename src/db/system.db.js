@@ -32,7 +32,7 @@ const registerNewRole = async (payload) => {
 };
 
 const getUserRoleById = async (roleId) => {
-  const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT, CREATED_DATE, MODIFIED_DATE
+  const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT, CORE, CREATED_DATE, MODIFIED_DATE
         FROM USER_ROLE
         WHERE ID = ? AND IS_DELETED = false`;
   const params = [roleId];
@@ -79,7 +79,7 @@ const registerNewScope = async (payload) => {
 };
 
 const getUserScopeById = async (scopeId, deletedRecord) => {
-  const query = `SELECT ID, SCOPE_CD, SCOPE_DESC, CREATED_DATE, MODIFIED_DATE
+  const query = `SELECT ID, SCOPE_CD, SCOPE_DESC, CORE, CREATED_DATE, MODIFIED_DATE
     FROM USER_SCOPE
     WHERE IS_DELETED = ? AND ID = ?;`;
   const params = [deletedRecord, scopeId];
@@ -163,7 +163,7 @@ const registerNewService = async (payload) => {
 };
 
 const getServiceById = async (svcId, deletedRecord) => {
-  const query = `SELECT ID, MICROSERVICE, ENVIRONMENT, PROTOCOL, PORT, CREATED_DATE, MODIFIED_DATE
+  const query = `SELECT ID, MICROSERVICE, ENVIRONMENT, PROTOCOL, PORT, CORE, CREATED_DATE, MODIFIED_DATE
     FROM SVC_CONFIG
     WHERE ID = ? AND IS_DELETED = ?;`;
   const params = [svcId, deletedRecord];
@@ -193,7 +193,7 @@ const registerNewRoute = async (payload) => {
 };
 
 const getRouteById = async (routeId, deletedRecord) => {
-  const query = `SELECT P.ID, S.ID AS SVC_ID, P.PATH, P.METHOD, P.VALIDATIONS, P.CREATED_DATE, P.MODIFIED_DATE, S.MICROSERVICE
+  const query = `SELECT P.ID, S.ID AS SVC_ID, P.PATH, P.METHOD, P.VALIDATIONS, P.CORE, P.CREATED_DATE, P.MODIFIED_DATE, S.MICROSERVICE
     FROM PATH_CONFIG P
     INNER JOIN SVC_CONFIG S ON S.ID = P.SVC_ID AND S.IS_DELETED = false
     WHERE P.ID = ? AND P.IS_DELETED = ?;`;
