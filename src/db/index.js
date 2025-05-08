@@ -50,7 +50,16 @@ import {
   updateRouteInfoById,
 } from './system.db.js';
 
-import { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo, isDashboardCategoryAvailable } from './dashboard.db.js';
+import {
+  isDashboardHeaderAvailable,
+  registerNewHeader,
+  getHeaderById,
+  getAllHeaders,
+  updateHeaderInfo,
+  isDashboardCategoryAvailable,
+  registerNewCategory,
+  getCategoryById,
+} from './dashboard.db.js';
 
 export {
   fetchDefaultUserRole,
@@ -103,4 +112,6 @@ export {
   updateHeaderInfo,
   isDashboardCategoryAvailable,
   getUserScope,
+  registerNewCategory,
+  getCategoryById,
 };

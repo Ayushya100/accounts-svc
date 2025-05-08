@@ -326,6 +326,43 @@ components:
       required:
         - headerDesc
 
+    registerDashboardCategoryPayload:
+      type: object
+      properties:
+        headerId:
+          type: string
+          description: Header ID
+          minLength: 30
+        categoryCode:
+          type: string
+          description: Category Code
+          minLength: 1
+        categoryName:
+          type: string
+          description: Category Name
+          minLength: 1
+        userAllowed:
+          type: boolean
+          description: Is user applied
+        categoryType:
+          type: string
+          description: Category Type
+          enum:
+            - toggle
+            - text
+            - multiselect
+            - singleselect
+        options:
+          type: array
+        value:
+          type: string
+      required:
+        - headerId
+        - categoryCode
+        - categoryName
+        - categoryType
+        - value
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -373,6 +410,8 @@ components:
         role:
           type: string
           example: USER
+        scopes:
+          type: array
         createdDate:
           type: string
         modifiedDate:
@@ -385,6 +424,7 @@ components:
         - loginType
         - isEmailVerified
         - role
+        - scopes
         - createdDate
         - modifiedDate
 
@@ -732,6 +772,52 @@ components:
         - headerCode
         - headerDesc
         - active
+
+    getHeaderSummaryData:
+      title: Schema for fetching Dashboard Header Summary Data
+      type: object
+      properties:
+        id:
+          type: string
+        headerCode:
+          type: string
+        headerDesc:
+          type: string
+      required:
+        - id
+        - headerCode
+        - headerDesc
+
+    registerDashboardCategoryResponseData:
+      title: Schema for fetching Dashboard Category Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        header:
+          type: object
+          $ref: '#/components/schemas/getHeaderSummaryData'
+        categoryCode:
+          type: string
+        categoryName:
+          type: string
+        userAllowed:
+          type: boolean
+        categoryType:
+          type: string
+        options:
+          type: array
+        value:
+          type: string
+      required:
+        - id
+        - header
+        - categoryCode
+        - categoryName
+        - userAllowed
+        - categoryType
+        - options
+        - value      
 
     emptyResponse:
       type: object
@@ -1284,6 +1370,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/getDashboardHeaderResponseData'
+
+    registerDashboardCategoryResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerDashboardCategoryResponseData'
+      required:
+        - statusCode
+        - type
+        - message
+        - devMessage
+        - success
+        - data
 
     noContentResponse:
       type: object
@@ -2939,6 +3054,61 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /dashboard/category:
+    post:
+      operationId: registerDashboardCategoryRoute
+      summary: Register Dashboard Category
+      description: An API to register new Dashboard Category in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerDashboardCategoryPayload'
+      responses:
+        '201':
+          description: REQUEST_COMPLETED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerDashboardCategoryResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userAlreadyExist'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

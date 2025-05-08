@@ -1,7 +1,8 @@
 'use strict';
 
-import { logger } from 'common-node-lib';
-import { isDashboardCategoryAvailable } from '../../db/index.js';
+import { convertPrettyStringToId, logger } from 'common-node-lib';
+import { isDashboardCategoryAvailable, registerNewCategory } from '../../db/index.js';
+import { getCategoryInfoById } from './getDashboardCategory.controller.js';
 
 const log = logger('Controller: register-dashboard-category');
 
@@ -42,4 +43,36 @@ const verifyCategoryExist = async (categoryCd) => {
   }
 };
 
-export { verifyCategoryExist };
+const registerNewDashboardCategory = async (payload) => {
+  try {
+    log.info('Controller function to register new dashboard category in system');
+    payload.userAllowed = payload.userAllowed !== null && payload.userAllowed !== undefined ? payload.userAllowed : true;
+    payload.headerId = convertPrettyStringToId(payload.headerId);
+
+    log.info('Call db query to register new dashboard category in system');
+    const newDashboardInfo = await registerNewCategory(payload);
+    const categoryId = newDashboardInfo.rows[0].id;
+
+    const newCategoryDtl = await getCategoryInfoById(categoryId);
+
+    log.success('New dashboard category registered successfully in system');
+    return {
+      status: 201,
+      message: 'New dashboard category registered',
+      data: newCategoryDtl.data,
+      isValid: true,
+    };
+  } catch (err) {
+    log.error('Error while registering new dashboard category in system');
+    return {
+      status: 500,
+      message: 'An error occurred while registering dashboard category in system',
+      data: [],
+      errors: err,
+      stack: err.stack,
+      isValid: false,
+    };
+  }
+};
+
+export { verifyCategoryExist, registerNewDashboardCategory };

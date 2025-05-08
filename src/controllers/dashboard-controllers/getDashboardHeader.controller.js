@@ -30,6 +30,7 @@ const getHeaderInfoById = async (headerId, deletedRecord = false) => {
       headerCode: headerDtl.header_cd,
       headerDesc: headerDtl.header_desc,
       active: headerDtl.is_active,
+      core: headerDtl.core,
       createdDate: convertToNativeTimeZone(headerDtl.created_date),
       modifiedDate: convertToNativeTimeZone(headerDtl.modified_date),
     };
