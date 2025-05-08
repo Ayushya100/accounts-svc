@@ -20,7 +20,7 @@ const deleteUserScope = async (req, res, next) => {
     }
 
     log.info('Call controller function to delete user scope');
-    const deleteScopeDtl = await settingController.deleteScope(userId, scopeId);
+    const deleteScopeDtl = await settingController.deleteScope(userId, scopeId, scopeDtl.data);
     if (!deleteScopeDtl.isValid) {
       throw deleteScopeDtl;
     }

@@ -136,6 +136,17 @@ const logoutUser = async (userId) => {
   return exec(query, params);
 };
 
+const getUserScope = async (scopeCd) => {
+  const query = `SELECT S.SCOPE_CD, S.SCOPE_DESC
+    FROM USER_ROLE U
+    INNER JOIN ROLE_SCOPE R ON R.ROLE_ID = U.ID AND R.IS_DELETED = false
+    INNER JOIN USER_SCOPE S ON S.ID = R.SCOPE_ID AND S.IS_DELETED = false
+    WHERE U.IS_DELETED = false AND U.ROLE_CD = ?;`;
+  const params = [scopeCd];
+
+  return exec(query, params);
+};
+
 export {
   fetchDefaultUserRole,
   isUsernameEmailInUse,
@@ -149,4 +160,5 @@ export {
   storeUserToken,
   getUserDtl,
   logoutUser,
+  getUserScope,
 };

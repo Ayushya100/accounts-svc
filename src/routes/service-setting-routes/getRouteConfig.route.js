@@ -7,11 +7,19 @@ const log = logger('Router: get-all-route-config');
 const serviceController = controllers.serviceController;
 
 // API Function
-const getAllRouteConfig = async (req, res, next) => {
+const getRouteConfig = async (req, res, next) => {
   try {
     log.info('Get all route configuration process initiated');
-    log.info('Call controller function to fetch all route info from system');
-    const routeDtl = await serviceController.getAllRouteInfo();
+    const routeId = req.params.routeId;
+
+    let routeDtl = {};
+    if (routeId) {
+      log.info('Call controller function to fetch route configuration for requested id');
+      routeDtl = await serviceController.getRouteInfoById(routeId);
+    } else {
+      log.info('Call controller function to fetch all route info from system');
+      routeDtl = await serviceController.getAllRouteInfo();
+    }
     if (!routeDtl.isValid) {
       throw routeDtl;
     }
@@ -27,4 +35,4 @@ const getAllRouteConfig = async (req, res, next) => {
   }
 };
 
-export default getAllRouteConfig;
+export default getRouteConfig;

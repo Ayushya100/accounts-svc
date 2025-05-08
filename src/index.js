@@ -23,15 +23,15 @@ class AccountService extends Service {
   registerServiceEndpoints() {
     // User Role routes
     this.app.post(`${USERS_API}/setup/role`, verifyScope('ROLE.U'), routes.settingRoutes.registerUserRole);
-    this.app.get(`${USERS_API}/setup/role`, verifyScope('ROLE.V'), routes.settingRoutes.getAllUserRoles);
-    this.app.get(`${USERS_API}/setup/role/:roleId`, verifyScope('ROLE.V'), routes.settingRoutes.getUserRoleById);
+    this.app.get(`${USERS_API}/setup/role`, verifyScope('ROLE.V'), routes.settingRoutes.getUserRoles);
+    this.app.get(`${USERS_API}/setup/role/:roleId`, verifyScope('ROLE.V'), routes.settingRoutes.getUserRoles);
     this.app.put(`${USERS_API}/setup/role/:roleId`, verifyScope('ROLE.U'), routes.settingRoutes.updateUserRole);
     this.app.delete(`${USERS_API}/setup/role/:roleId`, verifyScope('ROLE.D'), routes.settingRoutes.deleteUserRole);
 
     // User Scope routes
     this.app.post(`${USERS_API}/setup/scope`, verifyScope('SCOPE.U'), routes.settingRoutes.registerUserScope);
-    this.app.get(`${USERS_API}/setup/scope`, verifyScope('SCOPE.V'), routes.settingRoutes.getAllUserScopes);
-    this.app.get(`${USERS_API}/setup/scope/:scopeId`, verifyScope('SCOPE.V'), routes.settingRoutes.getUserScopeById);
+    this.app.get(`${USERS_API}/setup/scope`, verifyScope('SCOPE.V'), routes.settingRoutes.getUserScopes);
+    this.app.get(`${USERS_API}/setup/scope/:scopeId`, verifyScope('SCOPE.V'), routes.settingRoutes.getUserScopes);
     this.app.put(`${USERS_API}/setup/scope/:scopeId`, verifyScope('SCOPE.U'), routes.settingRoutes.updateUserScope);
     this.app.delete(`${USERS_API}/setup/scope/:scopeId`, verifyScope('SCOPE.D'), routes.settingRoutes.deleteUserScope);
     this.app.get(`${USERS_API}/setup/scope/assigned/:roleId`, verifyScope('SCOPE.V'), routes.settingRoutes.getAssignedScopes);
@@ -40,13 +40,13 @@ class AccountService extends Service {
 
     // Service routes
     this.app.post(`${USERS_API}/setup/service`, verifyScope('SERVICE.U'), routes.serviceRoutes.registerServiceConfig);
-    this.app.get(`${USERS_API}/setup/service`, verifyScope('SERVICE.V'), routes.serviceRoutes.getAllServiceConfig);
-    this.app.get(`${USERS_API}/setup/service/:svcId`, verifyScope('SERVICE.V'), routes.serviceRoutes.getServiceConfigById);
+    this.app.get(`${USERS_API}/setup/service`, verifyScope('SERVICE.V'), routes.serviceRoutes.getServiceConfig);
+    this.app.get(`${USERS_API}/setup/service/:svcId`, verifyScope('SERVICE.V'), routes.serviceRoutes.getServiceConfig);
     this.app.put(`${USERS_API}/setup/service/:svcId`, verifyScope('SERVICE.U'), routes.serviceRoutes.updateServiceConfig);
     this.app.delete(`${USERS_API}/setup/service/:svcId`, verifyScope('SERVICE.D'), routes.serviceRoutes.deleteServiceConfig);
     this.app.post(`${USERS_API}/setup/route`, verifyScope('ROUTE.U'), routes.serviceRoutes.registerRouteConfig);
-    this.app.get(`${USERS_API}/setup/route`, verifyScope('ROUTE.V'), routes.serviceRoutes.getAllRouteConfig);
-    this.app.get(`${USERS_API}/setup/route/:routeId`, verifyScope('ROUTE.V'), routes.serviceRoutes.getRouteConfigById);
+    this.app.get(`${USERS_API}/setup/route`, verifyScope('ROUTE.V'), routes.serviceRoutes.getRouteConfig);
+    this.app.get(`${USERS_API}/setup/route/:routeId`, verifyScope('ROUTE.V'), routes.serviceRoutes.getRouteConfig);
     this.app.put(`${USERS_API}/setup/route/:routeId`, verifyScope('ROUTE.U'), routes.serviceRoutes.updateRouteConfig);
     this.app.delete(`${USERS_API}/setup/route/:routeId`, verifyScope('ROUTE.D'), routes.serviceRoutes.deleteRouteConfig);
 

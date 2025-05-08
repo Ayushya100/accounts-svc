@@ -20,7 +20,7 @@ const deleteServiceConfig = async (req, res, next) => {
     }
 
     log.info('Call controller function to delete the service info for provided id');
-    const deletedSvcDtl = await serviceController.deleteService(userId, svcId);
+    const deletedSvcDtl = await serviceController.deleteService(userId, svcId, svcDtl.data);
     if (!deletedSvcDtl.isValid) {
       throw deletedSvcDtl;
     }

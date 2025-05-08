@@ -30,6 +30,7 @@ const getRouteInfoById = async (routeId, deletedRecord = false) => {
       path: configDtl.path,
       method: configDtl.method,
       validations: configDtl.validations,
+      core: configDtl.core,
       createdDate: convertToNativeTimeZone(configDtl.created_date),
       modifiedDate: convertToNativeTimeZone(configDtl.modified_date),
       service: {

@@ -7,11 +7,19 @@ const log = logger('Router: get-all-user-roles');
 const settingController = controllers.settingController;
 
 // API Function
-const getAllUserRoles = async (req, res, next) => {
+const getUserRoles = async (req, res, next) => {
   try {
-    log.info('Get all user roles request process initiated');
-    log.info('Call controller function to fetch all user roles from system');
-    const userRolesDtl = await settingController.getAllUserRoles();
+    log.info('Get user roles request process initiated');
+    const roleId = req.params.roleId;
+
+    let userRolesDtl = {};
+    if (roleId) {
+      log.info('Call controller function to fetch user role for requested id');
+      userRolesDtl = await settingController.getRoleById(roleId);
+    } else {
+      log.info('Call controller function to fetch all user roles from system');
+      userRolesDtl = await settingController.getAllUserRoles();
+    }
     if (!userRolesDtl.isValid) {
       throw userRolesDtl;
     }
@@ -28,4 +36,4 @@ const getAllUserRoles = async (req, res, next) => {
   }
 };
 
-export default getAllUserRoles;
+export default getUserRoles;

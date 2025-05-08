@@ -13,6 +13,7 @@ import {
   storeUserToken,
   getUserDtl,
   logoutUser,
+  getUserScope,
 } from './user.db.js';
 
 import {
@@ -49,7 +50,7 @@ import {
   updateRouteInfoById,
 } from './system.db.js';
 
-import { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo } from './dashboard.db.js';
+import { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo, isDashboardCategoryAvailable } from './dashboard.db.js';
 
 export {
   fetchDefaultUserRole,
@@ -100,4 +101,6 @@ export {
   getHeaderById,
   getAllHeaders,
   updateHeaderInfo,
+  isDashboardCategoryAvailable,
+  getUserScope,
 };

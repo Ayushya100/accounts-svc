@@ -7,11 +7,19 @@ const log = logger('Router: get-all-service-config');
 const serviceController = controllers.serviceController;
 
 // API Function
-const getAllServiceConfig = async (req, res, next) => {
+const getServiceConfig = async (req, res, next) => {
   try {
-    log.info('Get all service configuration process initiated');
-    log.info('Call controller function to fetch all service info from system');
-    const serviceDtl = await serviceController.getAllServiceInfo();
+    log.info('Get service configuration process initiated');
+    const svcId = req.params.svcId;
+
+    let serviceDtl = {};
+    if (svcId) {
+      log.info('Call controller function to fetch service configuration for requested id');
+      serviceDtl = await serviceController.getServiceInfoById(svcId);
+    } else {
+      log.info('Call controller function to fetch all service info from system');
+      serviceDtl = await serviceController.getAllServiceInfo();
+    }
     if (!serviceDtl.isValid) {
       throw serviceDtl;
     }
@@ -28,4 +36,4 @@ const getAllServiceConfig = async (req, res, next) => {
   }
 };
 
-export default getAllServiceConfig;
+export default getServiceConfig;

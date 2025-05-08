@@ -24,6 +24,18 @@ const deleteRole = async (userId, roleId, roleDtl) => {
       };
     }
 
+    if (roleDtl.core) {
+      log.error('Cannot delete the core user role');
+      return {
+        status: 400,
+        message: 'Core user role cannot be deleted',
+        data: [],
+        errors: [],
+        stack: 'deleteRole function call',
+        isValid: false,
+      };
+    }
+
     log.info('Call db query to soft delete the user role from system');
     await deleteUserRoleById(userId, roleId);
     let deletedRoleDtl = await getRoleById(roleId);

@@ -31,6 +31,7 @@ const getRoleById = async (roleId) => {
       roleDesc: roleDtl.role_desc,
       active: roleDtl.is_active,
       default: roleDtl.is_default,
+      core: roleDtl.core,
       createdDate: convertToNativeTimeZone(roleDtl.created_date),
       modifiedDate: convertToNativeTimeZone(roleDtl.modified_date),
     };

@@ -29,6 +29,7 @@ const getScopeById = async (scopeId, deletedRecord = false) => {
       id: convertIdToPrettyString(scopeDtl.id),
       scopeCode: scopeDtl.scope_cd,
       scopeDesc: scopeDtl.scope_desc,
+      core: scopeDtl.core,
       createdDate: convertToNativeTimeZone(scopeDtl.created_date),
       modifiedDate: convertToNativeTimeZone(scopeDtl.modified_date),
     };
