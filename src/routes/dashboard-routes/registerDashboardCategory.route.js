@@ -4,13 +4,13 @@ import { buildApiResponse, logger } from 'common-node-lib';
 import controllers from '../../controllers/index.js';
 import { verifyDashboardCategoryPayload } from '../../utils/index.js';
 
-const log = logger('Router: register-dashboard-category');
+const log = logger('Router: register-dashboard-setup');
 const dashboardController = controllers.dashboardController;
 
 // API Function
 const registerDashboardCategory = async (req, res, next) => {
   try {
-    log.info('Register dashboard category request process initiated');
+    log.info('Register dashboard setup request process initiated');
     const payload = req.body;
     payload.categoryCode = payload.categoryCode.toUpperCase().trim();
     payload.categoryType = payload.categoryType.trim();
@@ -21,7 +21,7 @@ const registerDashboardCategory = async (req, res, next) => {
       throw verificationResult;
     }
 
-    log.info('Call controller function to validate if dashboard category already exists');
+    log.info('Call controller function to validate if dashboard setup already exists');
     const cateogryExist = await dashboardController.verifyCategoryExist(payload.categoryCode);
     if (!cateogryExist.isValid) {
       throw cateogryExist;
@@ -33,13 +33,13 @@ const registerDashboardCategory = async (req, res, next) => {
       throw headerExist;
     }
 
-    log.info('Call controller function to register new dashboard category in system');
+    log.info('Call controller function to register new dashboard setup in system');
     const categoryDtl = await dashboardController.registerNewDashboardCategory(payload);
     if (!categoryDtl.isValid) {
       throw categoryDtl;
     }
 
-    log.success('Dashboard category registration completed successfully');
+    log.success('Dashboard setup registration completed successfully');
     res.status(201).json(buildApiResponse(categoryDtl));
   } catch (err) {
     if (err.statusCode === '500') {

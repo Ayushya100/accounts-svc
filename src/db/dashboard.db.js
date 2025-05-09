@@ -81,6 +81,14 @@ const updateCategoryInfo = async (userId, categoryId, payload) => {
   return exec(query, params);
 };
 
+const deleteCategoryById = async (userId, categoryId) => {
+  const query = `UPDATE DASHBOARD_SETUP SET IS_DELETED = true, MODIFIED_BY = ?
+    WHERE ID = ?;`;
+  const params = [userId, categoryId];
+
+  return exec(query, params);
+};
+
 export {
   isDashboardHeaderAvailable,
   registerNewHeader,
@@ -92,4 +100,5 @@ export {
   getCategoryById,
   getAllCategoryInfo,
   updateCategoryInfo,
+  deleteCategoryById,
 };

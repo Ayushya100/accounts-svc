@@ -3365,3 +3365,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
+
+    delete:
+      operationId: deleteDashboardCategoryById
+      summary: Delete Dashboard Category by ID
+      description: An API to delete the dashboard category for requested ID.
+      parameters:
+        - $ref: '#/components/parameters/CategoryIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerDashboardCategoryResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'

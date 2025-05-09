@@ -61,6 +61,7 @@ import {
   getCategoryById,
   getAllCategoryInfo,
   updateCategoryInfo,
+  deleteCategoryById,
 } from './dashboard.db.js';
 
 export {
@@ -118,4 +119,5 @@ export {
   getCategoryById,
   getAllCategoryInfo,
   updateCategoryInfo,
+  deleteCategoryById,
 };

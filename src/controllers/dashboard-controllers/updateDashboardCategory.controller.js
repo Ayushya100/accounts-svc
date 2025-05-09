@@ -4,11 +4,11 @@ import { convertPrettyStringToId, logger } from 'common-node-lib';
 import { updateCategoryInfo } from '../../db/index.js';
 import { getCategoryInfoById } from './getDashboardCategory.controller.js';
 
-const log = logger('Controller: update-dashboard-category');
+const log = logger('Controller: update-dashboard-setup');
 
 const updateCategory = async (userId, categoryId, categoryDtl, payload) => {
   try {
-    log.info('Controller function to update category info initiated');
+    log.info('Controller function to update setup info initiated');
     userId = convertPrettyStringToId(userId);
     categoryId = convertPrettyStringToId(categoryId);
 
@@ -22,23 +22,23 @@ const updateCategory = async (userId, categoryId, categoryDtl, payload) => {
     payload.headerId = convertPrettyStringToId(payload.headerId);
     console.log(payload);
 
-    log.info('Call db query to update dashboard category description in system');
+    log.info('Call db query to update dashboard setup description in system');
     await updateCategoryInfo(userId, categoryId, payload);
     let updatedCategoryDtl = await getCategoryInfoById(categoryId);
     updatedCategoryDtl = updatedCategoryDtl.data;
 
-    log.success('Dashboard category info updated successfully in system');
+    log.success('Dashboard setup info updated successfully in system');
     return {
       status: 200,
-      message: 'Dashboard category updated successfully',
+      message: 'Dashboard setup updated successfully',
       data: updatedCategoryDtl,
       isValid: true,
     };
   } catch (err) {
-    log.error('Error while updating dashboard category in system');
+    log.error('Error while updating dashboard setup in system');
     return {
       status: 500,
-      message: 'An error occurred while updating dashboard category information',
+      message: 'An error occurred while updating dashboard setup information',
       data: [],
       errors: err,
       stack: err.stack,

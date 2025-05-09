@@ -10,7 +10,7 @@ const dashboardController = controllers.dashboardController;
 // API Function
 const updateDashboardCategory = async (req, res, next) => {
   try {
-    log.info('Dashboard category info update for requested id operation initiated');
+    log.info('Dashboard setup info update for requested id operation initiated');
     const categoryId = req.params.categoryId;
     const userId = req.user.id;
     const payload = req.body;
@@ -23,7 +23,7 @@ const updateDashboardCategory = async (req, res, next) => {
     }
     console.log('Verification Successfull');
 
-    log.info('Call controller function to fetch the category information for provided id');
+    log.info('Call controller function to fetch the setup information for provided id');
     const categoryDtl = await dashboardController.getCategoryInfoById(categoryId);
     if (!categoryDtl.isValid) {
       throw categoryDtl;
@@ -37,14 +37,14 @@ const updateDashboardCategory = async (req, res, next) => {
       }
     }
 
-    log.info('Call controller function to update the category information for provided id');
+    log.info('Call controller function to update the setup information for provided id');
     const updatedCategoryDtl = await dashboardController.updateCategory(userId, categoryId, categoryDtl.data, payload);
     if (!updatedCategoryDtl.isValid) {
       throw updatedCategoryDtl;
     }
     console.log(updatedCategoryDtl);
 
-    log.success('Dashboard category information updated successfully');
+    log.success('Dashboard setup information updated successfully');
     res.status(200).json(buildApiResponse(updatedCategoryDtl));
   } catch (err) {
     if (err.statusCode === '500') {

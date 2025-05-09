@@ -21,7 +21,7 @@ const verifyCategoryValue = (categoryType, options, value) => {
 };
 
 const verifyDashboardCategoryPayload = (payload) => {
-  log.info('Dashboard category payload validation initiated');
+  log.info('Dashboard setup payload validation initiated');
 
   let validationResult = '';
   validationResult = verifyCategories(payload.categoryType, payload.options);

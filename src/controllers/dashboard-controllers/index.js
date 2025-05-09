@@ -6,6 +6,7 @@ import { updateHeader } from './updateDashboardHeader.controller.js';
 import { verifyCategoryExist, registerNewDashboardCategory } from './registerDashboardCategory.controller.js';
 import { getCategoryInfoById, getAllCategory } from './getDashboardCategory.controller.js';
 import { updateCategory } from './updateDashboardCategory.controller.js';
+import { deleteHeaderCategory } from './deleteCategory.controller.js';
 
 export default {
   verifyHeaderExist,
@@ -18,4 +19,5 @@ export default {
   getCategoryInfoById,
   getAllCategory,
   updateCategory,
+  deleteHeaderCategory,
 };
