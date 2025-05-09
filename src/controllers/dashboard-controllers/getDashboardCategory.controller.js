@@ -1,7 +1,7 @@
 'use strict';
 
 import { convertIdToPrettyString, convertPrettyStringToId, logger } from 'common-node-lib';
-import { getCategoryById } from '../../db/index.js';
+import { getCategoryById, getAllCategoryInfo } from '../../db/index.js';
 
 const log = logger('Controller: get-dashboard-category');
 
@@ -61,4 +61,49 @@ const getCategoryInfoById = async (categoryId, deletedRecord = false) => {
   }
 };
 
-export { getCategoryInfoById };
+const getAllCategory = async () => {
+  try {
+    log.info('Controller function to fetch all dashboard categories from system initiated');
+    log.info('Call db query to fetch all dashboard category informations');
+    let categoryDtl = await getAllCategoryInfo();
+    if (categoryDtl.rowCount === 0) {
+      log.info('No header category information available to display');
+      return {
+        status: 204,
+        message: 'No Dashboard Category info found',
+        data: [],
+        isValid: true,
+      };
+    }
+
+    categoryDtl = categoryDtl.rows;
+    const data = categoryDtl.map((category) => {
+      return {
+        id: convertIdToPrettyString(category.id),
+        categoryCode: category.category_cd,
+        categoryName: category.category_name,
+        headerDesc: category.header_desc,
+      };
+    });
+
+    log.success('Dashboard category retrieval operation completed successfully');
+    return {
+      status: 200,
+      message: 'Dashboard category fetched successfully',
+      data: data,
+      isValid: true,
+    };
+  } catch (err) {
+    log.error('Error while retrieving all dashboard categories from system');
+    return {
+      status: 500,
+      message: 'An error occurred while retrieving dashboard categories from system',
+      data: [],
+      errors: err,
+      stack: err.stack,
+      isValid: false,
+    };
+  }
+};
+
+export { getCategoryInfoById, getAllCategory };

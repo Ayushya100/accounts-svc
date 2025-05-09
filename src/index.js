@@ -61,15 +61,15 @@ class AccountService extends Service {
 
     // Dashboard routes
     this.app.post(`${USERS_API}/dashboard/header`, verifyScope('SETUP.U'), routes.dashboardRoutes.registerDashboardHeader);
-    this.app.get(`${USERS_API}/dashboard/header`, verifyScope('SETUP.V'), routes.dashboardRoutes.getAllDashboardHeader);
-    this.app.get(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardHeaderById);
+    this.app.get(`${USERS_API}/dashboard/header`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardHeader);
+    this.app.get(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardHeader);
     this.app.put(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.U'), routes.dashboardRoutes.updateDashboardHeader);
     // this.app.delete(`${USERS_API}/dashboard/header/:headerId`, verifyScope('SETUP.D'), );                -- Delete Dashboard Header for provided header ID
 
     // Dashboard Setup routes
     this.app.post(`${USERS_API}/dashboard/category`, verifyScope('SETUP.U'), routes.dashboardRoutes.registerDashboardCategory);
-    // this.app.get(`${USERS_API}/dashboard/category`, verifyScope('SETUP.V'), );                                    -- Get all Dashboard Setup info
-    // this.app.get(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.V'), );                           -- Get Dashboard Setup info for provided setup ID
+    this.app.get(`${USERS_API}/dashboard/category`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardCategory);
+    this.app.get(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardCategory);
     // this.app.put(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.U'), );                           -- Update Dashboard Setup info for provided setup ID
     // this.app.delete(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.D'), );                        -- Delete Dashboard Setup for provided setup ID
 

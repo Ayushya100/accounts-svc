@@ -64,4 +64,23 @@ const getCategoryById = async (categoryId, deletedRecord) => {
   return exec(query, params);
 };
 
-export { isDashboardHeaderAvailable, registerNewHeader, getHeaderById, getAllHeaders, updateHeaderInfo, isDashboardCategoryAvailable, registerNewCategory, getCategoryById };
+const getAllCategoryInfo = async () => {
+  const query = `SELECT S.ID, S.CATEGORY_CD, S.CATEGORY_NAME, H.HEADER_DESC
+  FROM DASHBOARD_SETUP S
+  INNER JOIN DASHBOARD_SETUP_HEADER H ON H.ID = S.HEADER_ID
+  WHERE S.IS_DELETED = false;`;
+
+  return exec(query);
+};
+
+export {
+  isDashboardHeaderAvailable,
+  registerNewHeader,
+  getHeaderById,
+  getAllHeaders,
+  updateHeaderInfo,
+  isDashboardCategoryAvailable,
+  registerNewCategory,
+  getCategoryById,
+  getAllCategoryInfo,
+};

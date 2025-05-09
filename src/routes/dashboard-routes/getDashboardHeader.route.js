@@ -7,11 +7,19 @@ const log = logger('Router: get-all-dashboard-header');
 const dashboardController = controllers.dashboardController;
 
 // API Function
-const getAllDashboardHeader = async (req, res, next) => {
+const getDashboardHeader = async (req, res, next) => {
   try {
-    log.info('Get all dashboard headers process initiated');
-    log.info('Call controller function to fetch all header info from system');
-    const headerDtl = await dashboardController.getAllDashboardHeader();
+    log.info('Get dashboard headers process initiated');
+    const headerId = req.params.headerId;
+
+    let headerDtl = {};
+    if (headerId) {
+      log.info('Call controller function to fetch the header info for requested id from system');
+      headerDtl = await dashboardController.getHeaderInfoById(headerId);
+    } else {
+      log.info('Call controller function to fetch all header info from system');
+      headerDtl = await dashboardController.getAllDashboardHeader();
+    }
     if (!headerDtl.isValid) {
       throw headerDtl;
     }
@@ -28,4 +36,4 @@ const getAllDashboardHeader = async (req, res, next) => {
   }
 };
 
-export default getAllDashboardHeader;
+export default getDashboardHeader;

@@ -75,6 +75,15 @@ components:
         type: string
         pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
 
+    CategoryIdParam:
+      name: categoryId
+      description: The ID of dashboard category to verify
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
+
   schemas:
     Username:
       type: string
@@ -817,7 +826,25 @@ components:
         - userAllowed
         - categoryType
         - options
-        - value      
+        - value
+
+    getDashboardCategoryResponseData:
+      title: Schema for fetching Dashboard Category Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        categoryCode:
+          type: string
+        categoryName:
+          type: string
+        headerDesc:
+          type: string
+      required:
+        - id
+        - categoryCode
+        - categoryName
+        - headerDesc
 
     emptyResponse:
       type: object
@@ -1372,6 +1399,65 @@ components:
             $ref: '#/components/schemas/getDashboardHeaderResponseData'
 
     registerDashboardCategoryResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/registerDashboardCategoryResponseData'
+      required:
+        - statusCode
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
+    GetDashboardCategoriesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getDashboardCategoryResponseData'
+      required:
+        - statusCode
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
+    getDashboardCategoryByIdResponse:
       type: object
       properties:
         statusCode:
@@ -3109,6 +3195,93 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userAlreadyExist'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    get:
+      operationId: GetDashboardCategories
+      summary: Get All Dashboard Categories
+      description: An API to fetch all dashboard categories existing in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDashboardCategoriesResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /dashboard/category/{categoryId}:
+    get:
+      operationId: getDashboardCategoryById
+      summary: Get Dashboard Category by ID
+      description: An API to retrieve the dashboard category for requested category ID.
+      parameters:
+        - $ref: '#/components/parameters/CategoryIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDashboardCategoryByIdResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

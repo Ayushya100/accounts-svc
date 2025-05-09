@@ -59,6 +59,7 @@ import {
   isDashboardCategoryAvailable,
   registerNewCategory,
   getCategoryById,
+  getAllCategoryInfo,
 } from './dashboard.db.js';
 
 export {
@@ -114,4 +115,5 @@ export {
   getUserScope,
   registerNewCategory,
   getCategoryById,
+  getAllCategoryInfo,
 };
