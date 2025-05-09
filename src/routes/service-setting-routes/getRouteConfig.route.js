@@ -3,7 +3,7 @@
 import { logger, buildApiResponse } from 'common-node-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Router: get-all-route-config');
+const log = logger('Router: get-route-config');
 const serviceController = controllers.serviceController;
 
 // API Function

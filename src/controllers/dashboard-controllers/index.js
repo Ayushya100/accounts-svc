@@ -5,6 +5,7 @@ import { getHeaderInfoById, getAllDashboardHeader } from './getDashboardHeader.c
 import { updateHeader } from './updateDashboardHeader.controller.js';
 import { verifyCategoryExist, registerNewDashboardCategory } from './registerDashboardCategory.controller.js';
 import { getCategoryInfoById, getAllCategory } from './getDashboardCategory.controller.js';
+import { updateCategory } from './updateDashboardCategory.controller.js';
 
 export default {
   verifyHeaderExist,
@@ -16,4 +17,5 @@ export default {
   registerNewDashboardCategory,
   getCategoryInfoById,
   getAllCategory,
+  updateCategory,
 };

@@ -70,7 +70,7 @@ class AccountService extends Service {
     this.app.post(`${USERS_API}/dashboard/category`, verifyScope('SETUP.U'), routes.dashboardRoutes.registerDashboardCategory);
     this.app.get(`${USERS_API}/dashboard/category`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardCategory);
     this.app.get(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.V'), routes.dashboardRoutes.getDashboardCategory);
-    // this.app.put(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.U'), );                           -- Update Dashboard Setup info for provided setup ID
+    this.app.put(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.U'), routes.dashboardRoutes.updateDashboardCategory);
     // this.app.delete(`${USERS_API}/dashboard/category/:categoryId`, verifyScope('SETUP.D'), );                        -- Delete Dashboard Setup for provided setup ID
 
     // this.app.put(`${USERS_API}/assign-dashboard/:userId`, verifyScope('SETUP.U'), );                     -- Assign Dashboard Setup to provided user ID
