@@ -3,20 +3,20 @@
 import { convertIdToPrettyString, convertPrettyStringToId, logger } from 'common-node-lib';
 import { getCategoryById, getAllCategoryInfo } from '../../db/index.js';
 
-const log = logger('Controller: get-dashboard-category');
+const log = logger('Controller: get-dashboard-setup');
 
 const getCategoryInfoById = async (categoryId, deletedRecord = false) => {
   try {
-    log.info('Controller function to fetch dashboard category info by id process initiated');
+    log.info('Controller function to fetch dashboard setup info by id process initiated');
     categoryId = convertPrettyStringToId(categoryId);
 
-    log.info(`Call db query to fetch the dashboard category details for provided id: ${categoryId}`);
+    log.info(`Call db query to fetch the dashboard setup details for provided id: ${categoryId}`);
     let categoryDtl = await getCategoryById(categoryId, deletedRecord);
     if (categoryDtl.rowCount === 0) {
-      log.error('Header category info for provided id does not exists in system');
+      log.error('Dashboard setup info for provided id does not exists in system');
       return {
         status: 404,
-        message: 'Dashboard category not found',
+        message: 'Dashboard setup not found',
         data: [],
         errors: [],
         stack: 'getCategoryInfoById function call',
@@ -41,18 +41,18 @@ const getCategoryInfoById = async (categoryId, deletedRecord = false) => {
       },
     };
 
-    log.success('Requested category details fetched successfully');
+    log.success('Requested setup details fetched successfully');
     return {
       status: 200,
-      message: 'Dashboard category details fetched successfully',
+      message: 'Dashboard setup details fetched successfully',
       data: categoryDtl,
       isValid: true,
     };
   } catch (err) {
-    log.error('Error while fetching header category for requested id from system');
+    log.error('Error while fetching header setup for requested id from system');
     return {
       status: 500,
-      message: 'An error occurred while fetching dashboard category for requested id from system',
+      message: 'An error occurred while fetching dashboard setup for requested id from system',
       data: [],
       errors: err,
       stack: err.stack,
@@ -64,13 +64,13 @@ const getCategoryInfoById = async (categoryId, deletedRecord = false) => {
 const getAllCategory = async () => {
   try {
     log.info('Controller function to fetch all dashboard categories from system initiated');
-    log.info('Call db query to fetch all dashboard category informations');
+    log.info('Call db query to fetch all dashboard setup informations');
     let categoryDtl = await getAllCategoryInfo();
     if (categoryDtl.rowCount === 0) {
-      log.info('No header category information available to display');
+      log.info('No dashboard setup information available to display');
       return {
         status: 204,
-        message: 'No Dashboard Category info found',
+        message: 'No Dashboard Setup info found',
         data: [],
         isValid: true,
       };
@@ -86,10 +86,10 @@ const getAllCategory = async () => {
       };
     });
 
-    log.success('Dashboard category retrieval operation completed successfully');
+    log.success('Dashboard setup retrieval operation completed successfully');
     return {
       status: 200,
-      message: 'Dashboard category fetched successfully',
+      message: 'Dashboard setup fetched successfully',
       data: data,
       isValid: true,
     };
