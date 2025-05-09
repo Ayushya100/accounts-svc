@@ -89,6 +89,18 @@ const deleteCategoryById = async (userId, categoryId) => {
   return exec(query, params);
 };
 
+const setupByHeaderId = async (headerId) => {
+  const query = `SELECT ID FROM DASHBOARD_SETUP WHERE HEADER_ID = ? AND IS_DELETED = false;`;
+  const params = [headerId];
+  return exec(query, params);
+};
+
+const deleteHeaderById = async (userId, headerId) => {
+  const query = `UPDATE DASHBOARD_SETUP_HEADER SET IS_DELETED = true, MODIFIED_BY = ? WHERE ID = ?`;
+  const params = [userId, headerId];
+  return exec(query, params);
+};
+
 export {
   isDashboardHeaderAvailable,
   registerNewHeader,
@@ -101,4 +113,6 @@ export {
   getAllCategoryInfo,
   updateCategoryInfo,
   deleteCategoryById,
+  setupByHeaderId,
+  deleteHeaderById,
 };

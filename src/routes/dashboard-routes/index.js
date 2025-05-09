@@ -7,6 +7,7 @@ import registerDashboardCategory from './registerDashboardCategory.route.js';
 import getDashboardCategory from './getDashboardCategory.route.js';
 import updateDashboardCategory from './updateDashboardCategoryById.route.js';
 import deleteHeaderCategory from './deleteCategoryById.route.js';
+import deleteDashboardHeader from './deleteDashboardById.route.js';
 
 export default {
   registerDashboardHeader,
@@ -16,4 +17,5 @@ export default {
   getDashboardCategory,
   updateDashboardCategory,
   deleteHeaderCategory,
+  deleteDashboardHeader,
 };
