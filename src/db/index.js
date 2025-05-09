@@ -60,6 +60,7 @@ import {
   registerNewCategory,
   getCategoryById,
   getAllCategoryInfo,
+  updateCategoryInfo,
 } from './dashboard.db.js';
 
 export {
@@ -116,4 +117,5 @@ export {
   registerNewCategory,
   getCategoryById,
   getAllCategoryInfo,
+  updateCategoryInfo,
 };

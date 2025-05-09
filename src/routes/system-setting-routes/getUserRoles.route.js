@@ -3,7 +3,7 @@
 import { logger, buildApiResponse } from 'common-node-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Router: get-all-user-roles');
+const log = logger('Router: get-user-roles');
 const settingController = controllers.settingController;
 
 // API Function

@@ -73,6 +73,14 @@ const getAllCategoryInfo = async () => {
   return exec(query);
 };
 
+const updateCategoryInfo = async (userId, categoryId, payload) => {
+  const query = `UPDATE DASHBOARD_SETUP SET HEADER_ID = ?, CATEGORY_NAME = ?, USER_APPLICABLE = ?, CATEGORY_TYPE = ?, OPTIONS = ?, VALUE = ?, MODIFIED_BY = ?
+    WHERE ID = ? AND IS_DELETED = false;`;
+  const params = [payload.headerId, payload.categoryName, payload.userAllowed, payload.categoryType, [...payload.options], payload.value, userId, categoryId];
+
+  return exec(query, params);
+};
+
 export {
   isDashboardHeaderAvailable,
   registerNewHeader,
@@ -83,4 +91,5 @@ export {
   registerNewCategory,
   getCategoryById,
   getAllCategoryInfo,
+  updateCategoryInfo,
 };

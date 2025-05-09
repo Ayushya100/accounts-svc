@@ -3,7 +3,7 @@
 import { logger, buildApiResponse } from 'common-node-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Router: get-all-dashboard-header');
+const log = logger('Router: get-dashboard-category');
 const dashboardController = controllers.dashboardController;
 
 // API Function
