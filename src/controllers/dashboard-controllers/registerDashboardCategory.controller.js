@@ -48,6 +48,7 @@ const registerNewDashboardCategory = async (payload) => {
     log.info('Controller function to register new dashboard setup in system');
     payload.userAllowed = payload.userAllowed !== null && payload.userAllowed !== undefined ? payload.userAllowed : true;
     payload.headerId = convertPrettyStringToId(payload.headerId);
+    payload.options = payload.options || [];
 
     log.info('Call db query to register new dashboard setup in system');
     const newDashboardInfo = await registerNewCategory(payload);
