@@ -24,6 +24,27 @@ components:
         hostname:
           type: string
 
+    registerUserRolePayload:
+      type: object
+      properties:
+        role_code:
+          type: string
+          description: Role Code
+          minLength: 1
+        role_desc:
+          type: string
+          description: Role Description
+          minLength: 1
+        is_default:
+          type: boolean
+          description: Is default user role
+        is_active:
+          type: boolean
+          description: Is Active user role
+      required:
+        - role_code
+        - role_desc
+
     healthCheckSuccessResponse:
       type: object
       properties:
@@ -44,6 +65,111 @@ components:
           example: true
         data:
           $ref: '#/components/schemas/healthCheckData'
+
+    registerUserRoleResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+
+    badRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 400
+        type:
+          type: string
+          example: 'BAD_REQUEST'
+        message:
+          type: string
+          example: 'Bad Request'
+        devMessage:
+          type: string
+          example: Bad Request. Required resource does not exist.
+        error:
+          type: array
+        data:
+          type: array
+
+    unauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 401
+        type:
+          type: string
+          example: 'UNAUTHORIZED'
+        message:
+          type: string
+          example: 'Unauthorized'
+        devMessage:
+          type: string
+          example: Unauthorized access. Could not proceed with the request.
+        error:
+          type: array
+        data:
+          type: array
+
+    forbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 403
+        type:
+          type: string
+          example: 'FORBIDDEN'
+        message:
+          type: string
+          example: 'Forbidden'
+        devMessage:
+          type: string
+          example: Forbidden access. Could not proceed with the request.
+        error:
+          type: array
+        data:
+          type: array
+
+    conflictResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 409
+        type:
+          type: string
+          example: 'CONFLICT'
+        message:
+          type: string
+          example: 'Resource already exist'
+        devMessage:
+          type: string
+          example: 'Resource already exist'
+        error:
+          type: array
+        data:
+          type: array
 
     internalServerErrorResponse:
       type: object
@@ -78,6 +204,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/healthCheckSuccessResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/role:
+    post:
+      operationId: registerUserRole
+      summary: Register User Role
+      description: An API to register new user role in the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerUserRolePayload'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserRoleResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflictResponse'
         '500':
           description: Internal Server Error
           content:

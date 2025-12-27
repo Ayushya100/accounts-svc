@@ -1,3 +1,14 @@
 {
-    "Service is healthy": "Service is healthy."
+    "Service is healthy": "Service is healthy.",
+    "Fields must be an array or an object": "Fields must be an array or an object.",
+    "Update Fields must be an array or an object": "Update clause Fields must be an array or an object.",
+    "Where Fields must be an array or an object": "Where clause Fields must be an array or an object.",
+    "User role not found": "User role not found.",
+    "User role found": "User role found",
+    "An error occurred while fetching user role details": "Error occurred while fetching user role details",
+    "User role already exists": "User role already exists",
+    "User role does not exists in system": "User role does not exists in system",
+    "An error occurred while verifying user role in system": "Error occurred while verifying user role in system",
+    "User role registered successfully": "User role registered successfully",
+    "An error occurred while registering new user role in system": "Error occurred while registering new user role in system"
 }
