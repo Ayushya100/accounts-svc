@@ -7,6 +7,8 @@ import routes from './routes/index.js';
 class AccountService extends Service {
   registerPublicEndpoints() {
     this.app.get(`${SVC_API}/health`, routes.healthCheck);
+
+    this.app.post(`${SVC_API}/setup/role`, routes.settingRoutes.registerUserRole);
   }
 
   registerPrivateEndpoints() {}
