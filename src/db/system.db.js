@@ -52,11 +52,16 @@ class SystemDB extends DBQuery {
     return db.execute(query, params);
   }
 
-  async getUserRoleById(roleId) {
-    const query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT, CREATED_DATE, MODIFIED_DATE
+  async getUserRole(roleId = null) {
+    let query = `SELECT ID, ROLE_CD, ROLE_DESC, IS_ACTIVE, IS_DEFAULT, CREATED_DATE, MODIFIED_DATE
       FROM ${this.tables['USER_ROLE']}
-      WHERE ID = ? AND IS_DELETED = false;`;
-    const params = [roleId];
+      WHERE IS_DELETED = false`;
+    let params = [];
+
+    if (roleId) {
+      query += ' AND ID = ?';
+      params.push(roleId);
+    }
 
     return db.execute(query, params);
   }

@@ -1,6 +1,6 @@
 'use strict';
 
-import { logger, ResponseBuilder } from 'common-svc-lib';
+import { logger, ResponseBuilder, _Error } from 'common-svc-lib';
 import controllers from '../../controllers/index.js';
 
 const log = logger('Router: create-user-role');
@@ -23,7 +23,7 @@ const registerUserRole = async (req, res, next) => {
     res.status(201).json(ResponseBuilder(roleDtl));
   } catch (err) {
     log.error('Error occurred while processing the request');
-    next(err);
+    next(_Error(500, 'An error occurred while processing the request', err));
   }
 };
 

@@ -8,7 +8,10 @@ class AccountService extends Service {
   registerPublicEndpoints() {
     this.app.get(`${SVC_API}/health`, routes.healthCheck);
 
+    // User Role Routes
     this.app.post(`${SVC_API}/setup/role`, routes.settingRoutes.registerUserRole);
+    this.app.get(`${SVC_API}/setup/role`, routes.settingRoutes.getUserRole);
+    this.app.get(`${SVC_API}/setup/role/:roleId`, routes.settingRoutes.getUserRole);
   }
 
   registerPrivateEndpoints() {}

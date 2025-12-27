@@ -10,5 +10,8 @@
     "User role does not exists in system": "User role does not exists in system",
     "An error occurred while verifying user role in system": "Error occurred while verifying user role in system",
     "User role registered successfully": "User role registered successfully",
-    "An error occurred while registering new user role in system": "Error occurred while registering new user role in system"
+    "An error occurred while registering new user role in system": "Error occurred while registering new user role in system",
+    "An error occurred while processing the request": "Error occurred while processing the request",
+    "No user role found": "No user role found",
+    "An error occurred while fetching user roles": "Error occurred while fetching user roles"
 }

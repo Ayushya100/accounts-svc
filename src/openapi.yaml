@@ -12,6 +12,16 @@ servers:
     description: Local development servers
 
 components:
+  parameters:
+    RoleIdParam:
+      name: roleId
+      description: The ID of role to verify
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
+
   schemas:
     healthCheckData:
       title: Schema for Health Check Data
@@ -44,6 +54,31 @@ components:
       required:
         - role_code
         - role_desc
+
+    getUserRolesResponseData:
+      title: Schema for User Role Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        role_code:
+          type: string
+        role_desc:
+          type: string
+        is_active:
+          type: boolean
+        is_default:
+          type: boolean
+        created_date:
+          type: string
+        modified_date:
+          type: string
+      required:
+        - id
+        - role_code
+        - role_desc
+        - is_active
+        - is_default
 
     healthCheckSuccessResponse:
       type: object
@@ -84,12 +119,67 @@ components:
         success:
           type: boolean
           example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/getUserRolesResponseData'
       required:
         - status
         - type
         - message
         - devMessage
         - success
+        - data
+
+    getUserRolesResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getUserRolesResponseData'
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
+    noContentResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 204
+        type:
+          type: string
+          example: 'CONTENT_NOT_AVAILABLE'
+        message:
+          type: string
+          example: 'No content available'
+        devMessage:
+          type: string
+          example: 'No content available'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
 
     badRequestResponse:
       type: object
@@ -146,6 +236,26 @@ components:
         devMessage:
           type: string
           example: Forbidden access. Could not proceed with the request.
+        error:
+          type: array
+        data:
+          type: array
+
+    notFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        type:
+          type: string
+          example: 'NOT_FOUND'
+        message:
+          type: string
+          example: 'Resource Not Found'
+        devMessage:
+          type: string
+          example: Not Found. Requested resource does not exist.
         error:
           type: array
         data:
@@ -253,6 +363,93 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/conflictResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    get:
+      operationId: GetUserRoles
+      summary: Get all User Roles
+      description: An API to fetch all user roles exist in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserRolesResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/role/{roleId}:
+    get:
+      operationId: getUserRoleInfoById
+      summary: Get User Role Info by ID
+      description: An API to retrieve the user role info for requested ID.
+      parameters:
+        - $ref: '#/components/parameters/RoleIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserRoleResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
         '500':
           description: Internal Server Error
           content:
