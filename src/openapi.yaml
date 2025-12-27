@@ -24,6 +24,27 @@ components:
         hostname:
           type: string
 
+    registerUserRolePayload:
+      type: object
+      properties:
+        role_code:
+          type: string
+          description: Role Code
+          minLength: 1
+        role_desc:
+          type: string
+          description: Role Description
+          minLength: 1
+        is_default:
+          type: boolean
+          description: Is default user role
+        is_active:
+          type: boolean
+          description: Is Active user role
+      required:
+        - role_code
+        - role_desc
+
     healthCheckSuccessResponse:
       type: object
       properties:
@@ -195,6 +216,12 @@ paths:
       operationId: registerUserRole
       summary: Register User Role
       description: An API to register new user role in the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerUserRolePayload'
       responses:
         '201':
           description: OK

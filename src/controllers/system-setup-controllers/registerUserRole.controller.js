@@ -30,6 +30,7 @@ const registerNewUserRole = async (payload) => {
     log.info('Controller function to register new user role in system initiated');
     const providedDefaultVal = payload.is_default || null;
     payload.is_default = payload.is_default || false;
+    payload.is_active = payload.is_active || false;
 
     if (providedDefaultVal) {
       log.info('call db query to deactivate existing default role');
