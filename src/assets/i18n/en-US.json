@@ -22,5 +22,11 @@
     "No user role found. Cannot proceed further": "No user role found. Cannot proceed further",
     "User registered successfully": "User registered successfully",
     "An error occurred while registering new user in system": "Error occurred while registering new user in system",
-    "An error occurred while trying to generate the verification code": "Error occurred while trying to generate the verification code"
+    "An error occurred while trying to generate the verification code": "Error occurred while trying to generate the verification code",
+    "No user meta info found for the provided id": "No user meta info found for the provided id",
+    "User email verification code invalid": "User email verification code invalid",
+    "Verification code has been expired. New code will be send for verification": "Verification code has been expired. New code will be send for verification",
+    "Email is verified": "Email is verified",
+    "An error occurred while verifying the user email id": "Error occurred while verifying the user email id",
+    "User already verified": "User already verified"
 }
