@@ -9,4 +9,6 @@ const serviceConfig = {
   PROTOCOL: 'http',
 };
 
-export { SVC_API, serviceConfig };
+const SALT_ROUNDS = 10;
+
+export { SVC_API, serviceConfig, SALT_ROUNDS };

@@ -2,13 +2,7 @@
 
 import { db } from 'common-svc-lib';
 import { DBQuery } from './index.js';
-
-const userRoleMappingFields = {
-  role_code: 'role_cd',
-  role_desc: 'role_desc',
-  is_active: 'is_active',
-  is_default: 'is_default',
-};
+import { fieldMappings } from '../utils/index.js';
 
 class SystemDB extends DBQuery {
   constructor() {
@@ -35,7 +29,7 @@ class SystemDB extends DBQuery {
   }
 
   async registerNewRole(payload) {
-    const query = this.insertQuery('USER_ROLE', userRoleMappingFields, payload);
+    const query = this.insertQuery('USER_ROLE', fieldMappings.userRoleMappingFields, payload);
     const params = [payload.role_code, payload.role_desc, payload.is_active, payload.is_default];
     return db.execute(query, params);
   }
@@ -47,7 +41,7 @@ class SystemDB extends DBQuery {
       IS_DELETED: false,
     };
 
-    const query = this.updateQuery('USER_ROLE', userRoleMappingFields, updateRec, whereRec);
+    const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateRec, whereRec);
     const params = [roleId];
     return db.execute(query, params);
   }
@@ -64,6 +58,12 @@ class SystemDB extends DBQuery {
     }
 
     return db.execute(query, params);
+  }
+
+  async getDefaultUserRole() {
+    const query = `SELECT ID FROM ${this.tables['USER_ROLE']}
+      WHERE IS_DELETED = false AND IS_ACTIVE = true AND IS_DEFAULT = true;`;
+    return db.execute(query);
   }
 }
 
