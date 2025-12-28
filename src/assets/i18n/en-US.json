@@ -13,5 +13,14 @@
     "An error occurred while registering new user role in system": "Error occurred while registering new user role in system",
     "An error occurred while processing the request": "Error occurred while processing the request",
     "No user role found": "No user role found",
-    "An error occurred while fetching user roles": "Error occurred while fetching user roles"
+    "An error occurred while fetching user roles": "Error occurred while fetching user roles",
+    "No user found with the provided user id": "No user found with the provided user id",
+    "Requested user info fetched successfully": "Requested user info fetched successfully",
+    "An error occurred while retrieving the user details": "Error occurred while retrieving the user details",
+    "Username or email id provided is already taken": "Username or email id provided is already taken",
+    "An error occurred while validating if the username or email already taken": "Error occurred while validating if the username or email already taken",
+    "No user role found. Cannot proceed further": "No user role found. Cannot proceed further",
+    "User registered successfully": "User registered successfully",
+    "An error occurred while registering new user in system": "Error occurred while registering new user in system",
+    "An error occurred while trying to generate the verification code": "Error occurred while trying to generate the verification code"
 }

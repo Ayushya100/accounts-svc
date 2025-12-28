@@ -23,6 +23,21 @@ components:
         pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
 
   schemas:
+    Username:
+      type: string
+      description: Username for the account
+      pattern: '^[a-zA-Z0-9]{4,24}$'
+
+    EmailId:
+      type: string
+      description: Email id of user
+      pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+
+    Password:
+      type: string
+      description: user account password
+      pattern: '^[a-zA-Z0-9@_.&*#$]{8,32}$'
+
     healthCheckData:
       title: Schema for Health Check Data
       type: object
@@ -33,6 +48,34 @@ components:
           type: string
         hostname:
           type: string
+
+    registerUserPayload:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: First Name
+          minLength: 1
+        last_name:
+          type: string
+          description: Last Name
+        username:
+          type: string
+          description: Username
+          $ref: '#/components/schemas/Username'
+        email_id:
+          type: string
+          description: Email ID
+          $ref: '#/components/schemas/EmailId'
+        password:
+          type: string
+          description: Password
+          $ref: '#/components/schemas/Password'
+      required:
+        - first_name
+        - username
+        - email_id
+        - password
 
     registerUserRolePayload:
       type: object
@@ -100,6 +143,34 @@ components:
           example: true
         data:
           $ref: '#/components/schemas/healthCheckData'
+    
+    registerUserResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
 
     registerUserRoleResponse:
       type: object
@@ -314,6 +385,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/healthCheckSuccessResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /register-user:
+    post:
+      operationId: registerUser
+      summary: Register User
+      description: An API to register new user in the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerUserPayload'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflictResponse'
         '500':
           description: Internal Server Error
           content:

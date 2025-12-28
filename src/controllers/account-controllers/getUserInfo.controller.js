@@ -1,0 +1,32 @@
+'use strict';
+
+import { _Error, _Response, convertPrettyStringToId, formatResponseBody, logger } from 'common-svc-lib';
+import { AccountDB } from '../../db/index.js';
+import { fieldMappings } from '../../utils/index.js';
+
+const log = logger('Controller: get-user-info');
+
+const getUserInfoById = async (userId) => {
+  try {
+    log.info('Controller function to fetch the user details operation initiated');
+    userId = convertPrettyStringToId(userId);
+
+    log.info('Call db query to fetch requested user info');
+    let userInfo = await AccountDB.getUserInfo(userId);
+    if (userInfo.rowCount === 0) {
+      log.error('No user found with the provided user id');
+      throw _Error(404, 'No user found with the provided user id');
+    }
+
+    userInfo = userInfo.rows;
+    formatResponseBody(userInfo, fieldMappings.userFields, ['role_id'], ['last_login']);
+    userInfo = userInfo[0];
+    log.success('Requested user info fetched successfully');
+    return _Response(200, 'User found', userInfo);
+  } catch (err) {
+    log.error('Error occurred while fetching the user details for provided id');
+    throw _Error(500, 'An error occurred while retrieving the user details', err);
+  }
+};
+
+export { getUserInfoById };

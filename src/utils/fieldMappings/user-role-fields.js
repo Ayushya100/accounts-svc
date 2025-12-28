@@ -1,5 +1,12 @@
 'use strict';
 
+const userRoleMappingFields = {
+  role_code: 'role_cd',
+  role_desc: 'role_desc',
+  is_active: 'is_active',
+  is_default: 'is_default',
+};
+
 const userRoleFields = {
   id: 'id',
   role_cd: 'role_code',
@@ -11,4 +18,4 @@ const userRoleFields = {
   is_deleted: 'is_deleted',
 };
 
-export default userRoleFields;
+export { userRoleMappingFields, userRoleFields };
