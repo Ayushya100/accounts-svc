@@ -41,7 +41,6 @@ class AccountDB extends DBQuery {
     let query = `SELECT ID FROM ${this.tables['USER_METADATA']} WHERE USER_ID = ?;`;
     let params = [userId];
     let record = await db.execute(query, params);
-    console.log(record);
 
     let payload = ['verification_token', 'verification_token_exp'];
     params = [verificationCode, verificationCodeExpiry];
