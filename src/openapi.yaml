@@ -22,6 +22,23 @@ components:
         type: string
         pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
 
+    UserIdParam:
+      name: userId
+      description: The ID of user to verify
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
+
+    TokenParam:
+      name: token
+      description: The token of user to verify
+      in: path
+      required: true
+      schema:
+        type: string
+
   schemas:
     Username:
       type: string
@@ -98,6 +115,47 @@ components:
         - role_code
         - role_desc
 
+    getUserResponseData:
+      title: Schema for User Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        role_id:
+          type: string
+        role_cd:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        email_id:
+          type: string
+        login_type:
+          type: string
+        is_verified:
+          type: boolean
+        created_date:
+          type: string
+        modified_date:
+          type: string
+        login_count:
+          type: integer
+        last_login:
+          type: string
+          nullable: true
+      required:
+        - id
+        - role_id
+        - role_cd
+        - first_name
+        - last_name
+        - username
+        - email_id
+        - is_verified
+
     getUserRolesResponseData:
       title: Schema for User Role Response Data
       type: object
@@ -150,6 +208,35 @@ components:
         status:
           type: integer
           example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/getUserResponseData'
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
+    verifyUserResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
         type:
           type: string
           example: 'SUCCESS'
@@ -332,6 +419,46 @@ components:
         data:
           type: array
 
+    goneResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 410
+        type:
+          type: string
+          example: 'GONE'
+        message:
+          type: string
+          example: 'The requested content has been permanently deleted from server.'
+        devMessage:
+          type: string
+          example: 'The requested content has been permanently deleted from server.'
+        error:
+          type: array
+        data:
+          type: array
+
+    badEventResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 489
+        type:
+          type: string
+          example: 'BAD_EVENT'
+        message:
+          type: string
+          example: 'The server did not understand an event package specified in an Event header field.'
+        devMessage:
+          type: string
+          example: 'The server did not understand an event package specified in an Event header field.'
+        error:
+          type: array
+        data:
+          type: array
+
     conflictResponse:
       type: object
       properties:
@@ -430,6 +557,52 @@ paths:
                 $ref: '#/components/schemas/conflictResponse'
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /verify-user/{userId}/{token}:
+    put:
+      operationId: verifyUser
+      summary: Verify User Email ID
+      description: An API to verify user email id in the system.
+      parameters:
+        - $ref: '#/components/parameters/UserIdParam'
+        - $ref: '#/components/parameters/TokenParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/verifyUserResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/goneResponse'
+        '489':
+          description: BAD_EVENT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badEventResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
           content:
             application/json:
               schema:

@@ -19,19 +19,19 @@ class SystemDB extends DBQuery {
       WHERE ROLE_CD = ? AND IS_DELETED = false;`;
     const params = [roleCode];
 
-    return db.execute(query, params);
+    return await db.execute(query, params);
   }
 
   async getDefaultRole() {
     const query = `SELECT ID FROM ${this.tables['USER_ROLE']}
       WHERE IS_DELETED = false AND IS_ACTIVE = true AND IS_DEFAULT = true;`;
-    return db.execute(query);
+    return await db.execute(query);
   }
 
   async registerNewRole(payload) {
     const query = this.insertQuery('USER_ROLE', fieldMappings.userRoleMappingFields, payload);
     const params = [payload.role_code, payload.role_desc, payload.is_active, payload.is_default];
-    return db.execute(query, params);
+    return await db.execute(query, params);
   }
 
   async deactivateRole(roleId) {
@@ -43,7 +43,7 @@ class SystemDB extends DBQuery {
 
     const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateRec, whereRec);
     const params = [roleId];
-    return db.execute(query, params);
+    return await db.execute(query, params);
   }
 
   async getUserRole(roleId = null) {
@@ -57,13 +57,13 @@ class SystemDB extends DBQuery {
       params.push(roleId);
     }
 
-    return db.execute(query, params);
+    return await db.execute(query, params);
   }
 
   async getDefaultUserRole() {
     const query = `SELECT ID FROM ${this.tables['USER_ROLE']}
       WHERE IS_DELETED = false AND IS_ACTIVE = true AND IS_DEFAULT = true;`;
-    return db.execute(query);
+    return await db.execute(query);
   }
 }
 
