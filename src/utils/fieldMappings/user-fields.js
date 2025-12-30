@@ -7,6 +7,11 @@ const userMappingFields = {
   email_id: 'email_id',
   password: 'password',
   role_id: 'role_id',
+  role_code: 'role_cd',
+  gender: 'gender',
+  dob: 'dob',
+  contact: 'contact_number',
+  profile_img: 'profile_img_uri',
   login_type: 'login_type',
 };
 
@@ -28,6 +33,10 @@ const userFields = {
   last_name: 'last_name',
   username: 'username',
   email_id: 'email_id',
+  gender: 'gender',
+  dob: 'dob',
+  contact_number: 'contact',
+  profile_img_uri: 'profile_img',
   login_type: 'login_type',
   is_verified: 'is_verified',
   created_date: 'created_date',

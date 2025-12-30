@@ -28,5 +28,14 @@
     "Verification code has been expired. New code will be send for verification": "Verification code has been expired. New code will be send for verification",
     "Email is verified": "Email is verified",
     "An error occurred while verifying the user email id": "Error occurred while verifying the user email id",
-    "User already verified": "User already verified"
+    "User already verified": "User already verified",
+    "No user found for the provided identity": "No user found for the provided identity",
+    "User found": "User found",
+    "Account not yet verified": "Account not yet verified",
+    "Invalid Credentials": "Invalid Credentials",
+    "User login successful": "User login successful",
+    "Error occured while granting access to the user": "Error occured while granting access to the user",
+    "An error occurred while granting access to the user": "An error occurred while granting access to the user",
+    "Requested user does not exists": "Requested user does not exists",
+    "User Profile fetched successfully": "User Profile fetched successfully"
 }

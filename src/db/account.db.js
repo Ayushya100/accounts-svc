@@ -115,6 +115,18 @@ class AccountDB extends DBQuery {
     }
     return true;
   }
+
+  async getUserDtlInfo(userId) {
+    const query = `SELECT U.ID, U.ROLE_ID, R.ROLE_CD, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID, U.GENDER, U.DOB
+      , U.CONTACT_NUMBER, U.PROFILE_IMG_URI, U.LOGIN_TYPE, U.IS_VERIFIED, U.CREATED_DATE, U.MODIFIED_DATE, U.LOGIN_COUNT
+      , U.LAST_LOGIN, U.IS_DELETED
+      FROM ${this.tables['USERS']} U
+      INNER JOIN ${this.tables['USER_ROLE']} R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
+      WHERE U.ID = ? AND U.IS_DELETED = false AND U.IS_VERIFIED = true;`;
+    const params = [userId];
+
+    return await db.execute(query, params);
+  }
 }
 
 export default new AccountDB();

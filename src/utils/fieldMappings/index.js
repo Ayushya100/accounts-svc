@@ -9,5 +9,5 @@ export default {
   userMappingFields,
   userMetadataMappingField,
   userFields,
-  userMappingFields,
+  userMetadataField,
 };
