@@ -10,7 +10,7 @@ const generateUserAccessToken = async (userInfo) => {
     {
       id: userInfo.id,
       username: userInfo.username,
-      role: userInfo.role_cd,
+      role: userInfo.role_code,
       scopes: userInfo.scopes,
       isVerified: userInfo.is_verified,
       isDeleted: userInfo.is_deleted,

@@ -171,7 +171,7 @@ components:
         - email_id
         - is_verified
 
-    loginUserResponseData:
+    userInfoResponseData:
       title: Schema for Login User Response Data
       type: object
       properties:
@@ -209,6 +209,18 @@ components:
           type: string
         refresh_token:
           type: string
+        gender:
+          type: string
+          nullable: true
+        dob:
+          type: string
+          nullable: true
+        contact:
+          type: string
+          nullable: true
+        profile_img:
+          type: string
+          nullable: true
       required:
         - id
         - role_id
@@ -224,9 +236,6 @@ components:
         - login_count
         - last_login
         - is_deleted
-        - scopes
-        - access_token
-        - refresh_token
 
     getUserRolesResponseData:
       title: Schema for User Role Response Data
@@ -351,7 +360,36 @@ components:
           example: true
         data:
           type: object
-          $ref: '#/components/schemas/loginUserResponseData'
+          $ref: '#/components/schemas/userInfoResponseData'
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
+    getUserInfoResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/userInfoResponseData'
       required:
         - status
         - type
@@ -745,6 +783,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/goneResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /users/me:
+    get:
+      operationId: getUserInfo
+      summary: Get User Information
+      description: An API to fetch user detail information from the system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserInfoResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

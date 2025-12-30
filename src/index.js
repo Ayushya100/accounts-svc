@@ -17,7 +17,9 @@ class AccountService extends Service {
     this.app.get(`${SVC_API}/setup/role/:roleId`, routes.settingRoutes.getUserRole);
   }
 
-  registerPrivateEndpoints() {}
+  registerPrivateEndpoints() {
+    this.app.get(`${SVC_API}/users/me`, routes.accountRoutes.userInfo);
+  }
 }
 
 serviceConfig.HOST = process.env.HOST;

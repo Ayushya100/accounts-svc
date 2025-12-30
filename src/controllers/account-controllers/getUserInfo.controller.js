@@ -50,4 +50,28 @@ const getUserInfoByIdentity = async (userIdentity) => {
   }
 };
 
-export { getUserInfoById, getUserInfoByIdentity };
+const getUserDetailInfoById = async (userId) => {
+  try {
+    log.info('Controller function to fetch the user details operation initiated');
+    userId = convertPrettyStringToId(userId);
+
+    log.info('Call db query to fetch the user details for the provided user id');
+    let userInfo = await AccountDB.getUserDtlInfo(userId);
+    if (userInfo.rowCount === 0) {
+      log.error('No user available in system or soft-deleted for the requested id');
+      throw _Error(404, 'Requested user does not exists');
+    }
+
+    userInfo = userInfo.rows;
+    formatResponseBody(userInfo, fieldMappings.userFields, ['role_id'], ['last_login']);
+    userInfo = userInfo[0];
+
+    log.success('User info retrieved successfully');
+    return _Response(200, 'User Profile fetched successfully', userInfo);
+  } catch (err) {
+    log.error('Error occurred while fetching the user details');
+    throw _Error(500, 'An error occurred while retrieving the user details', err);
+  }
+};
+
+export { getUserInfoById, getUserInfoByIdentity, getUserDetailInfoById };
