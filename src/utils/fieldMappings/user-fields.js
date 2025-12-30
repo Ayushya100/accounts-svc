@@ -23,7 +23,7 @@ const userMetadataMappingField = {
 const userFields = {
   id: 'id',
   role_id: 'role_id',
-  role_cd: 'role_cd',
+  role_cd: 'role_code',
   first_name: 'first_name',
   last_name: 'last_name',
   username: 'username',

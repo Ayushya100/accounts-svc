@@ -94,6 +94,21 @@ components:
         - email_id
         - password
 
+    loginUserPayload:
+      type: object
+      properties:
+        userIdentifier:
+          type: string
+          description: Username or Email Id
+          minLength: 1
+        password:
+          type: string
+          description: Password
+          $ref: '#/components/schemas/Password'
+      required:
+        - userIdentifier
+        - password
+
     registerUserRolePayload:
       type: object
       properties:
@@ -155,6 +170,63 @@ components:
         - username
         - email_id
         - is_verified
+
+    loginUserResponseData:
+      title: Schema for Login User Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        role_id:
+          type: string
+        role_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        email_id:
+          type: string
+        login_type:
+          type: string
+        is_verified:
+          type: boolean
+        created_date:
+          type: string
+        modified_date:
+          type: string
+        login_count:
+          type: integer
+        last_login:
+          type: string
+        is_deleted:
+          type: boolean
+        scopes:
+          type: array
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+      required:
+        - id
+        - role_id
+        - role_code
+        - first_name
+        - last_name
+        - username
+        - email_id
+        - login_type
+        - is_verified
+        - created_date
+        - modified_date
+        - login_count
+        - last_login
+        - is_deleted
+        - scopes
+        - access_token
+        - refresh_token
 
     getUserRolesResponseData:
       title: Schema for User Role Response Data
@@ -251,6 +323,35 @@ components:
           example: true
         data:
           type: object
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+    
+    loginUserResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/loginUserResponseData'
       required:
         - status
         - type
@@ -601,6 +702,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/badEventResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /login:
+    post:
+      operationId: loginUser
+      summary: Login User
+      description: An API to login a user which exist in system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginUserPayload'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginUserResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/goneResponse'
         '500':
           description: INTERNAL_SERVER_ERROR
           content:

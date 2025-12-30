@@ -9,6 +9,7 @@ class AccountService extends Service {
     this.app.get(`${SVC_API}/health`, routes.healthCheck);
     this.app.post(`${SVC_API}/register-user`, routes.accountRoutes.registerUser);
     this.app.put(`${SVC_API}/verify-user/:userId/:token`, routes.accountRoutes.verifyUser);
+    this.app.post(`${SVC_API}/login`, routes.accountRoutes.loginUser);
 
     // User Role Routes
     this.app.post(`${SVC_API}/setup/role`, routes.settingRoutes.registerUserRole);
