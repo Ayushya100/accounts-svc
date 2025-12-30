@@ -29,4 +29,25 @@ const getUserInfoById = async (userId) => {
   }
 };
 
-export { getUserInfoById };
+const getUserInfoByIdentity = async (userIdentity) => {
+  try {
+    log.info('Controller function to fetch the user details for provided identity operation initiated');
+    log.info('Call db query to fetch user info');
+    let userInfo = await AccountDB.userInfoByIdentity(userIdentity);
+    if (userInfo.rowCount === 0) {
+      log.error('No user found with the provided username or email id');
+      throw _Error(404, 'No user found for the provided identity');
+    }
+
+    userInfo = userInfo.rows;
+    formatResponseBody(userInfo, fieldMappings.userFields, ['role_id'], ['last_login']);
+    userInfo = userInfo[0];
+    log.success('Requested user info fetched successfully');
+    return _Response(200, 'User found', userInfo);
+  } catch (err) {
+    log.error('Error occurred while fetching the user details for provided user identity');
+    throw _Error(500, 'An error occurred while retrieving the user details', err);
+  }
+};
+
+export { getUserInfoById, getUserInfoByIdentity };

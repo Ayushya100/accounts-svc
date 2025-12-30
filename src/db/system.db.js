@@ -9,6 +9,8 @@ class SystemDB extends DBQuery {
     super();
     this.tables = {
       USER_ROLE: 'USER_ROLE',
+      USER_SCOPE: 'USER_SCOPE',
+      ROLE_SCOPE: 'ROLE_SCOPE',
     };
   }
 
@@ -64,6 +66,15 @@ class SystemDB extends DBQuery {
     const query = `SELECT ID FROM ${this.tables['USER_ROLE']}
       WHERE IS_DELETED = false AND IS_ACTIVE = true AND IS_DEFAULT = true;`;
     return await db.execute(query);
+  }
+
+  async getUserScope(roleId) {
+    const query = `SELECT S.ID, S.SCOPE_CD, S.SCOPE_DESC
+      FROM ${this.tables['ROLE_SCOPE']} R
+      INNER JOIN ${this.tables['USER_SCOPE']} S ON S.ID = R.SCOPE_ID AND S.IS_DELETED = false
+      WHERE R.ROLE_ID = ? AND R.IS_DELETED = false;`;
+    const params = [roleId];
+    return await db.execute(query, params);
   }
 }
 

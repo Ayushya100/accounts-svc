@@ -10,7 +10,15 @@ class AccountDB extends DBQuery {
     this.tables = {
       USERS: 'USERS',
       USER_METADATA: 'USER_METADATA',
+      USER_ROLE: 'USER_ROLE',
     };
+
+    // General Queries
+    this.userInfoQuery = `SELECT U.ID, U.ROLE_ID, R.ROLE_CD, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID, U.LOGIN_TYPE
+      , U.IS_VERIFIED, U.CREATED_DATE, U.MODIFIED_DATE, U.LOGIN_COUNT, U.LAST_LOGIN, U.IS_DELETED
+      FROM ${this.tables['USERS']} U
+      INNER JOIN ${this.tables['USER_ROLE']} R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
+      WHERE U.IS_DELETED = false`;
   }
 
   // Query Functions
@@ -28,11 +36,7 @@ class AccountDB extends DBQuery {
   }
 
   async getUserInfo(userId) {
-    const query = `SELECT U.ID, U.ROLE_ID, R.ROLE_CD, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID
-            , U.LOGIN_TYPE, U.IS_VERIFIED, U.CREATED_DATE, U.MODIFIED_DATE, U.LOGIN_COUNT, U.LAST_LOGIN
-            FROM USERS U
-            INNER JOIN USER_ROLE R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
-            WHERE U.ID = ? AND U.IS_DELETED = false;`;
+    const query = this.userInfoQuery + ' AND U.ID = ?';
     const params = [userId];
     return await db.execute(query, params);
   }
@@ -80,6 +84,35 @@ class AccountDB extends DBQuery {
     query = this.updateQuery(this.tables['USERS'], fieldMappings.userMappingFields, updateFields, whereField);
     params = [true, userId];
     await db.execute(query, params);
+    return true;
+  }
+
+  async userInfoByIdentity(userIdentity) {
+    const query = this.userInfoQuery + ' AND (U.USERNAME = ? OR U.EMAIL_ID = ?)';
+    const params = [userIdentity, userIdentity];
+    return await db.execute(query, params);
+  }
+
+  async getUserPassKey(userId) {
+    const query = `SELECT PASSWORD FROM ${this.tables['USERS']} WHERE ID = ?`;
+    const params = [userId];
+    return await db.execute(query, params);
+  }
+
+  async storeUserLoginInfo(userId, refreshToken, lastLoginTime) {
+    let query = this.updateQuery(this.tables['USER_METADATA'], fieldMappings.userMetadataMappingField, ['REFRESH_TOKEN'], ['USER_ID']);
+    let params = [refreshToken, userId];
+    await db.execute(query, params);
+
+    if (lastLoginTime) {
+      const updateFields = {
+        LAST_LOGIN: '?',
+        LOGIN_COUNT: 'LOGIN_COUNT + 1',
+      };
+      query = this.updateQuery(this.tables['USERS'], fieldMappings.userMappingFields, updateFields, ['ID']);
+      params = [lastLoginTime, userId];
+      await db.execute(query, params);
+    }
     return true;
   }
 }

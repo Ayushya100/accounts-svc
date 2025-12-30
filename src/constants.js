@@ -11,4 +11,9 @@ const serviceConfig = {
 
 const SALT_ROUNDS = 10;
 
-export { SVC_API, serviceConfig, SALT_ROUNDS };
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: true,
+};
+
+export { SVC_API, serviceConfig, SALT_ROUNDS, COOKIE_OPTIONS };
