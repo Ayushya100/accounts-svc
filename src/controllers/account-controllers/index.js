@@ -4,6 +4,7 @@ import { verifyUsernameEmailAlreadyTaken, registerNewUser } from './registerUser
 import { getUserInfoById, getUserInfoByIdentity, getUserDetailInfoById } from './getUserInfo.controller.js';
 import { verifyUserToken } from './verifyUser.controller.js';
 import { loginUserVerification } from './login.controller.js';
+import { logout } from './logout.controller.js';
 
 export default {
   verifyUsernameEmailAlreadyTaken,
@@ -13,4 +14,5 @@ export default {
   getUserInfoByIdentity,
   loginUserVerification,
   getUserDetailInfoById,
+  logout,
 };
