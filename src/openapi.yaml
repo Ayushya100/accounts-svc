@@ -686,7 +686,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /register-user:
+  /auth/register:
     post:
       operationId: registerUser
       summary: Register User
@@ -729,7 +729,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /verify-user/{userId}/{token}:
+  /auth/verify-email/{userId}/{token}:
     put:
       operationId: verifyUser
       summary: Verify User Email ID
@@ -775,7 +775,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /login:
+  /auth/login:
     post:
       operationId: loginUser
       summary: Login User
@@ -818,7 +818,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /user/me:
+  /users/me:
     get:
       operationId: getUserInfo
       summary: Get User Information
@@ -861,7 +861,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /user/logout:
+  /auth/logout:
     put:
       operationId: logoutUser
       summary: Logout User
