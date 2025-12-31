@@ -1,7 +1,6 @@
 'use strict';
 
-import { db } from 'common-svc-lib';
-import { DBQuery } from './index.js';
+import { db, DBQuery } from 'common-svc-lib';
 import { fieldMappings } from '../utils/index.js';
 
 class AccountDB extends DBQuery {
@@ -54,8 +53,8 @@ class AccountDB extends DBQuery {
       params.push(userId);
       query = this.insertQuery(this.tables['USER_METADATA'], fieldMappings.userMetadataMappingField, payload);
     } else {
-      query = this.updateQuery(this.tables['USER_METADATA'], fieldMappings.userMetadataMappingField, payload, ['id']);
-      params.push(record.rows[0].id);
+      query = this.updateQuery(this.tables['USER_METADATA'], fieldMappings.userMetadataMappingField, payload, ['ID', 'IS_DELETED']);
+      params.push(record.rows[0].id, false);
     }
 
     return await db.execute(query, params);
@@ -72,17 +71,17 @@ class AccountDB extends DBQuery {
   }
 
   async verifyUserEmail(userId, currentTime) {
-    let updateFields = ['verification_token', 'verification_token_exp'];
-    let whereField = ['user_id'];
+    let updateFields = ['VERIFICATION_TOKEN', 'VERIFICATION_TOKEN_EXP'];
+    let whereField = ['USER_ID', 'IS_DELETED'];
 
     let query = this.updateQuery(this.tables['USER_METADATA'], fieldMappings.userMetadataMappingField, updateFields, whereField);
-    let params = [null, currentTime, userId];
+    let params = [null, currentTime, userId, false];
     await db.execute(query, params);
 
-    updateFields = ['is_verified'];
-    whereField = ['id'];
+    updateFields = ['IS_VERIFIED'];
+    whereField = ['ID', 'IS_DELETED'];
     query = this.updateQuery(this.tables['USERS'], fieldMappings.userMappingFields, updateFields, whereField);
-    params = [true, userId];
+    params = [true, userId, false];
     await db.execute(query, params);
     return true;
   }
@@ -100,8 +99,8 @@ class AccountDB extends DBQuery {
   }
 
   async storeUserLoginInfo(userId, refreshToken, lastLoginTime) {
-    let query = this.updateQuery(this.tables['USER_METADATA'], fieldMappings.userMetadataMappingField, ['REFRESH_TOKEN'], ['USER_ID']);
-    let params = [refreshToken, userId];
+    let query = this.updateQuery(this.tables['USER_METADATA'], fieldMappings.userMetadataMappingField, ['REFRESH_TOKEN'], ['USER_ID', 'IS_DELETED']);
+    let params = [refreshToken, userId, false];
     await db.execute(query, params);
 
     if (lastLoginTime) {
@@ -109,8 +108,8 @@ class AccountDB extends DBQuery {
         LAST_LOGIN: '?',
         LOGIN_COUNT: 'LOGIN_COUNT + 1',
       };
-      query = this.updateQuery(this.tables['USERS'], fieldMappings.userMappingFields, updateFields, ['ID']);
-      params = [lastLoginTime, userId];
+      query = this.updateQuery(this.tables['USERS'], fieldMappings.userMappingFields, updateFields, ['ID', 'IS_DELETED']);
+      params = [lastLoginTime, userId, false];
       await db.execute(query, params);
     }
     return true;
@@ -124,6 +123,16 @@ class AccountDB extends DBQuery {
       INNER JOIN ${this.tables['USER_ROLE']} R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
       WHERE U.ID = ? AND U.IS_DELETED = false AND U.IS_VERIFIED = true;`;
     const params = [userId];
+
+    return await db.execute(query, params);
+  }
+
+  async logoutUser(userId) {
+    const updateFields = {
+      REFRESH_TOKEN: null,
+    };
+    const query = this.updateQuery('USER_METADATA', fieldMappings.userMetadataMappingField, updateFields, ['USER_ID', 'IS_DELETED']);
+    const params = [userId, false];
 
     return await db.execute(query, params);
   }

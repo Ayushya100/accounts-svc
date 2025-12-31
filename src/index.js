@@ -18,7 +18,8 @@ class AccountService extends Service {
   }
 
   registerPrivateEndpoints() {
-    this.app.get(`${SVC_API}/users/me`, routes.accountRoutes.userInfo);
+    this.app.get(`${SVC_API}/user/me`, routes.accountRoutes.userInfo);
+    this.app.put(`${SVC_API}/user/logout`, routes.accountRoutes.logoutUser);
   }
 }
 

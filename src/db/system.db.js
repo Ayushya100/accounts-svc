@@ -1,7 +1,6 @@
 'use strict';
 
-import { db } from 'common-svc-lib';
-import { DBQuery } from './index.js';
+import { db, DBQuery } from 'common-svc-lib';
 import { fieldMappings } from '../utils/index.js';
 
 class SystemDB extends DBQuery {

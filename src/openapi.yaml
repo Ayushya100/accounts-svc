@@ -398,6 +398,34 @@ components:
         - success
         - data
 
+    logoutUserResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
     registerUserRoleResponse:
       type: object
       properties:
@@ -790,7 +818,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
-  /users/me:
+  /user/me:
     get:
       operationId: getUserInfo
       summary: Get User Information
@@ -802,6 +830,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getUserInfoResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /user/logout:
+    put:
+      operationId: logoutUser
+      summary: Logout User
+      description: An API to logout the user from the system
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logoutUserResponse'
         '400':
           description: BAD_REQUEST
           content:
