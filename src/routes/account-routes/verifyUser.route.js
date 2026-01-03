@@ -22,7 +22,7 @@ const verifyUser = async (req, res, next) => {
     }
 
     log.info('Call controller function to verify user email via the provided token');
-    const verifiedUser = await accountController.verifyUserToken(userId, token, userInfo.data);
+    const verifiedUser = await accountController.verifyUserToken(userId, token, userInfo.data, req.headers);
 
     log.success('User email verification completed successfully!');
     res.status(200).json(ResponseBuilder(verifiedUser));
