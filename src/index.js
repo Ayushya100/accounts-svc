@@ -10,16 +10,17 @@ class AccountService extends Service {
     this.app.post(`${SVC_API}/auth/register`, routes.accountRoutes.registerUser);
     this.app.put(`${SVC_API}/auth/verify-email/:userId/:token`, routes.accountRoutes.verifyUser);
     this.app.post(`${SVC_API}/auth/login`, routes.accountRoutes.loginUser);
+  }
+
+  registerPrivateEndpoints() {
+    // User Routes
+    this.app.get(`${SVC_API}/users/me`, routes.accountRoutes.userInfo);
+    this.app.put(`${SVC_API}/auth/logout`, routes.accountRoutes.logoutUser);
 
     // User Role Routes
     this.app.post(`${SVC_API}/setup/role`, routes.settingRoutes.registerUserRole);
     this.app.get(`${SVC_API}/setup/role`, routes.settingRoutes.getUserRole);
     this.app.get(`${SVC_API}/setup/role/:roleId`, routes.settingRoutes.getUserRole);
-  }
-
-  registerPrivateEndpoints() {
-    this.app.get(`${SVC_API}/users/me`, routes.accountRoutes.userInfo);
-    this.app.put(`${SVC_API}/auth/logout`, routes.accountRoutes.logoutUser);
   }
 }
 

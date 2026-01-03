@@ -1,0 +1,27 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: finance-container-redis
+    ports:
+      - 6379:6379
+    networks:
+      - finance-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: finance-container-rabbitmq
+    ports:
+      - 5672:5672   # AMQP
+      - 15672:15672 # Management UI
+    networks:
+      - finance-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  finance-network:
+    name: finance-network
+    driver: bridge

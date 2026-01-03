@@ -1,7 +1,7 @@
 {
-  "name": "accounts-svc",
+  "name": "identity-svc",
   "version": "1.0.0",
-  "description": "Welcome to the GitHub repository for **Accounts SVC** - This service is responsible for managing user accounts and their information. It provides functionality for user registration, authentication, and profile management, allowing users to securely manage their operations.",
+  "description": "Welcome to the GitHub repository for **Identity SVC** - This service is responsible for managing user identity and their information. It provides functionality for user registration, authentication, and profile management, allowing users to securely manage their operations.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -10,24 +10,28 @@
     "start-appmap": "npx appmap-node nodemon src/index.js",
     "start": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
     "format": "prettier --write \"src/**/*.js\"",
-    "format:check": "prettier --check \"src/**/*.js\""
+    "format:check": "prettier --check \"src/**/*.js\"",
+    "infra:build": "docker-compose build",
+    "infra:up": "docker-compose up -d",
+    "infra:down": "docker-compose down",
+    "infra:logs": "docker logs -f finance-email-consumer"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ayushya100/accounts-svc.git"
+    "url": "git+https://github.com/Ayushya100/identity-svc.git"
   },
   "keywords": [
     "nodejs",
     "express",
     "javascript",
-    "accounts-svc"
+    "identity-svc"
   ],
   "author": "Ayushya Jaiswal",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ayushya100/accounts-svc/issues"
+    "url": "https://github.com/Ayushya100/identity-svc/issues"
   },
-  "homepage": "https://github.com/Ayushya100/accounts-svc#readme",
+  "homepage": "https://github.com/Ayushya100/identity-svc#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
