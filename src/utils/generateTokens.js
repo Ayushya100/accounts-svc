@@ -1,6 +1,7 @@
 'use strict';
 
 import jwt from 'jsonwebtoken';
+import { randomUUID } from 'crypto';
 import { logger } from 'common-svc-lib';
 
 const log = logger('util: generate-token');
@@ -9,6 +10,7 @@ const generateUserAccessToken = async (userInfo) => {
   const accessToken = jwt.sign(
     {
       id: userInfo.id,
+      sid: randomUUID(),
       username: userInfo.username,
       role: userInfo.role_code,
       scopes: userInfo.scopes,

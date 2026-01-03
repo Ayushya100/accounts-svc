@@ -23,7 +23,7 @@ const registerUser = async (req, res, next) => {
     await accountController.verifyUsernameEmailAlreadyTaken(payload);
 
     log.info('Call controller function to register new user in system');
-    const userDtl = await accountController.registerNewUser(payload);
+    const userDtl = await accountController.registerNewUser(payload, req.headers);
 
     res.status(201).json(ResponseBuilder(userDtl));
   } catch (err) {

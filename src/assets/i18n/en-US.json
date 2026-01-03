@@ -37,5 +37,7 @@
     "Error occured while granting access to the user": "Error occured while granting access to the user",
     "An error occurred while granting access to the user": "An error occurred while granting access to the user",
     "Requested user does not exists": "Requested user does not exists",
-    "User Profile fetched successfully": "User Profile fetched successfully"
+    "User Profile fetched successfully": "User Profile fetched successfully",
+    "An error occurred while performing user logout operation": "An error occurred while performing user logout operation",
+    "User logout": "User logout"
 }

@@ -28,7 +28,7 @@ const verifyUsernameEmailAlreadyTaken = async (payload) => {
   }
 };
 
-const registerNewUser = async (payload) => {
+const registerNewUser = async (payload, headers) => {
   try {
     log.info('Controller function to register new user in system initiated');
     let defaultUserRole = await SystemDB.getDefaultUserRole();
@@ -51,7 +51,7 @@ const registerNewUser = async (payload) => {
     const newUserId = newUser.rows[0].id;
 
     const newUserDtl = await getUserInfoById(newUserId);
-    await generateEmailVerificationCode(newUserId);
+    await generateEmailVerificationCode(newUserId, newUserDtl.data, headers);
 
     log.success('New user registered successfully in system');
     return _Response(201, 'User registered successfully', newUserDtl.data);

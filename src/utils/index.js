@@ -3,5 +3,6 @@
 import fieldMappings from './fieldMappings/index.js';
 import validateFields from './fieldPatternValidation.js';
 import { generateUserAccessToken, generateUserRefreshToken } from './generateTokens.js';
+import { requestEmailSend } from './messaging/index.js';
 
-export { fieldMappings, validateFields, generateUserAccessToken, generateUserRefreshToken };
+export { fieldMappings, validateFields, generateUserAccessToken, generateUserRefreshToken, requestEmailSend };

@@ -1,9 +1,9 @@
 'use strict';
 
-const SVC_API = '/accounts-svc/api/v1.0';
+const SVC_API = '/identity-svc/api/v1.0';
 
 const serviceConfig = {
-  serviceName: 'accounts-svc',
+  serviceName: 'identity-svc',
   HOST: 'localhost',
   PORT: 4800,
   PROTOCOL: 'http',
