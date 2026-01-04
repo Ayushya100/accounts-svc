@@ -37,14 +37,14 @@ const grantUserAccess = async (userInfo) => {
   }
 };
 
-const loginUserVerification = async (userDtl, userPassword) => {
+const loginUserVerification = async (userDtl, userPassword, headers) => {
   try {
     log.info('Controller operation to grant access to the user operation initiated');
     const userId = convertPrettyStringToId(userDtl.id);
 
     if (!userDtl.is_verified) {
       log.error('User not yet verified - sending new verification mail');
-      await generateEmailVerificationCode(userId);
+      await generateEmailVerificationCode(userId, userDtl, headers);
       throw _Error(400, 'Account not yet verified');
     }
 
@@ -67,4 +67,4 @@ const loginUserVerification = async (userDtl, userPassword) => {
   }
 };
 
-export { loginUserVerification };
+export { loginUserVerification, grantUserAccess };

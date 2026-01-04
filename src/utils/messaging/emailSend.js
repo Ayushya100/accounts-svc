@@ -15,7 +15,7 @@ const requestEmailSend = (input, requestContext) => {
     sessionId: requestContext.sessionId,
     correlationId: requestContext.correlationId,
     source: serviceConfig.serviceName,
-    action: 'EMAIL'
+    action: 'EMAIL',
   };
 
   publishEmailTask(payload, context);

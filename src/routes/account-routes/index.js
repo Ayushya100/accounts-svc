@@ -5,6 +5,7 @@ import verifyUser from './verifyUser.route.js';
 import loginUser from './login.route.js';
 import userInfo from './userInfo.route.js';
 import logoutUser from './logout.route.js';
+import refreshToken from './refresh.route.js';
 
 export default {
   registerUser,
@@ -12,4 +13,5 @@ export default {
   loginUser,
   userInfo,
   logoutUser,
+  refreshToken,
 };

@@ -6,11 +6,6 @@ import { fieldMappings } from '../utils/index.js';
 class AccountDB extends DBQuery {
   constructor() {
     super();
-    this.tables = {
-      USERS: 'USERS',
-      USER_METADATA: 'USER_METADATA',
-      USER_ROLE: 'USER_ROLE',
-    };
 
     // General Queries
     this.userInfoQuery = `SELECT U.ID, U.ROLE_ID, R.ROLE_CD, U.FIRST_NAME, U.LAST_NAME, U.USERNAME, U.EMAIL_ID, U.LOGIN_TYPE
@@ -133,6 +128,15 @@ class AccountDB extends DBQuery {
     };
     const query = this.updateQuery('USER_METADATA', fieldMappings.userMetadataMappingField, updateFields, ['USER_ID', 'IS_DELETED']);
     const params = [userId, false];
+
+    return await db.execute(query, params);
+  }
+
+  async getUserRefreshToken(userId) {
+    const query = `SELECT ID, USER_ID, REFRESH_TOKEN
+      FROM ${this.tables['USER_METADATA']}
+      WHERE IS_DELETED = false AND USER_ID = ?;`;
+    const params = [userId];
 
     return await db.execute(query, params);
   }
