@@ -29,7 +29,7 @@ const loginUser = async (req, res, next) => {
     const userDtl = await accountController.getUserInfoByIdentity(payload.userIdentifier);
 
     log.info('Call controller function to login the user after verification');
-    const accessGrantedDtl = await accountController.loginUserVerification(userDtl.data, payload.password);
+    const accessGrantedDtl = await accountController.loginUserVerification(userDtl.data, payload.password, req.headers);
 
     log.success('User login operation completed');
     res

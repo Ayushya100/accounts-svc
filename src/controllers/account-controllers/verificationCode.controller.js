@@ -27,7 +27,7 @@ const generateEmailVerificationCode = async (userId, userDtl, headers) => {
         is_verified: userDtl.is_verified,
         login_type: userDtl.login_type,
         verification_code: verificationCode,
-        verification_code_exp: verificationExpiry
+        verification_code_exp: verificationExpiry,
       },
     };
     const userContext = {

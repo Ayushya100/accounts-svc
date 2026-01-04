@@ -19,19 +19,19 @@ const sendVerificationConfirmationMail = (userId, userDtl, headers) => {
       username: userDtl.username,
       email_id: userDtl.email_id,
       is_verified: true,
-      login_type: userDtl.login_type
-    }
+      login_type: userDtl.login_type,
+    },
   };
   const userContext = {
     userId: userId,
     sessionId: headers['x-session-id'],
-    correlationId: headers['x-correlation-id']
+    correlationId: headers['x-correlation-id'],
   };
 
   requestEmailSend(userPayload, userContext);
 
   log.success('Verification confirmation mail task submitted successfully');
-}
+};
 
 const verifyUserToken = async (userId, token, userData, headers) => {
   try {

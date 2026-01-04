@@ -10,6 +10,7 @@ class AccountService extends Service {
     this.app.post(`${SVC_API}/auth/register`, routes.accountRoutes.registerUser);
     this.app.put(`${SVC_API}/auth/verify-email/:userId/:token`, routes.accountRoutes.verifyUser);
     this.app.post(`${SVC_API}/auth/login`, routes.accountRoutes.loginUser);
+    this.app.post(`${SVC_API}/auth/refresh`, routes.accountRoutes.refreshToken);
   }
 
   registerPrivateEndpoints() {
