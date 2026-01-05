@@ -23,6 +23,7 @@ class AccountService extends Service {
     this.app.get(`${SVC_API}/setup/role`, routes.settingRoutes.getUserRole);
     this.app.get(`${SVC_API}/setup/role/:roleId`, routes.settingRoutes.getUserRole);
     this.app.put(`${SVC_API}/setup/role/:roleId`, routes.settingRoutes.updateUserRole);
+    this.app.delete(`${SVC_API}/setup/role/:roleId`, routes.settingRoutes.deleteUserRole);
 
     // User Scope Routes
     this.app.post(`${SVC_API}/setup/scope`, routes.settingRoutes.registerUserScope);

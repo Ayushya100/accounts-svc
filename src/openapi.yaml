@@ -1258,6 +1258,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
+    delete:
+      operationId: deleteUserRole
+      summary: Delete User Role
+      description: An API to delete user role in the system
+      parameters:
+        - $ref: '#/components/parameters/RoleIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserRoleResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
   /setup/scope:
     post:
       operationId: registerUserScope
