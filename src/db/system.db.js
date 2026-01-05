@@ -100,6 +100,31 @@ class SystemDB extends DBQuery {
     const params = [payload.scope_code, payload.scope_desc];
     return await db.execute(query, params);
   }
+
+  async updateRoleDtl(roleId, payload = null, isDefault = null) {
+    let updateCond;
+    const whereCond = {
+      ID: '?',
+      IS_DELETED: false,
+    };
+    let params;
+
+    if (isDefault) {
+      updateCond = { IS_DEFAULT: isDefault };
+      params = [roleId];
+    } else {
+      updateCond = {
+        ROLE_DESC: '?',
+        IS_ACTIVE: payload.is_active,
+        IS_DEFAULT: payload.is_default,
+      };
+      params = [payload.role_desc, roleId];
+    }
+
+    const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateCond, whereCond);
+
+    return await db.execute(query, params);
+  }
 }
 
 export default new SystemDB();
