@@ -3,7 +3,7 @@
 import { logger, ResponseBuilder } from 'common-svc-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Router: Logout-User');
+const log = logger('Router: Logout');
 const accountController = controllers.accountController;
 
 // API Function

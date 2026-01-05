@@ -1,14 +1,14 @@
 openapi: 3.0.0
 info:
-  title: Accounts Service
+  title: Identity Service
   version: 1.0.0
-  description: The Accounts Service is responsible for managing user-related operations and system configurations.
+  description: The Identity Service is responsible for managing user-related operations and system configurations.
     User Management - Create, retrieve, update and delete user accounts.
     Authentication & Authorization - Handle user authentication, session management, and access control.
     System Configurations - Manage system-specific setting such as API configurations, user scopes and groups.
 
 servers:
-  - url: /accounts-svc/api/v1.0
+  - url: /identity-svc/api/v1.0
     description: Local development servers
 
 components:
@@ -138,6 +138,21 @@ components:
       required:
         - role_code
         - role_desc
+
+    registerUserScopePayload:
+      type: object
+      properties:
+        scope_code:
+          type: string
+          description: Scope Code
+          minLength: 1
+        scope_desc:
+          type: string
+          description: Scope Description
+          minLength: 1
+      required:
+        - scope_code
+        - scope_desc
 
     getUserResponseData:
       title: Schema for User Response Data
@@ -270,6 +285,25 @@ components:
         - role_desc
         - is_active
         - is_default
+
+    getUserScopesResponseData:
+      title: Schema for User Scope Response Data
+      type: object
+      properties:
+        id:
+          type: string
+        scope_code:
+          type: string
+        scope_desc:
+          type: string
+        created_date:
+          type: string
+        modified_date:
+          type: string
+      required:
+        - id
+        - scope_code
+        - scope_desc
 
     healthCheckSuccessResponse:
       type: object
@@ -456,6 +490,35 @@ components:
         data:
           type: object
           $ref: '#/components/schemas/getUserRolesResponseData'
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
+    registerUserScopeResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: '#/components/schemas/getUserScopesResponseData'
       required:
         - status
         - type
@@ -1079,6 +1142,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/notFoundResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/scope:
+    post:
+      operationId: registerUserScope
+      summary: Register User Scope
+      description: An API to register new user scope in the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerUserScopePayload'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserScopeResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflictResponse'
         '500':
           description: Internal Server Error
           content:

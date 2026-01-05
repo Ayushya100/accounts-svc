@@ -4,7 +4,7 @@ import { _Error, logger, ResponseBuilder } from 'common-svc-lib';
 import controllers from '../../controllers/index.js';
 import { validateFields } from '../../utils/index.js';
 
-const log = logger('Router: register-user');
+const log = logger('Router: Register-User');
 const accountController = controllers.accountController;
 
 // API Function

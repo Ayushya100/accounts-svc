@@ -7,7 +7,7 @@ import { SALT_ROUNDS } from '../../constants.js';
 import { getUserInfoById } from './getUserInfo.controller.js';
 import { generateEmailVerificationCode } from './verificationCode.controller.js';
 
-const log = logger('Controller: register-user');
+const log = logger('Controller: Register-User');
 
 const verifyUsernameEmailAlreadyTaken = async (payload) => {
   try {

@@ -5,7 +5,7 @@ import controllers from '../../controllers/index.js';
 import { validateFields } from '../../utils/index.js';
 import { COOKIE_OPTIONS } from '../../constants.js';
 
-const log = logger('Router: login');
+const log = logger('Router: Login');
 const accountController = controllers.accountController;
 
 // API Function

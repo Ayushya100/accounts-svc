@@ -5,7 +5,7 @@ import { AccountDB } from '../../db/index.js';
 import { generateEmailVerificationCode } from './verificationCode.controller.js';
 import { requestEmailSend } from '../../utils/index.js';
 
-const log = logger('Controller: verify-user');
+const log = logger('Controller: Verify-User');
 
 const sendVerificationConfirmationMail = (userId, userDtl, headers) => {
   const userPayload = {

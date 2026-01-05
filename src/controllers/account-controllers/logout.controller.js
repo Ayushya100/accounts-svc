@@ -3,7 +3,7 @@
 import { _Error, _Response, convertPrettyStringToId, logger } from 'common-svc-lib';
 import { AccountDB } from '../../db/index.js';
 
-const log = logger('Controller: Logout-User');
+const log = logger('Controller: Logout');
 
 const logout = async (userId) => {
   try {

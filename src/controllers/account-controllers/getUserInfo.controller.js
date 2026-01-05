@@ -4,7 +4,7 @@ import { _Error, _Response, convertPrettyStringToId, formatResponseBody, logger 
 import { AccountDB } from '../../db/index.js';
 import { fieldMappings } from '../../utils/index.js';
 
-const log = logger('Controller: get-user-info');
+const log = logger('Controller: Get-User-Info');
 
 const getUserInfoById = async (userId) => {
   try {
