@@ -3,7 +3,7 @@
 import { _Error, logger, ResponseBuilder } from 'common-svc-lib';
 import controllers from '../../controllers/index.js';
 
-const log = logger('Route: Delete-Role');
+const log = logger('Router: Delete-Role');
 const settingController = controllers.settingController;
 
 // API Function
