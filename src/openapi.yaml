@@ -39,6 +39,15 @@ components:
       schema:
         type: string
 
+    ScopeIdParam:
+      name: scopeId
+      description: The ID of scope to verify
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-F0-9]{8}:[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{11}'
+
   schemas:
     Username:
       type: string
@@ -498,6 +507,36 @@ components:
         - success
         - data
 
+    getUserRolesResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 201
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/getUserRolesResponseData'
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
+
     registerUserScopeResponse:
       type: object
       properties:
@@ -527,7 +566,7 @@ components:
         - success
         - data
 
-    getUserRolesResponse:
+    getUserScopeResponse:
       type: object
       properties:
         status:
@@ -548,7 +587,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/getUserRolesResponseData'
+            $ref: '#/components/schemas/getUserScopesResponseData'
       required:
         - status
         - type
@@ -1191,6 +1230,93 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/conflictResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    get:
+      operationId: GetUserScopes
+      summary: Get all User Scopes
+      description: An API to fetch all user scopes exist in system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserScopeResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /setup/scope/{scopeId}:
+    get:
+      operationId: getUserScopeById
+      summary: Get User Scope Info by ID
+      description: An API to retrieve the user scope info for requested ID.
+      parameters:
+        - $ref: '#/components/parameters/ScopeIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserScopeResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
         '500':
           description: Internal Server Error
           content:
