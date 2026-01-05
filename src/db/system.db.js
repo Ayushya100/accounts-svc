@@ -78,6 +78,10 @@ class SystemDB extends DBQuery {
         WHERE S.ID = ? AND S.IS_DELETED = false;`;
       params.push(scopeId);
     }
+    if (!roleId && !scopeId) {
+      query += ` FROM ${this.tables['USER_SCOPE']} S
+        WHERE S.IS_DELETED = false;`;
+    }
 
     return await db.execute(query, params);
   }
