@@ -73,7 +73,8 @@ class SystemDB extends DBQuery {
       params.push(roleId);
     }
     if (scopeId) {
-      query += ` FROM ${this.tables['USER_SCOPE']} S
+      query += `, S.CREATED_DATE, S.MODIFIED_DATE
+        FROM ${this.tables['USER_SCOPE']} S
         WHERE S.ID = ? AND S.IS_DELETED = false;`;
       params.push(scopeId);
     }
