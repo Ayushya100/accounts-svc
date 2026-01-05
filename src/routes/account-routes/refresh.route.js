@@ -4,7 +4,7 @@ import { _Error, logger, ResponseBuilder } from 'common-svc-lib';
 import controllers from '../../controllers/index.js';
 import { COOKIE_OPTIONS } from '../../constants.js';
 
-const log = logger('Route: Refresh-Token');
+const log = logger('Router: Refresh-Token');
 const accountController = controllers.accountController;
 
 // API Function

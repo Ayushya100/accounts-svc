@@ -137,6 +137,20 @@ class SystemDB extends DBQuery {
     const params = [roleId];
     return await db.execute(query, params);
   }
+
+  async updateScopeDtl(scopeId, payload) {
+    const updateCond = {
+      SCOPE_DESC: '?',
+    };
+    const whereCond = {
+      ID: '?',
+      IS_DELETED: false,
+    };
+
+    const query = this.updateQuery('USER_SCOPE', fieldMappings.userScopeMappingFields, updateCond, whereCond);
+    const params = [payload.scope_desc, scopeId];
+    return await db.execute(query, params);
+  }
 }
 
 export default new SystemDB();
