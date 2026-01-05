@@ -148,6 +148,20 @@ components:
         - role_code
         - role_desc
 
+    updateUserRolePayload:
+      type: object
+      properties:
+        role_desc:
+          type: string
+          description: Role Description
+          minLength: 1
+        is_default:
+          type: boolean
+          description: Is default user role
+        is_active:
+          type: boolean
+          description: Is Active user role
+
     registerUserScopePayload:
       type: object
       properties:
@@ -1150,6 +1164,62 @@ paths:
       description: An API to retrieve the user role info for requested ID.
       parameters:
         - $ref: '#/components/parameters/RoleIdParam'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerUserRoleResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+    put:
+      operationId: updateUserRole
+      summary: Update User Role
+      description: An API to update user role in the system.
+      parameters:
+        - $ref: '#/components/parameters/RoleIdParam'
+        - in: query
+          name: default
+          schema:
+            type: string
+          required: false
+          description: Update default value for user role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateUserRolePayload'
       responses:
         '200':
           description: SUCCESS
