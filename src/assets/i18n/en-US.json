@@ -57,5 +57,8 @@
     "An error occurred while deactivating existing default user role": "An error occurred while deactivating the existing default user role.",
     "User role details updated successfully": "User role details updated successfully.",
     "An error occurred while updating user role detail in system": "An error occurred while updating the user role details.",
-    "An error occurred while updating user role default value in system": "An error occurred while updating the default user role."
+    "An error occurred while updating user role default value in system": "An error occurred while updating the default user role.",
+    "An error occurred while deleting requested user role": "We couldn’t delete the selected user role. Please try again later.",
+    "User role deleted successfully": "The user role has been deleted successfully.",
+    "Default user role cannot be deleted": "The default user role cannot be deleted."
 }

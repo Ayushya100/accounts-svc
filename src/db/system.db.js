@@ -125,6 +125,18 @@ class SystemDB extends DBQuery {
 
     return await db.execute(query, params);
   }
+
+  async deleteRole(roleId) {
+    const updateCond = { IS_DELETED: true };
+    const whereCond = {
+      ID: '?',
+      IS_DELETED: false,
+    };
+
+    const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateCond, whereCond);
+    const params = [roleId];
+    return await db.execute(query, params);
+  }
 }
 
 export default new SystemDB();
