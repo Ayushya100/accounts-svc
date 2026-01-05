@@ -4,7 +4,7 @@ import { logger, _Error, _Response } from 'common-svc-lib';
 import { SystemDB } from '../../db/index.js';
 import { getUserRoleById } from './getUserRole.controller.js';
 
-const log = logger('Controller: register-user-role');
+const log = logger('Controller: Register-Role');
 
 const verifyUserRoleExist = async (roleCode) => {
   try {
@@ -12,7 +12,7 @@ const verifyUserRoleExist = async (roleCode) => {
     log.info('Call db query to validate if user role already exists');
     const roleDtl = await SystemDB.getUserRoleByCode(roleCode);
 
-    if (roleDtl.rows.length > 0) {
+    if (roleDtl.rowCount > 0) {
       log.error('User role already exists in system');
       throw _Error(409, 'User role already exists');
     }

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { AccountDB } from '../../db/index.js';
 import { requestEmailSend } from '../../utils/index.js';
 
-const log = logger('Controller: verification-code');
+const log = logger('Controller: Verification-Code');
 
 const generateEmailVerificationCode = async (userId, userDtl, headers) => {
   try {

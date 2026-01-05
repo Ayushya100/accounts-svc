@@ -1,6 +1,6 @@
 'use strict';
 
-import { userRoleMappingFields, userRoleFields } from './user-role-fields.js';
+import { userRoleMappingFields, userRoleFields, userScopeMappingFields, userScopeFields } from './user-role-fields.js';
 import { userMappingFields, userMetadataMappingField, userFields, userMetadataField } from './user-fields.js';
 
 export default {
@@ -10,4 +10,6 @@ export default {
   userMetadataMappingField,
   userFields,
   userMetadataField,
+  userScopeMappingFields,
+  userScopeFields,
 };

@@ -6,11 +6,6 @@ import { fieldMappings } from '../utils/index.js';
 class SystemDB extends DBQuery {
   constructor() {
     super();
-    this.tables = {
-      USER_ROLE: 'USER_ROLE',
-      USER_SCOPE: 'USER_SCOPE',
-      ROLE_SCOPE: 'ROLE_SCOPE',
-    };
   }
 
   // Query Functions
@@ -67,12 +62,37 @@ class SystemDB extends DBQuery {
     return await db.execute(query);
   }
 
-  async getUserScope(roleId) {
-    const query = `SELECT S.ID, S.SCOPE_CD, S.SCOPE_DESC
-      FROM ${this.tables['ROLE_SCOPE']} R
-      INNER JOIN ${this.tables['USER_SCOPE']} S ON S.ID = R.SCOPE_ID AND S.IS_DELETED = false
-      WHERE R.ROLE_ID = ? AND R.IS_DELETED = false;`;
-    const params = [roleId];
+  async getUserScope(roleId = null, scopeId = null) {
+    let query = 'SELECT S.ID, S.SCOPE_CD, S.SCOPE_DESC';
+    const params = [];
+
+    if (roleId) {
+      query += ` FROM ${this.tables['ROLE_SCOPE']} R
+        INNER JOIN ${this.tables['USER_SCOPE']} S ON S.ID = R.SCOPE_ID AND S.IS_DELETED = false
+        WHERE R.ROLE_ID = ? AND R.IS_DELETED = false;`;
+      params.push(roleId);
+    }
+    if (scopeId) {
+      query += ` FROM ${this.tables['USER_SCOPE']} S
+        WHERE S.ID = ? AND S.IS_DELETED = false;`;
+      params.push(scopeId);
+    }
+
+    return await db.execute(query, params);
+  }
+
+  async getUserScopeByCode(scopeCode) {
+    const query = `SELECT ID, SCOPE_CD, SCOPE_DESC, CREATED_DATE, MODIFIED_DATE
+      FROM ${this.tables['USER_SCOPE']}
+      WHERE SCOPE_CD = ? AND IS_DELETED = false;`;
+    const params = [scopeCode];
+
+    return await db.execute(query, params);
+  }
+
+  async registerNewScope(payload) {
+    const query = this.insertQuery('USER_SCOPE', fieldMappings.userScopeMappingFields, payload);
+    const params = [payload.scope_code, payload.scope_desc];
     return await db.execute(query, params);
   }
 }

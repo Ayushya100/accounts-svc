@@ -4,7 +4,7 @@ import { logger, convertPrettyStringToId, formatResponseBody, _Response, _Error 
 import { SystemDB } from '../../db/index.js';
 import { fieldMappings } from '../../utils/index.js';
 
-const log = logger('Controller: get-user-role-info');
+const log = logger('Controller: Get-Role-Info');
 
 const getUserRoleById = async (roleId) => {
   try {

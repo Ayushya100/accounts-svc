@@ -39,5 +39,16 @@
     "Requested user does not exists": "Requested user does not exists",
     "User Profile fetched successfully": "User Profile fetched successfully",
     "An error occurred while performing user logout operation": "An error occurred while performing user logout operation",
-    "User logout": "User logout"
+    "User logout": "User logout",
+    "Refresh Token not found": "Refresh Token not found",
+    "No Token stored in db": "No Token available",
+    "Invalid Token found": "Invalid Token found",
+    "Token Expired or Invalid": "Token Expired or Invalid",
+    "User scope already exists": "User scope already exists",
+    "User scope does not exists in system": "User scope does not exists in system",
+    "An error occurred while validating user scope in system": "Error occurred while validating user scope in system",
+    "User scope registered successfully": "User scope registered successfully",
+    "An error occurred while registering new user scope in system": "Error occurred while registering new user scope in system",
+    "User scope not found": "User scope not found",
+    "User scope found": "User scope found"
 }
