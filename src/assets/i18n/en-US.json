@@ -62,5 +62,7 @@
     "User role deleted successfully": "The user role has been deleted successfully.",
     "Default user role cannot be deleted": "The default user role cannot be deleted.",
     "User scope details updated successfully": "User scope have been updated successfully.",
-    "An error occurred while updating user scope in system": "An error occurred while updating the user scope"
+    "An error occurred while updating user scope in system": "An error occurred while updating the user scope",
+    "User scope deleted successfully": "User scope has been deleted successfully.",
+    "An error occurred while deleting requested user scope": "An error occurred while deleting the requested user scope."
 }
