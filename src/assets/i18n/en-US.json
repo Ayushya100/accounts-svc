@@ -64,5 +64,10 @@
     "User scope details updated successfully": "User scope have been updated successfully.",
     "An error occurred while updating user scope in system": "An error occurred while updating the user scope",
     "User scope deleted successfully": "User scope has been deleted successfully.",
-    "An error occurred while deleting requested user scope": "An error occurred while deleting the requested user scope."
+    "An error occurred while deleting requested user scope": "An error occurred while deleting the requested user scope.",
+    "Assigned Scopes list fetched successfully": "Assigned scopes were retrieved successfully.",
+    "An error occurred while fetching assigned scopes to the requested role": "An error occurred while retrieving the assigned scopes for the requested role.",
+    "Unassigned Scopes list fetched successfully": "Unassigned scopes were retrieved successfully.",
+    "An error occurred while fetching unassigned scopes to the requested role": "An error occurred while retrieving the unassigned scopes for the requested role.",
+    "Incorrect operation type requested": "The requested operation type is invalid."
 }
