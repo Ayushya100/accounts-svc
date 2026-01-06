@@ -151,6 +151,18 @@ class SystemDB extends DBQuery {
     const params = [payload.scope_desc, scopeId];
     return await db.execute(query, params);
   }
+
+  async deleteScope(scopeId) {
+    const updateCond = { IS_DELETED: true };
+    const whereCond = {
+      ID: '?',
+      IS_DELETED: false,
+    };
+
+    const query = this.updateQuery('USER_SCOPE', fieldMappings.userScopeMappingFields, updateCond, whereCond);
+    const params = [scopeId];
+    return await db.execute(query, params);
+  }
 }
 
 export default new SystemDB();
