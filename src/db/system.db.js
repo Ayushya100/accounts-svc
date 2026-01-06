@@ -163,6 +163,28 @@ class SystemDB extends DBQuery {
     const params = [scopeId];
     return await db.execute(query, params);
   }
+
+  async getAssignedScopes(roleId) {
+    const query = `SELECT S.ID, S.SCOPE_CD, S.SCOPE_DESC
+      FROM ${this.tables['ROLE_SCOPE']} R
+      INNER JOIN ${this.tables['USER_SCOPE']} S ON S.ID = R.SCOPE_ID AND S.IS_DELETED = false
+      WHERE R.ROLE_ID = ? AND R.IS_DELETED = false;`;
+    const params = [roleId];
+
+    return await db.execute(query, params);
+  }
+
+  async getUnassignedScopes(roleId) {
+    const query = `SELECT ID, SCOPE_CD, SCOPE_DESC
+      FROM ${this.tables['USER_SCOPE']}
+      WHERE ID NOT IN (SELECT SCOPE_ID
+        FROM ${this.tables['ROLE_SCOPE']}
+        WHERE ROLE_ID = ? AND IS_DELETED = false
+      );`;
+    const params = [roleId];
+
+    return await db.execute(query, params);
+  }
 }
 
 export default new SystemDB();
