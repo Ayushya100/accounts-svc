@@ -10,8 +10,8 @@ const accountController = controllers.accountController;
 const verifyUser = async (req, res, next) => {
   try {
     log.info('Verify user email id operation initiated');
-    const userId = req.params.userId;
-    const token = req.params.token;
+    const userId = req.body.userId;
+    const token = req.body.token;
 
     log.info('Call controller function to check if the requested user exists or not');
     const userInfo = await accountController.getUserInfoById(userId);

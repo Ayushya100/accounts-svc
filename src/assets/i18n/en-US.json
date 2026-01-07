@@ -69,5 +69,9 @@
     "An error occurred while fetching assigned scopes to the requested role": "An error occurred while retrieving the assigned scopes for the requested role.",
     "Unassigned Scopes list fetched successfully": "Unassigned scopes were retrieved successfully.",
     "An error occurred while fetching unassigned scopes to the requested role": "An error occurred while retrieving the unassigned scopes for the requested role.",
-    "Incorrect operation type requested": "The requested operation type is invalid."
+    "Incorrect operation type requested": "The requested operation type is invalid.",
+    "One of the scope id provided is incorrect": "One of the scope id provided is incorrect",
+    "Scope assignment has been updated successfull": "Scope assignment has been updated successfull",
+    "An error occurred while updating the scope assignment to the requested role": "An error occurred while updating the scope assignment to the requested role",
+    "Email has been sent to the registered email id": "Email has been sent to the registered email id"
 }
