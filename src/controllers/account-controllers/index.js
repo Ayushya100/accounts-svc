@@ -6,6 +6,7 @@ import { verifyUserToken } from './verifyUser.controller.js';
 import { loginUserVerification, grantUserAccess } from './login.controller.js';
 import { logout } from './logout.controller.js';
 import { isTokenAvailable } from './refreshToken.controller.js';
+import { forgotPasswordRequest } from './forgotPassword.controller.js';
 
 export default {
   verifyUsernameEmailAlreadyTaken,
@@ -18,4 +19,5 @@ export default {
   logout,
   isTokenAvailable,
   grantUserAccess,
+  forgotPasswordRequest,
 };

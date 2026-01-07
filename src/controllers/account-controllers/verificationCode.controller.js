@@ -46,4 +46,43 @@ const generateEmailVerificationCode = async (userId, userDtl, headers) => {
   }
 };
 
-export { generateEmailVerificationCode };
+const generatePasswordVerificationCode = async (userId, userDtl, headers) => {
+  try {
+    log.info('Controller function to generate the verification code for password reset process initiated');
+    const verificationCode = uuidv4() + userId;
+    const verificationExpiry = new Date(Date.now() + 30 * 60 * 1000);
+    const verificationCodeRecords = await AccountDB.registerPasswordVerification(userId, verificationCode, verificationExpiry);
+
+    const userPayload = {
+      to: userDtl.email_id,
+      template: 'USER_PASSWORD_RESET_REQUEST',
+      data: {
+        id: userId,
+        role_code: userDtl.role_code,
+        first_name: userDtl.first_name,
+        last_name: userDtl.last_name,
+        username: userDtl.username,
+        email_id: userDtl.email_id,
+        is_verified: userDtl.is_verified,
+        login_type: userDtl.login_type,
+        verification_code: verificationCode,
+        verification_code_exp: verificationExpiry,
+      },
+    };
+    const userContext = {
+      userId: userId,
+      sessionId: headers['x-session-id'],
+      correlationId: headers['x-correlation-id'],
+    };
+
+    requestEmailSend(userPayload, userContext);
+
+    log.success('Verification code generated successfully');
+    return true;
+  } catch (err) {
+    log.error('Error occurred while trying to generate the veirification code for password reset');
+    throw _Error(500, 'An error occurred while trying to generate the verification code', err);
+  }
+};
+
+export { generateEmailVerificationCode, generatePasswordVerificationCode };

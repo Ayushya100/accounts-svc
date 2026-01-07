@@ -102,18 +102,18 @@ class SystemDB extends DBQuery {
   }
 
   async updateRoleDtl(roleId, payload = null, isDefault = null) {
-    let updateCond;
-    const whereCond = {
+    let updateColumns;
+    const whereColumns = {
       ID: '?',
       IS_DELETED: false,
     };
     let params;
 
     if (isDefault) {
-      updateCond = { IS_DEFAULT: isDefault };
+      updateColumns = { IS_DEFAULT: isDefault };
       params = [roleId];
     } else {
-      updateCond = {
+      updateColumns = {
         ROLE_DESC: '?',
         IS_ACTIVE: payload.is_active,
         IS_DEFAULT: payload.is_default,
@@ -121,45 +121,45 @@ class SystemDB extends DBQuery {
       params = [payload.role_desc, roleId];
     }
 
-    const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateCond, whereCond);
+    const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateColumns, whereColumns);
 
     return await db.execute(query, params);
   }
 
   async deleteRole(roleId) {
-    const updateCond = { IS_DELETED: true };
-    const whereCond = {
+    const updateColumns = { IS_DELETED: true };
+    const whereColumns = {
       ID: '?',
       IS_DELETED: false,
     };
 
-    const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateCond, whereCond);
+    const query = this.updateQuery('USER_ROLE', fieldMappings.userRoleMappingFields, updateColumns, whereColumns);
     const params = [roleId];
     return await db.execute(query, params);
   }
 
   async updateScopeDtl(scopeId, payload) {
-    const updateCond = {
+    const updateColumns = {
       SCOPE_DESC: '?',
     };
-    const whereCond = {
+    const whereColumns = {
       ID: '?',
       IS_DELETED: false,
     };
 
-    const query = this.updateQuery('USER_SCOPE', fieldMappings.userScopeMappingFields, updateCond, whereCond);
+    const query = this.updateQuery('USER_SCOPE', fieldMappings.userScopeMappingFields, updateColumns, whereColumns);
     const params = [payload.scope_desc, scopeId];
     return await db.execute(query, params);
   }
 
   async deleteScope(scopeId) {
-    const updateCond = { IS_DELETED: true };
-    const whereCond = {
+    const updateColumns = { IS_DELETED: true };
+    const whereColumns = {
       ID: '?',
       IS_DELETED: false,
     };
 
-    const query = this.updateQuery('USER_SCOPE', fieldMappings.userScopeMappingFields, updateCond, whereCond);
+    const query = this.updateQuery('USER_SCOPE', fieldMappings.userScopeMappingFields, updateColumns, whereColumns);
     const params = [scopeId];
     return await db.execute(query, params);
   }
@@ -202,15 +202,15 @@ class SystemDB extends DBQuery {
   }
 
   async unassignScopesToRole(roleId, idsPlaceholder, scopeIdArr) {
-    const updateCond = {
+    const updateColumns = {
       IS_DELETED: true,
     };
-    const whereCond = {
+    const whereColumns = {
       IS_DELETED: false,
       ROLE_ID: '?',
     };
 
-    let query = this.updateQuery('ROLE_SCOPE', fieldMappings.userRoleMappingFields, updateCond, whereCond);
+    let query = this.updateQuery('ROLE_SCOPE', fieldMappings.userRoleMappingFields, updateColumns, whereColumns);
     query += ` AND SCOPE_ID IN (${idsPlaceholder})`;
 
     const params = [roleId, ...scopeIdArr];
