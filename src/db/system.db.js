@@ -185,6 +185,38 @@ class SystemDB extends DBQuery {
 
     return await db.execute(query, params);
   }
+
+  async getMultipleScopesByIds(idsPlaceholder, scopesArr) {
+    const query = `SELECT ID FROM ${this.tables['USER_SCOPE']}
+      WHERE ID IN (${idsPlaceholder}) AND IS_DELETED = false;`;
+    const params = scopesArr;
+
+    return await db.execute(query, params);
+  }
+
+  async assignScopesToRole(bindings, rowCount) {
+    const query = this.insertMultipleQuery('ROLE_SCOPE', fieldMappings.userRoleMappingFields, ['ROLE_ID', 'SCOPE_ID'], rowCount);
+    const params = bindings;
+
+    return await db.execute(query, params);
+  }
+
+  async unassignScopesToRole(roleId, idsPlaceholder, scopeIdArr) {
+    const updateCond = {
+      IS_DELETED: true,
+    };
+    const whereCond = {
+      IS_DELETED: false,
+      ROLE_ID: '?',
+    };
+
+    let query = this.updateQuery('ROLE_SCOPE', fieldMappings.userRoleMappingFields, updateCond, whereCond);
+    query += ` AND SCOPE_ID IN (${idsPlaceholder})`;
+
+    const params = [roleId, ...scopeIdArr];
+
+    return await db.execute(query, params);
+  }
 }
 
 export default new SystemDB();

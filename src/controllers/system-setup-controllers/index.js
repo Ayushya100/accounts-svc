@@ -9,6 +9,7 @@ import { deleteUserRole } from './deleteUserRole.controller.js';
 import { updateUserScope } from './updateUserScope.controller.js';
 import { deleteUserScope } from './deleteUserScope.controller.js';
 import { getAssignedScopesList, getUnassignedScopesList } from './getScopeList.controller.js';
+import { updateScopesListToRole } from './assignScopes.controller.js';
 
 export default {
   verifyUserRoleExist,
@@ -26,4 +27,5 @@ export default {
   deleteUserScope,
   getAssignedScopesList,
   getUnassignedScopesList,
+  updateScopesListToRole,
 };
