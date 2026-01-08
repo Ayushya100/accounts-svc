@@ -19,7 +19,7 @@ const requestResetPassword = async (req, res, next) => {
     await accountController.validateUserPasswordToken(userId, token);
 
     log.info('Call controller function to update the user password');
-    await accountController.updatePassword(userId, userDtl.data, password, true, req.headers);
+    await accountController.resetPassword(userId, userDtl.data, password, req.headers);
 
     log.success('Request Reset Password operation completed successfully');
     res.status(200).json(ResponseBuilder({ status: 200, message: 'Password Reset successfully' }));

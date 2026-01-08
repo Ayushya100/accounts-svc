@@ -169,6 +169,21 @@ components:
         - token
         - password
 
+    changePasswordPayload:
+      type: object
+      properties:
+        old_password:
+          type: string
+          description: Old Passowrd
+          $ref: '#/components/schemas/Password'
+        new_password:
+          type: string
+          description: New Passowrd
+          $ref: '#/components/schemas/Password'
+      required:
+        - old_password
+        - new_password
+
     registerUserRolePayload:
       type: object
       properties:
@@ -583,7 +598,7 @@ components:
         - success
         - data
 
-    forgotPasswordRequestResponse:
+    passwordRequestResponse:
       type: object
       properties:
         status:
@@ -1232,7 +1247,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/forgotPasswordRequestResponse'
+                $ref: '#/components/schemas/passwordRequestResponse'
         '400':
           description: BAD_REQUEST
           content:
@@ -1269,7 +1284,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/forgotPasswordRequestResponse'
+                $ref: '#/components/schemas/passwordRequestResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /auth/password/change:
+    patch:
+      operationId: changePassword
+      summary: Change Password
+      description: An API to change user password upon user request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/changePasswordPayload'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/passwordRequestResponse'
         '400':
           description: BAD_REQUEST
           content:
