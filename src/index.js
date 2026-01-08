@@ -12,6 +12,7 @@ class AccountService extends Service {
     this.app.post(`${SVC_API}/auth/login`, routes.accountRoutes.loginUser);
     this.app.post(`${SVC_API}/auth/token/refresh`, routes.accountRoutes.refreshToken);
     this.app.post(`${SVC_API}/auth/password/forgot`, routes.accountRoutes.forgotPassword);
+    this.app.post(`${SVC_API}/auth/password/reset`, routes.accountRoutes.requestResetPassword);
   }
 
   registerPrivateEndpoints() {

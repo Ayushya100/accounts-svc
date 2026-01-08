@@ -141,11 +141,21 @@ class AccountDB extends DBQuery {
     return await db.execute(query, params);
   }
 
-  async registerPasswordVerification(userId, verificationCode, verificationCodeExpiry) {
+  async passwordVerification(userId, verificationCode, verificationCodeExpiry) {
     const updateColumns = ['FORGOT_PASSWORD_TOKEN', 'FORGOT_PASSWORD_TOKEN_EXP'];
     const whereColumns = ['USER_ID', 'IS_DELETED'];
     const query = this.updateQuery('USER_METADATA', fieldMappings.userMetadataMappingField, updateColumns, whereColumns);
     const params = [verificationCode, verificationCodeExpiry, userId, false];
+
+    return await db.execute(query, params);
+  }
+
+  async updateUserPassword(userId, password) {
+    const updateColumns = ['PASSWORD'];
+    const whereColumns = ['ID', 'IS_DELETED'];
+
+    const query = this.updateQuery('USERS', fieldMappings.userMappingFields, updateColumns, whereColumns);
+    const params = [password, userId, false];
 
     return await db.execute(query, params);
   }

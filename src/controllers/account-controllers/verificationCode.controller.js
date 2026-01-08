@@ -51,7 +51,7 @@ const generatePasswordVerificationCode = async (userId, userDtl, headers) => {
     log.info('Controller function to generate the verification code for password reset process initiated');
     const verificationCode = uuidv4() + userId;
     const verificationExpiry = new Date(Date.now() + 30 * 60 * 1000);
-    const verificationCodeRecords = await AccountDB.registerPasswordVerification(userId, verificationCode, verificationExpiry);
+    const verificationCodeRecords = await AccountDB.passwordVerification(userId, verificationCode, verificationExpiry);
 
     const userPayload = {
       to: userDtl.email_id,
@@ -85,4 +85,37 @@ const generatePasswordVerificationCode = async (userId, userDtl, headers) => {
   }
 };
 
-export { generateEmailVerificationCode, generatePasswordVerificationCode };
+const generatePasswordResetConfirmation = async (userId, userDtl, headers) => {
+  try {
+    log.info('Controller funciton to send password reset confirmation mail process initiated');
+    const userPayload = {
+      to: userDtl.email_id,
+      template: 'USER_PASSWORD_RESET_CONFIRMATION',
+      data: {
+        id: userId,
+        role_code: userDtl.role_code,
+        first_name: userDtl.first_name,
+        last_name: userDtl.last_name,
+        username: userDtl.username,
+        email_id: userDtl.email_id,
+        is_verified: userDtl.is_verified,
+        login_type: userDtl.login_type,
+      },
+    };
+    const userContext = {
+      userId: userId,
+      sessionId: headers['x-session-id'],
+      correlationId: headers['x-correlation-id'],
+    };
+
+    requestEmailSend(userPayload, userContext);
+
+    log.success('Password Reset mail send operation completed successfully');
+    return true;
+  } catch (err) {
+    log.error('Error occurred while trying to send password reset confirmation mail');
+    throw _Error(500, 'An error occurred while trying to send password reset confirmation mail', err);
+  }
+};
+
+export { generateEmailVerificationCode, generatePasswordVerificationCode, generatePasswordResetConfirmation };

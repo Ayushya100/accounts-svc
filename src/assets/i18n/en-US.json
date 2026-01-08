@@ -73,5 +73,13 @@
     "One of the scope id provided is incorrect": "One of the scope id provided is incorrect",
     "Scope assignment has been updated successfull": "Scope assignment has been updated successfull",
     "An error occurred while updating the scope assignment to the requested role": "An error occurred while updating the scope assignment to the requested role",
-    "Email has been sent to the registered email id": "Email has been sent to the registered email id"
+    "Email has been sent to the registered email id": "Email has been sent to the registered email id",
+    "User record not found": "User not found.",
+    "Invalid or Expired Token": "Invalid or expired link.",
+    "User details found": "User details retrieved.",
+    "An error occurred while performing basic user verification": "User verification failed.",
+    "New Password cannot be same as old": "New Password cannot be same as old",
+    "Password Reset successfully": "Password reset successful.",
+    "An error occurred while updating the password for the user": "Password update failed.",
+    "An error occurred while trying to send password reset confirmation mail": "Failed to send password reset confirmation email."
 }
