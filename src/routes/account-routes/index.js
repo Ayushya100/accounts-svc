@@ -10,6 +10,7 @@ import forgotPassword from './forgotPassword.route.js';
 import requestResetPassword from './resetPassword.route.js';
 import changePassword from './changePassword.route.js';
 import getAllUsers from './getAllUsers.route.js';
+import getUserDtlById from './getUserDtlById.route.js';
 
 export default {
   registerUser,
@@ -22,4 +23,5 @@ export default {
   requestResetPassword,
   changePassword,
   getAllUsers,
+  getUserDtlById,
 };

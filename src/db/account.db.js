@@ -161,8 +161,7 @@ class AccountDB extends DBQuery {
   }
 
   async getAllusers() {
-    const query = `SELECT ID, FIRST_NAME, LAST_NAME, USERNAME, EMAIL_ID, LOGIN_TYPE, IS_VERIFIED
-      , CREATED_DATE, MODIFIED_DATE, LAST_LOGIN, IS_DELETED
+    const query = `SELECT ID, FIRST_NAME, LAST_NAME, EMAIL_ID, LOGIN_TYPE, IS_VERIFIED, LAST_LOGIN
       FROM ${this.tables['USERS']};`;
     return await db.execute(query);
   }
