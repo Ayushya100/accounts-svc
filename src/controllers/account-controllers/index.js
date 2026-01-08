@@ -8,6 +8,7 @@ import { logout } from './logout.controller.js';
 import { isTokenAvailable } from './refreshToken.controller.js';
 import { forgotPasswordRequest } from './forgotPassword.controller.js';
 import { validateUserPasswordToken, resetPassword, updatePassword } from './resetPassword.controller.js';
+import { getAllUsersList } from './getAllusers.controller.js';
 
 export default {
   verifyUsernameEmailAlreadyTaken,
@@ -24,4 +25,5 @@ export default {
   validateUserPasswordToken,
   resetPassword,
   updatePassword,
+  getAllUsersList,
 };

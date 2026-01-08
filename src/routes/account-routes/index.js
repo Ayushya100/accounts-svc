@@ -9,6 +9,7 @@ import refreshToken from './refresh.route.js';
 import forgotPassword from './forgotPassword.route.js';
 import requestResetPassword from './resetPassword.route.js';
 import changePassword from './changePassword.route.js';
+import getAllUsers from './getAllUsers.route.js';
 
 export default {
   registerUser,
@@ -20,4 +21,5 @@ export default {
   forgotPassword,
   requestResetPassword,
   changePassword,
+  getAllUsers,
 };

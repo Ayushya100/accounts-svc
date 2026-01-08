@@ -360,6 +360,45 @@ components:
         - last_login
         - is_deleted
 
+    getAllUsersResponseData:
+      title: Schema for User List Data
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        email_id:
+          type: string
+        login_type:
+          type: string
+        is_verified:
+          type: boolean
+        is_deleted:
+          type: boolean
+        created_date:
+          type: string
+        modified_date:
+          type: string
+        last_login:
+          type: string
+      required:
+        - id
+        - first_name
+        - last_name
+        - username
+        - email_id
+        - login_type
+        - is_verified
+        - is_deleted
+        - created_date
+        - modified_date
+        - last_login
+
     getUserRolesResponseData:
       title: Schema for User Role Response Data
       type: object
@@ -622,6 +661,37 @@ components:
         - message
         - devMessage
         - success
+
+    getAllUsersResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: 'SUCCESS'
+        message:
+          type: string
+          example: 'Success'
+        devMessage:
+          type: string
+          example: 'Success'
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/getAllUsersResponseData'
+      required:
+        - status
+        - type
+        - message
+        - devMessage
+        - success
+        - data
 
     registerUserRoleResponse:
       type: object
@@ -1341,6 +1411,49 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
+  /admin/users:
+    get:
+      operationId: getAllUsers
+      summary: Get All Users
+      description: An API to fetch all users from system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAllUsersResponse'
+        '204':
+          description: CONTENT_NOT_AVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/noContentResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
   /setup/role:
     post:
       operationId: registerUserRole
@@ -1391,7 +1504,7 @@ paths:
                 $ref: '#/components/schemas/internalServerErrorResponse'
 
     get:
-      operationId: GetUserRoles
+      operationId: getUserRoles
       summary: Get all User Roles
       description: An API to fetch all user roles exist in system.
       responses:
