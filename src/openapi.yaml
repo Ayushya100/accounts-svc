@@ -370,33 +370,21 @@ components:
           type: string
         last_name:
           type: string
-        username:
-          type: string
         email_id:
           type: string
         login_type:
           type: string
         is_verified:
           type: boolean
-        is_deleted:
-          type: boolean
-        created_date:
-          type: string
-        modified_date:
-          type: string
         last_login:
           type: string
       required:
         - id
         - first_name
         - last_name
-        - username
         - email_id
         - login_type
         - is_verified
-        - is_deleted
-        - created_date
-        - modified_date
         - last_login
 
     getUserRolesResponseData:
@@ -1441,6 +1429,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/unauthorizedResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /admin/users/{userId}:
+    get:
+      operationId: getUserDtlById
+      summary: Get User Detail by ID
+      description: An API to fetch the user detail for requested ID from system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserInfoResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
         '403':
           description: FORBIDDEN
           content:
