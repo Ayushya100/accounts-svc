@@ -150,6 +150,25 @@ components:
       required:
         - userIdentifier
 
+    forgotResetPasswordPayload:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: User Id
+        token:
+          type: string
+          description: Forgot password request token
+          minLength: 5
+        password:
+          type: string
+          description: Passowrd
+          $ref: '#/components/schemas/Password'
+      required:
+        - userId
+        - token
+        - password
+
     registerUserRolePayload:
       type: object
       properties:
@@ -1207,6 +1226,37 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/forgotPasswordPayload'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forgotPasswordRequestResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '500':
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /auth/password/reset:
+    post:
+      operationId: forgotResetPassword
+      summary: Forgot Reset Passowrd
+      description: An API to reset password upon user forgot password request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/forgotResetPasswordPayload'
       responses:
         '200':
           description: SUCCESS

@@ -7,6 +7,7 @@ import userInfo from './userInfo.route.js';
 import logoutUser from './logout.route.js';
 import refreshToken from './refresh.route.js';
 import forgotPassword from './forgotPassword.route.js';
+import requestResetPassword from './requestResetPassword.route.js';
 
 export default {
   registerUser,
@@ -16,4 +17,5 @@ export default {
   logoutUser,
   refreshToken,
   forgotPassword,
+  requestResetPassword,
 };
