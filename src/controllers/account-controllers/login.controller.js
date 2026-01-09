@@ -58,6 +58,12 @@ const loginUserVerification = async (userDtl, userPassword, headers) => {
       throw _Error(400, 'Invalid Credentials');
     }
 
+    if (userDtl.is_deleted) {
+      log.info('Reactivate the inactive user');
+      await AccountDB.changeStatus(userId, false);
+      userDtl.is_deleted = false;
+    }
+
     await grantUserAccess(userDtl);
     log.success('Access granted to user successfully');
     return _Response(200, 'User login successful', userDtl);

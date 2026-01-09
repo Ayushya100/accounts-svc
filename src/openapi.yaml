@@ -376,6 +376,8 @@ components:
           type: string
         is_verified:
           type: boolean
+        is_deleted:
+          type: boolean
         last_login:
           type: string
       required:
@@ -385,6 +387,7 @@ components:
         - email_id
         - login_type
         - is_verified
+        - is_deleted
         - last_login
 
     getUserRolesResponseData:
@@ -1447,6 +1450,49 @@ paths:
       operationId: getUserDtlById
       summary: Get User Detail by ID
       description: An API to fetch the user detail for requested ID from system.
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserInfoResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestResponse'
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedResponse'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFoundResponse'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerErrorResponse'
+
+  /admin/users/{userId}/status:
+    patch:
+      operationId: updateUserStatusById
+      summary: Update User Status by ID
+      description: An API to update the user status for requested ID from system.
       responses:
         '200':
           description: SUCCESS
