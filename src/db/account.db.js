@@ -12,7 +12,7 @@ class AccountDB extends DBQuery {
       , U.IS_VERIFIED, U.CREATED_DATE, U.MODIFIED_DATE, U.LOGIN_COUNT, U.LAST_LOGIN, U.IS_DELETED
       FROM ${this.tables['USERS']} U
       INNER JOIN ${this.tables['USER_ROLE']} R ON R.ID = U.ROLE_ID AND R.IS_DELETED = false
-      WHERE U.IS_DELETED = false`;
+      WHERE `;
   }
 
   // Query Functions
@@ -29,9 +29,16 @@ class AccountDB extends DBQuery {
     return await db.execute(query, params);
   }
 
-  async getUserInfo(userId) {
-    const query = this.userInfoQuery + ' AND U.ID = ?';
-    const params = [userId];
+  async getUserInfo(userId, inactive = false) {
+    let query = this.userInfoQuery;
+    let params;
+    if (!inactive) {
+      query += 'U.IS_DELETED = false AND U.ID = ?;';
+      params = [userId];
+    } else {
+      query += 'U.ID = ?;';
+      params = [userId];
+    }
     return await db.execute(query, params);
   }
 
@@ -82,7 +89,7 @@ class AccountDB extends DBQuery {
   }
 
   async userInfoByIdentity(userIdentity) {
-    const query = this.userInfoQuery + ' AND (U.USERNAME = ? OR U.EMAIL_ID = ?)';
+    const query = this.userInfoQuery + '(U.USERNAME = ? OR U.EMAIL_ID = ?)';
     const params = [userIdentity, userIdentity];
     return await db.execute(query, params);
   }
@@ -161,9 +168,18 @@ class AccountDB extends DBQuery {
   }
 
   async getAllusers() {
-    const query = `SELECT ID, FIRST_NAME, LAST_NAME, EMAIL_ID, LOGIN_TYPE, IS_VERIFIED, LAST_LOGIN
+    const query = `SELECT ID, FIRST_NAME, LAST_NAME, EMAIL_ID, LOGIN_TYPE, IS_VERIFIED, IS_DELETED, LAST_LOGIN
       FROM ${this.tables['USERS']};`;
     return await db.execute(query);
+  }
+
+  async changeStatus(userId, status) {
+    const updateColumns = ['IS_DELETED'];
+    const whereColumns = ['ID'];
+    const query = this.updateQuery('USERS', fieldMappings.userMappingFields, updateColumns, whereColumns);
+    const params = [status, userId];
+
+    return await db.execute(query, params);
   }
 }
 

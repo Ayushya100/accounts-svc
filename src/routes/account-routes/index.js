@@ -11,6 +11,7 @@ import requestResetPassword from './resetPassword.route.js';
 import changePassword from './changePassword.route.js';
 import getAllUsers from './getAllUsers.route.js';
 import getUserDtlById from './getUserDtlById.route.js';
+import updateUserStatus from './updateUserStatus.route.js';
 
 export default {
   registerUser,
@@ -24,4 +25,5 @@ export default {
   changePassword,
   getAllUsers,
   getUserDtlById,
+  updateUserStatus,
 };

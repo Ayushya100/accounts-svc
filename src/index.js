@@ -22,6 +22,7 @@ class AccountService extends Service {
     this.app.patch(`${SVC_API}/auth/password/change`, routes.accountRoutes.changePassword);
     this.app.get(`${SVC_API}/admin/users`, routes.accountRoutes.getAllUsers);
     this.app.get(`${SVC_API}/admin/users/:userId`, routes.accountRoutes.getUserDtlById);
+    this.app.patch(`${SVC_API}/admin/users/:userId/status`, routes.accountRoutes.updateUserStatus);
 
     // User Role Routes
     this.app.post(`${SVC_API}/setup/role`, routes.settingRoutes.registerUserRole);

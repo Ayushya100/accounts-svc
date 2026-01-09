@@ -6,13 +6,13 @@ import { fieldMappings } from '../../utils/index.js';
 
 const log = logger('Controller: Get-User-Info');
 
-const getUserInfoById = async (userId) => {
+const getUserInfoById = async (userId, inactive = false) => {
   try {
     log.info('Controller function to fetch the user details operation initiated');
     userId = convertPrettyStringToId(userId);
 
     log.info('Call db query to fetch requested user info');
-    let userInfo = await AccountDB.getUserInfo(userId);
+    let userInfo = await AccountDB.getUserInfo(userId, inactive);
     if (userInfo.rowCount === 0) {
       log.error('No user found with the provided user id');
       throw _Error(404, 'No user found with the provided user id');
